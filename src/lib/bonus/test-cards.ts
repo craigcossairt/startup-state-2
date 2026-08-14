@@ -33,6 +33,7 @@ export function ranked(partial: {
       deadline: partial.deadline === undefined ? null : partial.deadline,
       url: partial.url ?? null,
       aln: partial.aln ?? [],
+      description: null,
     },
     fit: partial.fit ?? "adjacent",
     why: "why",

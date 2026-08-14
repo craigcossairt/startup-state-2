@@ -12,7 +12,7 @@ export function assembleRankedCards(
   retrieved: Opportunity[],
   rankCards: RankModelCard[],
 ): OpportunityMapPayload {
-  const byId = new Map(retrieved.map((row) => [row.id, row]));
+  const byId = new Map<string, Opportunity>(retrieved.map((row) => [row.id, row]));
   const legal = dropUnknownRankIds(
     rankCards,
     retrieved.map((row) => row.id),

@@ -43,7 +43,9 @@ describe("assembleRankedCards", () => {
     expect(payload.cards[0].opportunity.deadline).toBe(federal.deadline);
     expect(payload.cards[0].opportunity.url).toBe(federal.url);
     expect(payload.cards[0].opportunity.lane).toBe("federal");
-    expect(payload.cards.some((card) => card.opportunity.id === "invented:grant")).toBe(false);
+    expect(payload.cards.map((card) => String(card.opportunity.id))).not.toContain(
+      "invented:grant",
+    );
   });
 
   it("trips the fixture-5 floor from canned rank input without inventing a federal grant", async () => {

@@ -35,3 +35,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-14** - Scaffolded the Next.js 16 Opportunity Map app in this repo. Retrieve, GOEO firing, rank-id drop, sort, and floor are pure functions; infer/rank call Grok 4.6. No prod deploy.
 - **2026-08-14** - Shipped locked stretch bonuses as real map controls: welcome-back, SAM Contract Opportunities (`sam_opps`), checklist, 12-month, similar-companies page, session alerts, grounded chat, agency groups, opportunity graph. No coming-soon chips. See `docs/spec/bonus-hang-off.md`.
 - **2026-08-14** - Demo history uses committed `data/cache/sbir/utah-awards.json` and `data/cache/sam/listings-slice.json` so Cursor cloud / clones do not need the gitignored dumps.
+- **2026-08-14** - Vercel project is [cossairt/startup-state-2](https://vercel.com/cossairt/startup-state-2). Production needs `XAI_API_KEY` and `SAM_API_KEY`. `next.config.ts` traces `./data/**/*` into serverless functions.
