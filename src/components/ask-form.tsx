@@ -7,6 +7,7 @@ import {
   applyMustHaveDraft,
   missingMustHaves,
   promoteFilledMustHaves,
+  seedLocationDefaults,
 } from "@/lib/profile/must-haves";
 import { loadStoredProfile, saveProfile } from "@/lib/session-profile";
 import type { CompanyProfile, MustHaveKey } from "@/lib/types/company-profile";
@@ -21,11 +22,12 @@ export function AskForm() {
       router.replace("/");
       return;
     }
-    if (missingMustHaves(stored).length === 0) {
+    const seeded = seedLocationDefaults(stored);
+    if (missingMustHaves(seeded).length === 0) {
       router.replace("/map");
       return;
     }
-    setProfile(stored);
+    setProfile(seeded);
   }, [router]);
 
   if (!profile) return <p className="p-8">Loading...</p>;
