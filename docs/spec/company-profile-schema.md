@@ -1,8 +1,8 @@
 # Company profile schema
 
-Locked spec for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not the Part 1 six-field Persona.
+**Status: DRAFT** — round 1 grilling locked the field *categories* (must-have vs infer-if-present). Rounds 2+ still open on types, enums, missing semantics, and fixture payloads. Do not treat as locked until [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8) closes after HITL.
 
-Source tickets: [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8). Ubiquitous language: `CONTEXT.md`.
+Working draft for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not the Part 1 six-field Persona.
 
 ## Design rules
 
