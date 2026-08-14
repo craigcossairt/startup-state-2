@@ -40,6 +40,7 @@ Company profile (all must-haves known)
 Per-source retrieve adapters  →  retrieved ID set (≤ ~50)
   Grants.gov search2          →  open / forecasted opportunity IDs
   GOEO six keys               →  State-lane row IDs
+  Curated Utah cards          →  seven standing ids (always)
   SAM / USAspending / SBIR CSV →  not retrieve IDs (join / history)
         ↓
 Grok 4.6 rank / explain (reasoning medium)
@@ -65,6 +66,7 @@ Server drops any rank ID not in the retrieved set and copies program / agency / 
 | USAspending V2 | Similar awardees on ranked cards. Prefer Utah when `hqState` is `UT`. | No |
 | SBIR award CSV | Similar awardees on SBIR-shaped cards. APIs stay 403. | No |
 | GOEO table | State lane. Six keys from Q11. Default map = fired slice, not 213. | Yes |
+| Curated Utah cards | Seven official standing cards. Always retrieved. See `docs/spec/utah-state-lane-mix.md`. | Yes |
 
 Federal adapters **ignore Utah residency**. A Utah State-lane row for a non-Utah company ranks as a real Fit only when the program allows nonresidents; otherwise `adjacent` + concern. National rows parked in the GOEO table (SBA, SCORE, EDA, USCS) may rank without that Utah-only concern.
 
@@ -155,5 +157,5 @@ Qualitative instructions in the rank prompt. Not a numeric scorer.
 - Exact infer / rank / explain prompt text (still fog on the map).
 - Numeric scoring weights.
 - Shared opportunity record shape (locked: `docs/spec/shared-opportunity-record.md`).
-- Curated Utah official-card mix vs GOEO-only ([Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13)).
+- Curated Utah official-card mix (locked: `docs/spec/utah-state-lane-mix.md`).
 - Intake / map structure (locked: `docs/spec/intake-and-map-look.md`). Visual end state is a later ticket.

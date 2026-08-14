@@ -19,7 +19,7 @@ Structure: `docs/spec/intake-and-map-look.md`. Floor: `docs/spec/retrieve-and-ra
 ## Click path
 
 1. Land on Intake. Click **Healthcare AI**. Map loads from the fixture (all must-haves `known`). Cached retrieve, not a cold Grants.gov hunt.
-2. On the first Ranked card: Federal badge, Fit, why, similar awardee, next step. Then one Utah-badge card (Nucleus / counseling / whatever [Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13) locks).
+2. On the first Ranked card: Federal badge, Fit, why, similar awardee, next step. Then one Utah-badge card (`curated:nucleus-grow` on fixture-1; `curated:sbdc` on fixture-5).
 3. Fixture rail → **Youth marketplace (honest-no)**. Banner, Utah cards first, 1–3 Federal `probably not` still listed. Do not invent a strong federal grant.
 4. Stop. If a judge asks, they can click Aerospace, Water / climate, or Cyber themselves.
 
@@ -43,5 +43,5 @@ Structure: `docs/spec/intake-and-map-look.md`. Floor: `docs/spec/retrieve-and-ra
 
 - A speech Craig has to give.
 - Pixel polish ([Visual end state for Intake and Opportunity Map](https://github.com/craigcossairt/startup-state-2/issues/18)).
-- The Utah official-card list ([Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13)).
+- The Utah official-card list (locked: `docs/spec/utah-state-lane-mix.md`).
 - Exact infer / rank / explain prompts.
