@@ -19,3 +19,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-13** - Charted wayfinder map [Lock the Government Opportunity Finder spec](https://github.com/craigcossairt/startup-state-2/issues/1).
 - **2026-08-13** - GOEO retrieve uses six title/description keys, not source Funding/topics. See [GOEO table categories](https://github.com/craigcossairt/startup-state-2/issues/6).
 - **2026-08-13** - Federal card split: Grants.gov open list, SAM CFDA catalog (cache), USAspending history, SBIR award CSV (APIs 403). See [Four federal APIs](https://github.com/craigcossairt/startup-state-2/issues/7).
+- **2026-08-13** - No official Utah opportunity API. State lane is not a live ingest. See [Utah state APIs](https://github.com/craigcossairt/startup-state-2/issues/10).

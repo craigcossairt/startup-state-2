@@ -21,8 +21,8 @@ Required core. Grants.gov, USAspending, SBIR.gov, and SAM.gov Assistance Listing
 _Avoid_: every agency, the full federal government
 
 **State lane**:
-Local programs for a Jurisdiction. This demo uses the Part 1 GOEO table (up to the full 213) with categorization and filtering so the map is not a dump. A company outside Utah can still match a Utah program when the program allows it; most will not. Rows companion a federal match or are the honest answer when federal is a poor fit.
-_Avoid_: Utah lane, Playbook, dumping the whole catalog unfiltered
+Local programs for a Jurisdiction. There is no official Utah opportunity API. This demo uses the Part 1 GOEO table (up to the full 213) with categorization and filtering, plus any curated official program cards we lock. A company outside Utah can still match a Utah program when the program allows it; most will not.
+_Avoid_: Utah lane, Playbook, dumping the whole catalog unfiltered, inventing a Utah Grants.gov
 
 **Jurisdiction**:
 The state or municipality whose local programs sit in the State lane. This demo: Utah.
@@ -39,6 +39,10 @@ _Avoid_: eligible, eligibility determination
 **Fixture**:
 One of the five official test companies in the brief. Case 5 may have no strong federal grant.
 _Avoid_: Jordan/Maria/Marcus/Priya/David/Amir (those were Part 1)
+
+**Nucleus**:
+GOEO’s current SBIR/STTR help desk. Part 1 catalog name: Utah Innovation Center.
+_Avoid_: treating campus “Innovation Centers” as this program
 
 **Part 1 app**:
 craigcossairt/startup-state. Anything that does not conflict with the Part 2 brief may be copied, including extras that show future vision. Conflicts: Playbook or a geo map as the product, last year's six personas as the judged set, topic-weight matching as the ranker, inventing programs.
