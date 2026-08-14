@@ -160,4 +160,4 @@ Later surfaces hang off these fields. They do not add payloads to this record.
 - Exact infer / rank / explain prompt text (still fog on the map).
 - Which curated Utah cards exist (locked: `docs/spec/utah-state-lane-mix.md`).
 - How Intake and the map look (structure locked: `docs/spec/intake-and-map-look.md`). Visual end state is a later ticket.
-- Graph edge types, alert delivery, checklist contents, 12-month generation, or chat as a helper.
+- Graph edge types, alert delivery, checklist contents, 12-month generation, or chat as a helper (locked: `docs/spec/bonus-hang-off.md`).
