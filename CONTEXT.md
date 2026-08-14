@@ -13,7 +13,7 @@ One retrieved listing from one adapter (a Grants.gov hit, a GOEO row, or a curat
 _Avoid_: Resource, Program as the record, treating several FOAs as one card
 
 **Ranked card**:
-An Opportunity shown for one Company profile: Fit, why, concerns, next step, and attached similar awardees. The Opportunity Map is a list of these.
+An Opportunity shown for one Company profile: Fit, why, concerns, next step, and attached similar awardees. The Opportunity Map is a list of these, sorted best Fit first.
 _Avoid_: ScoredResource, match, result, eligible card
 
 **Instrument**:
@@ -49,7 +49,7 @@ Federal, or State named by Jurisdiction (Utah on this demo).
 _Avoid_: Utah-only as the product category
 
 **Fit label**:
-likely / potential-verify / adjacent / probably not. The only ranking language in the product. Never “eligible.”
+likely / potential-verify / adjacent / probably not. The only ranking language in the product. Never “eligible.” Sort is best Fit first, not Federal-first or Utah-first.
 _Avoid_: eligible, eligibility determination
 
 **Retrieve**:

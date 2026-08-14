@@ -64,5 +64,5 @@ One USBCI card covers LPP and CAP. Next step points at the listed-lender path on
 ## What this spec is not
 
 - Pixel look ([Visual end state for Intake and Opportunity Map](https://github.com/craigcossairt/startup-state-2/issues/18)).
-- Exact infer / rank / explain prompt text.
+- Exact infer / rank / explain prompt text (locked: `docs/spec/infer-rank-explain-prompts.md`).
 - GOEO key firing matrix (already on `docs/spec/retrieve-and-rank.md`).

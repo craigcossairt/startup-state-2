@@ -29,7 +29,7 @@ Company profile: `docs/spec/company-profile-schema.md`.
 | Q10 | SBIR **award CSV** = similar awardees on SBIR-shaped cards. Open SBIR/STTR opportunities come from **Grants.gov**. Do not live-hit SBIR.gov on Friday. |
 | Q11 | GOEO firing matrix below (OR within a row; union of fired keys). |
 | Q12 | Weekend chips: **Lane** (Federal / Utah), **GOEO keys** (the six), **`directory`**, **Fit** (filter ranked list only). No community or geography chips. |
-| Q13 | Default rank mix: Federal-first, at least 2 Utah cards if any GOEO key fired. Floor tripped: Utah-first, then 1–3 Federal `probably not`. Still 8–12 total. |
+| Q13 | **Superseded 2026-08-14:** sort is best Fit first (see `docs/spec/infer-rank-explain-prompts.md`). Inclusion unchanged: at least 2 Utah cards if any GOEO key fired; floor keeps 1–3 Federal `probably not`. Still 8–12 total. |
 | Q14 | Floor banner: **Traditional federal grants look like a poor fit for this company. Utah programs below are the stronger place to start.** |
 
 ## Pipeline
@@ -107,12 +107,16 @@ Do not append Utah, city, or employee counts to the federal keyword.
 
 Lane / GOEO-key / `directory` chips re-run retrieve, still capped at ~50, then re-rank.
 
-## Rank mix (Q13)
+## Rank mix (Q13, updated)
 
-| Condition | Order |
+**Sort:** best Fit first. Server tie-break: sooner deadline, then lane (Utah first only if the floor tripped), then `id`. See `docs/spec/infer-rank-explain-prompts.md`.
+
+**Inclusion (unchanged):**
+
+| Condition | Include |
 | --- | --- |
-| Floor not tripped | Federal-first. Include at least 2 Utah cards if any GOEO key fired. |
-| Floor tripped | Utah-first (Nucleus / APEX / counseling as available), then 1–3 Federal `probably not`. |
+| Any GOEO key fired | At least 2 Utah cards when possible |
+| Floor tripped | Utah leads plus 1–3 Federal `probably not` |
 
 Still 8–12 cards total.
 
@@ -154,7 +158,7 @@ Qualitative instructions in the rank prompt. Not a numeric scorer.
 
 ## What this spec is not
 
-- Exact infer / rank / explain prompt text (still fog on the map).
+- Exact infer / rank / explain prompt text (locked: `docs/spec/infer-rank-explain-prompts.md`).
 - Numeric scoring weights.
 - Shared opportunity record shape (locked: `docs/spec/shared-opportunity-record.md`).
 - Curated Utah official-card mix (locked: `docs/spec/utah-state-lane-mix.md`).

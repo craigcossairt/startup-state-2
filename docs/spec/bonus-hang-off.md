@@ -52,5 +52,5 @@ No disabled bonus nav. If a bonus ships, it appears as a real control. If it doe
 ## What this spec is not
 
 - The app.
-- Exact infer / rank / explain prompt text ([Infer rank and explain prompts](https://github.com/craigcossairt/startup-state-2/issues/20)).
+- Exact infer / rank / explain prompt text (locked: `docs/spec/infer-rank-explain-prompts.md`).
 - Pixel look ([Visual end state for Intake and Opportunity Map](https://github.com/craigcossairt/startup-state-2/issues/18)).

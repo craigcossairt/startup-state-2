@@ -44,4 +44,4 @@ Structure: `docs/spec/intake-and-map-look.md`. Floor: `docs/spec/retrieve-and-ra
 - A speech Craig has to give.
 - Pixel polish ([Visual end state for Intake and Opportunity Map](https://github.com/craigcossairt/startup-state-2/issues/18)).
 - The Utah official-card list (locked: `docs/spec/utah-state-lane-mix.md`).
-- Exact infer / rank / explain prompts.
+- Exact infer / rank / explain prompts (locked: `docs/spec/infer-rank-explain-prompts.md`).
