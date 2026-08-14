@@ -1,6 +1,6 @@
 # Retrieve and probably-not floor
 
-**Status: DRAFT** — round 1 grilling complete. Round 2 open on per-source adapters (SAM / SBIR / USAspending roles), GOEO firing matrix, chips, and rank mix. Locked when [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2) closes after HITL.
+**Status: LOCKED** — HITL grilling rounds 1–2 complete. See [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2).
 
 How a Company profile becomes Opportunity Map cards: retrieve from official sources and the GOEO table, then Grok ranks **only retrieved IDs** and assigns Fit labels. Default view is the retrieved set, not all 213 GOEO rows.
 
@@ -15,10 +15,22 @@ Company profile: `docs/spec/company-profile-schema.md`.
 | Q1 | **Per-source adapters** on one `CompanyProfile`. No fused blob. No LLM-invented programs. Each adapter returns IDs only from that source’s catalog or cache. |
 | Q2 | GOEO retrieve keys fire from **deterministic profile rules**, not LLM. Chips can add keys. Six keys: `sbir-help`, `contracting`, `state-capital`, `workforce`, `counseling`, `trade`. |
 | Q3 | Grants.gov `search2` keyword = `whatTheyDo` + `technologies` + `sectors` labels, capped ~200 chars. **No Utah filter** on federal search. |
-| Q4 | Cap **~50 retrieved IDs** before rank. Rank surfaces **8–12 cards** by default. Chips widen the retrieve set, not the rank list, for the weekend POC. |
+| Q4 | Cap **~50 retrieved IDs** before rank. Rank surfaces **8–12 cards** by default. Chips widen the retrieve set, not the rank list, for the weekend POC (except Fit chips, which filter the ranked list). |
 | Q5 | **Probably-not floor:** after rank, if no Federal card is `likely` or `potential-verify`, and at least one Utah card is `likely`, `potential-verify`, or strong `adjacent`, show a banner above the list. Do not hide federal `probably not` rows that have real whys. |
 | Q6 | Fixture-5: **1–3 Federal `probably not`** cards plus State-lane lead. Never invent a strong federal grant. |
 | Q7 | Employee / revenue / capital ranges are **prompt rules, not hard gates**. Overlap can support `likely` / `potential-verify`; same sector outside band → `adjacent` + concern; no semantic overlap → `probably not`. Weekend rank is qualitative (no numeric score). |
+
+### Round 2 (adapters, matrix, chips, mix)
+
+| # | Decision |
+| --- | --- |
+| Q8 | SAM is **join-only**. Fill program description / ALN on Grants.gov cards from the cached dump. No standalone SAM retrieve IDs. |
+| Q9 | USAspending is **history attach**, not retrieve. Similar awardees join onto ranked cards via CFDA / NAICS / keyword. Prefer Utah recipients when `hqState` is `UT`. |
+| Q10 | SBIR **award CSV** = similar awardees on SBIR-shaped cards. Open SBIR/STTR opportunities come from **Grants.gov**. Do not live-hit SBIR.gov on Friday. |
+| Q11 | GOEO firing matrix below (OR within a row; union of fired keys). |
+| Q12 | Weekend chips: **Lane** (Federal / Utah), **GOEO keys** (the six), **`directory`**, **Fit** (filter ranked list only). No community or geography chips. |
+| Q13 | Default rank mix: Federal-first, at least 2 Utah cards if any GOEO key fired. Floor tripped: Utah-first, then 1–3 Federal `probably not`. Still 8–12 total. |
+| Q14 | Floor banner: **Traditional federal grants look like a poor fit for this company. Utah programs below are the stronger place to start.** |
 
 ## Pipeline
 
@@ -26,44 +38,52 @@ Company profile: `docs/spec/company-profile-schema.md`.
 Company profile (all must-haves known)
         ↓
 Per-source retrieve adapters  →  retrieved ID set (≤ ~50)
+  Grants.gov search2          →  open / forecasted opportunity IDs
+  GOEO six keys               →  State-lane row IDs
+  SAM / USAspending / SBIR CSV →  not retrieve IDs (join / history)
         ↓
 Grok 4.6 rank / explain (reasoning medium)
   may emit only retrieved IDs
   Fit label per card
         ↓
+Attach history (USAspending, SBIR CSV) onto ranked cards
+        ↓
 Opportunity Map (8–12 cards)
   + probably-not floor banner when Q5 trips
-  + chips that re-retrieve (widen keys / keyword), then re-rank
+  + Lane / GOEO / directory chips re-retrieve then re-rank
+  + Fit chips filter the ranked list only
 ```
 
-Server drops any rank ID not in the retrieved set and copies program / agency / value / deadline from retrieve.
+Server drops any rank ID not in the retrieved set and copies program / agency / value / deadline from retrieve. SAM text fills description / ALN on Grants.gov cards.
 
-## Per-source adapters (round 1 shape)
+## Per-source adapters
 
-Exact SAM / SBIR / USAspending retrieve roles: round 2.
-
-| Adapter | Lane | Round 1 lock |
+| Adapter | Role | Retrieve IDs? |
 | --- | --- | --- |
-| Grants.gov search2 | Federal | Keyword from Q3. Statuses `posted\|forecasted`. Small-business eligibility when profile looks like a startup. Live with backoff. |
-| SAM Assistance Listings | Federal | Cache only (no live Friday). Round 2: catalog cards vs ALN join-only. |
-| USAspending V2 | Federal (history) | Not an open-opportunity list. Round 2: similar-awardee attach vs retrieve IDs. |
-| SBIR award CSV | Federal (history / topics) | APIs 403. Round 2: CSV for similar awardees vs solicitation cards. |
-| GOEO table | State (Utah) | Six keys from Q2. Default map = fired slice, not 213. |
+| Grants.gov search2 | Open list (`posted\|forecasted`). Keyword from Q3. Small-business eligibility when the profile is a startup. Live with backoff. | Yes |
+| SAM Assistance Listings | Cached CFDA catalog. Join onto Grants.gov by ALN / CFDA. No live Friday hits. | No |
+| USAspending V2 | Similar awardees on ranked cards. Prefer Utah when `hqState` is `UT`. | No |
+| SBIR award CSV | Similar awardees on SBIR-shaped cards. APIs stay 403. | No |
+| GOEO table | State lane. Six keys from Q11. Default map = fired slice, not 213. | Yes |
 
 Federal adapters **ignore Utah residency**. A Utah State-lane row for a non-Utah company ranks as a real Fit only when the program allows nonresidents; otherwise `adjacent` + concern. National rows parked in the GOEO table (SBA, SCORE, EDA, USCS) may rank without that Utah-only concern.
 
-## GOEO keys (from [GOEO table categories](https://github.com/craigcossairt/startup-state-2/issues/6))
+## GOEO firing matrix (Q11)
 
-| Key | Typical rows | Round 1 fire hint (matrix locked in round 2) |
+Fire a key when **any** cell in its row is true. Union of fired keys is the first retrieve.
+
+| Key | Typical rows | Fire when |
 | --- | --- | --- |
-| `sbir-help` | Nucleus (Innovation Center) | `rdIntensity` core / some, or `useOfFunds` includes `r_and_d`, or sectors look deep-tech |
-| `contracting` | APEX | sectors `defense` / `aerospace`, or customers `b2g` / `defense` |
-| `state-capital` | USBCI, UTIF, UMLF, Get Started, … | always when `capitalNeedUsd` is known |
-| `workforce` | DWS, Talent Ready, Custom Fit, MEP, … | `useOfFunds` `hiring` / `pilots` / `manufacturing_scale`, or fixture-5 sectors |
-| `counseling` | SBDC, SCORE, SBA, … | fixture-5 shape; or early stage; or no strong federal |
-| `trade` | WTC, USCS | only if infer text / customers clearly export (do not fire by default) |
+| `sbir-help` | Nucleus (Innovation Center) | `rdIntensity` is `core` or `some`, **or** `useOfFunds` includes `r_and_d`, **or** sectors include `ai` / `healthcare` / `aerospace` / `cybersecurity` / `water` / `climate` / `environment` |
+| `contracting` | APEX | sectors include `defense` or `aerospace`, **or** `customerTypes` includes `b2g` or `defense` |
+| `state-capital` | USBCI, UTIF, UMLF, Get Started, … | `capitalNeedUsd` status is `known` |
+| `workforce` | DWS, Talent Ready, Custom Fit, MEP, … | `useOfFunds` includes `hiring`, `pilots`, or `manufacturing_scale`, **or** sectors include `workforce` / `education` / `youth` / `marketplace` |
+| `counseling` | SBDC, SCORE, SBA, … | `stage` is `pre_revenue` or `early_revenue`, **or** sectors include `marketplace` and (`youth` or `education`), **or** neither `sbir-help` nor `contracting` fired |
+| `trade` | WTC, USCS | `whatTheyDo` or customers clearly export. **Do not fire** on the five official fixtures by default. |
 
-`directory` chip opts into leftover GOEO rows (~180). Not a retrieve key on first pass.
+`directory` chip adds leftover GOEO rows (~180). Not a first-pass retrieve key.
+
+Private capital (Kickstart, Pelion, angels, RevRoad) stays out of `state-capital`.
 
 ## Grants.gov keyword (Q3)
 
@@ -79,24 +99,46 @@ Do not append Utah, city, or employee counts to the federal keyword.
 
 | Stage | Cap |
 | --- | --- |
-| Retrieved IDs (all adapters, deduped) | ~50 |
+| Retrieved IDs (Grants.gov + GOEO, deduped) | ~50 |
 | Ranked cards on the default Opportunity Map | 8–12 |
 | Fixture-5 federal `probably not` | 1–3 |
 
-Chips re-run retrieve with extra keys or a wider keyword, still capped at ~50, then re-rank.
+Lane / GOEO-key / `directory` chips re-run retrieve, still capped at ~50, then re-rank.
 
-## Probably-not floor (Q5–Q6)
+## Rank mix (Q13)
+
+| Condition | Order |
+| --- | --- |
+| Floor not tripped | Federal-first. Include at least 2 Utah cards if any GOEO key fired. |
+| Floor tripped | Utah-first (Nucleus / APEX / counseling as available), then 1–3 Federal `probably not`. |
+
+Still 8–12 cards total.
+
+## Probably-not floor (Q5–Q6, Q14)
 
 **Trip when all are true after rank:**
 
 1. Zero Federal cards with Fit `likely` or `potential-verify`.
 2. At least one Utah-badge card with Fit `likely`, `potential-verify`, or strong `adjacent`.
 
-**UI:** one banner above the ranked list. Federal `probably not` cards stay in the list with why / concerns. State cards may lead the sort when the floor trips.
+**Banner (user-facing, no em dash):**
+
+> Traditional federal grants look like a poor fit for this company. Utah programs below are the stronger place to start.
+
+Federal `probably not` cards stay in the list under the banner with why / concerns.
 
 **Fixture-5 (Youth marketplace):** floor should trip. Show 1–3 Federal `probably not` (example: SBIR/STTR poor fit for a parent/youth marketplace) plus State `workforce` / `counseling` lead. Do not invent a strong federal grant.
 
-Banner copy and sort-when-tripped: round 2.
+## Weekend chips (Q12)
+
+| Chip | Effect |
+| --- | --- |
+| Lane: Federal / Utah | Re-retrieve that lane only, then re-rank |
+| GOEO key | Add that key and re-retrieve State lane |
+| `directory` | Include leftover GOEO ~180, still cap ~50 |
+| Fit | Filter the **already ranked** list. Does not re-retrieve |
+
+No community or geography chips for the weekend POC.
 
 ## Range matching in rank (Q7)
 
@@ -114,11 +156,3 @@ Qualitative instructions in the rank prompt. Not a numeric scorer.
 - Numeric scoring weights.
 - Shared opportunity record shape ([Shared opportunity record](https://github.com/craigcossairt/startup-state-2/issues/3)).
 - Curated Utah official-card mix vs GOEO-only ([Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13)).
-
-## Round 2 (open)
-
-- SAM: standing CFDA cards vs ALN join onto Grants.gov only
-- USAspending / SBIR CSV: retrieve IDs vs history attached to cards
-- Full GOEO key-firing table from `CompanyProfile`
-- Weekend chip set
-- Rank mix when the floor does / does not trip

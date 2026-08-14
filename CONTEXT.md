@@ -17,8 +17,8 @@ The structured description used to match. Schema: `docs/spec/company-profile-sch
 _Avoid_: Persona
 
 **Federal lane**:
-Required core. Grants.gov, USAspending, SBIR.gov, and SAM.gov Assistance Listings.
-_Avoid_: every agency, the full federal government
+Required core. Open list is Grants.gov. SAM Assistance Listings (cache) join onto those cards by ALN. USAspending and the SBIR award CSV attach similar awardees. They are not a second open-opportunity list.
+_Avoid_: every agency, the full federal government, treating SAM or USAspending as live NOFOs
 
 **State lane**:
 Local programs for a Jurisdiction. There is no official Utah opportunity API. This demo uses the Part 1 GOEO table (up to the full 213) with categorization and filtering, plus any curated official program cards we lock. A company outside Utah can still match a Utah program when the program allows it; most will not.
@@ -45,7 +45,7 @@ When rank finds no Federal `likely` or `potential-verify`, and at least one Utah
 _Avoid_: hiding federal rows, hallucinating a strong grant for fixture-5
 
 **Chip**:
-A control that widens retrieve (extra GOEO keys, `directory`, or a broader federal keyword) and re-ranks. Default map is the first retrieved slice, not all 213.
+A control that widens retrieve (lane, extra GOEO keys, `directory`) and re-ranks, or filters the ranked list by Fit. Default map is the first retrieved slice, not all 213.
 _Avoid_: dumping the catalog, using source `Funding` as a retrieve key
 
 **Fixture**:
