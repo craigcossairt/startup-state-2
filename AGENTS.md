@@ -1,4 +1,4 @@
-# AGENTS.md - <!-- FILL IN: Project Name -->
+# AGENTS.md - Startup State 2
 
 > Canonical instructions for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, and others).
 > Keep this file **harness-agnostic**: anything specific to one tool belongs in that tool's own
@@ -7,10 +7,10 @@
 
 ## Project
 
-- **Name:** <!-- FILL IN -->
-- **What it is:** <!-- FILL IN: one-line description -->
-- **Owner:** <!-- FILL IN: name - email -->
-- **Stage:** <!-- FILL IN: idea / prototype / MVP / production -->
+- **Name:** Startup State 2
+- **What it is:** GOED Government Opportunity Finder for AI Builder Day Part 2 (Aug 14-15 2026). One intake, one map, Federal + Utah lanes. New app wearing Startup State brand. Not a fork of craigcossairt/startup-state.
+- **Owner:** Craig Cossairt - craig@bloom.date
+- **Stage:** idea
 - For the owner's background and working style, see `docs/about-me.md`
 
 ## What I Need From Agents
@@ -28,7 +28,7 @@
 too fast for a static config file. Read the live sources below before acting on anything that
 depends on what's currently active or due:
 
-- **Active issues + priorities** - <!-- FILL IN: issue tracker URL (Linear, GitHub Issues, ...) -->
+- **Active issues + priorities** - https://github.com/craigcossairt/startup-state-2/issues
 - **Decision history (what was decided, when, why)** - `docs/decision-log.md`
 - **Known bug patterns** - `docs/common-gotchas.md`
 
@@ -38,24 +38,24 @@ If no, it goes in the issue tracker, not here.
 
 ## Tech Stack
 
-<!-- FILL IN: delete rows that don't apply, add your own -->
+Prefer the stack that already shipped the Part 1 Startup State demo, unless something is clearly faster.
 
 | Layer | Technology |
 |---|---|
-| Frontend | |
-| Backend | |
-| Database | |
-| Hosting | |
-| Issue Tracking | |
-| Error Tracking | |
+| Frontend | Next.js 16 / React / TypeScript / Tailwind |
+| Backend | Route handlers + official federal APIs (2-4 sources) |
+| Database | TBD (start with cached JSON / local files; Supabase only if needed) |
+| Hosting | Vercel |
+| Issue Tracking | GitHub Issues |
+| Error Tracking | none yet |
 
 ## Getting Started
 
-<!-- FILL IN: the commands a fresh clone needs to run -->
+App is not scaffolded yet. After `create-next-app`, put the real commands here.
 
 ```bash
-# install deps:
-# run dev server:
+# install deps:     pnpm install
+# run dev server:   pnpm dev
 # run tests:
 # lint / typecheck:
 ```
@@ -67,9 +67,11 @@ If no, it goes in the issue tracker, not here.
 ```
 .
 ├── docs/
-│   ├── common-gotchas.md    # symptom → root cause → fix table (append after every bug fix)
-│   ├── decision-log.md      # one line per decision
-│   └── methodology/         # TDD workflow, bug protocol, session habits
+│   ├── primary-bounty.md    # why GOED, weekend slice
+│   ├── briefs/              # official GOED brief + reuse note
+│   ├── common-gotchas.md
+│   ├── decision-log.md
+│   └── methodology/
 ├── .claude/                 # Claude Code adapter (hooks, commands, skills, agents)
 ├── .cursor/                 # Cursor adapter (rules + hooks + skill routers)
 ├── .grok/                   # Grok Build adapter (config + hooks)
@@ -174,10 +176,10 @@ delegate:
 
 | Tier | Best for | Delegate to it when |
 |---|---|---|
-| Fast <!-- FILL IN: current model --> | Bulk mechanical work: exhaustive greps, file inventories, formatting | Output is large, judgment is minimal, correctness is cheap to verify |
-| Mid <!-- FILL IN --> | Routine implementation following an established pattern | The pattern exists in the repo and a review pass will catch mistakes |
-| Strong <!-- FILL IN --> | Complex implementation, debugging, refactors, code review | The task needs real reasoning within known constraints |
-| Frontier <!-- FILL IN --> | Architecture decisions, auth/security design, ambiguous tradeoffs | One-shot hard calls; the escalation target |
+| Fast (Haiku 4.5) | Bulk mechanical work: exhaustive greps, file inventories, formatting | Output is large, judgment is minimal, correctness is cheap to verify |
+| Mid (Sonnet 5) | Routine implementation following an established pattern | The pattern exists in the repo and a review pass will catch mistakes |
+| Strong (Opus 4.8) | Complex implementation, debugging, refactors, code review | The task needs real reasoning within known constraints |
+| Frontier (Grok 4.6) | Architecture decisions, auth/security design, ambiguous tradeoffs | One-shot hard calls; the escalation target |
 
 Refresh the model names when the model family turns over; the tier structure is the stable part.
 
@@ -185,11 +187,10 @@ Refresh the model names when the model family turns over; the tier structure is 
 
 - Never fabricate statistics or market data - search first
 - All externally-facing content must be original - no copying from competitors
-- <!-- OPTIONAL, keep or delete: --> No em dashes (—) in externally-facing content (marketing
-  copy, user-facing UI text, emails to outside parties, public posts). Use hyphens, commas,
-  parentheses, or separate sentences. Em dashes are fine in internal docs, code comments, and
-  commit messages.
-- <!-- OPTIONAL, keep or delete: --> **Writing rules for prose (Orwell, 1946).** Scope: the
+- No em dashes (—) in externally-facing content (marketing copy, user-facing UI text, emails to
+  outside parties, public posts). Use hyphens, commas, parentheses, or separate sentences. Em
+  dashes are fine in internal docs, code comments, and commit messages.
+- **Writing rules for prose (Orwell, 1946).** Scope: the
   externally-facing content above, plus PR descriptions and commit messages. Prose only, never
   code, identifiers, or established technical terms; swap in everyday words only where
   precision survives.
@@ -199,7 +200,7 @@ Refresh the model names when the model family turns over; the tier structure is 
   4. Never use the passive where you can use the active.
   5. Never use jargon or a scientific word where everyday English will do.
   6. Break any of these rules sooner than write something clumsy.
-- <!-- OPTIONAL, keep or delete: --> **Banned in that same scope**, as a mechanical check like
+- **Banned in that same scope**, as a mechanical check like
   the em-dash rule: *comprehensive, robust, seamless, leverage* (as a verb), *delve, utilize,
   game-changer*; the "it's not just X, it's Y" construction; rule-of-three padding ("faster,
   smarter, better"); achievement language in commits and PRs ("significantly improved",
@@ -246,5 +247,5 @@ Refresh the model names when the model family turns over; the tier structure is 
 - Use bullet points for action items
 - Use Markdown: sections, tables, numbered lists where appropriate
 - When writing externally-facing content, align with the brand voice
-  (<!-- FILL IN: link brand/voice doc when one exists -->)
+  (Startup State / GOED brand: Vibrant Green, Midnight, Mulish + Source Sans + Source Serif)
 - When writing internal/working docs, prioritize clarity and speed

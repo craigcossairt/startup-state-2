@@ -8,5 +8,5 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 
 ---
 
-- **2026-07-01** - (Example - delete me) Chose Supabase over a custom backend: solo team, auth +
-  database + storage in one service. See #12.
+- **2026-08-13** - Created this private repo from craigcossairt/trellis after the GOED Part 2 brief was posted. Git history starts here on purpose.
+- **2026-08-13** - Primary bounty is GOED Government Opportunity Finder ($5k). New app, Startup State skin, Federal + Utah lanes. Not a fork of craigcossairt/startup-state. See `docs/primary-bounty.md`.
