@@ -159,5 +159,5 @@ Later surfaces hang off these fields. They do not add payloads to this record.
 
 - Exact infer / rank / explain prompt text (still fog on the map).
 - Which curated Utah cards exist ([Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13)).
-- How Intake and the map look ([Intake and Opportunity Map look](https://github.com/craigcossairt/startup-state-2/issues/9)).
+- How Intake and the map look (structure locked: `docs/spec/intake-and-map-look.md`). Visual end state is a later ticket.
 - Graph edge types, alert delivery, checklist contents, 12-month generation, or chat as a helper.
