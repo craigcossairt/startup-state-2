@@ -21,3 +21,14 @@ This is not a fork of [craigcossairt/startup-state](https://github.com/craigcoss
 - Issues: https://github.com/craigcossairt/startup-state-2/issues
 
 Needs `XAI_API_KEY` in `.env` for live infer and rank (Grok 4.6). Fixture clicks skip infer and still need the key for rank.
+
+## Vercel
+
+Project: [vercel.com/cossairt/startup-state-2](https://vercel.com/cossairt/startup-state-2). GitHub pushes to `main` deploy Production.
+
+Set these on Production, Preview, and Development (never commit them):
+
+- `XAI_API_KEY` - infer and rank
+- `SAM_API_KEY` - optional `sam_opps` retrieve; fail soft if missing
+
+`GH_TOKEN` is for GitHub CLI, not this app. After adding keys, Redeploy so the running functions pick them up.

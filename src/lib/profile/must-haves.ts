@@ -37,13 +37,16 @@ export function applyMustHaveDraft<K extends MustHaveKey>(
 }
 
 export function promoteFilledMustHaves(profile: CompanyProfile): CompanyProfile {
-  const next = { ...profile };
+  let next: CompanyProfile = { ...profile };
   for (const key of MUST_HAVE_KEYS) {
     const field = fieldOf(profile, key);
     if (field.status === "missing" && field.value !== undefined) {
-      (next as Record<string, ProfileField<unknown>>)[key] = {
-        ...field,
-        status: "known",
+      next = {
+        ...next,
+        [key]: {
+          ...field,
+          status: "known",
+        },
       };
     }
   }
@@ -51,12 +54,15 @@ export function promoteFilledMustHaves(profile: CompanyProfile): CompanyProfile 
 }
 
 export function confirmInferredMustHaves(profile: CompanyProfile): CompanyProfile {
-  const next = { ...profile };
+  let next: CompanyProfile = { ...profile };
   for (const key of inferredMustHaves(profile)) {
     const field = fieldOf(profile, key);
-    (next as Record<string, ProfileField<unknown>>)[key] = {
-      ...field,
-      status: "known",
+    next = {
+      ...next,
+      [key]: {
+        ...field,
+        status: "known",
+      },
     };
   }
   return next;

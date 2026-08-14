@@ -14,3 +14,5 @@ Include a commit SHA and issue reference when known.
 | Confirm listed inferred fields as JSON and they were not editable | Confirm rendered `JSON.stringify(value)` instead of inputs | Shared `MustHaveField` editors; Continue still runs `confirmInferredMustHaves` | 2026-08-14 | Intake |
 | Cursor cloud has no SBIR/SAM history | Full dumps are gitignored; cloud only clones git | Commit `utah-awards.json` and `listings-slice.json`; loaders prefer those | 2026-08-14 | history / SAM join |
 | SBIR similar awardees empty even with `award_data.csv` | Loader used col 28 (Zip) as State | State is col 27, city is col 26 | 2026-08-14 | `src/lib/history/sbir.ts` |
+| Vercel Production build fails TypeScript | Bonus helper omitted `description`; `must-haves` and rank-id Map used branded `Opportunity.id` against plain strings | Fill `description: null`; spread profile updates; `Map<string, Opportunity>` | 2026-08-14 | `pnpm build` |
+| Vercel map has empty Grants.gov / GOEO / history | `dataPath()` is dynamic, so file tracing drops `data/` | `outputFileTracingIncludes: { "/*": ["./data/**/*"] }` | 2026-08-14 | `next.config.ts` |
