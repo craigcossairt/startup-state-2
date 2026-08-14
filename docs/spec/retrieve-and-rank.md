@@ -154,5 +154,5 @@ Qualitative instructions in the rank prompt. Not a numeric scorer.
 
 - Exact infer / rank / explain prompt text (still fog on the map).
 - Numeric scoring weights.
-- Shared opportunity record shape ([Shared opportunity record](https://github.com/craigcossairt/startup-state-2/issues/3)).
+- Shared opportunity record shape (locked: `docs/spec/shared-opportunity-record.md`).
 - Curated Utah official-card mix vs GOEO-only ([Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13)).

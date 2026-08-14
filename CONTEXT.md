@@ -5,8 +5,24 @@ Government Opportunity Finder for the GOED bounty at AI Builder Day Part 2. A fo
 ## Language
 
 **Opportunity Map**:
-The product. Ranked-by-fit cards for a company: program, agency, value, deadline, why, concerns, similar awardees, next step. Not a geographic map. Not a determination that the company is eligible.
+The product. A list of Ranked cards for a company. Not a geographic map. Not a determination that the company is eligible.
 _Avoid_: grant search, Navigator, Playbook, startup map, eligible
+
+**Opportunity**:
+One retrieved listing from one adapter (a Grants.gov hit, a GOEO row, or a curated official card). Not a collapsed program. Not a geographic pin. Company-specific Fit does not live here.
+_Avoid_: Resource, Program as the record, treating several FOAs as one card
+
+**Ranked card**:
+An Opportunity shown for one Company profile: Fit, why, concerns, next step, and attached similar awardees. The Opportunity Map is a list of these.
+_Avoid_: ScoredResource, match, result, eligible card
+
+**Instrument**:
+What kind of listing: grant, loan, incentive, counseling, contracting help, procurement, other. Independent of the Federal / Utah Source badge.
+_Avoid_: treating every card as a grant
+
+**History attachment**:
+Similar awardees joined onto a Ranked card from USAspending or the SBIR award CSV. Not a retrieve ID. Not a second similar-companies model.
+_Avoid_: similar-companies as its own record
 
 **Intake**:
 One sentence or a fixture click, then infer, then only the missing Company profile fields, then the Opportunity Map.
