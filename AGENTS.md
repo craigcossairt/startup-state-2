@@ -254,3 +254,30 @@ Refresh the model names when the model family turns over; the tier structure is 
 - When writing externally-facing content, align with the brand voice
   (Startup State / GOED brand: Vibrant Green, Midnight, Mulish + Source Sans + Source Serif)
 - When writing internal/working docs, prioritize clarity and speed
+
+## Cursor Cloud specific instructions
+
+Durable, non-obvious notes for agents running in the Cursor Cloud VM. The startup update
+script installs dependencies only; service/run commands live here and in the sources below.
+
+- **The product app is not scaffolded yet (idea stage).** There is no `package.json`, no
+  source, and nothing to `pnpm dev`. The only runnable checks today are the guardrail scripts
+  and the `hooks-ci` workflow. Once `create-next-app` lands, put the real dev/test/lint
+  commands under `## Getting Started` (the intended stack is Next.js 16 + pnpm; Node 22 and
+  pnpm are on the VM).
+- **The real "lint/test" suite right now is `.github/workflows/hooks-ci.yml`.** It validates the
+  guardrail infrastructure: no CRLF, `bash -n`, `shellcheck -S warning -x`, exec bits on
+  `.githooks/*` and `bin/*`, skill/command/agent/router frontmatter, and JSON config parseability.
+  Run the same checks locally by stepping through that workflow's commands against
+  `git ls-files '*.sh' '.githooks/*'`.
+- **`shellcheck` is required for the lint suite and is a system package**, so it is not in the
+  startup update script (system deps do not belong there). Install it once per VM with
+  `sudo apt-get install -y shellcheck` if it is missing.
+- **The tracked push gate is inactive in cloud sessions, by design.** Cursor already sets
+  `core.hooksPath` to its own agent-hooks directory, so `bin/install-git-hooks.sh` refuses to
+  clobber it and the tracked `.githooks/pre-push` never wires up (regardless of
+  `GREEN_COMMANDS`). Do not fight this; run checks manually before pushing instead.
+- **Verify guardrail hooks with a deliberate violation, never by absence of complaints** (a
+  no-op hook looks identical to a passing one). Example:
+  `printf '{"file_path":".env"}' | bash bin/run-claude-hook.sh cursor block-sensitive-files`
+  must emit a `deny` verdict and exit 2.
