@@ -186,7 +186,7 @@ export type CompanyProfile = {
 
 ### Range matching (for retrieve ticket)
 
-Scoring weights and overlap rules live on [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2).
+Scoring weights and overlap rules live on [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2) / `docs/spec/retrieve-and-rank.md`.
 
 ## Official fixtures
 

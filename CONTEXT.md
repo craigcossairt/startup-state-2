@@ -36,6 +36,18 @@ _Avoid_: Utah-only as the product category
 likely / potential-verify / adjacent / probably not. The only ranking language in the product. Never “eligible.”
 _Avoid_: eligible, eligibility determination
 
+**Retrieve**:
+Per-source adapters that turn a Company profile into a capped ID set from official catalogs and the GOEO table. Rank may only emit retrieved IDs.
+_Avoid_: keyword-only search as the product, LLM-invented programs, topic-weight matching
+
+**Probably-not floor**:
+When rank finds no Federal `likely` or `potential-verify`, and at least one Utah card is still a real Fit, the Opportunity Map leads with an honest federal poor-fit banner plus the State lane. Federal `probably not` cards stay visible.
+_Avoid_: hiding federal rows, hallucinating a strong grant for fixture-5
+
+**Chip**:
+A control that widens retrieve (extra GOEO keys, `directory`, or a broader federal keyword) and re-ranks. Default map is the first retrieved slice, not all 213.
+_Avoid_: dumping the catalog, using source `Funding` as a retrieve key
+
 **Fixture**:
 One of the five official test companies in the brief. Case 5 may have no strong federal grant.
 _Avoid_: Jordan/Maria/Marcus/Priya/David/Amir (those were Part 1)
