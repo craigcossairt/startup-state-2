@@ -2,7 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { MustHaveField } from "@/components/must-have-field";
 import {
+  applyMustHaveDraft,
   confirmInferredMustHaves,
   inferredMustHaves,
   missingMustHaves,
@@ -31,6 +33,12 @@ export function ConfirmForm() {
 
   const fields = inferredMustHaves(profile);
 
+  function onDraft<K extends MustHaveKey>(key: K, value: CompanyProfile[K]["value"]) {
+    setProfile((current) =>
+      current ? applyMustHaveDraft(current, key, value) : current,
+    );
+  }
+
   function continueToNext() {
     if (!profile) return;
     const confirmed = confirmInferredMustHaves(profile);
@@ -46,41 +54,25 @@ export function ConfirmForm() {
         These must-have fields came from your sentence. Edit if needed, then
         continue. Nothing is marked known until you continue.
       </p>
-      <ul className="mt-8 space-y-4">
-        {fields.map((key) => (
-          <li key={key} className="rounded-lg border border-border p-4">
-            <p className="text-sm font-bold">{labelFor(key)}</p>
-            <p className="mt-1 text-sm">{formatField(profile, key)}</p>
-          </li>
-        ))}
-      </ul>
-      <button
-        type="button"
-        onClick={continueToNext}
-        className="mt-8 rounded-md bg-vibrant-green px-5 py-2.5 text-sm font-bold text-white"
+      <form
+        className="mt-8 space-y-4"
+        onSubmit={(event) => {
+          event.preventDefault();
+          continueToNext();
+        }}
       >
-        Continue
-      </button>
+        {fields.map((key) => (
+          <div key={key} className="rounded-lg border border-border p-4">
+            <MustHaveField fieldKey={key} profile={profile} onDraft={onDraft} />
+          </div>
+        ))}
+        <button
+          type="submit"
+          className="mt-4 rounded-md bg-vibrant-green px-5 py-2.5 text-sm font-bold text-white"
+        >
+          Continue
+        </button>
+      </form>
     </div>
   );
-}
-
-function labelFor(key: MustHaveKey): string {
-  return {
-    whatTheyDo: "What they do",
-    technologies: "Technologies",
-    sectors: "Sectors",
-    hqCountry: "Country",
-    hqState: "State",
-    employeeCount: "Employees",
-    revenue: "Revenue",
-    capitalRaisedUsd: "Capital raised",
-    capitalNeedUsd: "Capital need",
-    useOfFunds: "Use of funds",
-  }[key];
-}
-
-function formatField(profile: CompanyProfile, key: MustHaveKey): string {
-  const value = profile[key].value;
-  return value === undefined ? "Missing" : JSON.stringify(value);
 }

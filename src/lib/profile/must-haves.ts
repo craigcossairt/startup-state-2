@@ -21,6 +21,35 @@ export function allMustHavesKnown(profile: CompanyProfile): boolean {
   return MUST_HAVE_KEYS.every((key) => fieldOf(profile, key).status === "known");
 }
 
+export function applyMustHaveDraft<K extends MustHaveKey>(
+  profile: CompanyProfile,
+  key: K,
+  value: CompanyProfile[K]["value"],
+): CompanyProfile {
+  const field = fieldOf(profile, key);
+  return {
+    ...profile,
+    [key]: {
+      ...field,
+      value,
+    },
+  };
+}
+
+export function promoteFilledMustHaves(profile: CompanyProfile): CompanyProfile {
+  const next = { ...profile };
+  for (const key of MUST_HAVE_KEYS) {
+    const field = fieldOf(profile, key);
+    if (field.status === "missing" && field.value !== undefined) {
+      (next as Record<string, ProfileField<unknown>>)[key] = {
+        ...field,
+        status: "known",
+      };
+    }
+  }
+  return next;
+}
+
 export function confirmInferredMustHaves(profile: CompanyProfile): CompanyProfile {
   const next = { ...profile };
   for (const key of inferredMustHaves(profile)) {
