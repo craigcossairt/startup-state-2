@@ -27,6 +27,10 @@ brain/log.md
 brain/index.md
 brain/hooks/debug.log
 
+# Weekend federal dumps (too large; pull locally)
+data/cache/sam/
+data/cache/sbir/
+
 # OS noise
 .DS_Store
 Thumbs.db

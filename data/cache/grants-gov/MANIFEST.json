@@ -1,0 +1,82 @@
+[
+  {
+    "file": "data/cache/grants-gov/fixture-1-sbir.json",
+    "keyword": "SBIR healthcare AI nurses",
+    "http": 200,
+    "hitCount": 102,
+    "rows": 25,
+    "firstId": "359666"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-1-open.json",
+    "keyword": "healthcare AI administrative burden nurses",
+    "http": 200,
+    "hitCount": 219,
+    "rows": 25,
+    "firstId": "359666"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-2-sbir.json",
+    "keyword": "SBIR aerospace manufacturing",
+    "http": 200,
+    "hitCount": 38,
+    "rows": 25,
+    "firstId": "359671"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-2-open.json",
+    "keyword": "aerospace manufacturing advanced components",
+    "http": 200,
+    "hitCount": 234,
+    "rows": 25,
+    "firstId": "362036"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-3-sbir.json",
+    "keyword": "SBIR water climate sensors",
+    "http": 200,
+    "hitCount": 44,
+    "rows": 25,
+    "firstId": "356811"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-3-open.json",
+    "keyword": "water climate sensors AI",
+    "http": 200,
+    "hitCount": 52,
+    "rows": 25,
+    "firstId": "363292"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-4-sbir.json",
+    "keyword": "SBIR cyber threat detection",
+    "http": 200,
+    "hitCount": 88,
+    "rows": 25,
+    "firstId": "360455"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-4-open.json",
+    "keyword": "cybersecurity threat detection",
+    "http": 200,
+    "hitCount": 161,
+    "rows": 25,
+    "firstId": "360455"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-5-open.json",
+    "keyword": "workforce youth education marketplace",
+    "http": 200,
+    "hitCount": 202,
+    "rows": 25,
+    "firstId": "362036"
+  },
+  {
+    "file": "data/cache/grants-gov/fixture-5-sbir.json",
+    "keyword": "SBIR education youth",
+    "http": 200,
+    "hitCount": 191,
+    "rows": 25,
+    "firstId": "358912"
+  }
+]
