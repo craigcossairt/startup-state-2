@@ -17,8 +17,8 @@ The structured description used to match. Schema: `docs/spec/company-profile-sch
 _Avoid_: Persona
 
 **Federal lane**:
-Required core. Grants.gov, USAspending, SBIR.gov, and SAM.gov Assistance Listings.
-_Avoid_: every agency, the full federal government
+Required core. Open list is Grants.gov. SAM Assistance Listings (cache) join onto those cards by ALN. USAspending and the SBIR award CSV attach similar awardees. They are not a second open-opportunity list.
+_Avoid_: every agency, the full federal government, treating SAM or USAspending as live NOFOs
 
 **State lane**:
 Local programs for a Jurisdiction. There is no official Utah opportunity API. This demo uses the Part 1 GOEO table (up to the full 213) with categorization and filtering, plus any curated official program cards we lock. A company outside Utah can still match a Utah program when the program allows it; most will not.
@@ -35,6 +35,18 @@ _Avoid_: Utah-only as the product category
 **Fit label**:
 likely / potential-verify / adjacent / probably not. The only ranking language in the product. Never “eligible.”
 _Avoid_: eligible, eligibility determination
+
+**Retrieve**:
+Per-source adapters that turn a Company profile into a capped ID set from official catalogs and the GOEO table. Rank may only emit retrieved IDs.
+_Avoid_: keyword-only search as the product, LLM-invented programs, topic-weight matching
+
+**Probably-not floor**:
+When rank finds no Federal `likely` or `potential-verify`, and at least one Utah card is still a real Fit, the Opportunity Map leads with an honest federal poor-fit banner plus the State lane. Federal `probably not` cards stay visible.
+_Avoid_: hiding federal rows, hallucinating a strong grant for fixture-5
+
+**Chip**:
+A control that widens retrieve (lane, extra GOEO keys, `directory`) and re-ranks, or filters the ranked list by Fit. Default map is the first retrieved slice, not all 213.
+_Avoid_: dumping the catalog, using source `Funding` as a retrieve key
 
 **Fixture**:
 One of the five official test companies in the brief. Case 5 may have no strong federal grant.
