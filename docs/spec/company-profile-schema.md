@@ -1,6 +1,6 @@
 # Company profile schema
 
-**Status: DRAFT** — round 2 grilling complete (see below). Round 3 frontier open on capitalRaised definition, Intake widgets, and enum policy. Locked when [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8) closes after HITL.
+**Status: LOCKED** — HITL grilling complete (rounds 1–3). See [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8).
 
 Spec for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not the Part 1 six-field Persona.
 
@@ -24,6 +24,15 @@ Spec for the Company profile object used by Intake, infer, retrieve, rank, and t
 | Q6 | Explicit **confirm** screen for inferred must-haves before map; no silent promotion. |
 | Q7 | Fixture cities are **real** Utah municipalities (see fixture table). |
 | Q8 | Schema supports any US `hqState`; weekend demo uses Utah fixtures + optional live non-UT Intake. |
+
+### Round 3 (Intake widgets and enums)
+
+| # | Decision |
+| --- | --- |
+| Q9 | `capitalRaisedUsd` = equity + convertibles to date. No debt, no grants. |
+| Q10 | Employee Intake: **exact number** primary; optional band chips set `min === max` (midpoint or top of band). |
+| Q11 | `SectorTag` and `UseOfFundsTag` **frozen for the weekend**; extend only if a fixture needs a missing tag (same PR updates spec). |
+| Q12 | Fixture switcher labels: brief-aligned short names (see fixture table). Case 5 hints honest-no. |
 
 ## Design rules
 
@@ -153,9 +162,9 @@ export type CompanyProfile = {
 | `hqCountry` | string | yes | Intake asks country | Default infer `US` when US signals present |
 | `hqState` | 2-letter US state | yes | Intake asks state | Any US state allowed (Q8) |
 | `hqCity` | string | no | stays missing | Infer-if-present; real city when set; display only |
-| `employeeCount` | `IntRange` | yes | Intake asks headcount | Point estimate: `min === max` |
+| `employeeCount` | `IntRange` | yes | Intake asks headcount | Exact number primary; band chips optional (Q10). Point: `min === max` |
 | `revenue` | basis + USD point | yes | Intake asks revenue | `arr` when ARR stated; else `annual_revenue` |
-| `capitalRaisedUsd` | USD point | yes | Intake asks total raised | See round 3: equity definition |
+| `capitalRaisedUsd` | USD point | yes | Intake asks total raised | Equity + convertibles only; no debt or grants (Q9) |
 | `capitalNeedUsd` | `UsdRange` | yes | Intake asks funding target | Always a range; non-dilutive search target |
 | `useOfFunds` | `UseOfFundsTag[]` | yes | Intake asks use chips | Multi-select |
 | `useOfFundsNotes` | free text | no | stays missing | Color on use of funds |
@@ -183,13 +192,13 @@ Scoring weights and overlap rules live on [Retrieve and probably-not floor](http
 
 All five are Utah-headquartered per the brief. Cities are real Utah municipalities (Q7).
 
-| Fixture | Brief case | City (real) |
-| --- | --- | --- |
-| fixture-1 | AI healthcare SaaS | Salt Lake City |
-| fixture-2 | Aerospace manufacturing | Ogden |
-| fixture-3 | Water / climate sensors + AI | Provo |
-| fixture-4 | Cyber threat detection | Lehi |
-| fixture-5 | Parent / youth marketplace | Salt Lake City |
+| Fixture | Switcher label (Q12) | Brief case | City (real) |
+| --- | --- | --- | --- |
+| fixture-1 | Healthcare AI | AI healthcare SaaS | Salt Lake City |
+| fixture-2 | Aerospace | Aerospace manufacturing | Ogden |
+| fixture-3 | Water / climate | Water / climate sensors + AI | Provo |
+| fixture-4 | Cyber | Cyber threat detection | Lehi |
+| fixture-5 | Youth marketplace (honest-no) | Parent / youth marketplace | Salt Lake City |
 
 ### fixture-1 — AI healthcare SaaS
 
@@ -323,20 +332,15 @@ Store runtime copies under `data/fixtures/company-profile.fixture-*.json` when t
 1. User sentence or fixture click (fixtures load all fields as `known`).
 2. **Infer** (Grok 4.6, structured `CompanyProfile`).
 3. **Confirm** — if any must-have is `inferred`, one screen; user edits or accepts → all become `known`.
-4. **Ask** — any must-have still `missing` (chips + short text).
+4. **Ask** — any must-have still `missing` (chips + short text). Employee: number field plus optional bands (1–10, 11–50, 51–250, 251+).
 5. **Map** — all must-haves `known`; enrichments optional.
+
+## Enum policy (Q11)
+
+`SectorTag`, `UseOfFundsTag`, `CustomerType`, `CompanyStage`, `RdIntensity`, and `ProductMaturity` are frozen for the weekend POC. Add a tag only when a fixture or retrieve path requires it; update this spec in the same change.
 
 ## What this schema is not
 
 - Not Part 1 `Persona` (six fields, topic weights).
 - Not an eligibility checklist.
 - Not a persisted user account (session / fixture only for the weekend POC).
-
-## Round 3 (open)
-
-Pending HITL on [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8):
-
-- **capitalRaisedUsd** — equity + convertibles only, or include debt?
-- **employeeCount Intake** — exact number input vs band chips that set a point?
-- **SectorTag / UseOfFundsTag** — frozen for the weekend or extend in code without spec change?
-- **Fixture switcher labels** — "Case 1: Healthcare AI" vs numbered only?
