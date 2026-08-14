@@ -28,6 +28,8 @@ describe("Intake copy", () => {
     expect(intake).toContain("FIXTURE_CHIPS");
     expect(intake).toContain("{INTAKE_HERO}");
     expect(intake).toContain("{chip.label}");
-    expect(`${intake}\n${nav}`).not.toMatch(/Playbook|Careers|Swag|News|eligible|eligibility/i);
+    expect(`${intake}\n${nav}`).not.toMatch(
+      /Playbook|Careers|Swag|News|eligible|eligibility|coming soon|coming-soon/i,
+    );
   });
 });

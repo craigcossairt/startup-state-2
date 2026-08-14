@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { BonusBar } from "@/components/bonus-bar";
 import { FixtureRail } from "@/components/fixture-rail";
 import { RankedOpportunityCard } from "@/components/ranked-card";
 import { GOEO_KEY_LABELS } from "@/lib/copy";
+import { saveMapPayload } from "@/lib/session-map";
 import { loadStoredProfile, saveProfile } from "@/lib/session-profile";
 import type { CompanyProfile, FixtureId } from "@/lib/types/company-profile";
 import type {
@@ -61,6 +63,7 @@ export function OpportunityMap({
           throw new Error(await response.text());
         }
         const next = (await response.json()) as OpportunityMapPayload;
+        saveMapPayload(next);
         if (!cancelled) setPayload(next);
       } catch (err) {
         if (!cancelled) {
@@ -141,6 +144,11 @@ export function OpportunityMap({
             label={fit === "probably_not" ? "probably not" : fit}
           />
         ))}
+      </div>
+
+      <div className="mt-4">
+        <p className="eyebrow mb-2">This map</p>
+        <BonusBar />
       </div>
 
       {busy ? <p className="mt-8 text-sm">Building the Opportunity Map...</p> : null}

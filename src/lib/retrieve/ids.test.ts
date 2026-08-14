@@ -15,4 +15,9 @@ describe("mintOpportunityId", () => {
       "curated:nucleus-grow",
     );
   });
+
+  it("mints SAM Contract Opportunities ids from the notice id", () => {
+    expect(mintOpportunityId("sam_opps", "abc123")).toBe("sam_opps:abc123");
+  });
 });
+

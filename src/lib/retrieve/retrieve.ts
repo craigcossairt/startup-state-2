@@ -9,6 +9,7 @@ import {
 } from "./goeo-rows";
 import { retrieveGrantsGov } from "./grants-gov";
 import { joinSamListings } from "./sam-join";
+import { retrieveSamOpps } from "./sam-opps";
 
 export const RETRIEVE_CAP = 50;
 
@@ -43,8 +44,11 @@ export async function retrieveOpportunities(
     goeo.push(...leftoverGoeoRows(already).map(mapGoeoRowToOpportunity));
   }
 
-  const federal =
+  const grants =
     chips.lane === "state" ? [] : await retrieveGrantsGov(profile);
+  const samOpps =
+    chips.lane === "state" ? [] : await retrieveSamOpps(profile);
+  const federal = [...grants, ...samOpps];
 
   const selected = capRetrieved({
     curated,

@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { restoreLastCompanyProfile } from "@/lib/bonus/welcome-back";
 import { FIXTURE_CHIPS, INTAKE_HERO } from "@/lib/copy";
 import { inferredMustHaves, missingMustHaves } from "@/lib/profile/must-haves";
 import { saveProfile } from "@/lib/session-profile";
@@ -12,6 +13,25 @@ export function Intake() {
   const [sentence, setSentence] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [hasWelcomeBack, setHasWelcomeBack] = useState(false);
+
+  useEffect(() => {
+    setHasWelcomeBack(Boolean(restoreLastCompanyProfile(sessionStorage)));
+  }, []);
+
+  function openLastMap() {
+    const profile = restoreLastCompanyProfile(sessionStorage);
+    if (!profile) return;
+    if (inferredMustHaves(profile).length > 0) {
+      router.push("/confirm");
+      return;
+    }
+    if (missingMustHaves(profile).length > 0) {
+      router.push("/ask");
+      return;
+    }
+    router.push("/map");
+  }
 
   async function onInfer(event: React.FormEvent) {
     event.preventDefault();
@@ -81,6 +101,15 @@ export function Intake() {
             {busy ? "Reading that sentence..." : "See the Opportunity Map"}
           </button>
           {error ? <p className="text-sm text-red-700">{error}</p> : null}
+          {hasWelcomeBack ? (
+            <button
+              type="button"
+              onClick={openLastMap}
+              className="ml-3 rounded-md border border-midnight px-5 py-2.5 text-sm font-bold"
+            >
+              Open last Opportunity Map
+            </button>
+          ) : null}
         </form>
 
         <div className="mt-10">

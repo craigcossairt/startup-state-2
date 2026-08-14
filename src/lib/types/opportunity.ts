@@ -1,4 +1,4 @@
-export type OpportunitySource = "grants_gov" | "goeo" | "curated";
+export type OpportunitySource = "grants_gov" | "goeo" | "curated" | "sam_opps";
 
 export type Instrument =
   | "grant"

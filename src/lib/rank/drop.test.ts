@@ -23,4 +23,13 @@ describe("dropUnknownRankIds", () => {
       "curated:nucleus-grow",
     ]);
   });
+
+  it("drops a sam_opps id that was not retrieved", () => {
+    const kept = dropUnknownRankIds(
+      [card("sam_opps:abc123"), card("sam_opps:invented")],
+      ["sam_opps:abc123"],
+    );
+    expect(kept.map((row) => row.id)).toEqual(["sam_opps:abc123"]);
+  });
 });
+
