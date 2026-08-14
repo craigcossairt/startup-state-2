@@ -17,17 +17,21 @@ type SamCache = {
 
 let index: Map<string, SamListing> | null = null;
 
+function ingestSamFile(file: string, into: Map<string, SamListing>) {
+  if (!existsSync(file)) return;
+  const parsed = JSON.parse(readFileSync(file, "utf8")) as SamCache;
+  for (const listing of parsed.assistanceListingsData ?? []) {
+    if (listing.assistanceListingId && !into.has(listing.assistanceListingId)) {
+      into.set(listing.assistanceListingId, listing);
+    }
+  }
+}
+
 function loadSamIndex(): Map<string, SamListing> {
   if (index) return index;
   index = new Map();
-  const file = dataPath("cache", "sam", "active.json");
-  if (!existsSync(file)) return index;
-  const parsed = JSON.parse(readFileSync(file, "utf8")) as SamCache;
-  for (const listing of parsed.assistanceListingsData ?? []) {
-    if (listing.assistanceListingId) {
-      index.set(listing.assistanceListingId, listing);
-    }
-  }
+  ingestSamFile(dataPath("cache", "sam", "listings-slice.json"), index);
+  ingestSamFile(dataPath("cache", "sam", "active.json"), index);
   return index;
 }
 

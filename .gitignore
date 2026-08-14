@@ -29,9 +29,9 @@ brain/log.md
 brain/index.md
 brain/hooks/debug.log
 
-# Weekend federal dumps (too large; pull locally)
-data/cache/sam/
-data/cache/sbir/
+# Weekend federal dumps (too large; pull locally). Committed slices stay in git.
+data/cache/sam/active.json
+data/cache/sbir/award_data.csv
 
 # OS noise
 .DS_Store
