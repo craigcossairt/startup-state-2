@@ -1,16 +1,37 @@
 # Company profile schema
 
-**Status: DRAFT** — round 1 grilling locked the field *categories* (must-have vs infer-if-present). Rounds 2+ still open on types, enums, missing semantics, and fixture payloads. Do not treat as locked until [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8) closes after HITL.
+**Status: DRAFT** — round 2 grilling complete (see below). Round 3 frontier open on capitalRaised definition, Intake widgets, and enum policy. Locked when [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8) closes after HITL.
 
-Working draft for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not the Part 1 six-field Persona.
+Spec for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not the Part 1 six-field Persona.
+
+## Grilling decisions
+
+### Round 1 (field categories)
+
+- **Must-have (infer or ask):** what they do, tech, location (country + state), employees, revenue, capital raised, capital need, use of funds.
+- **Infer-if-present (never block):** stage, R&D intensity, product maturity, customers.
+- **Not Part 1 Persona.** Some fields are binary; others are fuzzy ranges.
+
+### Round 2 (types and semantics)
+
+| # | Decision |
+| --- | --- |
+| Q1 | Every field uses `ProfileField<T>` with `known` / `inferred` / `missing`. |
+| Q2 | Both `technologies` (open strings) and `sectors` (enum chips) are must-have. |
+| Q3 | `hqCountry` + `hqState` must-have; `hqCity` infer-if-present (display / color, not match gate). |
+| Q4 | `revenue` = single point amount + basis (`arr` \| `annual_revenue`). |
+| Q5 | `capitalNeedUsd` always a range; point target = `minUsd === maxUsd`. |
+| Q6 | Explicit **confirm** screen for inferred must-haves before map; no silent promotion. |
+| Q7 | Fixture cities are **real** Utah municipalities (see fixture table). |
+| Q8 | Schema supports any US `hqState`; weekend demo uses Utah fixtures + optional live non-UT Intake. |
 
 ## Design rules
 
-1. **Must-have for rank** — Infer first from free text or fixture click. Intake asks only fields still `missing` after infer. Opportunity Map does not run until every must-have field is `known` or `inferred` with user confirmation.
-2. **Enrichment optional** — Infer-if-present fields never block the map. Rank and explain may use them when present.
-3. **Fit, not eligible** — Profile fields describe the company. They do not assert grant eligibility.
-4. **Ranges are fuzzy** — Dollar and headcount ranges use min/max USD or integers. Matching treats overlap as partial fit, not a hard gate.
-5. **Utah is data, not a lane name** — Location fields feed State-lane rules. `hqState` and inferred Utah presence drive Utah program fit; Federal lane ignores Utah residency requirements on the card.
+1. **Must-have for rank** — Infer first from free text or fixture click. Intake asks only must-have fields still `missing` after infer. Opportunity Map runs only after confirm step clears all inferred must-haves and all must-haves are `known`.
+2. **Enrichment optional** — Infer-if-present fields never block the map.
+3. **Fit, not eligible** — Profile describes the company; it does not assert grant eligibility.
+4. **Ranges are fuzzy** — Dollar and headcount ranges use min/max. Matching overlap rules live on [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2).
+5. **Utah is data** — `hqState` and `operatesInUtah` feed State-lane rules; Federal lane ignores Utah residency on the card.
 
 ## TypeScript reference
 
@@ -35,7 +56,7 @@ type ProfileField<T> = {
   value?: T;
   /** 0–1 when status is inferred; omit when known or missing. */
   confidence?: number;
-  /** Short note when inferred from ambiguous text (shown in Intake confirm step). */
+  /** Shown on confirm step when inferred from ambiguous text. */
   note?: string;
 };
 
@@ -95,7 +116,6 @@ export type UseOfFundsTag =
   | "manufacturing_scale";
 
 export type CompanyProfile = {
-  /** Set when loaded from an official fixture; omit for live Intake. */
   fixtureId?: "fixture-1" | "fixture-2" | "fixture-3" | "fixture-4" | "fixture-5";
 
   /** Must-have */
@@ -104,7 +124,6 @@ export type CompanyProfile = {
   sectors: ProfileField<SectorTag[]>;
   hqCountry: ProfileField<string>;
   hqState: ProfileField<string>;
-  hqCity: ProfileField<string>;
   employeeCount: ProfileField<IntRange>;
   revenue: ProfileField<{ basis: RevenueBasis; amountUsd: UsdAmount }>;
   capitalRaisedUsd: ProfileField<UsdAmount>;
@@ -112,13 +131,14 @@ export type CompanyProfile = {
   useOfFunds: ProfileField<UseOfFundsTag[]>;
   useOfFundsNotes: ProfileField<string>;
 
-  /** Infer-if-present — never block */
+  /** Infer-if-present — never block Intake or map */
+  hqCity: ProfileField<string>;
   stage: ProfileField<CompanyStage>;
   rdIntensity: ProfileField<RdIntensity>;
   productMaturity: ProfileField<ProductMaturity>;
   customerTypes: ProfileField<CustomerType[]>;
 
-  /** Derived at infer time; not asked in Intake */
+  /** Derived at infer; not asked in Intake */
   operatesInUtah: ProfileField<boolean>;
 };
 ```
@@ -127,45 +147,49 @@ export type CompanyProfile = {
 
 | Field | Type | Must-have | Missing means | Notes |
 | --- | --- | --- | --- | --- |
-| `whatTheyDo` | free text | yes | Intake asks one clarifying sentence | Primary infer input; 1–3 sentences max in UI |
-| `technologies` | string[] | yes | Intake asks "what tech?" | e.g. `AI`, `SaaS`, `sensors`, `marketplace` — open vocabulary, normalized lowercase |
-| `sectors` | `SectorTag[]` | yes | Intake asks sector chips | Map infer text to enum tags; allow multi-select |
+| `whatTheyDo` | free text | yes | Intake asks one clarifying sentence | Primary infer input; 1–3 sentences in UI |
+| `technologies` | string[] | yes | Intake asks "what tech?" | Open vocabulary, normalized lowercase |
+| `sectors` | `SectorTag[]` | yes | Intake asks sector chips | Closed enum for retrieve; multi-select |
 | `hqCountry` | string | yes | Intake asks country | Default infer `US` when US signals present |
-| `hqState` | 2-letter US state | yes | Intake asks state | Required when `hqCountry` is `US` |
-| `hqCity` | string | yes | Intake asks city | City name; optional display only for rank |
-| `employeeCount` | `IntRange` | yes | Intake asks headcount | Point estimate: `min === max`. Brief uses exact counts |
-| `revenue` | basis + USD | yes | Intake asks revenue band | Prefer `arr` when ARR stated; else `annual_revenue` |
-| `capitalRaisedUsd` | USD | yes | Intake asks total raised | Equity + convertible total to date |
-| `capitalNeedUsd` | `UsdRange` | yes | Intake asks funding target | Non-dilutive target range for this search |
-| `useOfFunds` | `UseOfFundsTag[]` | yes | Intake asks use chips | Multi-select; `useOfFundsNotes` for color |
-| `useOfFundsNotes` | free text | no | stays missing | e.g. "hospital pilots", "municipal pilots" |
+| `hqState` | 2-letter US state | yes | Intake asks state | Any US state allowed (Q8) |
+| `hqCity` | string | no | stays missing | Infer-if-present; real city when set; display only |
+| `employeeCount` | `IntRange` | yes | Intake asks headcount | Point estimate: `min === max` |
+| `revenue` | basis + USD point | yes | Intake asks revenue | `arr` when ARR stated; else `annual_revenue` |
+| `capitalRaisedUsd` | USD point | yes | Intake asks total raised | See round 3: equity definition |
+| `capitalNeedUsd` | `UsdRange` | yes | Intake asks funding target | Always a range; non-dilutive search target |
+| `useOfFunds` | `UseOfFundsTag[]` | yes | Intake asks use chips | Multi-select |
+| `useOfFundsNotes` | free text | no | stays missing | Color on use of funds |
 | `stage` | enum | no | stays missing | Infer from revenue / employees / text |
-| `rdIntensity` | enum | no | stays missing | `core` for deep tech / SBIR-shaped cos |
+| `rdIntensity` | enum | no | stays missing | |
 | `productMaturity` | enum | no | stays missing | |
 | `customerTypes` | enum[] | no | stays missing | |
-| `operatesInUtah` | boolean | no | derived | `true` when `hqState === "UT"` until multi-state HQ rules exist |
+| `operatesInUtah` | boolean | no | derived | `true` when `hqState === "UT"` |
 
 ### `FieldStatus` semantics
 
 | Status | Meaning | Intake behavior |
 | --- | --- | --- |
-| `known` | User typed, fixture loaded, or user confirmed infer | Show as filled |
-| `inferred` | Model filled; user has not confirmed | Show confirm/edit chip before map |
-| `missing` | Not inferable | Prompt for must-have; skip optional |
+| `known` | User typed, fixture loaded, or user confirmed on confirm step | Filled |
+| `inferred` | Model filled; user has not confirmed | Shown on confirm screen |
+| `missing` | Not inferable | Prompt for must-have |
 
-After infer, promote `inferred` → `known` when the user continues without editing. Demote to `missing` if the user clears a field.
+**Confirm step (Q6):** After infer, if any must-have is `inferred`, show one screen listing those fields (editable). User taps Continue on that screen → all shown fields become `known`. No auto-promotion without passing confirm.
 
 ### Range matching (for retrieve ticket)
 
-- **Overlap** — Program band overlaps profile range → full credit in rank prompt.
-- **Adjacent** — Within 2× outside band → `adjacent` fit possible with concern.
-- **Point estimates** — Treat as `min === max`.
+Scoring weights and overlap rules live on [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2).
 
-Scoring weights live on [Retrieve and probably-not floor](https://github.com/craigcossairt/startup-state-2/issues/2); this schema only defines shapes.
+## Official fixtures
 
-## Official fixtures (typed payloads)
+All five are Utah-headquartered per the brief. Cities are real Utah municipalities (Q7).
 
-All five are Utah-headquartered per the brief.
+| Fixture | Brief case | City (real) |
+| --- | --- | --- |
+| fixture-1 | AI healthcare SaaS | Salt Lake City |
+| fixture-2 | Aerospace manufacturing | Ogden |
+| fixture-3 | Water / climate sensors + AI | Provo |
+| fixture-4 | Cyber threat detection | Lehi |
+| fixture-5 | Parent / youth marketplace | Salt Lake City |
 
 ### fixture-1 — AI healthcare SaaS
 
@@ -292,18 +316,27 @@ All five are Utah-headquartered per the brief.
 }
 ```
 
-Store runtime copies under `data/fixtures/company-profile.fixture-*.json` when the app exists. This doc is the spec source until then.
+Store runtime copies under `data/fixtures/company-profile.fixture-*.json` when the app exists.
 
 ## Intake flow binding
 
-1. User sentence or fixture click.
-2. **Infer** (Grok 4.6, structured output → `CompanyProfile` with `inferred` / `missing`).
-3. **Confirm** — surface only `inferred` must-haves; user edits or accepts.
-4. **Ask** — one screen for `missing` must-haves (chips + short text).
+1. User sentence or fixture click (fixtures load all fields as `known`).
+2. **Infer** (Grok 4.6, structured `CompanyProfile`).
+3. **Confirm** — if any must-have is `inferred`, one screen; user edits or accepts → all become `known`.
+4. **Ask** — any must-have still `missing` (chips + short text).
 5. **Map** — all must-haves `known`; enrichments optional.
 
 ## What this schema is not
 
 - Not Part 1 `Persona` (six fields, topic weights).
-- Not a eligibility checklist.
+- Not an eligibility checklist.
 - Not a persisted user account (session / fixture only for the weekend POC).
+
+## Round 3 (open)
+
+Pending HITL on [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8):
+
+- **capitalRaisedUsd** — equity + convertibles only, or include debt?
+- **employeeCount Intake** — exact number input vs band chips that set a point?
+- **SectorTag / UseOfFundsTag** — frozen for the weekend or extend in code without spec change?
+- **Fixture switcher labels** — "Case 1: Healthcare AI" vs numbered only?
