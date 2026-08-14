@@ -10,3 +10,10 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 
 - **2026-08-13** - Created this private repo from craigcossairt/trellis after the GOED Part 2 brief was posted. Git history starts here on purpose.
 - **2026-08-13** - Primary bounty is GOED Government Opportunity Finder ($5k). New app, Startup State skin, Federal + Utah lanes. Not a fork of craigcossairt/startup-state. See `docs/primary-bounty.md`.
+- **2026-08-13** - Wayfinder destination is a locked spec (not the weekend build). Product shape reopened, then locked as: new app, one Opportunity Map, infer-then-ask Intake, State lane in the spec. See grilling in session.
+- **2026-08-13** - Lanes are Federal / State (Utah is the first Jurisdiction). Same ranked list, source badge, Utah rises when federal is weak. See grilling in session.
+- **2026-08-13** - Spec plans bonuses into the architecture with a cut-line, rather than bolting them on later. Retrieve-then-LLM rank. Lift any Part 1 piece that does not conflict with the Part 2 brief. See grilling in session.
+- **2026-08-13** - Source badges are Federal or Utah. No footer expansion note. Location is a match input: an out-of-Utah company can still fit some Utah programs. See grilling in session.
+- **2026-08-13** - Spec includes all four brief federal APIs and the larger GOEO table with categorization/filtering. All brief bonus features are in the spec as planned architecture. See grilling in session.
+- **2026-08-13** - Product copy is fit, never eligible. Out-of-Utah companies can still match some Utah programs (adjacent + concern unless nonresident-open). Map default is retrieved-by-category, not the full 213; chips widen. Bonus cut-line last-to-first: graph, agency map, chat, alerts, similar-companies surface, 12-month, checklist, extra federal sources, welcome-back. See grilling in session.
+- **2026-08-13** - Charted wayfinder map [Lock the Government Opportunity Finder spec](https://github.com/craigcossairt/startup-state-2/issues/1).
