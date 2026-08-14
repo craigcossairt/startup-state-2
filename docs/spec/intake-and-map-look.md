@@ -68,4 +68,4 @@ Startup State wordmark + GOEO. One product item: Opportunity Map. Do not bring o
 - Pixel-level visual end state (Figma / Claude Design handoff; see the follow-on ticket).
 - Exact infer / rank / explain prompt text.
 - Which curated Utah cards exist ([Utah State-lane mix](https://github.com/craigcossairt/startup-state-2/issues/13)).
-- The judged talk track ([Judged demo walkthrough](https://github.com/craigcossairt/startup-state-2/issues/4)).
+- The judged click path (locked: `docs/spec/judged-demo-walkthrough.md`). Not a required speech.
