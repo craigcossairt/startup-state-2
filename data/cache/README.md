@@ -13,7 +13,7 @@ Pulled for [SAM Role and Thursday cache](https://github.com/craigcossairt/startu
 | Path | How |
 | --- | --- |
 | `data/cache/sbir/award_data.csv` | `curl -L -o data/cache/sbir/award_data.csv https://data.www.sbir.gov/awarddatapublic/award_data.csv` (~351 MB). HEAD 200 on 2026-08-14. API still 403. |
-| `data/cache/sam/active.json` | Page SAM Assistance Listings `status=Active&pageSize=1000` with a personal API key after a Role. |
+| `data/cache/sam/active.json` | Live API max `pageSize` is **100** (docs say 1000). No-Role cap is 10 req/day. Full Active catalog is 2,865 listings (29 pages). 2026-08-14 pull: pages 1–8, **800 / 2,865**. Finish remaining pages on later days, or skip: SAM is join-only. |
 
 `SAM_API_KEY` lives in Bitwarden, then `.env`. Never commit it.
 
