@@ -13,8 +13,9 @@ This is not a fork of [craigcossairt/startup-state](https://github.com/craigcoss
 
 ## Status
 
+- Live: https://startup-state-2.vercel.app
 - Repo: private, `main`
-- Stage: weekend build
+- Stage: weekend demo
 - Stack: Next.js 16 / TypeScript / Tailwind on Vercel
 - Local: `pnpm install` then `pnpm dev`
 - Tests: `pnpm test`
@@ -26,9 +27,12 @@ Needs `XAI_API_KEY` in `.env` for live infer and rank (Grok 4.6). Fixture clicks
 
 Project: [vercel.com/cossairt/startup-state-2](https://vercel.com/cossairt/startup-state-2). GitHub pushes to `main` deploy Production.
 
-Set these on Production, Preview, and Development (never commit them):
+Public production URL: https://startup-state-2.vercel.app  
+Preview and `*.vercel.app` deployment URLs stay behind Vercel SSO. Use the production alias in the room.
+
+Required env vars (already set on the project):
 
 - `XAI_API_KEY` - infer and rank
 - `SAM_API_KEY` - optional `sam_opps` retrieve; fail soft if missing
 
-`GH_TOKEN` is for GitHub CLI, not this app. After adding keys, Redeploy so the running functions pick them up.
+`GH_TOKEN` is for GitHub CLI, not this app.
