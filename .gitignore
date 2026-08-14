@@ -10,6 +10,8 @@
 node_modules/
 dist/
 build/
+.next/
+out/
 .dart_tool/
 __pycache__/
 target/

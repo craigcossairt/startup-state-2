@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  --c-onyx: #414042;
+  --c-midnight: #0a192e;
+  --c-vibrant-green: #00a24c;
+  --c-bright-green: #13df81;
+  --c-light-green: #a3f0ae;
+  --c-platinum: #d3d4d9;
+  --c-white: #ffffff;
+  --c-off-white: #f6f7f8;
+  --c-rule: #e4e5e7;
+  --c-muted: #6b6c70;
+
+  --background: var(--c-white);
+  --background-alt: #f2f3f4;
+  --background-dark: var(--c-midnight);
+  --foreground: var(--c-onyx);
+  --foreground-on-dark: var(--c-white);
+  --foreground-muted: var(--c-muted);
+  --primary: var(--c-vibrant-green);
+  --primary-hover: #008b40;
+  --accent: var(--c-bright-green);
+  --accent-soft: var(--c-light-green);
+  --border: var(--c-rule);
+  --border-strong: var(--c-onyx);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --tracking-eyebrow: 0.18em;
+  --tracking-tight: -0.02em;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-alt: var(--background-alt);
+  --color-background-dark: var(--background-dark);
+  --color-foreground: var(--foreground);
+  --color-foreground-on-dark: var(--foreground-on-dark);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-onyx: var(--c-onyx);
+  --color-midnight: var(--c-midnight);
+  --color-vibrant-green: var(--c-vibrant-green);
+  --color-bright-green: var(--c-bright-green);
+  --color-light-green: var(--c-light-green);
+  --color-platinum: var(--c-platinum);
+  --color-off-white: var(--c-off-white);
+  --font-display: var(--font-mulish), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-source-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-source-sans), "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.eyebrow {
+  font-family: var(--font-mulish), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-eyebrow);
+  font-size: 0.75rem;
+  color: var(--foreground-muted);
+}
+
+.h-display {
+  font-family: var(--font-mulish), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.05;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}

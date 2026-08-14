@@ -51,13 +51,11 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 
 ## Getting Started
 
-App is not scaffolded yet. After `create-next-app`, put the real commands here.
-
 ```bash
 # install deps:     pnpm install
 # run dev server:   pnpm dev
-# run tests:
-# lint / typecheck:
+# run tests:        pnpm test
+# lint / typecheck: pnpm lint
 ```
 
 ## Folder Structure
@@ -66,9 +64,16 @@ App is not scaffolded yet. After `create-next-app`, put the real commands here.
 
 ```
 .
+├── src/                     # Next.js App Router: Intake, map, confirm, ask, APIs
+├── data/
+│   ├── fixtures/            # five locked Company profiles
+│   ├── goeo/resources.json  # 213-row GOEO table
+│   ├── curated/             # seven official Utah cards
+│   └── cache/               # Grants.gov slices; SAM/SBIR local-only
 ├── docs/
 │   ├── primary-bounty.md    # why GOED, weekend slice
 │   ├── briefs/              # official GOED brief + reuse note
+│   ├── spec/                # locked product spec
 │   ├── common-gotchas.md
 │   ├── decision-log.md
 │   └── methodology/

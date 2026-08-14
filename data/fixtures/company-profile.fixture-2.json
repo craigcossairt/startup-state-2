@@ -1,0 +1,20 @@
+{
+  "fixtureId": "fixture-2",
+  "whatTheyDo": { "status": "known", "value": "Aerospace manufacturing and advanced components" },
+  "technologies": { "status": "known", "value": ["manufacturing", "aerospace"] },
+  "sectors": { "status": "known", "value": ["aerospace", "manufacturing", "defense"] },
+  "hqCountry": { "status": "known", "value": "US" },
+  "hqState": { "status": "known", "value": "UT" },
+  "hqCity": { "status": "known", "value": "Ogden" },
+  "employeeCount": { "status": "known", "value": { "min": 35, "max": 35 } },
+  "revenue": { "status": "known", "value": { "basis": "annual_revenue", "amountUsd": 3000000 } },
+  "capitalRaisedUsd": { "status": "known", "value": 8000000 },
+  "capitalNeedUsd": { "status": "known", "value": { "minUsd": 2000000, "maxUsd": 5000000 } },
+  "useOfFunds": { "status": "known", "value": ["scale_up", "r_and_d", "manufacturing_scale"] },
+  "useOfFundsNotes": { "status": "known", "value": "Manufacturing scale-up and R&D" },
+  "stage": { "status": "known", "value": "scale" },
+  "rdIntensity": { "status": "known", "value": "core" },
+  "productMaturity": { "status": "known", "value": "production" },
+  "customerTypes": { "status": "known", "value": ["defense", "b2b"] },
+  "operatesInUtah": { "status": "known", "value": true }
+}

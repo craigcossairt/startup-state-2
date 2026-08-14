@@ -14,6 +14,10 @@ This is not a fork of [craigcossairt/startup-state](https://github.com/craigcoss
 ## Status
 
 - Repo: private, `main`
-- Stage: idea
-- Stack: Next.js 16 on Vercel (app not scaffolded yet)
+- Stage: weekend build
+- Stack: Next.js 16 / TypeScript / Tailwind on Vercel
+- Local: `pnpm install` then `pnpm dev`
+- Tests: `pnpm test`
 - Issues: https://github.com/craigcossairt/startup-state-2/issues
+
+Needs `XAI_API_KEY` in `.env` for live infer and rank (Grok 4.6). Fixture clicks skip infer and still need the key for rank.

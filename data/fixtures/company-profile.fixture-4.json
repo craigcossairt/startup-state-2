@@ -1,0 +1,20 @@
+{
+  "fixtureId": "fixture-4",
+  "whatTheyDo": { "status": "known", "value": "Cyber threat detection for enterprises and government" },
+  "technologies": { "status": "known", "value": ["cybersecurity", "saas"] },
+  "sectors": { "status": "known", "value": ["cybersecurity", "defense", "saas"] },
+  "hqCountry": { "status": "known", "value": "US" },
+  "hqState": { "status": "known", "value": "UT" },
+  "hqCity": { "status": "known", "value": "Lehi" },
+  "employeeCount": { "status": "known", "value": { "min": 22, "max": 22 } },
+  "revenue": { "status": "known", "value": { "basis": "arr", "amountUsd": 2000000 } },
+  "capitalRaisedUsd": { "status": "known", "value": 5000000 },
+  "capitalNeedUsd": { "status": "known", "value": { "minUsd": 1000000, "maxUsd": 3000000 } },
+  "useOfFunds": { "status": "known", "value": ["r_and_d", "commercial_growth"] },
+  "useOfFundsNotes": { "status": "known", "value": "R&D and federal/commercial growth" },
+  "stage": { "status": "known", "value": "growth" },
+  "rdIntensity": { "status": "known", "value": "core" },
+  "productMaturity": { "status": "known", "value": "production" },
+  "customerTypes": { "status": "known", "value": ["b2b", "b2g", "defense"] },
+  "operatesInUtah": { "status": "known", "value": true }
+}

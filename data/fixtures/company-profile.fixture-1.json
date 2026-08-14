@@ -1,0 +1,20 @@
+{
+  "fixtureId": "fixture-1",
+  "whatTheyDo": { "status": "known", "value": "AI healthcare SaaS reducing administrative burden on nurses" },
+  "technologies": { "status": "known", "value": ["ai", "saas", "healthcare software"] },
+  "sectors": { "status": "known", "value": ["healthcare", "ai", "saas"] },
+  "hqCountry": { "status": "known", "value": "US" },
+  "hqState": { "status": "known", "value": "UT" },
+  "hqCity": { "status": "known", "value": "Salt Lake City" },
+  "employeeCount": { "status": "known", "value": { "min": 15, "max": 15 } },
+  "revenue": { "status": "known", "value": { "basis": "arr", "amountUsd": 1000000 } },
+  "capitalRaisedUsd": { "status": "known", "value": 2500000 },
+  "capitalNeedUsd": { "status": "known", "value": { "minUsd": 500000, "maxUsd": 2000000 } },
+  "useOfFunds": { "status": "known", "value": ["product_development", "pilots"] },
+  "useOfFundsNotes": { "status": "known", "value": "Product development and hospital pilots" },
+  "stage": { "status": "known", "value": "growth" },
+  "rdIntensity": { "status": "known", "value": "core" },
+  "productMaturity": { "status": "known", "value": "production" },
+  "customerTypes": { "status": "known", "value": ["hospitals", "b2b"] },
+  "operatesInUtah": { "status": "known", "value": true }
+}

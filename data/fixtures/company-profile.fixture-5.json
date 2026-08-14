@@ -1,0 +1,20 @@
+{
+  "fixtureId": "fixture-5",
+  "whatTheyDo": { "status": "known", "value": "Marketplace connecting parents with youth activities and programs" },
+  "technologies": { "status": "known", "value": ["marketplace", "mobile"] },
+  "sectors": { "status": "known", "value": ["marketplace", "education", "youth"] },
+  "hqCountry": { "status": "known", "value": "US" },
+  "hqState": { "status": "known", "value": "UT" },
+  "hqCity": { "status": "known", "value": "Salt Lake City" },
+  "employeeCount": { "status": "known", "value": { "min": 8, "max": 8 } },
+  "revenue": { "status": "known", "value": { "basis": "annual_revenue", "amountUsd": 750000 } },
+  "capitalRaisedUsd": { "status": "known", "value": 1000000 },
+  "capitalNeedUsd": { "status": "known", "value": { "minUsd": 250000, "maxUsd": 1000000 } },
+  "useOfFunds": { "status": "known", "value": ["expansion", "commercial_growth"] },
+  "useOfFundsNotes": { "status": "known", "value": "Geographic and category expansion" },
+  "stage": { "status": "known", "value": "early_revenue" },
+  "rdIntensity": { "status": "known", "value": "some" },
+  "productMaturity": { "status": "known", "value": "production" },
+  "customerTypes": { "status": "known", "value": ["parents", "youth", "b2c"] },
+  "operatesInUtah": { "status": "known", "value": true }
+}

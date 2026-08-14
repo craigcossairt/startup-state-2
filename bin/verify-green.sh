@@ -18,10 +18,7 @@ set -uo pipefail
 # OFF until this array is non-empty, so a fresh template clone pushes freely.
 # Each entry runs via `bash -c`, so compound commands work.
 GREEN_COMMANDS=(
-  # "npm run lint"
-  # "npm test"
-  # "flutter analyze --no-fatal-infos"
-  # "flutter test"
+  'cmd.exe /c "node_modules\\.bin\\vitest.cmd run"'
 )
 
 if [ "${1:-}" = "--check-configured" ]; then

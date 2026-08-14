@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 200" role="img" aria-label="Startup State horizontal logo">
+  <g transform="translate(0 0)">
+    <path d="M20 30 L180 30 L160 70 L100 70 L92 78 L40 78 Z" fill="#00A24C"></path>
+    <path d="M44 86 L156 86 L136 126 L92 126 L84 134 L64 134 Z" fill="#13DF81"></path>
+    <path d="M68 142 L132 142 L100 198 Z" fill="#A3F0AE"></path>
+  </g>
+  <text x="220" y="100" font-family="Mulish, Soleil, &#39;Helvetica Neue&#39;, Arial, sans-serif" font-weight="900" font-size="80" fill="#414042" letter-spacing="2">STARTUP</text>
+  <text x="220" y="160" font-family="Mulish, Soleil, &#39;Helvetica Neue&#39;, Arial, sans-serif" font-weight="500" font-size="56" fill="#414042" letter-spacing="6">STATE</text>
+</svg>

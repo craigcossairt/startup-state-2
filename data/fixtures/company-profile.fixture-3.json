@@ -1,0 +1,20 @@
+{
+  "fixtureId": "fixture-3",
+  "whatTheyDo": { "status": "known", "value": "Water and climate monitoring sensors with AI analytics" },
+  "technologies": { "status": "known", "value": ["sensors", "ai", "iot"] },
+  "sectors": { "status": "known", "value": ["water", "climate", "environment", "infrastructure", "ai"] },
+  "hqCountry": { "status": "known", "value": "US" },
+  "hqState": { "status": "known", "value": "UT" },
+  "hqCity": { "status": "known", "value": "Provo" },
+  "employeeCount": { "status": "known", "value": { "min": 10, "max": 10 } },
+  "revenue": { "status": "known", "value": { "basis": "annual_revenue", "amountUsd": 500000 } },
+  "capitalRaisedUsd": { "status": "known", "value": 1500000 },
+  "capitalNeedUsd": { "status": "known", "value": { "minUsd": 500000, "maxUsd": 3000000 } },
+  "useOfFunds": { "status": "known", "value": ["product_development", "pilots"] },
+  "useOfFundsNotes": { "status": "known", "value": "Product development and municipal pilots" },
+  "stage": { "status": "known", "value": "early_revenue" },
+  "rdIntensity": { "status": "known", "value": "core" },
+  "productMaturity": { "status": "known", "value": "beta" },
+  "customerTypes": { "status": "known", "value": ["municipalities", "b2g"] },
+  "operatesInUtah": { "status": "known", "value": true }
+}

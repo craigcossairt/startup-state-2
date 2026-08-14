@@ -9,4 +9,4 @@ Include a commit SHA and issue reference when known.
 
 | Symptom | Root Cause | Fix | Date | Ref |
 |---|---|---|---|---|
-| (Example - delete me) Login form submits twice on slow connections | Submit button stays enabled while the request is in flight | Disable the button on submit; added a regression test | 2026-07-01 | #42 |
+| React warns about two children with the same key on a Ranked card | USAspending often returns the same recipient name twice; the list key was `source:name` | Key similar awardees with source, name, year, and index | 2026-08-14 | history attach |
