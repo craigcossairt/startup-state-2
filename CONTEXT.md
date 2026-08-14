@@ -13,7 +13,7 @@ One sentence or a fixture click, then infer, then only the missing Company profi
 _Avoid_: long form first, chat-only capture, Persona bar
 
 **Company profile**:
-The structured description used to match. Must-have (infer or ask): what they do / tech, location, employees, revenue, capital raised, capital need, use of funds. Infer-if-present, never block: stage, R&D, product maturity, customers. Some fields are binary; others are fuzzy ranges.
+The structured description used to match. Schema: `docs/spec/company-profile-schema.md`. Must-have (infer or ask): what they do / tech, location, employees, revenue, capital raised, capital need, use of funds. Infer-if-present, never block: stage, R&D, product maturity, customers. Fields use `known` / `inferred` / `missing` status; must-haves block the Opportunity Map until filled or confirmed.
 _Avoid_: Persona
 
 **Federal lane**:
