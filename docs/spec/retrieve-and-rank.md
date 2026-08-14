@@ -109,7 +109,7 @@ Lane / GOEO-key / `directory` chips re-run retrieve, still capped at ~50, then r
 
 ## Rank mix (Q13, updated)
 
-**Sort:** best Fit first. Server tie-break: sooner deadline, then lane (Utah first only if the floor tripped), then `id`. See `docs/spec/infer-rank-explain-prompts.md`.
+**Sort:** best Fit first. Server tie-break: sooner deadline, then instrument ease, then published `maxUsd` (null last), then `id`. Lane is not a sort key. See `docs/spec/infer-rank-explain-prompts.md`.
 
 **Inclusion (unchanged):**
 

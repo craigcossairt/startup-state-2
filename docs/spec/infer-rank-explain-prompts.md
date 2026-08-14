@@ -11,8 +11,9 @@ Exact Grok 4.6 calls. Not the app. Provider: `docs/spec/retrieve-and-rank.md`. P
 | Q1 | **Two calls.** Infer is its own structured `CompanyProfile`. Rank writes Fit, why, concerns, nextStep. History attach is code, not a third hop. |
 | Q2 | Infer in: sentence + already-`known` fields. Out: one `CompanyProfile`. Missing stays `missing`. No invented `fixtureId`. |
 | Q3 | Rank in: confirmed profile + retrieved rows (~50). Out: 8–12 `{ id, fit, why, concerns[], nextStep }`. Server drops unknown ids and copies program / agency / value / deadline from retrieve. |
-| Q4 | **Best Fit first.** Inclusion still follows retrieve (at least 2 Utah if a GOEO key fired; floor keeps 1–3 Federal `probably not`). Server sorts. Tie-break below. |
+| Q4 | **Best Fit first.** Inclusion still follows retrieve (at least 2 Utah if a GOEO key fired; floor keeps 1–3 Federal `probably not`). Server sorts. Tie-break below. Lane is not a sort key. |
 | Q5 | Fit, never eligible. Why is 1–2 short sentences. Concerns are verify items. No em dashes. Do not invent program, dollars, or deadline. Null value/deadline → not published. |
+| Q6 | After deadline: instrument ease, then published `maxUsd` descending (`null` last), then `id`. Ease ladder: counseling / contracting_help, incentive, loan, grant, procurement, other. |
 
 ## Models
 
@@ -140,14 +141,26 @@ Each retrieved row the server sends:
 1. Drop any `id` not in the retrieved set.
 2. Copy program, agency, value, deadline, url, lane, instrument from retrieve onto the Ranked card.
 3. If length is not 8–12, keep the legal ids the model returned (do not call again unless the list is empty).
-4. **Sort best Fit first**, then ties:
+4. **Sort best Fit first**, then ties. Lane is not a key.
 
    | Priority | Rule |
    | --- | --- |
    | 1 | Fit: `likely` > `potential-verify` > `adjacent` > `probably_not` |
    | 2 | Sooner `deadline` first. `null` / standing last |
-   | 3 | If the probably-not floor tripped: Utah `lane` before Federal. Else Federal before Utah |
-   | 4 | `id` ascending |
+   | 3 | Instrument ease (easier first). Same-tier instruments stay tied. |
+   | 4 | Published `value.maxUsd` descending. `null` last |
+   | 5 | `id` ascending |
+
+   Instrument ease tiers (1 = easier):
+
+   | Tier | Instruments |
+   | --- | --- |
+   | 1 | `counseling`, `contracting_help` |
+   | 2 | `incentive` |
+   | 3 | `loan` |
+   | 4 | `grant` |
+   | 5 | `procurement` |
+   | 6 | `other` |
 
 5. Apply the probably-not banner in code when Q5 trips. Do not ask the model to write the banner.
 6. Attach `similarAwardees` from USAspending / SBIR CSV in code.
