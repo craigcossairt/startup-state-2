@@ -18,8 +18,9 @@ export function AskFab() {
     if (!footer) return;
     const update = () => {
       const rect = footer.getBoundingClientRect();
+      const visible = rect.top < window.innerHeight && rect.bottom > 0;
       const overlap = window.innerHeight - rect.top;
-      setDockBottom(overlap > 0 ? overlap + 16 : null);
+      setDockBottom(visible && overlap > 0 ? overlap + 16 : null);
     };
     update();
     window.addEventListener("scroll", update, { passive: true });

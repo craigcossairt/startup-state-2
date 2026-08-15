@@ -36,6 +36,18 @@ describe("leftover surfaces", () => {
     expect(SWAG_ITEMS).toHaveLength(9);
   });
 
+  it("always mounts the Utah plot, even when Mapbox is off", () => {
+    const directory = readFileSync(
+      path.join(root, "src/components/catalog/startup-directory.tsx"),
+      "utf8",
+    );
+    expect(directory).toContain("UtahStartupMap");
+    expect(directory).toContain("MAPBOX_MISSING_COPY");
+    expect(directory).not.toMatch(/mapboxEnabled && hasPublicMapboxToken/);
+    const fab = readFileSync(path.join(root, "src/components/ask-fab.tsx"), "utf8");
+    expect(fab).toContain("rect.bottom > 0");
+  });
+
   it("commits the swag photos the swag page names", () => {
     for (const item of SWAG_ITEMS) {
       const full = path.join(root, "public", item.src.replace(/^\//, ""));

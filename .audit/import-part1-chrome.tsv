@@ -13,3 +13,4 @@ ts	phase	decision	why	evidence	result
 2026-08-15T04:13:00Z	frame	leftover surfaces are now in because the user created Supabase and asked for the rest	user message this turn; /map stays Opportunity Map; Tyler stays out	user_query	in scope
 2026-08-15T04:13:00Z	unit	SITE_NAV registry plus Navigator FAB; JSON fallbacks under data/catalog	Supabase keys are not in this VM; pages must still be full	src/lib/site-nav.ts data/catalog/	implemented
 2026-08-15T04:13:00Z	verify	leftover fence mutate: SITE_NAV -> SITE_NAV_BROKEN fails with grep -w	substring grep was vacuous	scripts/check-import-fences.sh	mutate_exit=1 then clean
+2026-08-15T04:24:00Z	fix	startups hid the schematic plot when Mapbox was missing	directory gated the whole map on the token; UtahStartupMap already has a list-plot fallback	src/components/catalog/startup-directory.tsx	always mount plot

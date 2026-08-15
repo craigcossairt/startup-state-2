@@ -34,7 +34,7 @@ export function UtahStartupMap({
           backgroundSize: "cover",
         }}
       />
-      <div className="relative aspect-[5/3] w-full">
+      <div className="relative min-h-[22rem] w-full sm:min-h-[28rem]">
         {points.map((row) => {
           const left = ((row.lng! - UTAH.minLng) / (UTAH.maxLng - UTAH.minLng)) * 100;
           const top = ((UTAH.maxLat - row.lat!) / (UTAH.maxLat - UTAH.minLat)) * 100;
@@ -46,8 +46,10 @@ export function UtahStartupMap({
               title={row.name}
               aria-label={row.name}
               onClick={() => onSelect(row.id)}
-              className={`absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                selected ? "z-10 h-3.5 w-3.5 bg-bright-green" : "bg-vibrant-green/80"
+              className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_0_2px_rgba(10,25,46,0.6)] ${
+                selected
+                  ? "z-10 h-3.5 w-3.5 bg-bright-green"
+                  : "h-2.5 w-2.5 bg-bright-green/90"
               }`}
               style={{ left: `${left}%`, top: `${top}%` }}
             />

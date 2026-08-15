@@ -7,7 +7,7 @@ import {
   startupSectors,
   withWebsiteProtocol,
 } from "@/lib/catalog/filter";
-import { hasPublicMapboxToken, MAPBOX_MISSING_COPY } from "@/lib/catalog/mapbox";
+import { MAPBOX_MISSING_COPY } from "@/lib/catalog/mapbox";
 import type { CatalogStartup } from "@/lib/catalog/types";
 import { UtahStartupMap } from "./utah-startup-map";
 
@@ -75,13 +75,12 @@ export function StartupDirectory({
       <p className="text-sm text-foreground-muted">
         Showing {shown.length} of {startups.length} Utah companies
       </p>
-      {mapboxEnabled && hasPublicMapboxToken() ? (
-        <UtahStartupMap startups={shown} selectedId={selectedId} onSelect={setSelectedId} />
-      ) : (
+      {mapboxEnabled ? null : (
         <p className="rounded-xl border border-border bg-background-alt px-4 py-3 text-sm">
           {MAPBOX_MISSING_COPY}
         </p>
       )}
+      <UtahStartupMap startups={shown} selectedId={selectedId} onSelect={setSelectedId} />
       <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {shown.map((row) => (
           <li key={row.id}>
