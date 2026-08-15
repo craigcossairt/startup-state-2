@@ -126,6 +126,16 @@ async function applyOne(dsn) {
       }
     }
 
+    for (const row of startups) {
+      if (typeof row.slug !== "string" || !row.slug) continue;
+      await client.query(
+        `update public.startups
+            set is_hiring = $1
+          where slug = $2`,
+        [row.is_hiring === true, row.slug],
+      );
+    }
+
     const afterR = Number(
       (await client.query("select count(*)::int as n from public.resources")).rows[0].n,
     );
