@@ -3,6 +3,17 @@ export type SiteNavItem = {
   label: string;
 };
 
+export type FooterLegalLink =
+  | { kind: "internal"; href: string; label: string }
+  | { kind: "external"; href: string; label: string };
+
+export const FOOTER_LEGAL_LINKS: FooterLegalLink[] = [
+  { kind: "external", href: "https://utah.gov", label: "Utah.gov" },
+  { kind: "internal", href: "/", label: "Home" },
+  { kind: "internal", href: "/admin", label: "GOED admin" },
+  { kind: "external", href: "https://startup.utah.gov", label: "startup.utah.gov" },
+];
+
 export const SITE_NAV: SiteNavItem[] = [
   { href: "/map", label: "Opportunity Map" },
   { href: "/playbook", label: "Playbook" },

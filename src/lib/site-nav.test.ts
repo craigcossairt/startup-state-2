@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SITE_NAV, navItemIsActive } from "@/lib/site-nav";
+import { FOOTER_LEGAL_LINKS, SITE_NAV, navItemIsActive } from "@/lib/site-nav";
 
 describe("SITE_NAV", () => {
   it("lists leftover surfaces beside the Opportunity Map", () => {
@@ -12,6 +12,16 @@ describe("SITE_NAV", () => {
       ["/news", "News"],
       ["/swag", "Swag"],
     ]);
+  });
+
+  it("keeps the footer legal band to Part 1 density plus GOED admin", () => {
+    expect(FOOTER_LEGAL_LINKS.map((item) => [item.href, item.label])).toEqual([
+      ["https://utah.gov", "Utah.gov"],
+      ["/", "Home"],
+      ["/admin", "GOED admin"],
+      ["https://startup.utah.gov", "startup.utah.gov"],
+    ]);
+    expect(FOOTER_LEGAL_LINKS.some((item) => item.href === "/playbook")).toBe(false);
   });
 
   it("marks nested playbook and map routes active without stealing home", () => {

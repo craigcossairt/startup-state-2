@@ -1,24 +1,35 @@
 import { NextResponse } from "next/server";
 import { followUpChat } from "@/lib/bonus/chat";
-import type { RankedCard } from "@/lib/types/opportunity";
+import type { AskCardSummary, AskSurface } from "@/lib/ask-panel";
 
 export async function POST(request: Request) {
   const body = (await request.json()) as {
     message?: string;
-    cards?: RankedCard[];
+    surface?: AskSurface;
+    cards?: AskCardSummary[] | Array<{ opportunity?: { id?: string; program?: string }; why?: string }>;
   };
   if (!body.message) {
     return NextResponse.json({ error: "message is required" }, { status: 400 });
   }
-  const cards = body.cards ?? [];
+  const cards = (body.cards ?? []).map((card) => {
+    if ("id" in card && typeof card.id === "string") {
+      return {
+        id: card.id,
+        program: typeof card.program === "string" ? card.program : "",
+        why: typeof card.why === "string" ? card.why : "",
+      };
+    }
+    return {
+      id: card.opportunity?.id ?? "",
+      program: card.opportunity?.program ?? "",
+      why: card.why ?? "",
+    };
+  });
   const result = followUpChat({
     message: body.message,
-    rankedIds: cards.map((card) => card.opportunity.id),
-    cardSummaries: cards.map((card) => ({
-      id: card.opportunity.id,
-      program: card.opportunity.program,
-      why: card.why,
-    })),
+    surface: body.surface,
+    rankedIds: cards.map((card) => card.id).filter(Boolean),
+    cardSummaries: cards,
   });
   return NextResponse.json(result);
 }

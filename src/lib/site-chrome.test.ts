@@ -51,7 +51,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(FOOTER_NEWSLETTER_CTA).toBe("Subscribe to Newsletter");
     expect(WELCOME_BACK_BANNER).toContain("Opportunity Map");
     expect(WELCOME_BACK_ACTION).toBe("Open last Opportunity Map");
-    expect(ASK_FAB_LABEL).toBe("Navigator");
+    expect(ASK_FAB_LABEL).toBe("Ask the Navigator");
     expect(ASK_NEEDS_MAP).toContain("Navigator");
     expect(ASK_PANEL_LEAD).toContain("playbook");
     const locked = [
@@ -76,7 +76,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(layout).toContain('from "@/components/ask-fab"');
   });
 
-  it("ports the official Utah footer without admin or Tyler", () => {
+  it("ports the official Utah footer with GOED admin and no Tyler", () => {
     const footer = read("src/components/footer.tsx");
     expect(footer).toContain("FOOTER_CONNECT_EYEBROW");
     expect(footer).toContain("FOOTER_OFFICIAL_LINE");
@@ -84,8 +84,10 @@ describe("Part 1 site chrome import fences", () => {
     expect(footer).toContain("ss-stacked-white.png");
     expect(footer).toContain("goed-only-white.png");
     expect(footer).not.toContain("goeo-only");
-    expect(footer).not.toMatch(/admin|Tyler|tyler-card|confetti/i);
-    expect(footer).toContain("SITE_NAV");
+    expect(footer).not.toMatch(/Tyler|tyler-card|confetti/i);
+    expect(footer).toContain("FOOTER_LEGAL_LINKS");
+    expect(footer).not.toContain("SITE_NAV");
+    expect(footer).toContain("w-[10.5rem]");
   });
 
   it("gives Intake the Part 1 topographic hero and welcome-back banner", () => {

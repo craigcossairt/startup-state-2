@@ -47,7 +47,7 @@ describe("leftover surfaces", () => {
     expect(map).toContain("MAPBOX_MISSING_COPY");
     expect(map).toContain("mapboxToken");
     const fab = readFileSync(path.join(root, "src/components/ask-fab.tsx"), "utf8");
-    expect(fab).toContain("rect.bottom > 0");
+    expect(fab).toContain("dockFabAboveFooter");
   });
 
   it("ports the Part 1 startups map, careers filters, and playbook roadmap", () => {
