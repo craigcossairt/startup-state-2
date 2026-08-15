@@ -14,6 +14,7 @@ import {
   canSendAsk,
   dockFabAboveFooter,
   readAskResponse,
+  normalizeAskCards,
   summarizeAskCards,
 } from "@/lib/ask-panel";
 
@@ -71,6 +72,20 @@ describe("Ask panel", () => {
       goal: "Find funding",
       communities: [],
     })[1]).toContain("funding");
+  });
+
+  it("normalizes both posted card shapes so the chat route typechecks", () => {
+    expect(
+      normalizeAskCards([
+        { id: "curated:nucleus-grow", program: "Nucleus Grow", why: "SBIR help." },
+        { opportunity: { id: "curated:sbdc", program: "Utah SBDC" }, why: "Counseling." },
+        { opportunity: { id: "curated:empty" } },
+      ]),
+    ).toEqual([
+      { id: "curated:nucleus-grow", program: "Nucleus Grow", why: "SBIR help." },
+      { id: "curated:sbdc", program: "Utah SBDC", why: "Counseling." },
+      { id: "curated:empty", program: "", why: "" },
+    ]);
   });
 
   it("sends trimmed text plus program/why summaries, not id-only cards", () => {
@@ -140,6 +155,12 @@ describe("Ask panel", () => {
       "utf8",
     );
     expect(panel).toContain("/api/chat");
+    const route = readFileSync(
+      path.join(process.cwd(), "src/app/api/chat/route.ts"),
+      "utf8",
+    );
+    expect(route).toContain("normalizeAskCards");
+    expect(route).not.toContain("card.opportunity?");
     expect(panel).toContain("loadMapPayload");
     expect(panel).toContain("ASK_FAB_LABEL");
     expect(panel).toContain("canSendAsk");
