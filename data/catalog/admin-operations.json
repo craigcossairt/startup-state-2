@@ -1,0 +1,67 @@
+{
+  "pending": [
+    {
+      "id": "pending-bloom",
+      "name": "Bloom",
+      "website": "bloom.date/",
+      "description": "Bloom is the only dating platform designed around your entire relationship journey - from first match to forever.",
+      "city": "South Jordan",
+      "region": "Northern Utah",
+      "sector": "Software",
+      "stage": "Preseed",
+      "createdAt": "2026-05-09T06:04:03.000Z"
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-jobnimbus",
+      "startupSlug": "jobnimbus",
+      "requesterEmail": "test@jobnimbus.com",
+      "requesterDomain": "jobnimbus.com",
+      "status": "pending",
+      "createdAt": "2026-05-10T02:31:39.000Z"
+    },
+    {
+      "id": "claim-alphamountain",
+      "startupSlug": "alphamountain",
+      "requesterEmail": "founder@alphamountain.ai",
+      "requesterDomain": "alphamountain.ai",
+      "status": "pending",
+      "createdAt": "2026-05-09T06:17:59.000Z"
+    }
+  ],
+  "outreach": [
+    {
+      "id": "list-software",
+      "slug": "utah-software-leaders",
+      "title": "Utah's leading software companies.",
+      "audience": "International growth investors",
+      "filter": { "sectors": ["Software"] }
+    },
+    {
+      "id": "list-hiring",
+      "slug": "wasatch-front-hiring",
+      "title": "Wasatch Front companies hiring now.",
+      "audience": "Operators recruiting in Utah",
+      "filter": { "regions": ["Wasatch Front"], "hiringOnly": true }
+    },
+    {
+      "id": "list-deeptech",
+      "slug": "utah-deep-tech",
+      "title": "Utah deep tech and life sciences.",
+      "audience": "Deep tech and life science investors",
+      "filter": { "sectors": ["BioMedical", "Security", "Energy"] }
+    }
+  ],
+  "auditEdits": [
+    {
+      "id": 906,
+      "startupId": "pending-bloom",
+      "startupName": "Bloom",
+      "actorEmail": null,
+      "createdAt": "2026-05-09T08:03:38.000Z",
+      "before": { "city": null, "lat": null, "lng": null },
+      "after": { "city": "South Jordan", "lat": 40.5622, "lng": -111.9297 }
+    }
+  ]
+}
