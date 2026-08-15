@@ -60,6 +60,7 @@ describe("attachHistory", () => {
             amountUsd: 900000,
             year: 2023,
             state: "UT",
+            aln: ["93.310"],
           },
         ],
       },
@@ -67,6 +68,70 @@ describe("attachHistory", () => {
     expect(attached[0].similarAwardees.map((row) => row.name)).toEqual(["Acme Health AI"]);
     expect(attached[1].similarAwardees.map((row) => row.name)).toEqual(["Valley Clinic Systems"]);
     expect(attached.flatMap((row) => row.similarAwardees).every((row) => row.name.length > 0)).toBe(true);
+  });
+
+  it("does not attach SBIR awards to a Utah counseling card whose description mentions SBIR", () => {
+    const nucleus: RankedCard = {
+      ...card("Nucleus Grow"),
+      opportunity: {
+        ...card("Nucleus Grow").opportunity,
+        id: "curated:nucleus-grow",
+        source: "curated",
+        nativeId: "nucleus-grow",
+        lane: "state",
+        jurisdiction: "UT",
+        aln: [],
+        description: "Utah SBIR/STTR counseling and proposal help.",
+      },
+    };
+    const attached = attachHistory([nucleus], loadCompanyFixture("fixture-1"), {
+      sbirAwards: [
+        {
+          source: "sbir_csv",
+          name: "Acme Health AI",
+          year: 2024,
+          state: "UT",
+        },
+      ],
+    });
+    expect(attached[0].similarAwardees).toEqual([]);
+  });
+
+  it("attaches USAspending rows only when the award ALN overlaps the card", () => {
+    const nih = card("Open opportunity for hospitals");
+    const energy: RankedCard = {
+      ...card("Open energy demonstration"),
+      opportunity: {
+        ...card("Open energy demonstration").opportunity,
+        id: "grants_gov:2",
+        nativeId: "2",
+        aln: ["81.135"],
+      },
+    };
+    const attached = attachHistory([nih, energy], loadCompanyFixture("fixture-1"), {
+      usaAwards: [
+        {
+          source: "usaspending",
+          name: "Valley Clinic Systems",
+          year: 2023,
+          state: "UT",
+          aln: ["93.310"],
+        },
+        {
+          source: "usaspending",
+          name: "Red Rock Energy",
+          year: 2022,
+          state: "UT",
+          aln: ["81.135"],
+        },
+      ],
+    });
+    expect(attached[0].similarAwardees.map((row) => row.name)).toEqual([
+      "Valley Clinic Systems",
+    ]);
+    expect(attached[1].similarAwardees.map((row) => row.name)).toEqual([
+      "Red Rock Energy",
+    ]);
   });
 
   it("does not copy USAspending rows onto State-lane cards", () => {

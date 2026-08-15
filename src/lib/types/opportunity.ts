@@ -46,6 +46,7 @@ export type HistoryAttachment = {
   city?: string;
   summary?: string;
   url?: string;
+  aln?: string[];
 };
 
 export type RankedCard = {
