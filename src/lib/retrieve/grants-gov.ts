@@ -23,6 +23,13 @@ type GrantsGovSearchResponse = {
 };
 
 const SEARCH2_URL = "https://api.grants.gov/v1/api/search2";
+const DIPLOMATIC_MISSION = /u\.s\. mission to/i;
+
+export function dropDiplomaticMissionGrants(rows: Opportunity[]): Opportunity[] {
+  return rows.filter(
+    (row) => !DIPLOMATIC_MISSION.test(`${row.agency.name} ${row.program}`),
+  );
+}
 
 export function parseUsDate(value: string | undefined): string | null {
   if (!value) return null;
@@ -132,13 +139,15 @@ export async function retrieveGrantsGov(
 ): Promise<Opportunity[]> {
   if (profile.fixtureId) {
     const cached = loadFixtureGrantsGovCache(profile.fixtureId);
-    if (cached.length > 0) return cached;
+    if (cached.length > 0) return dropDiplomaticMissionGrants(cached);
   }
   if (options.live === false) return [];
   const keyword = buildGrantsGovKeyword(profile);
   if (!keyword) return [];
   try {
-    return await searchGrantsGovLive(keyword, options.fetchImpl);
+    return dropDiplomaticMissionGrants(
+      await searchGrantsGovLive(keyword, options.fetchImpl),
+    );
   } catch {
     return [];
   }
