@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ClaimForm } from "@/components/catalog/claim-form";
+import { CompanyLogo } from "@/components/catalog/company-logo";
 import { findCatalogStartup, websiteDomain } from "@/lib/catalog/claim";
 import { loadCatalogStartups } from "@/lib/catalog/load";
+import { sectorColor } from "@/lib/catalog/map-filters";
 
 export const dynamic = "force-dynamic";
 
@@ -19,18 +21,26 @@ export default async function ClaimPage({
   return (
     <section className="mx-auto max-w-2xl space-y-6 px-6 py-10">
       <Link
-        href="/startups"
+        href={`/startups?startup=${startup.id}`}
         className="inline-flex text-sm font-semibold text-foreground-muted hover:text-foreground"
       >
-        Back to map
+        ← Back to map
       </Link>
-      <div className="space-y-1.5">
-        <p className="eyebrow !mb-0">Claim listing</p>
-        <h1 className="h-display text-3xl">{startup.name}</h1>
-        <p className="serif-italic text-foreground-muted">
-          Verify you represent this company with an email at{" "}
-          <span className="font-mono text-foreground">{domain ?? "your-company.com"}</span>.
-        </p>
+      <div className="flex items-start gap-4">
+        <CompanyLogo
+          website={startup.website}
+          name={startup.name}
+          color={sectorColor(startup.sector)}
+          className="h-16 w-16"
+        />
+        <div className="space-y-1.5">
+          <p className="eyebrow !mb-0">Claim listing</p>
+          <h1 className="h-display text-3xl">{startup.name}</h1>
+          <p className="serif-italic text-foreground-muted">
+            Verify you represent this company with an email at{" "}
+            <span className="font-mono text-foreground">{domain ?? "your-company.com"}</span>.
+          </p>
+        </div>
       </div>
       <div className="space-y-5 rounded-2xl border border-border bg-white p-6">
         <div className="text-sm leading-relaxed text-foreground-muted">

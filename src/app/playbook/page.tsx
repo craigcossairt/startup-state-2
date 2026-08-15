@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { PersonalizedRoadmap } from "@/components/catalog/personalized-roadmap";
 import { PlaybookStageGrid } from "@/components/catalog/playbook-stage-grid";
+import { ResumeBanner } from "@/components/catalog/resume-banner";
 import { SurfaceHero } from "@/components/catalog/surface-hero";
 import { YouBar } from "@/components/catalog/you-bar";
 import { PLAYBOOK_STEPS } from "@/lib/catalog/playbook";
@@ -20,9 +21,14 @@ export default function PlaybookPage() {
         eyebrow="The Utah Startup Playbook"
         title={
           <>
-            <span className="serif-italic text-bright-green">{PLAYBOOK_STEPS.length}</span> steps,
-            written for the journey you are on.
+            <span className="serif-italic text-bright-green">{PLAYBOOK_STEPS.length}</span> steps,{" "}
+            <span className="serif-italic text-bright-green">written for you.</span>
           </>
+        }
+        after={
+          <Suspense fallback={null}>
+            <ResumeBanner />
+          </Suspense>
         }
       >
         <p>
@@ -39,6 +45,11 @@ export default function PlaybookPage() {
         <Suspense fallback={null}>
           <PlaybookStageGrid />
         </Suspense>
+        <p className="mt-10 max-w-2xl text-sm leading-relaxed text-foreground-muted">
+          Every step page is written specifically for your business: your sector, your community,
+          your stage, your goal. Same official GOED guidance, in language that matches where you
+          are.
+        </p>
       </section>
       <Suspense fallback={null}>
         <PersonalizedRoadmap />

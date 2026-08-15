@@ -1,11 +1,18 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { SurfaceHero } from "@/components/catalog/surface-hero";
+import { StepCompleteToggle } from "@/components/catalog/step-complete-toggle";
+import { StepNavFooter } from "@/components/catalog/step-nav-footer";
 import { YouBar } from "@/components/catalog/you-bar";
 import { YouParamLink } from "@/components/catalog/you-param-link";
 import { loadCatalogResources } from "@/lib/catalog/load";
 import { resourcesForStep } from "@/lib/catalog/filter";
-import { PLAYBOOK_STEPS, playbookStage, playbookStep } from "@/lib/catalog/playbook";
+import {
+  adjacentPlaybookSteps,
+  PLAYBOOK_STEPS,
+  playbookStage,
+  playbookStep,
+  stepsForStage,
+} from "@/lib/catalog/playbook";
 
 export function generateStaticParams() {
   return PLAYBOOK_STEPS.map((step) => ({ stage: step.stage, step: step.stepId }));
@@ -21,23 +28,43 @@ export default async function PlaybookStepPage({
   const step = playbookStep(stageSlug, stepId);
   if (!stage || !step) notFound();
   const related = resourcesForStep(step, await loadCatalogResources());
+  const neighbors = adjacentPlaybookSteps(stage.slug, step.stepId);
+  const stageSteps = stepsForStage(stage.slug);
+
   return (
     <>
       <Suspense fallback={null}>
         <YouBar />
       </Suspense>
-      <SurfaceHero eyebrow={stage.label} title={step.title}>
-        <p>{step.summary}</p>
-      </SurfaceHero>
-      <section className="mx-auto max-w-[1200px] space-y-10 px-6 py-12">
-        <p className="text-sm">
-          <YouParamLink
-            href={`/playbook/${stage.slug}`}
-            className="font-semibold text-primary hover:underline"
-          >
-            {stage.label}
-          </YouParamLink>
-        </p>
+      <section
+        className="relative isolate overflow-hidden border-b border-border"
+        style={{ backgroundColor: `${stage.accent}10` }}
+      >
+        <div className="relative mx-auto max-w-[860px] px-6 py-12 sm:py-16">
+          <p className="mb-5 text-xs text-foreground-muted">
+            <YouParamLink href="/playbook" className="hover:text-foreground">
+              Playbook
+            </YouParamLink>
+            <span className="px-1">›</span>
+            <YouParamLink href={`/playbook/${stage.slug}`} className="hover:text-foreground">
+              {stage.label}
+            </YouParamLink>
+          </p>
+          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-4">
+            <p className="eyebrow !mb-0" style={{ color: stage.accent }}>
+              Step {step.stepIndex.toString().padStart(2, "0")} of {stageSteps.length}
+            </p>
+            <Suspense fallback={null}>
+              <StepCompleteToggle stageSlug={stage.slug} stepId={step.stepId} />
+            </Suspense>
+          </div>
+          <h1 className="h-display text-4xl leading-tight sm:text-5xl">{step.title}</h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground-muted">
+            {step.summary}
+          </p>
+        </div>
+      </section>
+      <section className="mx-auto max-w-[860px] space-y-10 px-6 py-12">
         <div>
           <h2 className="h-display text-2xl">What you do</h2>
           <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
@@ -86,6 +113,14 @@ export default async function PlaybookStepPage({
           </div>
         ) : null}
       </section>
+      <Suspense fallback={null}>
+        <StepNavFooter
+          stageSlug={stage.slug}
+          stageLabel={stage.label}
+          prevStep={neighbors.prev}
+          nextStep={neighbors.next}
+        />
+      </Suspense>
     </>
   );
 }

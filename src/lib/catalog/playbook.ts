@@ -410,6 +410,22 @@ export function playbookStep(
   return PLAYBOOK_STEPS.find((step) => step.stage === stage && step.stepId === stepId);
 }
 
+export function adjacentPlaybookSteps(
+  stage: string,
+  stepId: string,
+): { prev: { stepId: string; title: string } | null; next: { stepId: string; title: string } | null } {
+  const steps = PLAYBOOK_STEPS.filter((step) => step.stage === stage).sort(
+    (a, b) => a.stepIndex - b.stepIndex,
+  );
+  const index = steps.findIndex((step) => step.stepId === stepId);
+  const prev = index > 0 ? steps[index - 1] : null;
+  const next = index >= 0 && index < steps.length - 1 ? steps[index + 1] : null;
+  return {
+    prev: prev ? { stepId: prev.stepId, title: prev.title } : null,
+    next: next ? { stepId: next.stepId, title: next.title } : null,
+  };
+}
+
 export function stepCountByStage(): Record<PlaybookStageSlug, number> {
   return {
     "thinking-of-starting": stepsForStage("thinking-of-starting").length,

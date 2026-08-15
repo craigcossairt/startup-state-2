@@ -64,8 +64,41 @@ describe("leftover surfaces", () => {
     expect(careers).toContain("/startups?startup=");
     expect(careers).toContain("View open roles");
     expect(playbook).toContain("PersonalizedRoadmap");
+    expect(playbook).toContain("ResumeBanner");
+    expect(playbook).toContain("written for you.");
     expect(playbook).toContain("GOED");
     expect(playbook).not.toMatch(/\bGOEO\b/);
+  });
+
+  it("ports Part 1 playbook progress, resource ranking chrome, and leftover polish", () => {
+    const playbook = readFileSync(path.join(root, "src/app/playbook/page.tsx"), "utf8");
+    const stage = readFileSync(path.join(root, "src/app/playbook/[stage]/page.tsx"), "utf8");
+    const step = readFileSync(path.join(root, "src/app/playbook/[stage]/[step]/page.tsx"), "utf8");
+    const grid = readFileSync(path.join(root, "src/components/catalog/playbook-stage-grid.tsx"), "utf8");
+    const stageCard = readFileSync(path.join(root, "src/components/catalog/stage-card-link.tsx"), "utf8");
+    const resourcesPage = readFileSync(path.join(root, "src/app/resources/page.tsx"), "utf8");
+    const directory = readFileSync(
+      path.join(root, "src/components/catalog/resource-directory.tsx"),
+      "utf8",
+    );
+    const news = readFileSync(path.join(root, "src/app/news/page.tsx"), "utf8");
+    const claim = readFileSync(path.join(root, "src/app/claim/[id]/page.tsx"), "utf8");
+    expect(playbook).toContain("ResumeBanner");
+    expect(grid).toContain("StageCardLink");
+    expect(stageCard).toContain("completedInStage");
+    expect(stage).toContain("StepCardLink");
+    expect(step).toContain("StepCompleteToggle");
+    expect(step).toContain("StepNavFooter");
+    expect(resourcesPage).toContain("ranked for you");
+    expect(directory).toContain("communityFilter");
+    expect(directory).toContain("matchResources");
+    expect(directory).toContain("reasons");
+    expect(directory).toContain("setLimit");
+    expect(directory).toContain("more");
+    expect(directory).not.toMatch(/framer-motion/);
+    expect(news).toContain("Read on startup.utah.gov");
+    expect(claim).toContain("/startups?startup=");
+    expect(claim).toContain("CompanyLogo");
   });
 
   it("applies leftover catalog schema during build and never inserts startup status", () => {

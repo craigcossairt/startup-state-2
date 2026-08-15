@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   PLAYBOOK_STAGES,
   PLAYBOOK_STEPS,
+  adjacentPlaybookSteps,
   playbookStep,
   stepCountByStage,
   stepsForStage,
@@ -26,6 +27,15 @@ describe("Utah playbook catalog", () => {
     expect(playbookStep("growing", "workforce")?.title).toBe(
       "Workforce and talent acquisition",
     );
+    expect(adjacentPlaybookSteps("starting", "business-validation")).toEqual({
+      prev: null,
+      next: {
+        stepId: "build-product",
+        title: "Build your product or service",
+      },
+    });
+    expect(adjacentPlaybookSteps("closing", "close-business").prev).toBeNull();
+    expect(adjacentPlaybookSteps("closing", "close-business").next).toBeNull();
   });
 
   it("points every step at the official startup.utah.gov page", () => {

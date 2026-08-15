@@ -20,14 +20,14 @@ export default async function ResourcesPage() {
         eyebrow="Utah's state-supported programs"
         title={
           <>
-            <span className="serif-italic text-bright-green">{resources.length}</span> programs
-            in the GOED directory.
+            <span className="serif-italic text-bright-green">{resources.length}</span> programs,
+            ranked for you.
           </>
         }
       >
         <p>
-          Accelerators, grants, counseling, workforce, and trade. Filter by topic or search.
-          Rank a company on Intake when you want these programs fitted to one business.
+          Accelerators, grants, counseling, workforce, and trade. Filter by topic, community, or
+          search. The You bar re-sorts the list to your stage, sector, and community.
         </p>
       </SurfaceHero>
       <Suspense fallback={null}>

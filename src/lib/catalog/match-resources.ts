@@ -53,9 +53,15 @@ const REGION_TO_COUNTIES: Record<YouRegion, string[]> = {
   ],
 };
 
+export type MatchReason = {
+  kind: "goal" | "stage" | "community" | "industry" | "any";
+  label: string;
+};
+
 export type ScoredResource = {
   resource: CatalogResource;
   score: number;
+  reasons: MatchReason[];
 };
 
 export function filterResourcesByRegion(
@@ -87,26 +93,38 @@ export function matchResources(persona: YouPersona, resources: CatalogResource[]
       locations: raw.locations ?? [],
     };
     let score = 0;
+    const reasons: MatchReason[] = [];
     const matchedGoal = row.topics.filter((topic) => goalTopics.has(topic));
-    if (matchedGoal.length > 0) score += 3 * matchedGoal.length;
+    if (matchedGoal.length > 0) {
+      score += 3 * matchedGoal.length;
+      reasons.push({ kind: "goal", label: `For ${persona.goal.toLowerCase()}` });
+    }
     const matchedStage = row.topics.filter((topic) => stageTopics.has(topic));
-    if (matchedStage.length > 0 && matchedGoal.length === 0) score += 1.5 * matchedStage.length;
+    if (matchedStage.length > 0 && matchedGoal.length === 0) {
+      score += 1.5 * matchedStage.length;
+      reasons.push({ kind: "stage", label: `${persona.stage.toLowerCase()} stage` });
+    }
     if (personaCommunities.size > 0) {
       const matched = row.communities.map(normalizeCommunity).filter((item) => personaCommunities.has(item));
-      if (matched.length > 0) score += 4 * matched.length;
-      else if (row.communities.includes("Any")) score += 0.5;
+      if (matched.length > 0) {
+        score += 4 * matched.length;
+        reasons.push({ kind: "community", label: matched.map(prettyCommunity).join(" + ") });
+      } else if (row.communities.includes("Any")) score += 0.5;
     } else if (row.communities.includes("Any")) {
       score += 0.2;
     }
     if (row.industries.length > 0 && row.industries.length <= 3) {
       const matched = row.industries.filter((item) => sectorIndustries.has(item));
-      if (matched.length > 0) score += 2 * matched.length;
+      if (matched.length > 0) {
+        score += 2 * matched.length;
+        reasons.push({ kind: "industry", label: `${persona.sector} focus` });
+      }
     }
     if (row.locations.length > 0 && row.locations.length <= 8) {
       const matched = row.locations.filter((item) => personaCounties.has(item));
       if (matched.length > 0) score += 0.3 * matched.length;
     }
-    return { resource: row, score };
+    return { resource: row, score, reasons };
   });
 
   scored.sort((left, right) => {
@@ -146,6 +164,19 @@ export function filterRankedCards(cards: RankedCard[], persona: YouPersona | nul
   return hits
     .sort((left, right) => right.score - left.score)
     .map((item) => item.card);
+}
+
+function prettyCommunity(token: string): string {
+  return (
+    {
+      women: "Women-owned",
+      veteran: "Veteran",
+      student: "Student",
+      multicultural: "Multicultural",
+      "new-american": "New American",
+      rural: "Rural",
+    }[token] ?? token
+  );
 }
 
 function normalizeCommunity(value: string): string {

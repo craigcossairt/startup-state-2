@@ -80,8 +80,11 @@ const startups: CatalogStartup[] = [
 ];
 
 describe("catalog filters", () => {
-  it("filters resources by topic and search text", () => {
+  it("filters resources by topic, community, and search text", () => {
     expect(filterResources(resources, { topic: "Funding" }).map((row) => row.id)).toEqual(["2"]);
+    expect(filterResources(resources, { community: "Woman-owned" }).map((row) => row.id)).toEqual([
+      "2",
+    ]);
     expect(filterResources(resources, { q: "workforce" }).map((row) => row.id)).toEqual(["1"]);
   });
 

@@ -47,7 +47,15 @@ describe("persona resource matching", () => {
   it("ranks funding resources first for the Healthcare AI test case and hides non-overlapping counties", () => {
     const persona = applyTestCase("fixture-1");
     expect(matchResources(persona, resources)[0]?.resource.id).toBe("fund");
+    expect(matchResources(persona, resources)[0]?.reasons.map((reason) => reason.label)).toEqual([
+      "For find funding",
+      "Software focus",
+    ]);
     expect(resourcesForPersona(resources, persona).map((row) => row.id)).toEqual(["fund"]);
+    const womanOwned = { ...persona, communities: ["Woman-owned" as const] };
+    expect(
+      matchResources(womanOwned, resources)[0]?.reasons.some((reason) => reason.kind === "community"),
+    ).toBe(true);
   });
 });
 

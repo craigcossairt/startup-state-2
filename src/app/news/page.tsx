@@ -41,7 +41,11 @@ export default function NewsPage() {
           <p className="eyebrow !mb-3 !text-primary">Featured</p>
           <h2 className="h-display text-2xl leading-tight sm:text-3xl">{feature.title}</h2>
           <p className="mt-3 max-w-3xl text-foreground-muted">{feature.summary}</p>
-          <p className="mt-4 text-xs text-foreground-muted">{feature.date}</p>
+          <p className="mt-4 flex items-center gap-3 text-xs text-foreground-muted">
+            <span>{feature.date}</span>
+            <span className="opacity-50">·</span>
+            <span className="font-semibold text-primary">Read on startup.utah.gov</span>
+          </p>
         </a>
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((item) => (
