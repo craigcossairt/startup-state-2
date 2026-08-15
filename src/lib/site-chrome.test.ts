@@ -101,6 +101,14 @@ describe("Part 1 site chrome import fences", () => {
     );
   });
 
+  it("shows leftover links at laptop width the way Part 1 does", () => {
+    const nav = read("src/components/nav.tsx");
+    expect(nav).toContain("max-w-[1400px]");
+    expect(nav).toMatch(/\bmd:flex\b/);
+    expect(nav).not.toMatch(/\bxl:flex\b/);
+    expect(nav).not.toMatch(/\bxl:hidden\b/);
+  });
+
   it("puts leftover surfaces on the nav and still forbids the Tyler card", () => {
     const nav = read("src/components/nav.tsx");
     expect(nav).toContain("SITE_NAV");
