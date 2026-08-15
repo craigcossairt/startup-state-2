@@ -2,9 +2,33 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 
 export function YouParamLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <Link href={href} className={className}>
+          {children}
+        </Link>
+      }
+    >
+      <YouParamLinkInner href={href} className={className}>
+        {children}
+      </YouParamLinkInner>
+    </Suspense>
+  );
+}
+
+function YouParamLinkInner({
   href,
   className,
   children,

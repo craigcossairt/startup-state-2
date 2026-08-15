@@ -30,6 +30,12 @@ describe("You bar", () => {
     ]);
   });
 
+  it("keeps YouParamLink search params behind Suspense so playbook steps can prerender", () => {
+    const link = read("src/components/catalog/you-param-link.tsx");
+    expect(link).toContain("useSearchParams");
+    expect(link).toMatch(/<Suspense[\s\S]*useSearchParams|function YouParamLink[\s\S]*<Suspense/);
+  });
+
   it("mounts on Opportunity Map, Playbook, and Resources", () => {
     expect(read("src/app/map/page.tsx")).toContain("YouBar");
     expect(read("src/app/playbook/page.tsx")).toContain("YouBar");
