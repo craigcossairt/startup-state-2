@@ -9,11 +9,9 @@ export type HistorySources = {
 const SBIR_SHAPED = /sbir|sttr/i;
 
 export function isSbirShaped(card: RankedCard): boolean {
-  const text = [
-    card.opportunity.program,
-    card.opportunity.opportunityNumber ?? "",
-    card.opportunity.description ?? "",
-  ].join(" ");
+  const text = [card.opportunity.program, card.opportunity.opportunityNumber ?? ""].join(
+    " ",
+  );
   return SBIR_SHAPED.test(text);
 }
 
@@ -25,11 +23,15 @@ export function attachHistory(
   const sbir = sources.sbirAwards ?? [];
   const usa = sources.usaAwards ?? [];
   return cards.map((card) => {
-    const pool = isSbirShaped(card)
-      ? sbir
-      : card.opportunity.lane === "federal" && card.opportunity.aln.length > 0
-        ? usa
-        : [];
+    const federal = card.opportunity.lane === "federal";
+    const pool =
+      federal && isSbirShaped(card)
+        ? sbir
+        : federal && card.opportunity.aln.length > 0
+          ? usa.filter((row) =>
+              (row.aln ?? []).some((code) => card.opportunity.aln.includes(code)),
+            )
+          : [];
     return {
       ...card,
       similarAwardees: pool.slice(0, 3),

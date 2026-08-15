@@ -3,80 +3,90 @@
     "file": "data/cache/grants-gov/fixture-1-sbir.json",
     "keyword": "SBIR healthcare AI nurses",
     "http": 200,
-    "hitCount": 102,
+    "hitCount": 267,
     "rows": 25,
-    "firstId": "359666"
+    "firstId": "359666",
+    "agencies": "NSF:6, HHS-NIH11:5, DOS-ARG:2, HHS-HRSA:1, DOS-IDN:1, DOS-ALB:1, DOS-PHL:1, DOS-SAU:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-1-open.json",
     "keyword": "healthcare AI administrative burden nurses",
     "http": 200,
-    "hitCount": 219,
+    "hitCount": 685,
     "rows": 25,
-    "firstId": "359666"
+    "firstId": "359666",
+    "agencies": "HHS-NIH11:8, NSF:5, HHS-CDC-HHSCDCERA:2, DOS-ARG:1, HHS-HRSA:1, DOC-DOCNISTERA:1, HHS-OPHS:1, DOS-IDN:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-2-sbir.json",
     "keyword": "SBIR aerospace manufacturing",
     "http": 200,
-    "hitCount": 38,
+    "hitCount": 180,
     "rows": 25,
-    "firstId": "359671"
+    "firstId": "336962",
+    "agencies": "NSF:6, HHS-NIH11:5, DOD-AFRL:3, DOE-ARPAE:2, DOC-NIST:2, DOD-AFRL-RW:1, NASA-HQ:1, SBA:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-2-open.json",
     "keyword": "aerospace manufacturing advanced components",
     "http": 200,
-    "hitCount": 234,
+    "hitCount": 683,
     "rows": 25,
-    "firstId": "362036"
+    "firstId": "306171",
+    "agencies": "NSF:7, DOD-AFRL:3, DOE-ARPAE:2, DOS-NEA:2, DOT-FAA-FAA COE-FAA JAMS:1, VA-CSHF:1, DOS-ARG:1, DOC-NIST:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-3-sbir.json",
     "keyword": "SBIR water climate sensors",
     "http": 200,
-    "hitCount": 44,
+    "hitCount": 226,
     "rows": 25,
-    "firstId": "356811"
+    "firstId": "306169",
+    "agencies": "NSF:8, HHS-NIH11:6, DOC:1, DOS-ESP:1, DOI-USGS1:1, DOD-DARPA-DSO:1, DOD-ONR-SEA-CRANE:1, DOD-ONR-NRL:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-3-open.json",
     "keyword": "water climate sensors AI",
     "http": 200,
-    "hitCount": 52,
+    "hitCount": 289,
     "rows": 25,
-    "firstId": "363292"
+    "firstId": "306169",
+    "agencies": "NSF:9, HHS-NIH11:3, DOS-TUN:2, HHS-CDC-HHSCDCERA:1, DOI-USGS1:1, DOC:1, PAMS-SC:1, DOS-ESP:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-4-sbir.json",
     "keyword": "SBIR cyber threat detection",
     "http": 200,
-    "hitCount": 88,
+    "hitCount": 314,
     "rows": 25,
-    "firstId": "360455"
+    "firstId": "363249",
+    "agencies": "HHS-CDC-GHC:4, HHS-NIH11:4, NSF:2, HHS-CDC-NCEZID:2, HHS-FDA:2, DOS-ALB:1, DOS-INL:1, DOS-IDN:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-4-open.json",
     "keyword": "cybersecurity threat detection",
     "http": 200,
-    "hitCount": 161,
+    "hitCount": 411,
     "rows": 25,
-    "firstId": "360455"
+    "firstId": "363249",
+    "agencies": "NSF:4, HHS-CDC-GHC:4, DOS-ALB:2, HHS-CDC-NCEZID:2, HHS-FDA:2, DOS-TUN:2, DOS-IDN:1, DOI-BLM:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-5-open.json",
     "keyword": "workforce youth education marketplace",
     "http": 200,
-    "hitCount": 202,
+    "hitCount": 676,
     "rows": 25,
-    "firstId": "362036"
+    "firstId": "361952",
+    "agencies": "NSF:9, HHS-NIH11:4, DOE-ARPAE:2, DOD-ONR:2, USDA-NIFA:1, DOS-MEX:1, DOI-BLM:1, DOD:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-5-sbir.json",
     "keyword": "SBIR education youth",
     "http": 200,
-    "hitCount": 191,
+    "hitCount": 632,
     "rows": 25,
-    "firstId": "358912"
+    "firstId": "358912",
+    "agencies": "HHS-ACF-FYSB:6, HHS-NIH11:5, HHS-CDC-HHSCDCERA:2, DOS-KHM:2, DOD-AFRL-RW:1, NASA:1, DOI-BLM:1, DOS-ALB:1"
   }
 ]

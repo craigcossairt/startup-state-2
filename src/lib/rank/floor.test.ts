@@ -74,4 +74,26 @@ describe("applyProbablyNotFloor", () => {
     expect(applied.cards.filter((row) => row.opportunity.lane === "federal")).toHaveLength(3);
     expect(applied.cards.some((row) => row.opportunity.id === "grants_gov:4")).toBe(false);
   });
+
+  it("keeps Federal adjacent plus 3 Federal probably_not, Utah first, and drops the 4th probably_not", () => {
+    const applied = applyProbablyNotFloor([
+      card("curated:sbdc", "state", "likely"),
+      card("grants_gov:adjacent", "federal", "adjacent"),
+      card("grants_gov:1", "federal", "probably_not"),
+      card("grants_gov:2", "federal", "probably_not"),
+      card("grants_gov:3", "federal", "probably_not"),
+      card("grants_gov:4", "federal", "probably_not"),
+    ]);
+    expect(applied.floorTripped).toBe(true);
+    expect(applied.floorBanner).toBe(FLOOR_BANNER);
+    expect(applied.cards[0]?.opportunity.id).toBe("curated:sbdc");
+    expect(applied.cards.map((row) => row.opportunity.id)).toEqual([
+      "curated:sbdc",
+      "grants_gov:adjacent",
+      "grants_gov:1",
+      "grants_gov:2",
+      "grants_gov:3",
+    ]);
+    expect(applied.cards.some((row) => row.opportunity.id === "grants_gov:4")).toBe(false);
+  });
 });

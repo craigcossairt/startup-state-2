@@ -72,7 +72,11 @@ export async function* streamRetrieveThenRank(
     ((opportunities: Opportunity[], current: CompanyProfile) =>
       rankRetrievedOpportunities(current, opportunities));
   const rankCards = await rank(retrieved.opportunities, profile);
-  const assembled = assembleRankedCards(retrieved.opportunities, rankCards);
+  const assembled = assembleRankedCards(
+    retrieved.opportunities,
+    rankCards,
+    retrieved.firedKeys,
+  );
   const rankedPayload: OpportunityMapPayload = {
     ...assembled,
     firedKeys: retrieved.firedKeys,

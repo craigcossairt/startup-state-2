@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { loadCompanyFixture } from "@/lib/profile/load-fixture";
 import { fireGoeoKeys } from "./goeo-keys";
-import { capRetrieved, retrieveOpportunities, RETRIEVE_CAP } from "./retrieve";
+import {
+  capRetrieved,
+  retrieveOpportunities,
+  FEDERAL_RESERVE,
+  RETRIEVE_CAP,
+} from "./retrieve";
 import type { Opportunity } from "@/lib/types/opportunity";
 
 function stub(id: string, source: Opportunity["source"] = "grants_gov"): Opportunity {
@@ -58,14 +63,35 @@ describe("retrieveOpportunities", () => {
 });
 
 describe("capRetrieved", () => {
-  it("always keeps curated cards first, then GOEO, then federal, at the cap", () => {
+  it("reserves federal slots so leftover GOEO cannot fill the whole cap", () => {
+    const curated = Array.from({ length: 7 }, (_, i) => stub(`c${i}`, "curated"));
+    const goeo = Array.from({ length: 40 }, (_, i) => stub(`g${i}`, "goeo"));
+    const federal = Array.from({ length: 20 }, (_, i) => stub(`f${i}`));
+    const capped = capRetrieved({ curated, goeo, federal, cap: 50 });
+    expect(capped).toHaveLength(50);
+    expect(capped.filter((row) => row.source === "curated")).toHaveLength(7);
+    expect(capped.filter((row) => row.source === "grants_gov")).toHaveLength(
+      FEDERAL_RESERVE,
+    );
+    expect(capped.filter((row) => row.source === "goeo")).toHaveLength(28);
+    expect(capped[0].source).toBe("curated");
+  });
+
+  it("honors an explicit federal reserve on a smaller cap", () => {
     const curated = [stub("nucleus-grow", "curated"), stub("sbdc", "curated")];
-    const goeo = Array.from({ length: 10 }, (_, i) => stub(`g${i}`, "goeo"));
-    const federal = Array.from({ length: 50 }, (_, i) => stub(`f${i}`));
-    const capped = capRetrieved({ curated, goeo, federal, cap: 12 });
-    expect(capped).toHaveLength(12);
+    const goeo = Array.from({ length: 20 }, (_, i) => stub(`g${i}`, "goeo"));
+    const federal = Array.from({ length: 20 }, (_, i) => stub(`f${i}`));
+    const capped = capRetrieved({
+      curated,
+      goeo,
+      federal,
+      cap: 20,
+      federalReserve: 8,
+    });
+    expect(capped).toHaveLength(20);
     expect(capped[0].id).toBe("curated:nucleus-grow");
     expect(capped[1].id).toBe("curated:sbdc");
     expect(capped.filter((row) => row.source === "goeo")).toHaveLength(10);
+    expect(capped.filter((row) => row.source === "grants_gov")).toHaveLength(8);
   });
 });

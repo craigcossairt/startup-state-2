@@ -1,4 +1,4 @@
-import { FIT_LABELS, NOT_PUBLISHED } from "@/lib/copy";
+import { FIT_LABELS, NONE_ATTACHED, NOT_PUBLISHED } from "@/lib/copy";
 import type { RankedCard } from "@/lib/types/opportunity";
 
 function money(value: { minUsd: number; maxUsd: number } | null): string {
@@ -67,6 +67,34 @@ export function RankedOpportunityCard({ card }: { card: RankedCard }) {
                 {card.concerns.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
+              </ul>
+            )}
+          </div>
+          <div className="mt-4">
+            <p className="eyebrow">Similar awardees</p>
+            {card.similarAwardees.length === 0 ? (
+              <p className="mt-1 text-foreground-muted">{NONE_ATTACHED}</p>
+            ) : (
+              <ul className="mt-1 space-y-1">
+                {card.similarAwardees.map((row, index) => {
+                  const parts = [row.name, row.state, row.year].filter(
+                    (part) => part !== undefined && part !== "",
+                  );
+                  const amount =
+                    row.amountUsd === undefined
+                      ? ""
+                      : new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                          maximumFractionDigits: 0,
+                        }).format(row.amountUsd);
+                  return (
+                    <li key={`${row.source}:${row.name}:${row.year ?? ""}:${index}`}>
+                      {parts.join(", ")}
+                      {amount ? ` ${amount}` : ""}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>

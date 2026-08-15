@@ -61,7 +61,7 @@ Server drops any rank ID not in the retrieved set and copies program / agency / 
 
 | Adapter | Role | Retrieve IDs? |
 | --- | --- | --- |
-| Grants.gov search2 | Open list (`posted\|forecasted`). Keyword from Q3. Small-business eligibility when the profile is a startup. Live with backoff. | Yes |
+| Grants.gov search2 | Open list (`posted\|forecasted`). Keyword from Q3. Do not send `eligibilities`. Eligibility 23 hid DoD/NASA/NSF on the first page. Live with backoff. | Yes |
 | SAM Assistance Listings | Cached CFDA catalog. Join onto Grants.gov by ALN / CFDA. No live Friday hits. | No |
 | USAspending V2 | Similar awardees on ranked cards. Prefer Utah when `hqState` is `UT`. | No |
 | SBIR award CSV | Similar awardees on SBIR-shaped cards. APIs stay 403. | No |
@@ -116,7 +116,7 @@ Lane / GOEO-key / `directory` chips re-run retrieve, still capped at ~50, then r
 | Condition | Include |
 | --- | --- |
 | Any GOEO key fired | At least 2 Utah cards when possible |
-| Floor tripped | Utah leads plus 1–3 Federal `probably not` |
+| Floor tripped | Utah leads, Federal `adjacent` stays, plus 1–3 Federal `probably not` |
 
 Still 8–12 cards total.
 
@@ -131,7 +131,7 @@ Still 8–12 cards total.
 
 > Traditional federal grants look like a poor fit for this company. Utah programs below are the stronger place to start.
 
-Federal `probably not` cards stay in the list under the banner with why / concerns.
+When the floor trips, keep Federal `adjacent` as well as 1–3 Federal `probably not`. Utah still leads. Federal `probably not` cards stay in the list under the banner with why / concerns.
 
 **Fixture-5 (Youth marketplace):** floor should trip. Show 1–3 Federal `probably not` (example: SBIR/STTR poor fit for a parent/youth marketplace) plus State `workforce` / `counseling` lead. Do not invent a strong federal grant.
 

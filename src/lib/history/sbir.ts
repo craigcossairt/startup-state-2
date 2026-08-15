@@ -89,22 +89,26 @@ async function loadUtahSbirIndex(): Promise<HistoryAttachment[]> {
   return indexing;
 }
 
+export function historyTokens(profile: CompanyProfile): string[] {
+  return [
+    ...(profile.sectors.value ?? []),
+    ...(profile.technologies.value ?? []),
+  ]
+    .map((token) => token.toLowerCase())
+    .filter((token) => token.length >= 2);
+}
+
 export async function loadSbirAwards(
   profile: CompanyProfile,
   limit = 6,
 ): Promise<HistoryAttachment[]> {
   const rows = await loadUtahSbirIndex();
   if (rows.length === 0) return [];
-  const tokens = [
-    ...(profile.sectors.value ?? []),
-    ...(profile.technologies.value ?? []),
-  ]
-    .map((token) => token.toLowerCase())
-    .filter((token) => token.length > 2);
+  const tokens = historyTokens(profile);
   const matched = rows.filter((row) => {
     if (tokens.length === 0) return true;
     const haystack = `${row.summary ?? ""} ${row.name}`.toLowerCase();
     return tokens.some((token) => haystack.includes(token));
   });
-  return (matched.length > 0 ? matched : rows).slice(0, limit);
+  return matched.slice(0, limit);
 }

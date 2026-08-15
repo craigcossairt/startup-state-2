@@ -55,3 +55,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Close open Dependabot alerts by bumping Next to 16.3.1 (ships postcss 8.5.23 and sharp ^0.35.3). Do not override sharp 0.35 under Next 16.2: NFT still looks for `sharp/lib/index.js` and Vercel can miss `libvips-cpp`. See this PR.
 - **2026-08-15** - `AGENTS.md` no longer stores a stage label or a frozen Vitest count. Database convention is cached JSON plus optional Supabase public read. See this PR.
 - **2026-08-15** - Removed unused `brain/`, SETUP.md, and `.audit/`. Agent prompt BM25 is not retrieve. See this PR.
+- **2026-08-15** - Grants.gov retrieve drops eligibility 23. The floor keeps Federal adjacent. History joins per listing. capRetrieved reserves 15 federal slots. The server enforces 8-12 cards and at least 2 Utah when GOEO keys fired. See this PR.

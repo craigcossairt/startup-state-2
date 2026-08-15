@@ -43,4 +43,10 @@ describe("Opportunity Map shell", () => {
     expect(FIT_LABELS.likely).toBe("likely");
     expect(NOT_PUBLISHED).toBe("Not published");
   });
+
+  it("paints similar awardees on each ranked card, including the empty label", () => {
+    const card = read("src/components/ranked-card.tsx");
+    expect(card).toContain("similarAwardees");
+    expect(card).toContain("NONE_ATTACHED");
+  });
 });
