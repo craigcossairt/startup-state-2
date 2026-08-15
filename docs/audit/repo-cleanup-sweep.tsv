@@ -8,3 +8,5 @@ ts	phase	decision	why	evidence	result
 2026-08-15T18:47:58Z	keep	Kept scripts/run-judged-rank.ts despite zero importers	Manual npx tsx judging CLI; zero refs is expected for a one-shot lever	scripts/run-judged-rank.ts	kept; must_keep in verify script
 2026-08-15T18:47:58Z	verify	npx tsc --noEmit passes; layout and map/home metadata typecheck offline	Build was blocked on Google fonts; tsc covers the metadata rewrite	npx tsc --noEmit	VERIFIED
 2026-08-15T18:47:58Z	docs	Map and Intake pages set their own titles; root default is Startup State Opportunity Finder	Avoid bare /map title after root metadata template change	src/app/map/page.tsx src/app/page.tsx	updated
+2026-08-15T18:49:18Z	followup	Deleted dead /api/bonus surfaces checklist; fixed supabase README CONTEXT DIRECTORY_LABEL footer UA	Inventory agents found zero-importer bonus route after first sweep	bc-6dce442e inventory; bc-291d0d57 about	pending verify
+2026-08-15T18:49:48Z	verify	pnpm test 186 green; tsc clean after clearing .next stale bonus route types	Follow-up deletes proved	pnpm test; npx tsc --noEmit	VERIFIED

@@ -124,7 +124,7 @@ export async function fetchWebsiteText(rawUrl: string): Promise<{
     headers: {
       accept: "text/html,application/xhtml+xml",
       "user-agent":
-        "StartupStateOpportunityMap/0.1 (https://startup-state-2.vercel.app)",
+        "StartupState2/0.1 (https://startup-state-2.vercel.app)",
     },
     redirect: "follow",
     signal: AbortSignal.timeout(8000),

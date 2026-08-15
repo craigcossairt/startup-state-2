@@ -134,7 +134,7 @@ export function Footer() {
                 </a>
               ),
             )}
-            <span className="opacity-60">Built for AI Builder Day</span>
+            <span className="opacity-60">Built for AI Builder Day Part 2</span>
           </div>
         </div>
       </div>

@@ -31,4 +31,4 @@ time. A deploy that finished before the save will not see them.
 
 Do not add the service role key to Vercel as a `NEXT_PUBLIC_` var.
 
-Claim and admin stay out until RLS write policies and an auth gate exist.
+Claim (`/claim/[id]`) and `/admin` Operations are in as leftover surfaces. Approve/Reject and live claim writes are not wired. Add-listing does not insert.
