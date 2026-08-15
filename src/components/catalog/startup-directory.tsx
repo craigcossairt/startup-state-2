@@ -123,6 +123,9 @@ export function StartupDirectory({
                     LinkedIn
                   </a>
                 ) : null}
+                <a href={`/claim/${row.id}`} className="text-primary hover:underline">
+                  Claim this listing
+                </a>
               </div>
             </article>
           </li>

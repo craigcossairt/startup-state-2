@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ASK_FAB_LABEL, ASK_NEEDS_MAP, ASK_PANEL_LEAD, ASK_PLACEHOLDER } from "@/lib/copy";
-import { buildAskRequest, canSendAsk, readAskResponse } from "@/lib/ask-panel";
+import { askFabHiddenOn, buildAskRequest, canSendAsk, readAskResponse } from "@/lib/ask-panel";
 import { loadMapPayload } from "@/lib/session-map";
 
 export function AskFab() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [reply, setReply] = useState<string | null>(null);
@@ -32,6 +34,8 @@ export function AskFab() {
   }, []);
 
   const dockStyle = dockBottom == null ? undefined : { bottom: dockBottom };
+
+  if (askFabHiddenOn(pathname)) return null;
 
   return (
     <>
