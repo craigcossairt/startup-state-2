@@ -62,11 +62,12 @@ export default function PlanPage() {
                         <button
                           type="button"
                           aria-pressed={checked}
+                          aria-label={checked ? `Done: ${item.program}` : `Mark done: ${item.program}`}
                           onClick={() => toggle(item)}
-                          className={`mt-0.5 h-5 w-5 shrink-0 rounded border ${
+                          className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded border-2 text-sm font-bold ${
                             checked
                               ? "border-vibrant-green bg-vibrant-green text-white"
-                              : "border-border bg-white"
+                              : "border-midnight bg-white text-transparent"
                           }`}
                         >
                           {checked ? "✓" : ""}

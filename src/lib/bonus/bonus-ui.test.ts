@@ -35,6 +35,9 @@ describe("bonus controls", () => {
         "utf8",
       );
       expect(source.length).toBeGreaterThan(40);
+      if (item.href === "/map/plan") {
+        expect(source).toContain("aria-pressed");
+      }
     }
   });
 });
