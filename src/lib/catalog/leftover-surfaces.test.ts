@@ -56,6 +56,8 @@ describe("leftover surfaces", () => {
     const script = readFileSync(path.join(root, "scripts/apply-catalog-schema.mjs"), "utf8");
     expect(script).toContain("supabase/schema.sql");
     expect(script).toContain("insert into public.startups");
+    expect(script).toContain("rejectUnauthorized: false");
+    expect(script).toContain("stripSslMode");
     expect(script).not.toMatch(/insert into public\.startups[\s\S]*\bstatus\b/);
   });
 

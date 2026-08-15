@@ -17,6 +17,14 @@ const DSN_KEYS = [
   "POSTGRES_PRISMA_URL",
 ];
 
+function stripSslMode(dsn) {
+  return dsn
+    .replace(/([?&])sslmode=[^&]*/i, "$1")
+    .replace(/[?&]+$/, "")
+    .replace(/\?&/, "?")
+    .replace(/&&+/g, "&");
+}
+
 function dsnCandidates(env) {
   const out = [];
   for (const key of DSN_KEYS) {
@@ -79,8 +87,9 @@ async function applyOne(dsn) {
     readFileSync(path.join(root, "data/catalog/startups.json"), "utf8"),
   );
 
+  const stripped = stripSslMode(dsn);
   const client = new pg.Client({
-    connectionString: dsn,
+    connectionString: `${stripped}${stripped.includes("?") ? "&" : "?"}sslmode=no-verify`,
     ssl: { rejectUnauthorized: false },
   });
   await client.connect();

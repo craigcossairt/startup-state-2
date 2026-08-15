@@ -4,6 +4,14 @@ const POSTGRES_DSN_KEYS = [
   "POSTGRES_PRISMA_URL",
 ] as const;
 
+export function stripPostgresSslMode(dsn: string): string {
+  return dsn
+    .replace(/([?&])sslmode=[^&]*/i, "$1")
+    .replace(/[?&]+$/, "")
+    .replace(/\?&/, "?")
+    .replace(/&&+/g, "&");
+}
+
 export function postgresDsnCandidates(
   env: Record<string, string | undefined> = process.env,
 ): string[] {
