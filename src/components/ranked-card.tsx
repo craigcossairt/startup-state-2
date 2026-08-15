@@ -42,22 +42,18 @@ export function RankedOpportunityCard({ card }: { card: RankedCard }) {
         >
           {sourceLabel}
         </span>
-        {card.ranking ? null : (
-          <>
-            <span className="text-xs font-semibold uppercase tracking-[0.06em] text-foreground-muted">
-              {formatInstrument(card.opportunity.instrument)}
-            </span>
-            <span className="inline-block h-0.5 w-0.5 rounded-full bg-platinum" />
-            <span className="text-xs font-semibold uppercase tracking-[0.06em] text-foreground-muted">
-              {card.opportunity.status}
-            </span>
-            <span
-              className={`ml-auto rounded-full border px-3 py-1 text-xs font-bold tracking-[0.04em] ${FIT_PILL[card.fit]}`}
-            >
-              {FIT_LABELS[card.fit]}
-            </span>
-          </>
-        )}
+        <span className="text-xs font-semibold uppercase tracking-[0.06em] text-foreground-muted">
+          {formatInstrument(card.opportunity.instrument)}
+        </span>
+        <span className="inline-block h-0.5 w-0.5 rounded-full bg-platinum" />
+        <span className="text-xs font-semibold uppercase tracking-[0.06em] text-foreground-muted">
+          {card.opportunity.status}
+        </span>
+        <span
+          className={`ml-auto rounded-full border px-3 py-1 text-xs font-bold tracking-[0.04em] ${FIT_PILL[card.fit]}`}
+        >
+          {FIT_LABELS[card.fit]}
+        </span>
       </div>
 
       <h3 className="max-w-[820px] font-display text-[19px] font-extrabold leading-snug text-midnight text-pretty">
@@ -105,105 +101,96 @@ export function RankedOpportunityCard({ card }: { card: RankedCard }) {
         </div>
       </dl>
 
-      {card.ranking ? (
-        <div className="flex items-center gap-2.5">
-          <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-vibrant-green" />
-          <span className="text-sm font-bold text-midnight">Ranking by fit</span>
+      <div className="mb-[18px]">
+        <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-vibrant-green">
+          {WHY_HEADING}
+        </p>
+        <p className="max-w-[760px] font-serif text-[17px] leading-relaxed text-midnight text-pretty">
+          {card.why}
+        </p>
+      </div>
+
+      {card.concerns.length > 0 ? (
+        <div className="mb-[18px]">
+          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-foreground-muted">
+            {VERIFY_HEADING}
+          </p>
+          <ul className="flex flex-col gap-1.5">
+            {card.concerns.map((item) => (
+              <li
+                key={item}
+                className="relative pl-4 text-[15px] leading-snug text-foreground"
+              >
+                <span className="absolute top-2 left-0 inline-block h-1.5 w-1.5 bg-[#ffad00]" />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
-      ) : (
-        <>
-          <div className="mb-[18px]">
-            <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-vibrant-green">
-              {WHY_HEADING}
-            </p>
-            <p className="max-w-[760px] font-serif text-[17px] leading-relaxed text-midnight text-pretty">
-              {card.why}
-            </p>
-          </div>
+      ) : null}
 
-          {card.concerns.length > 0 ? (
-            <div className="mb-[18px]">
-              <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-foreground-muted">
-                {VERIFY_HEADING}
-              </p>
-              <ul className="flex flex-col gap-1.5">
-                {card.concerns.map((item) => (
-                  <li
-                    key={item}
-                    className="relative pl-4 text-[15px] leading-snug text-foreground"
-                  >
-                    <span className="absolute top-2 left-0 inline-block h-1.5 w-1.5 bg-[#ffad00]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          <div className="mb-[18px] rounded bg-off-white px-[18px] py-4">
-            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-foreground-muted">
-              {SIMILAR_HEADING}
-            </p>
-            {card.similarAwardees.length === 0 ? (
-              <p className="text-sm text-foreground-muted">{NONE_ATTACHED}.</p>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {card.similarAwardees.map((row, index) => (
-                  <div key={`${row.source}:${row.name}:${row.year ?? ""}:${index}`}>
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="text-[15px] font-bold text-midnight">{row.name}</span>
-                      {row.amountUsd !== undefined ? (
-                        <span className="text-sm font-bold text-vibrant-green">
-                          {formatUsdCompact(row.amountUsd)}
-                        </span>
-                      ) : null}
-                      <span className="text-[13px] text-foreground-muted">
-                        {[row.year, row.city, row.state].filter(Boolean).join(" · ")}
-                      </span>
-                    </div>
-                    {row.summary ? (
-                      <p className="mt-1 max-w-[700px] text-sm leading-snug text-foreground">
-                        {row.summary}
-                      </p>
-                    ) : null}
-                  </div>
-                ))}
+      <div className="mb-[18px] rounded bg-off-white px-[18px] py-4">
+        <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.14em] text-foreground-muted">
+          {SIMILAR_HEADING}
+        </p>
+        {card.similarAwardees.length === 0 ? (
+          <p className="text-sm text-foreground-muted">{NONE_ATTACHED}.</p>
+        ) : (
+          <div className="flex flex-col gap-3">
+            {card.similarAwardees.map((row, index) => (
+              <div key={`${row.source}:${row.name}:${row.year ?? ""}:${index}`}>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="text-[15px] font-bold text-midnight">{row.name}</span>
+                  {row.amountUsd !== undefined ? (
+                    <span className="text-sm font-bold text-vibrant-green">
+                      {formatUsdCompact(row.amountUsd)}
+                    </span>
+                  ) : null}
+                  <span className="text-[13px] text-foreground-muted">
+                    {[row.year, row.city, row.state].filter(Boolean).join(" · ")}
+                  </span>
+                </div>
+                {row.summary ? (
+                  <p className="mt-1 max-w-[700px] text-sm leading-snug text-foreground">
+                    {row.summary}
+                  </p>
+                ) : null}
               </div>
-            )}
+            ))}
           </div>
+        )}
+      </div>
 
-          <div className="flex flex-wrap items-center gap-4">
-            {card.nextStep.url ? (
-              <a
-                href={card.nextStep.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex rounded-full bg-vibrant-green px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-hover"
-              >
-                {card.nextStep.label}
-              </a>
-            ) : (
-              <span className="inline-flex rounded-full border border-platinum px-5 py-2.5 text-sm font-bold text-midnight">
-                {card.nextStep.label}
-              </span>
-            )}
-            {card.opportunity.description ? (
-              <button
-                type="button"
-                onClick={() => setDescOpen((value) => !value)}
-                className="border-b border-platinum bg-transparent p-0 text-[13px] font-bold text-foreground-muted"
-              >
-                {descOpen ? "Hide official description" : "Official description"}
-              </button>
-            ) : null}
-          </div>
-          {descOpen && card.opportunity.description ? (
-            <p className="mt-4 max-w-[820px] border-t border-border pt-4 text-sm leading-relaxed text-foreground-muted">
-              {card.opportunity.description}
-            </p>
-          ) : null}
-        </>
-      )}
+      <div className="flex flex-wrap items-center gap-4">
+        {card.nextStep.url ? (
+          <a
+            href={card.nextStep.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex rounded-full bg-vibrant-green px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-hover"
+          >
+            {card.nextStep.label}
+          </a>
+        ) : (
+          <span className="inline-flex rounded-full border border-platinum px-5 py-2.5 text-sm font-bold text-midnight">
+            {card.nextStep.label}
+          </span>
+        )}
+        {card.opportunity.description ? (
+          <button
+            type="button"
+            onClick={() => setDescOpen((value) => !value)}
+            className="border-b border-platinum bg-transparent p-0 text-[13px] font-bold text-foreground-muted"
+          >
+            {descOpen ? "Hide official description" : "Official description"}
+          </button>
+        ) : null}
+      </div>
+      {descOpen && card.opportunity.description ? (
+        <p className="mt-4 max-w-[820px] border-t border-border pt-4 text-sm leading-relaxed text-foreground-muted">
+          {card.opportunity.description}
+        </p>
+      ) : null}
     </article>
   );
 }

@@ -11,14 +11,15 @@ function read(rel: string): string {
 }
 
 describe("Opportunity Map shell", () => {
-  it("restores a cached map, paints retrieved cards while ranking, and keeps filters off the bonus row", () => {
+  it("restores a cached map, paints completed cards as they stream, and keeps filters off the bonus row", () => {
     const map = read("src/components/opportunity-map.tsx");
     const filters = read("src/components/map-filter-bar.tsx");
     expect(map).toContain("loadCachedMap");
     expect(map).toContain("saveCachedMap");
     expect(map).toContain("peekCachedMap");
     expect(map).toContain("chipsReady");
-    expect(map).toContain("pendingCardsFromPreviews");
+    expect(map).toContain("cardsReadyToPaint");
+    expect(map).not.toContain("pendingCardsFromPreviews");
     expect(map).not.toContain("CompanySnapshot");
     expect(map).not.toContain("profileOpen");
     expect(map).not.toContain("profileRevision");

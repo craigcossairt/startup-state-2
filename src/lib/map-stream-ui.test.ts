@@ -18,7 +18,8 @@ describe("map stream and KPIs", () => {
     expect(map).toContain("summarizeMapMetrics");
     expect(map).toContain("ProgressStatus");
     expect(map).toContain("MapMetrics");
-    expect(map).toContain("pendingCardsFromPreviews");
+    expect(map).toContain("cardsReadyToPaint");
+    expect(map).not.toContain("pendingCardsFromPreviews");
     expect(map).not.toContain("Building the Opportunity Map...");
   });
 
