@@ -2,13 +2,23 @@
 
 import { useMemo, useState } from "react";
 import { filterResources, resourceTopics } from "@/lib/catalog/filter";
+import { rankResourcesForNeedles } from "@/lib/catalog/leftover-test-case";
 import type { CatalogResource } from "@/lib/catalog/types";
 
-export function ResourceDirectory({ resources }: { resources: CatalogResource[] }) {
+export function ResourceDirectory({
+  resources,
+  needles = [],
+}: {
+  resources: CatalogResource[];
+  needles?: string[];
+}) {
   const [q, setQ] = useState("");
   const [topic, setTopic] = useState("");
   const topics = useMemo(() => resourceTopics(resources), [resources]);
-  const shown = useMemo(() => filterResources(resources, { q, topic }), [resources, q, topic]);
+  const shown = useMemo(() => {
+    const filtered = filterResources(resources, { q, topic });
+    return rankResourcesForNeedles(filtered, needles);
+  }, [resources, q, topic, needles]);
 
   return (
     <section className="mx-auto max-w-[1200px] space-y-6 px-6 py-12">

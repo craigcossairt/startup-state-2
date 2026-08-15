@@ -1,5 +1,8 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { LeftoverTestCaseBar } from "@/components/catalog/leftover-test-case-bar";
 import { SurfaceHero } from "@/components/catalog/surface-hero";
+import { parseLeftoverFixtureId, withLeftoverFixture } from "@/lib/catalog/leftover-test-case";
 import { PLAYBOOK_STAGES, PLAYBOOK_STEPS, stepCountByStage } from "@/lib/catalog/playbook";
 
 export const metadata = {
@@ -7,10 +10,18 @@ export const metadata = {
   description: "Nineteen official GOEO steps for thinking, starting, growing, or closing a Utah company.",
 };
 
-export default function PlaybookPage() {
+export default async function PlaybookPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ fixture?: string }>;
+}) {
+  const fixture = parseLeftoverFixtureId((await searchParams).fixture);
   const counts = stepCountByStage();
   return (
     <>
+      <Suspense fallback={null}>
+        <LeftoverTestCaseBar />
+      </Suspense>
       <SurfaceHero
         eyebrow="The Utah Startup Playbook"
         title={
@@ -35,7 +46,7 @@ export default function PlaybookPage() {
           {PLAYBOOK_STAGES.map((stage) => (
             <li key={stage.slug}>
               <Link
-                href={`/playbook/${stage.slug}`}
+                href={withLeftoverFixture(`/playbook/${stage.slug}`, fixture)}
                 className="block h-full rounded-2xl border border-border bg-white p-5 hover:border-primary/40 hover:shadow-md"
               >
                 <span
