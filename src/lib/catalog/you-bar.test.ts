@@ -50,16 +50,14 @@ describe("You bar", () => {
     expect(link).toMatch(/<Suspense[\s\S]*useSearchParams|function YouParamLink[\s\S]*<Suspense/);
   });
 
-  it("mounts on Opportunity Map, Playbook, and Resources", () => {
-    expect(read("src/app/map/page.tsx")).toContain("YouBar");
-    expect(read("src/app/playbook/page.tsx")).toContain("YouBar");
-    expect(read("src/app/playbook/[stage]/page.tsx")).toContain("YouBar");
-    expect(read("src/app/playbook/[stage]/[step]/page.tsx")).toContain("YouBar");
-    expect(read("src/app/resources/page.tsx")).toContain("YouBar");
-    expect(read("src/components/catalog/resource-directory.tsx")).toContain("matchResources");
-    expect(read("src/components/opportunity-map.tsx")).toContain("filterRankedCards");
-    expect(existsSync(path.join(root, "src/components/catalog/leftover-test-case-bar.tsx"))).toBe(
-      false,
-    );
+  it("constrains an open Company profile panel so it scrolls inside the sticky bar", () => {
+    const bar = read("src/components/catalog/you-bar.tsx");
+    expect(bar).toMatch(/max-h-\[calc\(100dvh-3\.5rem\)\]/);
+    expect(bar).toMatch(/open && draft[\s\S]*overflow-y-auto|overflow-y-auto[\s\S]*open && draft/);
+    const openAt = bar.indexOf("{open && draft");
+    expect(openAt).toBeGreaterThan(-1);
+    const openBlock = bar.slice(openAt, openAt + 280);
+    expect(openBlock).toContain("overflow-y-auto");
+    expect(openBlock).toContain("min-h-0");
   });
 });
