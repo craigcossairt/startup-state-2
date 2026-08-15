@@ -50,6 +50,17 @@ describe("You bar", () => {
     expect(link).toMatch(/<Suspense[\s\S]*useSearchParams|function YouParamLink[\s\S]*<Suspense/);
   });
 
+  it("constrains an open Company profile panel so it scrolls inside the sticky bar", () => {
+    const bar = read("src/components/catalog/you-bar.tsx");
+    expect(bar).toMatch(/max-h-\[calc\(100dvh-3\.5rem\)\]/);
+    expect(bar).toMatch(/open && draft[\s\S]*overflow-y-auto|overflow-y-auto[\s\S]*open && draft/);
+    const openAt = bar.indexOf("{open && draft");
+    expect(openAt).toBeGreaterThan(-1);
+    const openBlock = bar.slice(openAt, openAt + 280);
+    expect(openBlock).toContain("overflow-y-auto");
+    expect(openBlock).toContain("min-h-0");
+  });
+
   it("mounts on Opportunity Map, Playbook, and Resources", () => {
     expect(read("src/app/map/page.tsx")).toContain("YouBar");
     expect(read("src/app/playbook/page.tsx")).toContain("YouBar");

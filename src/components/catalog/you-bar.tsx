@@ -164,8 +164,12 @@ export function YouBar() {
   }
 
   return (
-    <div className="sticky top-14 z-20 border-b border-border bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1400px] items-center gap-2 px-4 py-2.5 sm:gap-3 sm:px-6">
+    <div
+      className={`sticky top-14 z-20 border-b border-border bg-background/85 backdrop-blur-md ${
+        open ? "flex max-h-[calc(100dvh-3.5rem)] flex-col" : ""
+      }`}
+    >
+      <div className="mx-auto flex max-w-[1400px] shrink-0 items-center gap-2 px-4 py-2.5 sm:gap-3 sm:px-6">
         {strip.kind === "intake-cta" ? (
           <IntakeCtaStrip persona={strip.persona} onReset={reset} />
         ) : strip.kind === "summary" ? (
@@ -218,7 +222,7 @@ export function YouBar() {
         )}
       </div>
       {open && draft ? (
-        <div className="border-t border-border bg-background-alt">
+        <div className="min-h-0 flex-1 overflow-y-auto border-t border-border bg-background-alt">
           <div className="mx-auto max-w-[1400px] px-4 py-5 sm:px-6">
             <CompanyProfileForm
               draft={draft}
