@@ -5,7 +5,7 @@ How the engineering skills should consume this repo's domain documentation when 
 ## Before exploring, read these
 
 - **`CONTEXT.md`** at the repo root
-- **`docs/briefs/goed-opportunity-finder.md`**, **`docs/primary-bounty.md`**, **`docs/briefs/startup-state-reuse.md`** for GOED Part 2 product context
+- **`docs/briefs/goed-opportunity-finder.md`**, **`docs/primary-bounty.md`** for GOED Part 2 product context
 - **`docs/decision-log.md`** for locked decisions (not live priorities)
 - **`docs/adr/`** when it exists — read ADRs that touch the area you're about to work in
 

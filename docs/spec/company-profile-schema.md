@@ -2,7 +2,7 @@
 
 **Status: LOCKED** — HITL grilling complete (rounds 1–3). See [Company profile schema](https://github.com/craigcossairt/startup-state-2/issues/8).
 
-Spec for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not the Part 1 six-field Persona.
+Spec for the Company profile object used by Intake, infer, retrieve, rank, and the five official fixtures. Not a leftover six-field Persona.
 
 ## Grilling decisions
 
@@ -10,7 +10,7 @@ Spec for the Company profile object used by Intake, infer, retrieve, rank, and t
 
 - **Must-have (infer or ask):** what they do, tech, location (country + state), employees, revenue, capital raised, capital need, use of funds.
 - **Infer-if-present (never block):** stage, R&D intensity, product maturity, customers.
-- **Not Part 1 Persona.** Some fields are binary; others are fuzzy ranges.
+- **Not a leftover Persona.** Some fields are binary; others are fuzzy ranges.
 
 ### Round 2 (types and semantics)
 
@@ -341,6 +341,6 @@ Store runtime copies under `data/fixtures/company-profile.fixture-*.json` when t
 
 ## What this schema is not
 
-- Not Part 1 `Persona` (six fields, topic weights).
+- Not a leftover `Persona` (six fields, topic weights).
 - Not an eligibility checklist.
 - Not a persisted user account (session / fixture only for the weekend POC).

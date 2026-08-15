@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { filterStartupsForList, loadAdminOperations } from "./admin-operations";
 import { parseStartupList } from "./catalog/parse";
 
-describe("Part 1 admin operations", () => {
+describe("admin operations", () => {
   it("loads Bloom pending, two claims, and three outreach lists", () => {
     const ops = loadAdminOperations();
     expect(ops.pending.map((row) => row.name)).toEqual(["Bloom"]);

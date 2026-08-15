@@ -1,7 +1,7 @@
 # GOED / Startup State — Government Opportunity Finder
 
 Source: [startupstate-hackathon-brief.lovable.app](https://startupstate-hackathon-brief.lovable.app/?utm_source=luma)
-Pulled 2026-08-12. Prize $5,000 (confirmed separately). This is not the Part 1 Navigator + Utah Startup Map brief.
+Pulled 2026-08-12. Prize $5,000 (confirmed separately). This is the GOED Opportunity Finder brief.
 
 ## The ask
 

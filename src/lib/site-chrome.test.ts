@@ -40,7 +40,7 @@ function walkSrcFiles(dir = path.join(root, "src")): string[] {
   return out;
 }
 
-describe("Part 1 site chrome import fences", () => {
+describe("leftover site chrome import fences", () => {
   it("keeps official footer copy free of em dashes and admin easter eggs", () => {
     expect(FOOTER_CONNECT_EYEBROW).toBe("Let's connect");
     expect(FOOTER_OFFICIAL_LINE).toBe("An official state of Utah website");
@@ -90,7 +90,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(footer).toContain("w-[10.5rem]");
   });
 
-  it("gives Intake the Part 1 topographic hero and welcome-back banner", () => {
+  it("gives Intake the leftover topographic hero and welcome-back banner", () => {
     const intake = read("src/components/intake.tsx");
     expect(intake).toContain("topography-tile.webp");
     expect(intake).toContain("WelcomeBack");
@@ -98,7 +98,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(INTAKE_HERO).toBe("Tell us about your company.");
   });
 
-  it("keeps the Part 1 Events outbound link", () => {
+  it("keeps the leftover Events outbound link", () => {
     const nav = read("src/components/nav.tsx");
     expect(nav).toContain(
       "https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732",
@@ -109,7 +109,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(nav).not.toContain("Economic Opportunity");
   });
 
-  it("shows leftover links at laptop width the way Part 1 does", () => {
+  it("shows leftover links at laptop width", () => {
     const nav = read("src/components/nav.tsx");
     expect(nav).toContain("max-w-[1400px]");
     expect(nav).toMatch(/\bmd:flex\b/);
@@ -137,7 +137,7 @@ describe("Part 1 site chrome import fences", () => {
   });
 });
 
-describe("Part 1 brand assets in git", () => {
+describe("leftover brand assets in git", () => {
   it("commits the official lockups the nav and footer already name", () => {
     const required = [
       "public/brand/ss-horiz-color.png",

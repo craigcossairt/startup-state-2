@@ -13,7 +13,7 @@ import { loadCompanyFixture, FIXTURE_IDS } from "@/lib/profile/load-fixture";
 import type { CatalogResource } from "./types";
 
 describe("leftover test cases", () => {
-  it("uses the five Part 2 fixtures, not Part 1 demo people", () => {
+  it("uses the five Part 2 fixtures, not leftover demo people", () => {
     expect(FIXTURE_CHIPS.map((chip) => chip.id)).toEqual(FIXTURE_IDS);
     expect(parseLeftoverFixtureId("fixture-3")).toBe("fixture-3");
     expect(parseLeftoverFixtureId("jordan")).toBeNull();

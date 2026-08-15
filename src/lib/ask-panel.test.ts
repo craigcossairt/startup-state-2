@@ -19,7 +19,7 @@ import {
 } from "@/lib/ask-panel";
 
 describe("Ask panel", () => {
-  it("docks above the last footer the way Part 1 does after the short-page bug", () => {
+  it("docks above the last footer after the short-page bug", () => {
     expect(
       dockFabAboveFooter({
         footerTop: 900,

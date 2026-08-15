@@ -14,7 +14,7 @@ describe("SITE_NAV", () => {
     ]);
   });
 
-  it("keeps the footer legal band to Part 1 density plus GOED admin", () => {
+  it("keeps the footer legal band to leftover density plus GOED admin", () => {
     expect(FOOTER_LEGAL_LINKS.map((item) => [item.href, item.label])).toEqual([
       ["https://utah.gov", "Utah.gov"],
       ["/", "Home"],

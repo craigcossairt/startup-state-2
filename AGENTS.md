@@ -8,7 +8,7 @@
 ## Project
 
 - **Name:** Startup State 2
-- **What it is:** GOED Government Opportunity Finder for AI Builder Day Part 2 (Aug 14-15 2026). One intake, one map, Federal + Utah lanes. New app wearing Startup State brand. Not a fork of craigcossairt/startup-state.
+- **What it is:** GOED Government Opportunity Finder for AI Builder Day Part 2 (Aug 14-15 2026). One intake, one map, Federal + Utah lanes. New app wearing Startup State brand.
 - **Owner:** Craig Cossairt - craig@bloom.date
 - For the owner's background and working style, see `docs/about-me.md`
 
@@ -37,7 +37,7 @@ If no, it goes in the issue tracker, not here.
 
 ## Tech Stack
 
-Prefer the stack that already shipped the Part 1 Startup State demo, unless something is clearly faster.
+Prefer the stack already in this repo, unless something is clearly faster.
 
 | Layer | Technology |
 |---|---|
@@ -71,7 +71,7 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 ├── supabase/                # leftover catalog schema, public read only
 ├── docs/
 │   ├── primary-bounty.md    # why GOED, weekend slice
-│   ├── briefs/              # official GOED brief + reuse note
+│   ├── briefs/              # official GOED brief
 │   ├── spec/                # locked product spec
 │   ├── common-gotchas.md
 │   ├── decision-log.md

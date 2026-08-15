@@ -73,7 +73,7 @@ export const FIT_HEADING = "Fit";
 export const FIT_HELP =
   "Narrows the ranked set already on the page. No new search.";
 
-export const DIRECTORY_LABEL = "Include GOEO directory";
+export const DIRECTORY_LABEL = "Include GOED directory";
 
 export const DIRECTORY_HELP =
   "About 180 leftover rows. Retrieve stays capped near 50 ids.";

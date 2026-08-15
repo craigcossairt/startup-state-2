@@ -1,0 +1,13 @@
+ts	phase	decision	why	evidence	result
+2026-08-15T18:41:32Z	frame	Scoped cleanup to dead assets docs scripts metadata not leftover product routes	Deletion is reversible; leftover playbook etc are intentional Part 1 ports	gh repo view homepageUrl lovable brief; public/*.svg zero refs	predicate set
+2026-08-15T18:41:48Z	delete	Removed next placeholders unused brand dupes stale import-fences script and two template docs	Zero inbound refs; import-fences contradicts shipped Tyler card	scripts/verify-cleanup-refs.sh	cleanup refs ok
+2026-08-15T18:42:23Z	delete	Removed unused admin-snapshot module and its test	Superseded by admin-operations; no production importers	rg buildAdminSnapshot only self+test	deleted
+2026-08-15T18:42:42Z	docs	Refreshed README about-me package.json layout metadata; noted GitHub About fields gh cannot write	Repo About homepage pointed at lovable brief; layout title said Opportunity Map only	gh repo view; src/app/layout.tsx	updated in-repo; GitHub About still needs human
+2026-08-15T18:43:13Z	verify	pnpm test 188 green after cleanup; build blocked on Google font fetch in this VM	Prove deletions against tests and cleanup lever	pnpm test; scripts/verify-cleanup-refs.sh	tests VERIFIED; build INCONCLUSIVE env fonts
+2026-08-15T18:47:58Z	fixup	Removed agent-session About blurb from README; decision-log now says GitHub About still needs a human	Cross-model review: product README should not describe a one-run token limit	claude-opus review Attention	fixed
+2026-08-15T18:47:58Z	keep	Kept scripts/run-judged-rank.ts despite zero importers	Manual npx tsx judging CLI; zero refs is expected for a one-shot lever	scripts/run-judged-rank.ts	kept; must_keep in verify script
+2026-08-15T18:47:58Z	verify	npx tsc --noEmit passes; layout and map/home metadata typecheck offline	Build was blocked on Google fonts; tsc covers the metadata rewrite	npx tsc --noEmit	VERIFIED
+2026-08-15T18:47:58Z	docs	Map and Intake pages set their own titles; root default is Startup State Opportunity Finder	Avoid bare /map title after root metadata template change	src/app/map/page.tsx src/app/page.tsx	updated
+2026-08-15T18:49:18Z	followup	Deleted dead /api/bonus surfaces checklist; fixed supabase README CONTEXT DIRECTORY_LABEL footer UA	Inventory agents found zero-importer bonus route after first sweep	bc-6dce442e inventory; bc-291d0d57 about	pending verify
+2026-08-15T18:49:48Z	verify	pnpm test 186 green; tsc clean after clearing .next stale bonus route types	Follow-up deletes proved	pnpm test; npx tsc --noEmit	VERIFIED
+2026-08-15T19:05:49Z	submit	Set GitHub homepage to live app, made repo public, stripped prior-app Part 1 wording	Submission needs public repo pointing at the demo not the brief	gh repo view homepageUrl visibility	public; homepage live app

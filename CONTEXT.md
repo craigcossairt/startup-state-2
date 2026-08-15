@@ -37,7 +37,7 @@ Required core. Open list is Grants.gov. SAM Assistance Listings (cache) join ont
 _Avoid_: every agency, the full federal government, treating SAM or USAspending as live NOFOs
 
 **State lane**:
-Local programs for a Jurisdiction. There is no official Utah opportunity API. This demo uses the Part 1 GOEO table (up to the full 213) with categorization and filtering, plus any curated official program cards we lock. A company outside Utah can still match a Utah program when the program allows it; most will not.
+Local programs for a Jurisdiction. There is no official Utah opportunity API. This demo uses the committed GOEO table (up to the full 213) with categorization and filtering, plus any curated official program cards we lock. A company outside Utah can still match a Utah program when the program allows it; most will not.
 _Avoid_: Utah lane, Playbook, dumping the whole catalog unfiltered, inventing a Utah Grants.gov
 
 **Jurisdiction**:
@@ -66,12 +66,12 @@ _Avoid_: dumping the catalog, using source `Funding` as a retrieve key
 
 **Fixture**:
 One of the five official test companies in the brief. Case 5 may have no strong federal grant.
-_Avoid_: Jordan/Maria/Marcus/Priya/David/Amir (those were Part 1)
+_Avoid_: Jordan/Maria/Marcus/Priya/David/Amir (those were leftover demo people)
 
 **Nucleus**:
-GOEO’s current SBIR/STTR help desk. Part 1 catalog name: Utah Innovation Center.
+GOEO’s current SBIR/STTR help desk. Earlier catalog name: Utah Innovation Center.
 _Avoid_: treating campus “Innovation Centers” as this program
 
-**Part 1 app**:
-craigcossairt/startup-state. Anything that does not conflict with the Part 2 brief may be copied, including extras that show future vision. Conflicts: Playbook or a geo map as the product, last year's six personas as the judged set, topic-weight matching as the ranker, inventing programs. Leftover siblings (Playbook, Resources, Startups, Careers, News, Swag) sit beside Intake. `/map` stays the Opportunity Map.
-_Avoid_: treating the five-surface app as this product, redirecting `/map` to a geo plot
+**Leftover siblings**:
+Playbook, Resources, Startups, Careers, News, Swag, Claim, and `/admin` sit beside Intake. `/map` stays the Opportunity Map. Do not treat leftover pages as the product. Conflicts with the Part 2 brief: Playbook or a geo map as the product, last year's six personas as the judged set, topic-weight matching as the ranker, inventing programs.
+_Avoid_: treating leftover surfaces as this product, redirecting `/map` to a geo plot

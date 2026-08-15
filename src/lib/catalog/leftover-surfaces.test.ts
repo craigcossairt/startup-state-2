@@ -50,7 +50,7 @@ describe("leftover surfaces", () => {
     expect(fab).toContain("dockFabAboveFooter");
   });
 
-  it("ports the Part 1 startups map, careers filters, and playbook roadmap", () => {
+  it("ports the leftover startups map, careers filters, and playbook roadmap", () => {
     const startups = readFileSync(path.join(root, "src/app/startups/page.tsx"), "utf8");
     const careers = readFileSync(path.join(root, "src/app/careers/page.tsx"), "utf8");
     const playbook = readFileSync(path.join(root, "src/app/playbook/page.tsx"), "utf8");
@@ -69,7 +69,7 @@ describe("leftover surfaces", () => {
     expect(playbook).not.toMatch(/\bGOEO\b/);
   });
 
-  it("ports Part 1 playbook progress, resource ranking chrome, and leftover polish", () => {
+  it("ports leftover playbook progress, resource ranking chrome, and leftover polish", () => {
     const playbook = readFileSync(path.join(root, "src/app/playbook/page.tsx"), "utf8");
     const stage = readFileSync(path.join(root, "src/app/playbook/[stage]/page.tsx"), "utf8");
     const step = readFileSync(path.join(root, "src/app/playbook/[stage]/[step]/page.tsx"), "utf8");

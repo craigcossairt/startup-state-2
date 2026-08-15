@@ -34,7 +34,7 @@ describe("Intake copy", () => {
     expect(INTAKE_WHAT_THEY_DO_HINT).not.toMatch(/—/);
   });
 
-  it("keeps those strings on the Intake surface and out of Part 1 leftovers", () => {
+  it("keeps those strings on the Intake surface and out of leftover pages", () => {
     const intake = readFileSync(
       path.join(process.cwd(), "src", "components", "intake.tsx"),
       "utf8",

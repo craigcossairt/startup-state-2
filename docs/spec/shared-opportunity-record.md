@@ -29,7 +29,7 @@ Language: `CONTEXT.md`.
 
 ## Why the split
 
-Part 1 flattened a directory row and a score onto one `ScoredResource`. Alerts, a graph, and a 12-month list need a listing that still exists when the Company profile changes. Fit does not. Two types keep the weekend map as one JSON list and leave a stable id for later bonuses.
+An earlier catalog flattened a directory row and a score onto one `ScoredResource`. Alerts, a graph, and a 12-month list need a listing that still exists when the Company profile changes. Fit does not. Two types keep the weekend map as one JSON list and leave a stable id for later bonuses.
 
 ## TypeScript reference
 
@@ -99,7 +99,7 @@ The Opportunity Map payload is `RankedCard[]`. Length 8–12 on the default view
 | Source | `id` example | `nativeId` | Also store |
 | --- | --- | --- | --- |
 | Grants.gov search2 | `grants_gov:359671` | integer `id` (required by `fetchOpportunity`) | `opportunityNumber` (`PA-27-100`) as display, not the id |
-| GOEO table | `goeo:2543` | WP export `external_id` (unique on all 213 in the Part 1 snapshot) | — |
+| GOEO table | `goeo:2543` | WP export `external_id` (unique on all 213 in the committed snapshot) | — |
 | Curated official card | `curated:nucleus-utif` | slug we assign | — |
 
 Adapters mint `id` as `` `${source}:${nativeId}` ``. Rank may only emit these ids. Server drops any rank id that is not in the retrieved set.

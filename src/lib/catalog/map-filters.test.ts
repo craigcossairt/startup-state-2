@@ -46,7 +46,7 @@ const startups: CatalogStartup[] = [
 ];
 
 describe("startup map filters", () => {
-  it("round-trips URL filters and keeps hiring-only as a Part 1 map control", () => {
+  it("round-trips URL filters and keeps hiring-only as a leftover map control", () => {
     const params = new URLSearchParams(
       "sector=Software&stage=SeriesA&region=Wasatch Front&revenue=$1M-$10M&hiring=true&startup=hire-me",
     );
