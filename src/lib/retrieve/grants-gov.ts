@@ -23,7 +23,6 @@ type GrantsGovSearchResponse = {
 };
 
 const SEARCH2_URL = "https://api.grants.gov/v1/api/search2";
-const SMALL_BUSINESS_ELIGIBILITY = "23";
 
 export function parseUsDate(value: string | undefined): string | null {
   if (!value) return null;
@@ -82,12 +81,11 @@ export async function searchGrantsGovLive(
   fetchImpl: typeof fetch = fetch,
 ): Promise<Opportunity[]> {
   const bodies = [
-    { keyword, rows: 25, oppStatuses: "forecasted|posted", eligibilities: SMALL_BUSINESS_ELIGIBILITY },
+    { keyword, rows: 25, oppStatuses: "forecasted|posted" },
     {
       keyword: `SBIR ${keyword}`.slice(0, 200).trim(),
       rows: 25,
       oppStatuses: "forecasted|posted",
-      eligibilities: SMALL_BUSINESS_ELIGIBILITY,
     },
   ];
   const seen = new Set<string>();
