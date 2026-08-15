@@ -1,4 +1,4 @@
-import { FIXTURE_IDS } from "@/lib/profile/load-fixture";
+import { FIXTURE_CHIPS } from "@/lib/copy";
 import type { CompanyProfile, FixtureId } from "@/lib/types/company-profile";
 import type { CatalogResource } from "./types";
 
@@ -6,7 +6,7 @@ export const LEFTOVER_FIXTURE_STORAGE_KEY = "leftover-fixture";
 
 export function parseLeftoverFixtureId(value: string | null | undefined): FixtureId | null {
   if (!value) return null;
-  return FIXTURE_IDS.includes(value as FixtureId) ? (value as FixtureId) : null;
+  return FIXTURE_CHIPS.some((chip) => chip.id === value) ? (value as FixtureId) : null;
 }
 
 export function leftoverFixtureHref(pathname: string, id: FixtureId): string {

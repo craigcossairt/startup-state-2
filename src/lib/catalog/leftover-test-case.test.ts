@@ -90,4 +90,17 @@ describe("leftover test cases", () => {
       /jordan|maria|marcus|priya|david|amir/i,
     );
   });
+
+  it("keeps leftover helpers off the fixture file loader so the chip bar can run in the browser", () => {
+    const helper = readFileSync(
+      path.join(process.cwd(), "src/lib/catalog/leftover-test-case.ts"),
+      "utf8",
+    );
+    const bar = readFileSync(
+      path.join(process.cwd(), "src/components/catalog/leftover-test-case-bar.tsx"),
+      "utf8",
+    );
+    expect(helper).not.toMatch(/load-fixture|node:fs/);
+    expect(bar).not.toMatch(/load-fixture|node:fs/);
+  });
 });
