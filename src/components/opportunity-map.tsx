@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FixtureRail } from "@/components/fixture-rail";
 import { MapFilterBar } from "@/components/map-filter-bar";
@@ -97,6 +97,7 @@ export function OpportunityMap({
   const [newCount, setNewCount] = useState(0);
   const [chipsReady, setChipsReady] = useState(false);
   const [restored, setRestored] = useState(false);
+  const bypassCacheRef = useRef(false);
 
   const chips: RetrieveChips = {
     lane: appliedLane === "all" ? undefined : appliedLane,
@@ -155,7 +156,9 @@ export function OpportunityMap({
     let cancelled = false;
     async function rank() {
       try {
-        const cached = loadCachedMap(profile, chips);
+        const allowCache = !bypassCacheRef.current;
+        bypassCacheRef.current = false;
+        const cached = allowCache ? loadCachedMap(profile, chips) : null;
         if (cached) {
           if (cancelled) return;
           setPayload(cached.payload);
@@ -236,9 +239,11 @@ export function OpportunityMap({
   }, [chipsReady, searchKey, appliedLane, appliedKeys.join("|"), appliedDirectory, rankNonce]);
 
   useEffect(() => {
-    const onCommit = () => {
-      const next = loadStoredProfile();
+    const onCommit = (event: Event) => {
+      const detail = (event as CustomEvent<{ profile?: CompanyProfile }>).detail;
+      const next = detail?.profile ?? loadStoredProfile();
       if (!next) return;
+      bypassCacheRef.current = true;
       setCompany(next);
       setRankNonce((n) => n + 1);
     };
@@ -295,6 +300,7 @@ export function OpportunityMap({
     setAppliedLane(lane);
     setAppliedKeys(extraKeys);
     setAppliedDirectory(directory);
+    bypassCacheRef.current = true;
     if (!dirty) setRankNonce((value) => value + 1);
   }
 
@@ -452,6 +458,7 @@ export function OpportunityMap({
                 type="button"
                 onClick={() => {
                   setRestored(false);
+                  bypassCacheRef.current = true;
                   setRankNonce((value) => value + 1);
                 }}
                 className="ml-auto bg-transparent p-0 text-[13px] font-bold text-vibrant-green"

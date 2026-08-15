@@ -72,4 +72,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 
 - **2026-08-15** - Repo is public for submission. GitHub About website is https://startup-state-2.vercel.app. Docs and tests no longer name the prior Startup State app. See PR #43.
 
-- **2026-08-15** - Company profile editing lives in the YouBar expand slot. Apply writes leftover persona and, on /map, `commitProfile`. Map fixture load is separate from re-rank so a commit cannot be overwritten by `resolveProfile(fixture)`. See this PR.
+- **2026-08-15** - Company profile editing lives in the YouBar expand slot. Apply writes leftover persona and, on /map, `commitProfile` with the profile in the event detail. Map fixture load is separate from re-rank. User Apply and Rank again set `bypassCacheRef` so a matching `loadCachedMap` cannot no-op the fresh run. Persona URL writes keep an active rail `?fixture=`. See this PR.

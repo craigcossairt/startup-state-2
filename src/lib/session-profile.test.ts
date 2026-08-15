@@ -76,11 +76,12 @@ describe("saveProfile vs commitProfile", () => {
     expect(commits).toBe(0);
   });
 
-  it("commitProfile writes then fires PROFILE_COMMITTED_EVENT", () => {
+  it("commitProfile writes then fires PROFILE_COMMITTED_EVENT with the profile in detail", () => {
     const profile = loadCompanyFixture("fixture-2");
     const seen: CompanyLike[] = [];
-    shims.target.addEventListener(PROFILE_COMMITTED_EVENT, () => {
-      seen.push(loadStoredProfile() as CompanyLike);
+    shims.target.addEventListener(PROFILE_COMMITTED_EVENT, (event) => {
+      const detail = (event as CustomEvent<{ profile?: CompanyLike }>).detail;
+      seen.push(detail.profile as CompanyLike);
     });
 
     commitProfile(profile);

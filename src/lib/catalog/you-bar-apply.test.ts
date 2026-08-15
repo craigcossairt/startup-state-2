@@ -14,6 +14,7 @@ import {
   YOU_STORAGE_KEY,
   EMPTY_YOU_PERSONA,
   FIXTURE_PERSONAS,
+  personaToParams,
   type YouPersona,
 } from "@/lib/catalog/you-persona";
 import {
@@ -23,6 +24,7 @@ import {
   neededMustHaves,
   persistBarApply,
   prepareBarApply,
+  withPreservedRailFixture,
   youBarStrip,
 } from "./you-bar-apply";
 
@@ -252,6 +254,55 @@ describe("prepareBarApply", () => {
     });
     expect(verdict.persona.sector).toBe("FinTech");
   });
+  it("blocks blank string and empty array must-have values even after promote", () => {
+    const profile = {
+      ...loadCompanyFixture("fixture-1"),
+      whatTheyDo: { status: "missing" as const, value: "   " },
+      technologies: { status: "missing" as const, value: [] as string[] },
+    };
+    const verdict = prepareBarApply({
+      mode: "dual",
+      persona: healthcare,
+      profile,
+    });
+    expect(verdict.status).toBe("blocked");
+    if (verdict.status !== "blocked") throw new Error("expected blocked");
+    expect(verdict.missing).toEqual(expect.arrayContaining(["whatTheyDo", "technologies"]));
+  });
+
+  it("treats a finite zero dollar amount as filled", () => {
+    const base = loadCompanyFixture("fixture-1");
+    const profile = {
+      ...base,
+      capitalRaisedUsd: { status: "missing" as const, value: 0 },
+    };
+    const verdict = prepareBarApply({
+      mode: "dual",
+      persona: healthcare,
+      profile,
+    });
+    expect(verdict.status).toBe("ready");
+    if (verdict.status !== "ready" || verdict.mode !== "dual") {
+      throw new Error("expected ready dual");
+    }
+    expect(verdict.profile.capitalRaisedUsd).toEqual({ status: "known", value: 0 });
+  });
+});
+
+describe("withPreservedRailFixture", () => {
+  it("keeps an active map fixture when persona params omit it", () => {
+    const params = personaToParams({ ...healthcare, fixtureId: null });
+    expect(params.get("fixture")).toBeNull();
+    withPreservedRailFixture(params, "fixture-3");
+    expect(params.get("fixture")).toBe("fixture-3");
+  });
+
+  it("does not overwrite a fixture already on the persona params", () => {
+    const params = personaToParams(healthcare);
+    expect(params.get("fixture")).toBe("fixture-1");
+    withPreservedRailFixture(params, "fixture-3");
+    expect(params.get("fixture")).toBe("fixture-1");
+  });
 });
 
 describe("appliedProfileNeedsLiveRank", () => {
@@ -302,8 +353,12 @@ describe("persistBarApply", () => {
   it("writes persona then commitProfile on dual apply", () => {
     const profile = loadCompanyFixture("fixture-1");
     const events: string[] = [];
+    const committed: unknown[] = [];
     shims.target.addEventListener(YOU_CHANGED_EVENT, () => events.push("you"));
-    shims.target.addEventListener(PROFILE_COMMITTED_EVENT, () => events.push("commit"));
+    shims.target.addEventListener(PROFILE_COMMITTED_EVENT, (event) => {
+      events.push("commit");
+      committed.push((event as CustomEvent<{ profile?: unknown }>).detail?.profile);
+    });
 
     persistBarApply(
       { status: "ready", mode: "dual", persona: healthcare, profile },
@@ -312,6 +367,7 @@ describe("persistBarApply", () => {
 
     expect(events).toEqual(["you", "commit"]);
     expect(loadStoredProfile()).toEqual(profile);
+    expect(committed).toEqual([profile]);
   });
 });
 

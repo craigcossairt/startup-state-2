@@ -11,6 +11,7 @@ import {
   persistBarApply,
   prepareBarApply,
   toggleSourceFromEvent,
+  withPreservedRailFixture,
   youBarStrip,
   YOU_BAR_TOGGLE_EVENT,
   type BarDraft,
@@ -67,7 +68,11 @@ export function YouBar() {
     if (!stored) return;
     setPersona(stored);
     setFilled(true);
-    router.replace(`${pathname}?${personaToParams(stored).toString()}`, { scroll: false });
+    const params = withPreservedRailFixture(
+      personaToParams(stored),
+      parseLeftoverFixtureId(new URLSearchParams(window.location.search).get("fixture")),
+    );
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }, []);
 
   useEffect(() => {
@@ -100,7 +105,8 @@ export function YouBar() {
   function replacePersonaUrl(next: YouPersona) {
     setPersona(next);
     setFilled(true);
-    router.replace(`${pathname}?${personaToParams(next).toString()}`, { scroll: false });
+    const params = withPreservedRailFixture(personaToParams(next), fixtureId);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   function toggleSlot(source: YouBarOpenSource) {

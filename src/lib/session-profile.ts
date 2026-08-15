@@ -21,5 +21,7 @@ export function loadStoredProfile(): CompanyProfile | null {
 
 export function commitProfile(profile: CompanyProfile): void {
   saveProfile(profile);
-  window.dispatchEvent(new CustomEvent(PROFILE_COMMITTED_EVENT));
+  window.dispatchEvent(
+    new CustomEvent(PROFILE_COMMITTED_EVENT, { detail: { profile } }),
+  );
 }

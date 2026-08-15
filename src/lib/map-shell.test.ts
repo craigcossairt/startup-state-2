@@ -72,9 +72,17 @@ describe("Opportunity Map shell", () => {
     expect(map).not.toMatch(/\[chipsReady, fixture,[\s\S]*rankNonce/);
     const commitAt = map.indexOf("addEventListener(PROFILE_COMMITTED_EVENT");
     expect(commitAt).toBeGreaterThan(-1);
-    const commitBlock = map.slice(Math.max(0, commitAt - 420), commitAt + 180);
-    expect(commitBlock).toContain("loadStoredProfile");
+    const commitBlock = map.slice(Math.max(0, commitAt - 420), commitAt + 280);
+    expect(commitBlock).toContain("detail?.profile");
+    expect(commitBlock).toContain("bypassCacheRef.current = true");
     expect(commitBlock).toContain("setRankNonce");
     expect(commitBlock).not.toContain("resolveProfile");
+  });
+
+  it("bypasses the session map cache on user commit and Rank again", () => {
+    const map = read("src/components/opportunity-map.tsx");
+    expect(map).toContain("bypassCacheRef");
+    expect(map).toContain("allowCache ? loadCachedMap");
+    expect(map).toMatch(/bypassCacheRef\.current = true[\s\S]*setRankNonce/);
   });
 });

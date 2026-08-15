@@ -10,7 +10,12 @@ import {
 } from "@/lib/profile/must-haves";
 import { profileCacheKey } from "@/lib/session-map";
 import { commitProfile } from "@/lib/session-profile";
-import type { CompanyProfile, FixtureId, MustHaveKey } from "@/lib/types/company-profile";
+import {
+  MUST_HAVE_KEYS,
+  type CompanyProfile,
+  type FixtureId,
+  type MustHaveKey,
+} from "@/lib/types/company-profile";
 
 export type BarDraft =
   | { mode: "persona"; persona: YouPersona }
@@ -62,12 +67,39 @@ export function beginYouBarDraft(input: {
   return { mode: "persona", persona: input.persona };
 }
 
+export function hasMustHaveValue(value: unknown): boolean {
+  if (value === undefined || value === null) return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (typeof value === "number") return Number.isFinite(value);
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === "object") {
+    if ("amountUsd" in value) {
+      return Number.isFinite((value as { amountUsd: number }).amountUsd);
+    }
+    if ("minUsd" in value && "maxUsd" in value) {
+      const range = value as { minUsd: number; maxUsd: number };
+      return Number.isFinite(range.minUsd) && Number.isFinite(range.maxUsd);
+    }
+    if ("min" in value && "max" in value) {
+      const range = value as { min: number; max: number };
+      return Number.isFinite(range.min) && Number.isFinite(range.max);
+    }
+  }
+  return true;
+}
+
+export function emptyMustHaveValues(profile: CompanyProfile): MustHaveKey[] {
+  return MUST_HAVE_KEYS.filter((key) => !hasMustHaveValue(profile[key].value));
+}
+
 export function prepareBarApply(draft: BarDraft): BarApplyVerdict {
   if (draft.mode === "persona") {
     return { status: "ready", mode: "persona", persona: draft.persona };
   }
   const ready = confirmInferredMustHaves(promoteFilledMustHaves(draft.profile));
-  const missing = missingMustHaves(ready);
+  const missing = [
+    ...new Set([...missingMustHaves(ready), ...emptyMustHaveValues(ready)]),
+  ];
   if (missing.length > 0) return { status: "blocked", missing };
   return { status: "ready", mode: "dual", persona: draft.persona, profile: ready };
 }
@@ -106,4 +138,15 @@ export function appliedProfileNeedsLiveRank(
 export function toggleSourceFromEvent(event: Event): YouBarOpenSource {
   const source = (event as CustomEvent<{ source?: YouBarOpenSource }>).detail?.source;
   return source === "map-hero" ? "map-hero" : "strip";
+}
+
+/** Keep an active map rail `?fixture=` when persona params would otherwise drop it. */
+export function withPreservedRailFixture(
+  params: URLSearchParams,
+  railFixture: FixtureId | null | undefined,
+): URLSearchParams {
+  if (railFixture && !params.get("fixture")) {
+    params.set("fixture", railFixture);
+  }
+  return params;
 }
