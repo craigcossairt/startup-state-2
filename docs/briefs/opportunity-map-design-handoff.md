@@ -163,7 +163,8 @@ Youth marketplace (honest-no) is the reading that trips this.
 - Ranking programs by fit
 - Attaching similar awards
 
-Listings may appear after retrieve with program, agency, and lane known, before Fit, why, concerns, and history are ready. That in-progress state is `Ranking by fit`.
+Listings appear only after each card's Fit, why, concerns, and history are ready.
+ProgressStatus covers retrieve and rank; empty placeholder shells stay off the list.
 
 **Ready.** 8 to 12 Ranked cards, best Fit first. Floor notice only when the rule above trips.
 

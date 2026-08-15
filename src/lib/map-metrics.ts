@@ -85,46 +85,14 @@ function addDays(date: Date, days: number): Date {
   return next;
 }
 
+export type RankProgressStage = "retrieve" | "rank" | "history";
+
 export type RetrievedPreview = {
   id: string;
   program: string;
   lane: "federal" | "state";
   agency: string;
 };
-
-export function pendingCardsFromPreviews(
-  previews: RetrievedPreview[],
-): OpportunityMapPayload["cards"] {
-  return previews.map((row) => {
-    const [source, ...rest] = row.id.split(":");
-    return {
-      ranking: true,
-      opportunity: {
-        id: row.id as OpportunityMapPayload["cards"][number]["opportunity"]["id"],
-        source: source as OpportunityMapPayload["cards"][number]["opportunity"]["source"],
-        nativeId: rest.join(":"),
-        lane: row.lane,
-        jurisdiction: row.lane === "state" ? "UT" : null,
-        instrument: "other",
-        status: "posted",
-        program: row.program,
-        agency: { name: row.agency },
-        value: null,
-        deadline: null,
-        url: null,
-        aln: [],
-        description: null,
-      },
-      fit: "adjacent",
-      why: "",
-      concerns: [],
-      nextStep: { label: "Ranking by fit" },
-      similarAwardees: [],
-    };
-  });
-}
-
-export type RankProgressStage = "retrieve" | "rank" | "history";
 
 export type RankStreamEvent =
   | { type: "progress"; stage: RankProgressStage; message: string }
