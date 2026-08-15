@@ -19,6 +19,8 @@ export const FLOOR_BANNER =
 
 export const NOT_PUBLISHED = "Not published";
 
+export const NONE_ATTACHED = "None attached";
+
 export const TEST_CASES_LABEL = "Test cases";
 
 export const FIXTURE_CHIPS: { id: FixtureId; label: string }[] = [
