@@ -61,10 +61,10 @@ describe("persona resource matching", () => {
 
 describe("persona map filtering", () => {
   it("keeps grant cards ahead of counseling when the goal is Find funding", () => {
-    const grant = card("grant:1", "grant", "Utah SBIR matching grant");
+    const grant = card("grants_gov:1", "grant", "Utah SBIR matching grant");
     const counsel = card("goeo:2", "counseling", "Free mentoring hour");
     expect(filterRankedCards([counsel, grant], applyTestCase("fixture-1")).map((row) => row.opportunity.id)).toEqual([
-      "grant:1",
+      "grants_gov:1",
     ]);
   });
 });
