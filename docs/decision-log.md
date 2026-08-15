@@ -65,3 +65,5 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - `/swag` ships the 16 grok product shots, not the Part 1 nine-item webp set. `SWAG_ITEMS` stays the table. See this PR.
 - **2026-08-15** - Leftover Careers and the home hiring KPI use the Part 1 30-company hiring set from the committed catalog. Live Supabase rows get those flags overlaid. Production apply updates `is_hiring` on existing slugs. See this PR.
 - **2026-08-15** - `/admin` matches the Part 1 Operations page: pending submissions, claim queue, outreach lists, saved-search subscribers, audit log, green-circle icons, and the Tyler card. Queue rows come from `data/catalog/admin-operations.json` plus catalog-derived audit creates. Approve/Reject is not wired. See this PR. Supersedes the same-day note that shipped admin without Tyler or queue data.
+
+- **2026-08-15** - Repo cleanup: drop create-next-app public SVGs, unused brand duplicates, stale import-fences script, template docs, and unused admin-snapshot. README, About notes, package homepage/repository, and root metadata match the live Opportunity Finder. See this PR.

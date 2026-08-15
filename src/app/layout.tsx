@@ -29,9 +29,12 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Startup State Opportunity Map",
+  title: {
+    default: "Startup State",
+    template: "%s · Startup State",
+  },
   description:
-    "Tell us about your company. See federal and Utah programs that fit, with a why.",
+    "GOED Government Opportunity Finder. Tell us about your company. See federal and Utah programs that fit, with a why.",
 };
 
 export default function RootLayout({

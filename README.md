@@ -1,6 +1,6 @@
 # Startup State 2
 
-GOED Government Opportunity Finder. A founder describes a company and gets federal and Utah programs ranked by fit, with a why.
+GOED Government Opportunity Finder for AI Builder Day Part 2. A founder describes a company and gets federal and Utah programs ranked by fit, with a why. New app wearing the Startup State brand.
 
 Live: https://startup-state-2.vercel.app
 
@@ -10,7 +10,7 @@ This is not a fork of [craigcossairt/startup-state](https://github.com/craigcoss
 
 - `/` Intake. One sentence or a fixture click, then infer, then missing fields.
 - `/map` Opportunity Map. Ranked cards. Fit language only. Never eligible.
-- Leftover siblings from Part 1 sit beside Intake: Playbook, Resources, Startups, Careers, News, Swag.
+- Leftover siblings from Part 1 sit beside Intake: Playbook, Resources, Startups, Careers, News, Swag, Claim, and `/admin` Operations.
 - Navigator FAB (Ask the Navigator, Startup State mark) answers from the ranked Opportunity Map, the 19 playbook steps, and leftover pages. Hidden on claim and admin.
 
 Home stays Intake. `/map` stays the Opportunity Map.
@@ -41,6 +41,14 @@ Project: [vercel.com/cossairt/startup-state-2](https://vercel.com/cossairt/start
 
 Public production URL: https://startup-state-2.vercel.app  
 Preview and `*.vercel.app` deployment URLs stay behind Vercel SSO.
+
+## GitHub About
+
+Set the repo About fields to match production (the API key on this agent cannot write them):
+
+- Description: `GOED Government Opportunity Finder for AI Builder Day Part 2`
+- Website: `https://startup-state-2.vercel.app`
+- Topics: `goed`, `utah`, `nextjs`, `opportunity-finder`
 
 ## Docs
 

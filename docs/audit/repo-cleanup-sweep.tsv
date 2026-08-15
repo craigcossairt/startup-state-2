@@ -1,0 +1,6 @@
+ts	phase	decision	why	evidence	result
+2026-08-15T18:41:32Z	frame	Scoped cleanup to dead assets docs scripts metadata not leftover product routes	Deletion is reversible; leftover playbook etc are intentional Part 1 ports	gh repo view homepageUrl lovable brief; public/*.svg zero refs	predicate set
+2026-08-15T18:41:48Z	delete	Removed next placeholders unused brand dupes stale import-fences script and two template docs	Zero inbound refs; import-fences contradicts shipped Tyler card	scripts/verify-cleanup-refs.sh	cleanup refs ok
+2026-08-15T18:42:23Z	delete	Removed unused admin-snapshot module and its test	Superseded by admin-operations; no production importers	rg buildAdminSnapshot only self+test	deleted
+2026-08-15T18:42:42Z	docs	Refreshed README about-me package.json layout metadata; noted GitHub About fields gh cannot write	Repo About homepage pointed at lovable brief; layout title said Opportunity Map only	gh repo view; src/app/layout.tsx	updated in-repo; GitHub About still needs human
+2026-08-15T18:43:13Z	verify	pnpm test 188 green after cleanup; build blocked on Google font fetch in this VM	Prove deletions against tests and cleanup lever	pnpm test; scripts/verify-cleanup-refs.sh	tests VERIFIED; build INCONCLUSIVE env fonts

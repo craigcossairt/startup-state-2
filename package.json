@@ -2,7 +2,12 @@
   "name": "startup-state-2",
   "version": "0.1.0",
   "private": true,
-  "description": "GOED Government Opportunity Finder. Federal and Utah programs ranked by fit.",
+  "description": "GOED Government Opportunity Finder for AI Builder Day Part 2. Federal and Utah programs ranked by fit.",
+  "homepage": "https://startup-state-2.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/craigcossairt/startup-state-2.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "node scripts/apply-catalog-schema.mjs && next build",

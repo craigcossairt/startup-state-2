@@ -32,8 +32,8 @@ Non-technical PM background, now a daily vibe-coder. Can read code, steer archit
 
 ## Current constraints
 
-- Full-time on Bloom. This is a hackathon weekend, not a new company.
+- Full-time on Bloom. This repo is a hackathon product, not a new company.
 - Solo.
-- Competitive build clock: Friday 1:30 PM to Saturday 2:00 PM (about 24 hours), plus head start now that the brief is public.
+- AI Builder Day Part 2 demo window was Friday 1:30 PM through Saturday 2:00 PM (local). Prefer polish and demos that stay green over new scope.
 - Scope for a working demo, not a finished platform.
 - Budget: free tiers and event credits.
