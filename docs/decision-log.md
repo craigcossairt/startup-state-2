@@ -56,3 +56,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - `AGENTS.md` no longer stores a stage label or a frozen Vitest count. Database convention is cached JSON plus optional Supabase public read. See this PR.
 - **2026-08-15** - Removed unused `brain/`, SETUP.md, and `.audit/`. Agent prompt BM25 is not retrieve. See this PR.
 - **2026-08-15** - Grants.gov retrieve drops eligibility 23. The floor keeps Federal adjacent. History joins per listing. capRetrieved reserves 15 federal slots. The server enforces 8-12 cards and at least 2 Utah when GOEO keys fired. See this PR.
+- **2026-08-15** - Grants.gov retrieve drops `U.S. Mission to` diplomatic exchange rows. Fixture-1 SBIR cache keyword is `SBIR STTR healthcare`. Rank treats same-sector NIH, NSF, HHS, or SBIR/STTR as at least potential-verify. See this PR.
