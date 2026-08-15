@@ -60,47 +60,12 @@ describe("leftover test cases", () => {
     ]);
   });
 
-  it("mounts the leftover test-case bar on Playbook and Resources", () => {
-    const playbook = readFileSync(
-      path.join(process.cwd(), "src/app/playbook/page.tsx"),
-      "utf8",
-    );
-    const stage = readFileSync(
-      path.join(process.cwd(), "src/app/playbook/[stage]/page.tsx"),
-      "utf8",
-    );
-    const step = readFileSync(
-      path.join(process.cwd(), "src/app/playbook/[stage]/[step]/page.tsx"),
-      "utf8",
-    );
-    const resources = readFileSync(
-      path.join(process.cwd(), "src/app/resources/page.tsx"),
-      "utf8",
-    );
-    const bar = readFileSync(
-      path.join(process.cwd(), "src/components/catalog/leftover-test-case-bar.tsx"),
-      "utf8",
-    );
-    expect(playbook).toContain("LeftoverTestCaseBar");
-    expect(stage).toContain("LeftoverTestCaseBar");
-    expect(step).toContain("LeftoverTestCaseBar");
-    expect(resources).toContain("LeftoverTestCaseBar");
-    expect(bar).toContain("LEFTOVER_FIXTURE_STORAGE_KEY");
-    expect(`${playbook}\n${stage}\n${step}\n${resources}\n${bar}`).not.toMatch(
-      /jordan|maria|marcus|priya|david|amir/i,
-    );
-  });
-
-  it("keeps leftover helpers off the fixture file loader so the chip bar can run in the browser", () => {
+  it("keeps leftover fixture ids client-safe", () => {
     const helper = readFileSync(
       path.join(process.cwd(), "src/lib/catalog/leftover-test-case.ts"),
       "utf8",
     );
-    const bar = readFileSync(
-      path.join(process.cwd(), "src/components/catalog/leftover-test-case-bar.tsx"),
-      "utf8",
-    );
     expect(helper).not.toMatch(/load-fixture|node:fs/);
-    expect(bar).not.toMatch(/load-fixture|node:fs/);
+    expect(parseLeftoverFixtureId("jordan")).toBeNull();
   });
 });

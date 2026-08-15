@@ -1,26 +1,19 @@
-import Link from "next/link";
 import { Suspense } from "react";
-import { LeftoverTestCaseBar } from "@/components/catalog/leftover-test-case-bar";
+import { PlaybookStageGrid } from "@/components/catalog/playbook-stage-grid";
 import { SurfaceHero } from "@/components/catalog/surface-hero";
-import { parseLeftoverFixtureId, withLeftoverFixture } from "@/lib/catalog/leftover-test-case";
-import { PLAYBOOK_STAGES, PLAYBOOK_STEPS, stepCountByStage } from "@/lib/catalog/playbook";
+import { YouBar } from "@/components/catalog/you-bar";
+import { PLAYBOOK_STEPS } from "@/lib/catalog/playbook";
 
 export const metadata = {
   title: "Utah Startup Playbook",
   description: "Nineteen official GOEO steps for thinking, starting, growing, or closing a Utah company.",
 };
 
-export default async function PlaybookPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ fixture?: string }>;
-}) {
-  const fixture = parseLeftoverFixtureId((await searchParams).fixture);
-  const counts = stepCountByStage();
+export default function PlaybookPage() {
   return (
     <>
       <Suspense fallback={null}>
-        <LeftoverTestCaseBar />
+        <YouBar />
       </Suspense>
       <SurfaceHero
         eyebrow="The Utah Startup Playbook"
@@ -42,27 +35,9 @@ export default async function PlaybookPage({
         <h2 className="h-display mb-10 max-w-2xl text-3xl sm:text-4xl">
           Where are you on your <span className="serif-italic text-primary">path?</span>
         </h2>
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PLAYBOOK_STAGES.map((stage) => (
-            <li key={stage.slug}>
-              <Link
-                href={withLeftoverFixture(`/playbook/${stage.slug}`, fixture)}
-                className="block h-full rounded-2xl border border-border bg-white p-5 hover:border-primary/40 hover:shadow-md"
-              >
-                <span
-                  className="mb-4 block h-1.5 w-12 rounded-full"
-                  style={{ background: stage.accent }}
-                />
-                <h3 className="font-display text-xl font-extrabold tracking-tight">{stage.shortLabel}</h3>
-                <p className="mt-1 text-sm text-foreground-muted">{stage.label}</p>
-                <p className="mt-3 text-sm leading-relaxed">{stage.lead}</p>
-                <p className="mt-4 text-xs font-semibold text-primary">
-                  {counts[stage.slug]} steps
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Suspense fallback={null}>
+          <PlaybookStageGrid />
+        </Suspense>
       </section>
     </>
   );

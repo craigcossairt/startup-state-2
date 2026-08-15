@@ -1,24 +1,23 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { filterResources, resourceTopics } from "@/lib/catalog/filter";
-import { rankResourcesForNeedles } from "@/lib/catalog/leftover-test-case";
+import { resourcesForPersona } from "@/lib/catalog/match-resources";
+import { paramsToPersona, personaIsFilled } from "@/lib/catalog/you-persona";
 import type { CatalogResource } from "@/lib/catalog/types";
 
-export function ResourceDirectory({
-  resources,
-  needles = [],
-}: {
-  resources: CatalogResource[];
-  needles?: string[];
-}) {
+export function ResourceDirectory({ resources }: { resources: CatalogResource[] }) {
+  const params = useSearchParams();
+  const persona = personaIsFilled(params) ? paramsToPersona(params) : null;
   const [q, setQ] = useState("");
   const [topic, setTopic] = useState("");
-  const topics = useMemo(() => resourceTopics(resources), [resources]);
-  const shown = useMemo(() => {
-    const filtered = filterResources(resources, { q, topic });
-    return rankResourcesForNeedles(filtered, needles);
-  }, [resources, q, topic, needles]);
+  const ranked = useMemo(() => resourcesForPersona(resources, persona), [resources, persona]);
+  const topics = useMemo(() => resourceTopics(ranked), [ranked]);
+  const shown = useMemo(
+    () => filterResources(ranked, { q, topic }),
+    [ranked, q, topic],
+  );
 
   return (
     <section className="mx-auto max-w-[1200px] space-y-6 px-6 py-12">

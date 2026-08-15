@@ -1,11 +1,10 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { LeftoverTestCaseBar } from "@/components/catalog/leftover-test-case-bar";
 import { SurfaceHero } from "@/components/catalog/surface-hero";
+import { YouBar } from "@/components/catalog/you-bar";
+import { YouParamLink } from "@/components/catalog/you-param-link";
 import { loadCatalogResources } from "@/lib/catalog/load";
 import { resourcesForStep } from "@/lib/catalog/filter";
-import { parseLeftoverFixtureId, withLeftoverFixture } from "@/lib/catalog/leftover-test-case";
 import { PLAYBOOK_STEPS, playbookStage, playbookStep } from "@/lib/catalog/playbook";
 
 export function generateStaticParams() {
@@ -14,13 +13,10 @@ export function generateStaticParams() {
 
 export default async function PlaybookStepPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ stage: string; step: string }>;
-  searchParams: Promise<{ fixture?: string }>;
 }) {
   const { stage: stageSlug, step: stepId } = await params;
-  const fixture = parseLeftoverFixtureId((await searchParams).fixture);
   const stage = playbookStage(stageSlug);
   const step = playbookStep(stageSlug, stepId);
   if (!stage || !step) notFound();
@@ -28,19 +24,19 @@ export default async function PlaybookStepPage({
   return (
     <>
       <Suspense fallback={null}>
-        <LeftoverTestCaseBar />
+        <YouBar />
       </Suspense>
       <SurfaceHero eyebrow={stage.label} title={step.title}>
         <p>{step.summary}</p>
       </SurfaceHero>
       <section className="mx-auto max-w-[1200px] space-y-10 px-6 py-12">
         <p className="text-sm">
-          <Link
-            href={withLeftoverFixture(`/playbook/${stage.slug}`, fixture)}
+          <YouParamLink
+            href={`/playbook/${stage.slug}`}
             className="font-semibold text-primary hover:underline"
           >
             {stage.label}
-          </Link>
+          </YouParamLink>
         </p>
         <div>
           <h2 className="h-display text-2xl">What you do</h2>
