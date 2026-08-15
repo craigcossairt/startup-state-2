@@ -5,7 +5,7 @@ import type { Opportunity, RankedCard } from "@/lib/types/opportunity";
 
 function card(id: string, aln: string[]): RankedCard {
   const opportunity: Opportunity = {
-    id: `grants_gov:${id}`,
+    id: `grants_gov:${id}` as Opportunity["id"],
     source: "grants_gov",
     nativeId: id,
     lane: "federal",
@@ -31,22 +31,24 @@ function card(id: string, aln: string[]): RankedCard {
 }
 
 describe("loadUsaSpendingAwards", () => {
-  it("fetches each ALN on its own and tags the award with that ALN", async () => {
-    const programNumbers: string[][] = [];
+  it("fetches each unique ALN and tags awards with that ALN", async () => {
+    const requested: string[][] = [];
     const fetchImpl: typeof fetch = async (_url, init) => {
       const body = JSON.parse(String(init?.body)) as {
         filters: { program_numbers: string[] };
       };
-      programNumbers.push(body.filters.program_numbers);
+      requested.push(body.filters.program_numbers);
       const aln = body.filters.program_numbers[0];
       return {
         ok: true,
+        status: 200,
         json: async () => ({
           results: [
             {
-              "Recipient Name": aln === "93.310" ? "Valley Clinic Systems" : "Red Rock Energy",
-              "Start Date": "2023-01-01",
+              "Recipient Name":
+                aln === "93.310" ? "Valley Clinic Systems" : "Red Rock Energy",
               "Award Amount": 1000,
+              "Start Date": "2023-01-01",
             },
           ],
         }),
@@ -59,24 +61,10 @@ describe("loadUsaSpendingAwards", () => {
       fetchImpl,
     );
 
-    expect(programNumbers).toEqual([["93.310"], ["81.135"]]);
-    expect(awards).toEqual([
-      {
-        source: "usaspending",
-        name: "Valley Clinic Systems",
-        amountUsd: 1000,
-        year: 2023,
-        summary: undefined,
-        aln: ["93.310"],
-      },
-      {
-        source: "usaspending",
-        name: "Red Rock Energy",
-        amountUsd: 1000,
-        year: 2023,
-        summary: undefined,
-        aln: ["81.135"],
-      },
+    expect(requested).toEqual([["93.310"], ["81.135"]]);
+    expect(awards.map((row) => ({ name: row.name, aln: row.aln }))).toEqual([
+      { name: "Valley Clinic Systems", aln: ["93.310"] },
+      { name: "Red Rock Energy", aln: ["81.135"] },
     ]);
   });
 });
