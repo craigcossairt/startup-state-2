@@ -94,6 +94,13 @@ describe("Part 1 site chrome import fences", () => {
     expect(INTAKE_HERO).toBe("Tell us about your company.");
   });
 
+  it("keeps the Part 1 Events outbound link", () => {
+    const nav = read("src/components/nav.tsx");
+    expect(nav).toContain(
+      "https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732",
+    );
+  });
+
   it("puts leftover surfaces on the nav and still forbids the Tyler card", () => {
     const nav = read("src/components/nav.tsx");
     expect(nav).toContain("SITE_NAV");

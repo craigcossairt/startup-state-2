@@ -52,6 +52,14 @@ export function Nav() {
           {SITE_NAV.map((item) => (
             <NavLink key={item.href} href={item.href} label={item.label} active={navItemIsActive(pathname, item.href)} />
           ))}
+          <a
+            href="https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-9 items-center rounded-md px-2.5 text-[13px] font-semibold text-foreground-muted hover:bg-background-alt hover:text-foreground md:inline-flex"
+          >
+            Events ↗
+          </a>
         </nav>
         <button
           type="button"
@@ -81,6 +89,16 @@ export function Nav() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href="https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 items-center rounded-md bg-background-alt px-3 text-sm font-semibold text-foreground"
+              >
+                Events ↗
+              </a>
+            </li>
           </ul>
         </nav>
       ) : null}

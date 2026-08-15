@@ -45,3 +45,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Next 16 `allowedDevOrigins` includes `127.0.0.1` so Cursor cloud / computerUse on that host can hydrate. The Navigator FAB itself is unchanged. See this PR.
 - **2026-08-15** - Leftover catalog schema applies during the Vercel Production build from marketplace `POSTGRES_URL*`. Agents cannot decrypt those sensitive vars via the Vercel API or `vercel env run`. See [PR 28](https://github.com/craigcossairt/startup-state-2/pull/28).
 - **2026-08-15** - Catalog apply strips DSN `sslmode=require` and uses `sslmode=no-verify`. `pg` 8 treats require as verify-full and rejects the Supabase chain. See this PR.
+- **2026-08-15** - Leftover public chrome keeps the Part 1 Events outbound link. Home stays Intake. Claim, add-listing, admin, and Tyler stay out. See this PR.
