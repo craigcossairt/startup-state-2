@@ -38,3 +38,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-14** - Vercel project is [cossairt/startup-state-2](https://vercel.com/cossairt/startup-state-2). Production needs `XAI_API_KEY` and `SAM_API_KEY`. `next.config.ts` traces `./data/**/*` into serverless functions.
 - **2026-08-14** - Production is live at https://startup-state-2.vercel.app (public). Preview URLs stay SSO-gated. Fixture-1 and fixture-5 rank on that URL. See [PR 22](https://github.com/craigcossairt/startup-state-2/pull/22).
 - **2026-08-14** - Intake can start from a public website URL. Scrape text feeds infer; country/state typeaheads default to US/UT; rank streams retrieve then cards; the map shows a KPI strip. See this PR.
+- **2026-08-15** - pstack roles bias to Grok 4.6 (`cursor-grok-4.6-high-fast`) while it is 50% off token usage. Panels keep GPT and Claude for cross-family review. Re-run `/setup-pstack` when the promo ends. See `.cursor/rules/pstack-models.mdc`.
