@@ -10,7 +10,7 @@ function read(rel: string): string {
 }
 
 describe("You bar", () => {
-  it("is the Part 1 You bar with Part 2 test-case chips in the edit panel", () => {
+  it("is the leftover You bar with Part 2 test-case chips in the edit panel", () => {
     const bar = read("src/components/catalog/you-bar.tsx");
     expect(bar).toMatch(/>\s*You\s*</);
     expect(bar).toContain("Refine your persona");

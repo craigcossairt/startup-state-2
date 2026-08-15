@@ -16,7 +16,7 @@ empty. Local, CI, and Preview builds skip the apply when those URLs are
 absent.
 
 You can still paste `schema.sql` in the SQL editor if you want the tables
-before the next production deploy. Do not paste the Part 1
+before the next production deploy. Do not paste an earlier leftover
 `0001_initial_schema.sql`.
 
 ## Vercel public vars

@@ -22,7 +22,7 @@ Constraints: solo; head start is real except BetterRX; official clock Fri 1:30 P
 | Compete? | Yes | Yes | Only if selected. 8 teams. Friday announce. |
 | Build now? | Yes | Yes | Form says no. Event window only. |
 | Win condition | Five named test companies. Explain. History. Honest "no" on case 5. | Jacob believes one loop actually learned. | In the room, then a two-sided DME board that beats today's portals. |
-| Unfair advantage | Utah founder. HITLAB government-data work. Part 1 brand, intake, chips, catalog. Brief *asks* for a Utah layer. | Craig runs GTM for real. | Healthcare PM. Form already in. $10k and 8 finalists. |
+| Unfair advantage | Utah founder. HITLAB government-data work. Existing brand, intake, chips, catalog. Brief *asks* for a Utah layer. | Craig runs GTM for real. | Healthcare PM. Form already in. $10k and 8 finalists. |
 | How we lose | Shallow search box, hallucinated grants, or last year's Playbook/map with a grants tab. | Learning looks stored. Category owner is in the room. | Not picked. Or 24 hours against people who live hospice ops. |
 | Head-start compound | Cache 2–4 federal sources. Lift brand. Five fixtures. | Spec and spike the loop. | Paper only until Friday. |
 

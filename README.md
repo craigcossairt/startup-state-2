@@ -4,13 +4,11 @@ GOED Government Opportunity Finder for AI Builder Day Part 2. A founder describe
 
 Live: https://startup-state-2.vercel.app
 
-This is not a fork of [craigcossairt/startup-state](https://github.com/craigcossairt/startup-state).
-
 ## Surfaces
 
 - `/` Intake. One sentence or a fixture click, then infer, then missing fields.
 - `/map` Opportunity Map. Ranked cards. Fit language only. Never eligible.
-- Leftover siblings from Part 1 sit beside Intake: Playbook, Resources, Startups, Careers, News, Swag, Claim, and `/admin` Operations.
+- Leftover siblings sit beside Intake: Playbook, Resources, Startups, Careers, News, Swag, Claim, and `/admin` Operations.
 - Navigator FAB (Ask the Navigator, Startup State mark) answers from the ranked Opportunity Map, the 19 playbook steps, and leftover pages. Hidden on claim and admin.
 
 Home stays Intake. `/map` stays the Opportunity Map.
@@ -46,5 +44,4 @@ Preview and `*.vercel.app` deployment URLs stay behind Vercel SSO.
 
 - Brief: [`docs/briefs/goed-opportunity-finder.md`](docs/briefs/goed-opportunity-finder.md)
 - Slice: [`docs/primary-bounty.md`](docs/primary-bounty.md)
-- What to steal from Part 1: [`docs/briefs/startup-state-reuse.md`](docs/briefs/startup-state-reuse.md)
 - Issues: https://github.com/craigcossairt/startup-state-2/issues

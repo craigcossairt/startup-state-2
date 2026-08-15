@@ -8,8 +8,8 @@ import type { CatalogStartup } from "./types";
 
 const root = process.cwd();
 
-/** Part 1 live /careers list on 2026-08-15. Independent of this repo's flags. */
-const PART1_HIRING_SLUGS = [
+/** Prior hiring set on /careers as of 2026-08-15. Independent of this repo's flags. */
+const HIRING_CATALOG_SLUGS = [
   "3helix",
   "applause",
   "atomic",
@@ -43,12 +43,12 @@ const PART1_HIRING_SLUGS = [
 ] as const;
 
 describe("committed hiring catalog", () => {
-  it("keeps the Part 1 30-company hiring set so Careers and the home KPI are not empty", () => {
+  it("keeps the prior 30-company hiring set so Careers and the home KPI are not empty", () => {
     const startups = parseStartupList(
       JSON.parse(readFileSync(path.join(root, "data/catalog/startups.json"), "utf8")),
     );
     expect(hiringStartups(startups).map((row) => row.slug).sort()).toEqual(
-      [...PART1_HIRING_SLUGS].sort(),
+      [...HIRING_CATALOG_SLUGS].sort(),
     );
   });
 
@@ -64,7 +64,7 @@ describe("committed hiring catalog", () => {
     const merged = applyCommittedHiringFlags(live, committed);
     expect(hiringStartups(live)).toEqual([]);
     expect(hiringStartups(merged).map((row) => row.slug).sort()).toEqual(
-      [...PART1_HIRING_SLUGS].sort(),
+      [...HIRING_CATALOG_SLUGS].sort(),
     );
   });
 
@@ -74,7 +74,7 @@ describe("committed hiring catalog", () => {
     expect(script).toContain("where slug");
   });
 
-  it("paints the Part 1 Filter and BellPlus icons on Careers watch chrome", () => {
+  it("paints the leftover Filter and BellPlus icons on Careers watch chrome", () => {
     const talent = readFileSync(
       path.join(root, "src/components/catalog/talent-filters.tsx"),
       "utf8",

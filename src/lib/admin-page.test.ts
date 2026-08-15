@@ -8,8 +8,8 @@ function read(rel: string): string {
   return readFileSync(path.join(root, rel), "utf8");
 }
 
-describe("Part 1 admin page", () => {
-  it("paints the five Part 1 sections with green-circle icons and live fixture rows", () => {
+describe("admin page", () => {
+  it("paints the five leftover sections with green-circle icons and live fixture rows", () => {
     const page = read("src/app/admin/page.tsx");
     const icons = read("src/components/admin/admin-icon.tsx");
     expect(page).toContain("loadAdminOperations");

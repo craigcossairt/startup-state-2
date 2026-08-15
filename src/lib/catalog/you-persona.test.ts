@@ -14,7 +14,7 @@ import {
 } from "./you-persona";
 
 describe("You persona", () => {
-  it("maps Part 2 test cases onto leftover persona fields, not Part 1 demo people", () => {
+  it("maps Part 2 test cases onto leftover persona fields, not leftover demo people", () => {
     expect(FIXTURE_CHIPS.map((chip) => chip.id)).toEqual(Object.keys(FIXTURE_PERSONAS));
     expect(applyTestCase("fixture-1")).toEqual({
       stage: "Growing",

@@ -8,7 +8,7 @@ Who the founder/owner is, so agents calibrate their advice and explanations.
 - Career product manager. Chose PM because he likes problems with real-world impact.
 - Healthcare background: PillPack and Infor. Knows the industry at a basic working level, including what a PBM is.
 - Won the Data Governance bounty at HITLAB x UVU World Cup Hackathon 2026 (Utah Office of Data Privacy). Public repo: github.com/craigcossairt/HITLAB-UVU-World-Cup-Hackathon-2026. That is not an AI Builder Day win.
-- Shipped a Startup State branded app for AI Builder Day Part 1 (github.com/craigcossairt/startup-state). This repo is a new product, not that fork.
+- Shipped an earlier Startup State branded demo. This repo is a new product for AI Builder Day Part 2.
 - Builds daily with AI coding agents (Claude Code, Cursor, Grok Build).
 - Utah-based.
 
