@@ -1,12 +1,12 @@
 [
   {
     "file": "data/cache/grants-gov/fixture-1-sbir.json",
-    "keyword": "SBIR healthcare AI nurses",
+    "keyword": "SBIR STTR healthcare",
     "http": 200,
-    "hitCount": 267,
+    "hitCount": 141,
     "rows": 25,
-    "firstId": "359666",
-    "agencies": "NSF:6, HHS-NIH11:5, DOS-ARG:2, HHS-HRSA:1, DOS-IDN:1, DOS-ALB:1, DOS-PHL:1, DOS-SAU:1"
+    "firstId": "359726",
+    "agencies": "HHS-NIH11:15, HHS-CDC-NCEZID:2, DOD-AFRL-RW:1, NASA:1, NSF:1, HHS-CDC-HHSCDCERA:1, HHS-OPHS:1, HHS-CDC-NCHHSTP:1"
   },
   {
     "file": "data/cache/grants-gov/fixture-1-open.json",
