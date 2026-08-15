@@ -50,22 +50,22 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-start gap-10 px-6 py-12 md:grid-cols-3">
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="mx-auto flex w-[10.5rem] flex-col items-center gap-5">
-            <Link href="/" aria-label="Startup State home" className="inline-block hover:opacity-90">
+            <Link href="/" aria-label="Startup State home" className="block w-full hover:opacity-90">
               <Image
                 src="/brand/ss-stacked-white.png"
                 alt="Startup State"
-                width={170}
-                height={120}
-                className="h-24 w-auto"
+                width={1058}
+                height={735}
+                className="h-auto w-full"
               />
             </Link>
-            <div className="h-px w-16 bg-white/30" aria-hidden />
+            <div className="h-px w-1/2 bg-white/30" aria-hidden />
             <a
               href="https://business.utah.gov/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Governor's Office of Economic Development"
-              className="inline-block w-full hover:opacity-90"
+              className="block w-full hover:opacity-90"
             >
               <Image
                 src="/brand/goed-only-white.png"
