@@ -33,7 +33,7 @@ describe("leftover surfaces", () => {
     expect(startups.every((row) => typeof row.lat === "number")).toBe(true);
     expect(PLAYBOOK_STEPS).toHaveLength(19);
     expect(NEWS_ITEMS).toHaveLength(10);
-    expect(SWAG_ITEMS).toHaveLength(9);
+    expect(SWAG_ITEMS).toHaveLength(16);
   });
 
   it("always mounts the Utah plot, even when Mapbox is off", () => {
@@ -153,5 +153,26 @@ describe("leftover surfaces", () => {
       expect(existsSync(full), item.src).toBe(true);
       expect(statSync(full).size, item.src).toBeGreaterThan(1000);
     }
+  });
+
+  it("names each grok swag photo with a title that matches the item", () => {
+    expect(SWAG_ITEMS.map((item) => item.title)).toEqual([
+      "Sticker pack",
+      "Backpack",
+      "Desk mat",
+      "Camp mug",
+      "Ceramic mug",
+      "Insulated tumbler",
+      "Water bottle",
+      "Tee",
+      "Polo",
+      "Hoodie",
+      "Trucker hat",
+      "Beanie",
+      "Canvas tote",
+      "Hardcover notebook",
+      "Coaster",
+      "Phone case",
+    ]);
   });
 });
