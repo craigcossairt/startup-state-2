@@ -10,6 +10,7 @@ export function TypeaheadSelect({
   options,
   onChange,
   required,
+  describedBy,
 }: {
   id: string;
   label?: string;
@@ -17,6 +18,7 @@ export function TypeaheadSelect({
   options: LocationOption[];
   onChange: (code: string) => void;
   required?: boolean;
+  describedBy?: string;
 }) {
   const selected = options.find((row) => row.code === value);
   const [query, setQuery] = useState(selected?.name ?? "");
@@ -63,6 +65,7 @@ export function TypeaheadSelect({
         role="combobox"
         aria-expanded={open}
         aria-controls={`${id}-list`}
+        aria-describedby={describedBy}
         autoComplete="off"
         required={required}
         className="w-full rounded-md border border-border bg-white px-3 py-2"
