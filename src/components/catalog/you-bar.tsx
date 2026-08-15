@@ -86,7 +86,9 @@ export function YouBar() {
           />
         ) : (
           <form
-            className="flex w-full items-center gap-2 sm:gap-3"
+            className={`flex w-full items-center gap-2 sm:gap-3 ${
+              !open && !draft.trim() ? "persona-bar-breathing" : ""
+            }`}
             onSubmit={(event) => {
               event.preventDefault();
               setOpen(true);
@@ -105,13 +107,22 @@ export function YouBar() {
               placeholder="Tell us about your business to get a personalized action plan"
               className="h-8 min-w-0 flex-1 bg-transparent text-sm placeholder:text-foreground-muted/70 focus:outline-none"
             />
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md bg-background-alt px-2.5 text-xs text-foreground-muted hover:text-foreground"
-            >
-              Open form
-            </button>
+            {draft.trim().length > 3 ? (
+              <button
+                type="submit"
+                className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full bg-primary px-3 text-xs font-semibold text-white hover:bg-primary/90"
+              >
+                Personalize
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md bg-background-alt px-2.5 text-xs text-foreground-muted hover:text-foreground"
+              >
+                Open form
+              </button>
+            )}
           </form>
         )}
       </div>

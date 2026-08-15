@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState, type ReactNode } from "react";
 import { CompanyLogo } from "./company-logo";
+import { SaveSearchButton } from "./save-search-button";
 import {
   ALL_REGIONS,
   ALL_REVENUES,
@@ -75,7 +77,12 @@ export function MapFilterPanel({
             {total} startups
           </span>
           {searchMatches ? <span className="font-semibold text-primary">searching</span> : null}
-          <span className="ml-auto tabular-nums">{shown} after filters</span>
+          <Link
+            href="/startups/add"
+            className="ml-auto inline-flex items-center gap-1 font-semibold text-primary hover:underline"
+          >
+            + Add
+          </Link>
         </div>
       </header>
 
@@ -160,6 +167,21 @@ export function MapFilterPanel({
             </button>
           </div>
         ) : null}
+      </div>
+
+      <div className="border-b border-border px-5 py-3">
+        <SaveSearchButton
+          scope="map"
+          defaultLabel={describeMapFilter(state)}
+          filter={{
+            sectors: [...state.sectors],
+            stages: [...state.stages],
+            regions: [...state.regions],
+            revenues: [...state.revenues],
+            hiringOnly: state.hiringOnly,
+          }}
+          triggerClassName="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-md bg-accent-soft/30 text-xs font-semibold hover:bg-accent-soft/60"
+        />
       </div>
 
       <div className="flex-1 overflow-y-auto px-2 py-2">
@@ -251,4 +273,20 @@ function toggle<T>(set: Set<T>, value: T): Set<T> {
   if (next.has(value)) next.delete(value);
   else next.add(value);
   return next;
+}
+
+function describeMapFilter(state: {
+  sectors: Set<string>;
+  stages: Set<string>;
+  regions: Set<string>;
+  revenues: Set<string>;
+  hiringOnly: boolean;
+}): string {
+  const bits: string[] = [];
+  if (state.sectors.size) bits.push([...state.sectors].join(", "));
+  if (state.stages.size) bits.push(`${[...state.stages].join("/")} stage`);
+  if (state.regions.size) bits.push([...state.regions].join(", "));
+  if (state.revenues.size) bits.push(`revenue ${[...state.revenues].join(", ")}`);
+  if (state.hiringOnly) bits.push("hiring");
+  return bits.length ? `Map: ${bits.join(" · ")}` : "Map: all Utah startups";
 }

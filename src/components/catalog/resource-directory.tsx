@@ -55,57 +55,35 @@ export function ResourceDirectory({ resources }: { resources: CatalogResource[] 
 
   return (
     <section className="mx-auto max-w-[1200px] space-y-6 px-6 py-12">
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
-        <label className="block flex-1 text-sm font-semibold">
-          Search programs
-          <input
-            value={q}
-            onChange={(event) => setQ(event.target.value)}
-            className="mt-1 h-11 w-full rounded-md border border-border px-3 text-sm font-normal"
-            placeholder="Search programs by name or description"
-          />
-        </label>
-        <p className="text-sm text-foreground-muted">
-          {persona ? (
-            <>
-              <span className="font-semibold text-foreground">{shown.length}</span> of{" "}
-              {filtered.length} program{filtered.length === 1 ? "" : "s"} sorted for{" "}
-              {persona.stage.toLowerCase()}-stage {persona.sector.toLowerCase()} founders in{" "}
-              {persona.region}.
-            </>
-          ) : (
-            <>
-              Showing {shown.length} of {filtered.length}. Set You above to sort by relevance.
-            </>
-          )}
-        </p>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <TopicChip label="All topics" active={!topic} onClick={() => setTopic("")} />
-        {topics.map((item) => (
-          <TopicChip
-            key={item}
-            label={item}
-            active={topic === item}
-            onClick={() => setTopic(item === topic ? "" : item)}
-          />
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <TopicChip
-          label="All communities"
-          active={!communityFilter}
-          onClick={() => setCommunityFilter("")}
+      <div className="flex flex-wrap items-center gap-3">
+        <input
+          value={q}
+          onChange={(event) => setQ(event.target.value)}
+          className="h-10 min-w-[260px] flex-1 rounded-md border border-border px-3 text-sm"
+          placeholder="Search programs by name or description"
         />
-        {communities.map((item) => (
-          <TopicChip
-            key={item}
-            label={item}
-            active={communityFilter === item}
-            onClick={() => setCommunityFilter(item === communityFilter ? "" : item)}
-          />
-        ))}
+        <FilterDropdown label="Topic" value={topic} onChange={setTopic} options={topics} />
+        <FilterDropdown
+          label="Community"
+          value={communityFilter}
+          onChange={setCommunityFilter}
+          options={communities}
+        />
       </div>
+      <p className="text-xs text-foreground-muted">
+        {persona ? (
+          <>
+            <span className="font-semibold text-foreground">{shown.length}</span> of {filtered.length}{" "}
+            program{filtered.length === 1 ? "" : "s"} sorted for {persona.stage.toLowerCase()}-stage{" "}
+            {persona.sector.toLowerCase()} founders in {persona.region}.
+          </>
+        ) : (
+          <>
+            <span className="font-semibold text-foreground">{shown.length}</span> of {filtered.length}{" "}
+            programs. Set You above to sort by relevance.
+          </>
+        )}
+      </p>
       {shown.length === 0 ? (
         <p className="py-8 text-sm text-foreground-muted">
           No programs match these filters. Try clearing your search or widening the filters.
@@ -190,24 +168,65 @@ function ReasonChip({ reason }: { reason: MatchReason }) {
   );
 }
 
-function TopicChip({
+function FilterDropdown({
   label,
-  active,
-  onClick,
+  value,
+  onChange,
+  options,
 }: {
   label: string;
-  active: boolean;
-  onClick: () => void;
+  value: string;
+  onChange: (next: string) => void;
+  options: string[];
 }) {
+  const [open, setOpen] = useState(false);
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-        active ? "bg-midnight text-white" : "bg-background-alt text-foreground-muted"
-      }`}
-    >
-      {label}
-    </button>
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        className={`inline-flex h-10 min-w-[160px] items-center justify-between gap-2 rounded-md border bg-white pl-3 pr-2 text-sm ${
+          value ? "border-primary text-foreground" : "border-border text-foreground-muted"
+        }`}
+      >
+        <span className="truncate">
+          <span className="text-foreground-muted">{label}:</span>{" "}
+          <span className="font-medium text-foreground">{value || "All"}</span>
+        </span>
+        <span aria-hidden>▾</span>
+      </button>
+      {open ? (
+        <div className="absolute z-40 mt-1 max-h-[60vh] w-64 overflow-y-auto rounded-xl border border-border bg-white p-1.5 shadow-lg">
+          <button
+            type="button"
+            onClick={() => {
+              onChange("");
+              setOpen(false);
+            }}
+            className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-sm font-semibold ${
+              !value ? "bg-accent-soft/30" : "hover:bg-background-alt"
+            }`}
+          >
+            All
+          </button>
+          <div className="my-1 border-t border-border" />
+          {options.map((option) => (
+            <button
+              type="button"
+              key={option}
+              onClick={() => {
+                onChange(option);
+                setOpen(false);
+              }}
+              className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-sm ${
+                value === option ? "bg-accent-soft/30 font-semibold" : "hover:bg-background-alt"
+              }`}
+            >
+              <span className="truncate">{option}</span>
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
   );
 }

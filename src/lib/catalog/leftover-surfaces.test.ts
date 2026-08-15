@@ -44,7 +44,6 @@ describe("leftover surfaces", () => {
     const map = readFileSync(path.join(root, "src/components/catalog/utah-startup-map.tsx"), "utf8");
     expect(client).toContain("UtahStartupMap");
     expect(client).toContain("MapFilterPanel");
-    expect(client).not.toContain("/startups/add");
     expect(map).toContain("MAPBOX_MISSING_COPY");
     expect(map).toContain("mapboxToken");
     const fab = readFileSync(path.join(root, "src/components/ask-fab.tsx"), "utf8");
@@ -97,8 +96,38 @@ describe("leftover surfaces", () => {
     expect(directory).toContain("more");
     expect(directory).not.toMatch(/framer-motion/);
     expect(news).toContain("Read on startup.utah.gov");
+    expect(news).toContain("SurfaceHero");
     expect(claim).toContain("/startups?startup=");
     expect(claim).toContain("CompanyLogo");
+  });
+
+  it("ports leftover dropdowns, saved-search, add listing, and empty You glow", () => {
+    const directory = readFileSync(
+      path.join(root, "src/components/catalog/resource-directory.tsx"),
+      "utf8",
+    );
+    const panel = readFileSync(
+      path.join(root, "src/components/catalog/map-filter-panel.tsx"),
+      "utf8",
+    );
+    const talent = readFileSync(path.join(root, "src/components/catalog/talent-filters.tsx"), "utf8");
+    const you = readFileSync(path.join(root, "src/components/catalog/you-bar.tsx"), "utf8");
+    const addPage = readFileSync(path.join(root, "src/app/startups/add/page.tsx"), "utf8");
+    const addApi = readFileSync(path.join(root, "src/app/api/startups/add/route.ts"), "utf8");
+    const news = readFileSync(path.join(root, "src/app/news/page.tsx"), "utf8");
+    expect(directory).toContain("FilterDropdown");
+    expect(directory).toContain("Topic");
+    expect(directory).toContain("Community");
+    expect(panel).toContain("/startups/add");
+    expect(panel).toContain("SaveSearchButton");
+    expect(talent).toContain("SaveSearchButton");
+    expect(you).toContain("persona-bar-breathing");
+    expect(addPage).toContain("AddListingForm");
+    expect(addPage).not.toMatch(/coming soon|coming-soon/i);
+    expect(addApi).toContain("submitAddListing");
+    expect(addApi).not.toMatch(/insert into/);
+    expect(addApi).not.toMatch(/pending/);
+    expect(news).toContain("SurfaceHero");
   });
 
   it("applies leftover catalog schema during build and never inserts startup status", () => {

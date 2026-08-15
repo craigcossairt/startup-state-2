@@ -148,3 +148,35 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+@keyframes persona-bar-breathe {
+  0%,
+  100% {
+    border-color: rgba(0, 162, 76, 0.35);
+    background-color: rgba(0, 162, 76, 0);
+  }
+  50% {
+    border-color: rgba(0, 162, 76, 0.65);
+    background-color: rgba(0, 162, 76, 0.06);
+  }
+}
+
+.persona-bar-breathing {
+  border: 1px solid rgba(0, 162, 76, 0.35);
+  border-radius: 9999px;
+  padding-left: 0.875rem;
+  padding-right: 0.5rem;
+  animation: persona-bar-breathe 3.4s ease-in-out infinite;
+}
+
+.persona-bar-breathing:focus-within {
+  animation: none;
+  border-color: var(--primary);
+  background-color: rgba(0, 162, 76, 0.05);
+  outline: none;
+}
+
+.persona-bar-breathing:focus-within input:focus-visible,
+.persona-bar-breathing input {
+  outline: none;
+}

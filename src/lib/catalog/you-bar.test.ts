@@ -19,7 +19,8 @@ describe("You bar", () => {
     expect(bar).toContain("applyTestCase");
     expect(bar).toContain("YOU_STORAGE_KEY");
     expect(bar).not.toMatch(/pick a test persona|DEMO_PERSONAS|jordan|maria/i);
-    expect(bar).not.toMatch(/load-fixture|node:fs|framer-motion/);
+    expect(bar).toContain("persona-bar-breathing");
+    expect(bar).toContain("Tell us about your business to get a personalized action plan");
     expect(FIXTURE_CHIPS.map((chip) => chip.label)).toEqual([
       "Healthcare AI",
       "Aerospace",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { SaveSearchButton } from "@/components/catalog/save-search-button";
 import {
   ALL_REGIONS,
   ALL_SECTORS,
@@ -39,6 +40,11 @@ export function TalentFilters({
     <div className="space-y-4">
       <div className="flex items-center gap-3 text-xs text-foreground-muted">
         <span>Filter</span>
+        <SaveSearchButton
+          scope="talent"
+          defaultLabel={describeTalentFilter(activeSectors, activeRegions)}
+          filter={{ sectors: activeSectors, regions: activeRegions }}
+        />
         <span className="ml-auto tabular-nums">
           <span className="font-semibold text-foreground">{shown}</span> of {total} companies
         </span>
@@ -93,4 +99,11 @@ export function TalentFilters({
       </div>
     </div>
   );
+}
+
+function describeTalentFilter(sectors: string[], regions: string[]): string {
+  const bits: string[] = [];
+  if (sectors.length) bits.push(sectors.join(", "));
+  if (regions.length) bits.push(regions.join(", "));
+  return bits.length ? `Hiring: ${bits.join(" · ")}` : "Hiring: any Utah company";
 }
