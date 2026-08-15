@@ -86,6 +86,7 @@ describe("leftover surfaces", () => {
     expect(grid).toContain("StageCardLink");
     expect(stageCard).toContain("completedInStage");
     expect(stage).toContain("StepCardLink");
+    expect(stage).toMatch(/<Suspense fallback=\{null\}>\s*<ol[\s\S]*?<StepCardLink/);
     expect(step).toContain("StepCompleteToggle");
     expect(step).toContain("StepNavFooter");
     expect(resourcesPage).toContain("ranked for you");

@@ -48,20 +48,22 @@ export default async function PlaybookStagePage({
         </div>
       </section>
       <section className="mx-auto max-w-[1200px] px-6 py-12">
-        <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {steps.map((step) => (
-            <li key={step.stepId}>
-              <StepCardLink
-                stageSlug={stage.slug}
-                stepId={step.stepId}
-                stepIndex={step.stepIndex}
-                title={step.title}
-                accent={stage.accent}
-                previewText={step.summary}
-              />
-            </li>
-          ))}
-        </ol>
+        <Suspense fallback={null}>
+          <ol className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {steps.map((step) => (
+              <li key={step.stepId}>
+                <StepCardLink
+                  stageSlug={stage.slug}
+                  stepId={step.stepId}
+                  stepIndex={step.stepIndex}
+                  title={step.title}
+                  accent={stage.accent}
+                  previewText={step.summary}
+                />
+              </li>
+            ))}
+          </ol>
+        </Suspense>
       </section>
     </>
   );
