@@ -1,8 +1,17 @@
+export function readMapboxPublicToken(
+  env: Record<string, string | undefined> = process.env,
+): string | null {
+  for (const key of ["NEXT_PUBLIC_MAPBOX_TOKEN", "MAPBOX_TOKEN"] as const) {
+    const token = env[key]?.trim() ?? "";
+    if (token.startsWith("pk.")) return token;
+  }
+  return null;
+}
+
 export function hasPublicMapboxToken(
   env: Record<string, string | undefined> = process.env,
 ): boolean {
-  const token = env.NEXT_PUBLIC_MAPBOX_TOKEN?.trim() ?? "";
-  return token.startsWith("pk.");
+  return readMapboxPublicToken(env) !== null;
 }
 
 export const MAPBOX_MISSING_COPY =

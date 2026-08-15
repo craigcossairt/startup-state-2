@@ -12,7 +12,7 @@ export function navigatorCatalogHint(message: string): string {
   }).slice(0, 3);
   if (matches.length > 0) {
     const lines = matches.map((step) => `${step.title} (${step.sourceUrl})`);
-    return `Start with these playbook steps: ${lines.join("; ")}. The GOEO directory is on /resources. Rank a company on Intake if you want a fitted Opportunity Map.`;
+    return `Start with these playbook steps: ${lines.join("; ")}. The GOED directory is on /resources. Rank a company on Intake if you want a fitted Opportunity Map.`;
   }
-  return "I can walk the Utah playbook, the GOEO resource directory, or a ranked Opportunity Map. Open /playbook for the 19 official steps, /resources for the 213 programs, or rank a company on Intake.";
+  return "I can walk the Utah playbook, the GOED resource directory, or a ranked Opportunity Map. Open /playbook for the 19 official steps, /resources for the 213 programs, or rank a company on Intake.";
 }

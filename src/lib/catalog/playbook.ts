@@ -362,13 +362,13 @@ export const PLAYBOOK_STEPS: PlaybookStep[] = [
     summary:
       "Utah can be a second site or a new HQ. Bring the jobs number and the timeline.",
     whatYouDo: [
-      "Call GOEO with headcount, sector, and the quarter you would move.",
+      "Call GOED with headcount, sector, and the quarter you would move.",
       "Compare EDTIF and local incentives against the real lease math.",
       "Register the Utah entity before you hire here.",
     ],
     officialLinks: [
       { label: "Official step on startup.utah.gov", url: "https://startup.utah.gov/relocate-business/" },
-      { label: "GOEO", url: "https://business.utah.gov/" },
+      { label: "GOED", url: "https://business.utah.gov/" },
     ],
     resourceTopics: ["Late Stage Growth", "Funding"],
   },
@@ -408,6 +408,22 @@ export function playbookStep(
   stepId: string,
 ): PlaybookStep | undefined {
   return PLAYBOOK_STEPS.find((step) => step.stage === stage && step.stepId === stepId);
+}
+
+export function adjacentPlaybookSteps(
+  stage: string,
+  stepId: string,
+): { prev: { stepId: string; title: string } | null; next: { stepId: string; title: string } | null } {
+  const steps = PLAYBOOK_STEPS.filter((step) => step.stage === stage).sort(
+    (a, b) => a.stepIndex - b.stepIndex,
+  );
+  const index = steps.findIndex((step) => step.stepId === stepId);
+  const prev = index > 0 ? steps[index - 1] : null;
+  const next = index >= 0 && index < steps.length - 1 ? steps[index + 1] : null;
+  return {
+    prev: prev ? { stepId: prev.stepId, title: prev.title } : null,
+    next: next ? { stepId: next.stepId, title: next.title } : null,
+  };
 }
 
 export function stepCountByStage(): Record<PlaybookStageSlug, number> {

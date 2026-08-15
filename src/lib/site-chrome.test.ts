@@ -7,8 +7,8 @@ import {
   ASK_PANEL_LEAD,
   FOOTER_CONNECT_EYEBROW,
   FOOTER_EMAIL,
-  FOOTER_GOEO_ADDRESS_1,
-  FOOTER_GOEO_NAME,
+  FOOTER_GOED_ADDRESS_1,
+  FOOTER_GOED_NAME,
   FOOTER_NEWSLETTER_CTA,
   FOOTER_OFFICIAL_LINE,
   INTAKE_HERO,
@@ -44,8 +44,9 @@ describe("Part 1 site chrome import fences", () => {
   it("keeps official footer copy free of em dashes and admin easter eggs", () => {
     expect(FOOTER_CONNECT_EYEBROW).toBe("Let's connect");
     expect(FOOTER_OFFICIAL_LINE).toBe("An official state of Utah website");
-    expect(FOOTER_GOEO_NAME).toContain("GOEO");
-    expect(FOOTER_GOEO_ADDRESS_1).toContain("South Temple");
+    expect(FOOTER_GOED_NAME).toBe("Utah Governor's Office of Economic Development (GOED)");
+    expect(FOOTER_GOED_NAME).not.toContain("GOEO");
+    expect(FOOTER_GOED_ADDRESS_1).toContain("South Temple");
     expect(FOOTER_EMAIL).toBe("business@utah.gov");
     expect(FOOTER_NEWSLETTER_CTA).toBe("Subscribe to Newsletter");
     expect(WELCOME_BACK_BANNER).toContain("Opportunity Map");
@@ -56,7 +57,7 @@ describe("Part 1 site chrome import fences", () => {
     const locked = [
       FOOTER_CONNECT_EYEBROW,
       FOOTER_OFFICIAL_LINE,
-      FOOTER_GOEO_NAME,
+      FOOTER_GOED_NAME,
       FOOTER_NEWSLETTER_CTA,
       WELCOME_BACK_BANNER,
       ASK_FAB_LABEL,
@@ -79,9 +80,10 @@ describe("Part 1 site chrome import fences", () => {
     const footer = read("src/components/footer.tsx");
     expect(footer).toContain("FOOTER_CONNECT_EYEBROW");
     expect(footer).toContain("FOOTER_OFFICIAL_LINE");
-    expect(footer).toContain("FOOTER_GOEO_NAME");
+    expect(footer).toContain("FOOTER_GOED_NAME");
     expect(footer).toContain("ss-stacked-white.png");
-    expect(footer).toContain("goeo-only-white.png");
+    expect(footer).toContain("goed-only-white.png");
+    expect(footer).not.toContain("goeo-only");
     expect(footer).not.toMatch(/admin|Tyler|tyler-card|confetti/i);
     expect(footer).toContain("SITE_NAV");
   });
@@ -92,6 +94,25 @@ describe("Part 1 site chrome import fences", () => {
     expect(intake).toContain("WelcomeBack");
     expect(intake).toContain("{INTAKE_HERO}");
     expect(INTAKE_HERO).toBe("Tell us about your company.");
+  });
+
+  it("keeps the Part 1 Events outbound link", () => {
+    const nav = read("src/components/nav.tsx");
+    expect(nav).toContain(
+      "https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732",
+    );
+    expect(nav).toContain("goed-only-color.png");
+    expect(nav).toContain("Governor's Office of Economic Development");
+    expect(nav).not.toContain("goeo-only");
+    expect(nav).not.toContain("Economic Opportunity");
+  });
+
+  it("shows leftover links at laptop width the way Part 1 does", () => {
+    const nav = read("src/components/nav.tsx");
+    expect(nav).toContain("max-w-[1400px]");
+    expect(nav).toMatch(/\bmd:flex\b/);
+    expect(nav).not.toMatch(/\bxl:flex\b/);
+    expect(nav).not.toMatch(/\bxl:hidden\b/);
   });
 
   it("puts leftover surfaces on the nav and still forbids the Tyler card", () => {
@@ -113,9 +134,9 @@ describe("Part 1 brand assets in git", () => {
   it("commits the official lockups the nav and footer already name", () => {
     const required = [
       "public/brand/ss-horiz-color.png",
-      "public/brand/goeo-only-color.png",
+      "public/brand/goed-only-color.png",
       "public/brand/ss-stacked-white.png",
-      "public/brand/goeo-only-white.png",
+      "public/brand/goed-only-white.png",
       "public/brand/topography-tile.webp",
     ];
     const patterns = [
