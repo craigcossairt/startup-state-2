@@ -1,10 +1,14 @@
 import { PLAYBOOK_STEPS } from "./playbook";
 
 export function navigatorCatalogHint(message: string): string {
-  const needle = message.toLowerCase();
+  const words = message
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((word) => word.length > 3);
   const matches = PLAYBOOK_STEPS.filter((step) => {
     const hay = `${step.title} ${step.summary} ${step.resourceTopics.join(" ")}`.toLowerCase();
-    return needle.split(/\s+/).some((word) => word.length > 3 && hay.includes(word));
+    return words.some((word) => hay.includes(word));
   }).slice(0, 3);
   if (matches.length > 0) {
     const lines = matches.map((step) => `${step.title} (${step.sourceUrl})`);
