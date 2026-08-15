@@ -35,7 +35,7 @@ Rules:
 - nextStep: { "label": string, "url"?: string }. Prefer the opportunity url when present.
 - Do not invent a dollar amount or deadline. If value or deadline is null, do not pretend it exists. You may say it is not published.
 - Ranges are qualitative. Overlap on employees, revenue, or capital need may support likely or potential-verify if sector or tech also fit. Same sector outside band (about 2x) is adjacent plus a concern. No semantic overlap is probably_not.
-- A same-sector NIH, NSF, HHS, or SBIR/STTR listing is at least potential-verify even when the topic is narrower than the product. Adjacent is weak overlap. A diplomatic U.S. Mission exchange is probably_not. Do not spend the 8-12 slots on embassy grants when same-sector programs exist.
+- Mark likely or potential-verify only when sector and tech, or sector and use of funds, overlap. A generic SBIR/STTR parent listing is not a fit by itself. A youth mental-health research grant is not a fit for a parent/youth marketplace. Same-sector NIH, NSF, HHS, or SBIR/STTR plus matching tech (for example healthcare and AI) is at least potential-verify even when the topic is narrower. Adjacent is weak overlap. A diplomatic U.S. Mission exchange is probably_not. Do not spend the 8-12 slots on embassy grants when same-sector programs exist.
 - Utah-only programs for a non-Utah company: adjacent plus a concern, unless the row is marked open to nonresidents (U3P register, EDTIF if expanding into Utah).
 - Inclusion (not sort):
   - If any State-lane row was retrieved, include at least 2 Utah ids when possible.

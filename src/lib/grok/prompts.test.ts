@@ -9,10 +9,12 @@ describe("RANK_SYSTEM", () => {
     expect(RANK_SYSTEM).toMatch(/SBIR\/STTR|SBIR or STTR/i);
     expect(RANK_SYSTEM).toMatch(/same sector|same-sector/i);
     expect(RANK_SYSTEM).toMatch(/diplomatic|embassy|U\.S\. Mission/i);
+    expect(RANK_SYSTEM).toMatch(/generic SBIR\/STTR parent|not a fit by itself/i);
+    expect(RANK_SYSTEM).toMatch(/marketplace/i);
     const spec = readFileSync(
       path.join(process.cwd(), "docs", "spec", "infer-rank-explain-prompts.md"),
       "utf8",
     );
-    expect(spec).toContain("same-sector NIH, NSF, HHS, or SBIR/STTR");
+    expect(spec).toMatch(/same-sector NIH, NSF, HHS, or SBIR\/STTR/i);
   });
 });
