@@ -22,7 +22,7 @@ describe("bonus controls", () => {
       path.join(process.cwd(), "src", "components", "nav.tsx"),
       "utf8",
     );
-    expect(filters).toContain("Watch this search");
+    expect(map).toContain("Watch this search");
     expect(intake).toContain("WelcomeBack");
     const welcome = readFileSync(
       path.join(process.cwd(), "src", "components", "welcome-back.tsx"),

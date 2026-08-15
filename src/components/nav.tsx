@@ -118,10 +118,10 @@ function NavLink({
   return (
     <Link
       href={href}
-      className={`inline-flex h-9 items-center rounded-md px-2.5 text-[13px] font-semibold ${
+      className={`inline-flex h-9 items-center px-2.5 text-[13px] font-semibold ${
         active
-          ? "bg-midnight text-white"
-          : "text-foreground-muted hover:bg-background-alt hover:text-foreground"
+          ? "border-b-2 border-vibrant-green text-vibrant-green"
+          : "text-foreground hover:bg-background-alt"
       }`}
     >
       {label}
