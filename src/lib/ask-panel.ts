@@ -97,6 +97,25 @@ export function summarizeAskCards(cards: AskCardInput[]): AskCardSummary[] {
   }));
 }
 
+export function normalizeAskCards(cards: unknown[]): AskCardSummary[] {
+  return cards.map((card) => {
+    if (!isRecord(card)) return { id: "", program: "", why: "" };
+    if (typeof card.id === "string") {
+      return {
+        id: card.id,
+        program: typeof card.program === "string" ? card.program : "",
+        why: typeof card.why === "string" ? card.why : "",
+      };
+    }
+    const opportunity = isRecord(card.opportunity) ? card.opportunity : null;
+    return {
+      id: typeof opportunity?.id === "string" ? opportunity.id : "",
+      program: typeof opportunity?.program === "string" ? opportunity.program : "",
+      why: typeof card.why === "string" ? card.why : "",
+    };
+  });
+}
+
 export function buildAskRequest(input: {
   message: string;
   surface: AskSurface;
