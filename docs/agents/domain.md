@@ -22,7 +22,7 @@ Single-context repo:
 │   ├── briefs/
 │   ├── decision-log.md
 │   └── adr/                    (created lazily by domain-modeling)
-└── src/                        (app not scaffolded yet)
+└── src/                        App Router: Intake, Opportunity Map, leftover pages
 ```
 
 ## Use the glossary's vocabulary

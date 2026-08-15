@@ -73,5 +73,5 @@ GOEO’s current SBIR/STTR help desk. Part 1 catalog name: Utah Innovation Cente
 _Avoid_: treating campus “Innovation Centers” as this program
 
 **Part 1 app**:
-craigcossairt/startup-state. Anything that does not conflict with the Part 2 brief may be copied, including extras that show future vision. Conflicts: Playbook or a geo map as the product, last year's six personas as the judged set, topic-weight matching as the ranker, inventing programs.
-_Avoid_: treating the five-surface app as this product
+craigcossairt/startup-state. Anything that does not conflict with the Part 2 brief may be copied, including extras that show future vision. Conflicts: Playbook or a geo map as the product, last year's six personas as the judged set, topic-weight matching as the ranker, inventing programs. Leftover siblings (Playbook, Resources, Startups, Careers, News, Swag) sit beside Intake. `/map` stays the Opportunity Map.
+_Avoid_: treating the five-surface app as this product, redirecting `/map` to a geo plot

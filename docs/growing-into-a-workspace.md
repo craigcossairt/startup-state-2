@@ -73,9 +73,6 @@ need this?" - if not, it's a context file agents read on demand, not AGENTS.md c
   is enrichment, not a dependency.
 - **Run business sessions at the workspace root, code sessions at the repo root.** The working
   directory picks the context level for you.
-- **The brain moves up.** If you initialized `brain/` in the repo, a workspace-level corpus
-  (all repos' docs + Files/Context Files) is usually more valuable once the venture has real
-  history. Keep the brain OUT of cloud-synced folders (see eviction warning).
 
 ## Parallel sessions: park the main checkout
 

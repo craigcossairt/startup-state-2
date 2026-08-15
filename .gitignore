@@ -19,16 +19,6 @@ target/
 # Local agent state
 .claude/settings.local.json
 
-# Brain: corpus and generated state are local-only
-brain/raw/*
-!brain/raw/.gitkeep
-brain/summaries/*
-!brain/summaries/.gitkeep
-brain/.last-ingest
-brain/log.md
-brain/index.md
-brain/hooks/debug.log
-
 # Weekend federal dumps (too large; pull locally). Committed slices stay in git.
 data/cache/sam/active.json
 data/cache/sbir/award_data.csv
