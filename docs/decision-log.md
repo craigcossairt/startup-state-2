@@ -63,3 +63,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Claude Design brief for the Opportunity Map states jobs, information, and situations only. Arrangement stays out so the visual pass is not biased by the locked structure note. The brief is the facts archive for the zip that already landed. See `docs/briefs/opportunity-map-design-handoff.md`.
 - **2026-08-15** - Chat route accepts both posted card shapes through `normalizeAskCards`. The union map in `/api/chat` failed `next build` TypeScript on Vercel. See this PR.
 - **2026-08-15** - `/swag` ships the 16 grok product shots, not the Part 1 nine-item webp set. `SWAG_ITEMS` stays the table. See this PR.
+- **2026-08-15** - Leftover Careers and the home hiring KPI use the Part 1 30-company hiring set from the committed catalog. Live Supabase rows get those flags overlaid. Production apply updates `is_hiring` on existing slugs. See this PR.

@@ -28,12 +28,30 @@ async function fetchSupabaseTable(table: "resources" | "startups"): Promise<unkn
   }
 }
 
+export function applyCommittedHiringFlags(
+  live: CatalogStartup[],
+  committed: CatalogStartup[],
+): CatalogStartup[] {
+  const flags = new Map(committed.map((row) => [row.slug, row]));
+  return live.map((row) => {
+    const fallback = flags.get(row.slug);
+    if (!fallback) return row;
+    return {
+      ...row,
+      isHiring: fallback.isHiring,
+      careersUrl: row.careersUrl ?? fallback.careersUrl,
+    };
+  });
+}
+
 export async function loadCatalogResources(): Promise<CatalogResource[]> {
   const live = await fetchSupabaseTable("resources");
   return parseResourceList(live ?? readJson("catalog/resources.json"));
 }
 
 export async function loadCatalogStartups(): Promise<CatalogStartup[]> {
+  const committed = parseStartupList(readJson("catalog/startups.json"));
   const live = await fetchSupabaseTable("startups");
-  return parseStartupList(live ?? readJson("catalog/startups.json"));
+  if (!live) return committed;
+  return applyCommittedHiringFlags(parseStartupList(live), committed);
 }

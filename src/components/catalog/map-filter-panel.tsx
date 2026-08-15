@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode, type SVGProps } from "react";
 import { CompanyLogo } from "./company-logo";
 import { SaveSearchButton } from "./save-search-button";
 import {
@@ -93,6 +93,7 @@ export function MapFilterPanel({
           className="flex w-full items-center gap-2 px-5 py-3 text-[10px] font-bold uppercase tracking-wider text-foreground-muted hover:text-foreground"
           aria-expanded={filtersOpen}
         >
+          <FilterIcon className="h-3 w-3" />
           Filter
           {activeCount > 0 ? (
             <span className="text-[11px] font-semibold normal-case text-primary">{activeCount} active</span>
@@ -273,6 +274,14 @@ function toggle<T>(set: Set<T>, value: T): Set<T> {
   if (next.has(value)) next.delete(value);
   else next.add(value);
   return next;
+}
+
+function FilterIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" {...props}>
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+    </svg>
+  );
 }
 
 function describeMapFilter(state: {
