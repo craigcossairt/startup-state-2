@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { postgresDsnCandidates, supabasePublicConfig } from "./env";
+import { postgresDsnCandidates, stripPostgresSslMode, supabasePublicConfig } from "./env";
 
 describe("supabase public config", () => {
   it("stays off until both a https url and an anon key are present", () => {
@@ -39,5 +39,16 @@ describe("supabase public config", () => {
       "postgres://pooler.example/postgres",
       "postgres://prisma.example/postgres?pgbouncer=true",
     ]);
+  });
+
+  it("drops sslmode so pg can use rejectUnauthorized false", () => {
+    expect(
+      stripPostgresSslMode(
+        "postgres://u:p@db.example/postgres?sslmode=require&pgbouncer=true",
+      ),
+    ).toBe("postgres://u:p@db.example/postgres?pgbouncer=true");
+    expect(stripPostgresSslMode("postgres://u:p@db.example/postgres")).toBe(
+      "postgres://u:p@db.example/postgres",
+    );
   });
 });
