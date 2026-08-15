@@ -9,7 +9,7 @@ export function Nav() {
   const onMap = pathname.startsWith("/map");
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex min-w-0 items-center gap-3">
           <Link href="/" aria-label="Startup State home" className="shrink-0 hover:opacity-80">
             <Image

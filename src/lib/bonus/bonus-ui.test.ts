@@ -23,8 +23,13 @@ describe("bonus controls", () => {
       "utf8",
     );
     expect(filters).toContain("Watch this search");
-    expect(intake).toContain("Open last Opportunity Map");
-    expect(intake).toContain("restoreLastCompanyProfile");
+    expect(intake).toContain("WelcomeBack");
+    const welcome = readFileSync(
+      path.join(process.cwd(), "src", "components", "welcome-back.tsx"),
+      "utf8",
+    );
+    expect(welcome).toContain("WELCOME_BACK_ACTION");
+    expect(welcome).toContain("restoreLastCompanyProfile");
     const blob = `${map}\n${intake}\n${nav}`;
     expect(blob).not.toMatch(/coming soon|coming-soon/i);
     expect(nav).not.toMatch(/Playbook|Careers|Swag|News/i);

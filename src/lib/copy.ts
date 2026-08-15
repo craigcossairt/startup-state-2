@@ -47,3 +47,26 @@ export const FIT_LABELS = {
   adjacent: "adjacent",
   probably_not: "probably not",
 } as const;
+
+export const FOOTER_CONNECT_EYEBROW = "Let's connect";
+export const FOOTER_OFFICIAL_LINE = "An official state of Utah website";
+export const FOOTER_NEWSLETTER_EYEBROW = "Email Newsletter";
+export const FOOTER_NEWSLETTER_BODY =
+  "Sign up for our monthly newsletter to learn more about GOEO programs and ecosystem activity.";
+export const FOOTER_NEWSLETTER_CTA = "Subscribe to Newsletter";
+export const FOOTER_GOEO_NAME =
+  "Utah Governor's Office of Economic Opportunity (GOEO)";
+export const FOOTER_GOEO_ADDRESS_1 = "60 East South Temple, Suite 300";
+export const FOOTER_GOEO_ADDRESS_2 = "Salt Lake City, Utah 84111-1041";
+export const FOOTER_EMAIL = "business@utah.gov";
+export const FOOTER_NEWSLETTER_URL =
+  "https://cdn.forms-content.sg-form.com/06b418c5-1057-11ee-9a80-ca5180dad175";
+export const WELCOME_BACK_BANNER =
+  "Welcome back. We saved your last Opportunity Map.";
+export const WELCOME_BACK_ACTION = "Open last Opportunity Map";
+export const ASK_FAB_LABEL = "Ask the map";
+export const ASK_PANEL_LEAD =
+  "Questions stay on programs already retrieved for this company.";
+export const ASK_NEEDS_MAP =
+  "Rank a company first. Then I can talk about programs on that Opportunity Map.";
+export const ASK_PLACEHOLDER = "What should I do first on this map?";
