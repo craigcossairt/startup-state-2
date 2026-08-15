@@ -56,6 +56,14 @@ export function isSameCompanySearch(a: CompanyProfile, b: CompanyProfile): boole
   return profileCacheKey(a) === profileCacheKey(b);
 }
 
+export function isCurrentWatchedSearch(
+  saved: SavedSearch,
+  profile: CompanyProfile,
+  chips: RetrieveChips,
+): boolean {
+  return mapCacheKey(saved.profile, saved.chips) === mapCacheKey(profile, chips);
+}
+
 export function mapCacheKey(profile: CompanyProfile, chips: RetrieveChips): string {
   const extra = [...(chips.extraGoeoKeys ?? [])].sort();
   return JSON.stringify({

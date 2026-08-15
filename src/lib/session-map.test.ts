@@ -3,6 +3,7 @@ import { emptyCompanyProfile } from "@/lib/profile/empty";
 import { ranked } from "@/lib/bonus/test-cards";
 import { subscribeToSearch } from "@/lib/bonus/alerts";
 import {
+  isCurrentWatchedSearch,
   isSameCompanySearch,
   loadCachedMap,
   loadSavedSearch,
@@ -125,5 +126,19 @@ describe("map cache", () => {
     );
     expect(loadSavedSearch(store)?.seenIds).toEqual(["grants_gov:1"]);
     expect(loadSavedSearch(memoryStore())).toBeNull();
+  });
+
+  it("treats a watched search as current only when profile and retrieve chips match", () => {
+    const company = profile("AI healthcare SaaS");
+    const saved = subscribeToSearch({
+      profile: company,
+      chips: { lane: "federal" },
+      seenIds: ["grants_gov:1"],
+    });
+    expect(isCurrentWatchedSearch(saved, company, { lane: "federal" })).toBe(true);
+    expect(isCurrentWatchedSearch(saved, company, {})).toBe(false);
+    expect(isCurrentWatchedSearch(saved, profile("Youth marketplace"), { lane: "federal" })).toBe(
+      false,
+    );
   });
 });

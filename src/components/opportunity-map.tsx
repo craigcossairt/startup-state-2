@@ -19,7 +19,7 @@ import { sortRankedCards } from "@/lib/rank/sort";
 import { readRankStream } from "@/lib/rank/stream-events";
 import { confirmInferredMustHaves, promoteFilledMustHaves } from "@/lib/profile/must-haves";
 import {
-  isSameCompanySearch,
+  isCurrentWatchedSearch,
   loadCachedMap,
   loadSavedSearch,
   peekCachedMap,
@@ -170,7 +170,7 @@ export function OpportunityMap({
 
   function applyWatch(profile: CompanyProfile, ids: string[]) {
     const saved = loadSavedSearch();
-    const match = Boolean(saved && isSameCompanySearch(saved.profile, profile));
+    const match = Boolean(saved && isCurrentWatchedSearch(saved, profile, chips));
     setWatching(match);
     setNewCount(match && saved ? newOpportunityIds(saved.seenIds, ids).length : 0);
   }
