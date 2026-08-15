@@ -342,24 +342,27 @@ export function OpportunityMap({
         </section>
       ) : null}
 
+      <div className="border-b border-border bg-white">
+        <div className="mx-auto max-w-[1320px] px-6 py-4 sm:px-8">
+          <p className="eyebrow mb-3">{TEST_CASES_LABEL}</p>
+          <FixtureRail active={fixture} />
+        </div>
+      </div>
+
       {profileOpen && company ? (
         <div className="border-b border-border bg-white">
           <div className="mx-auto max-w-[1320px] px-6 py-6 sm:px-8">
-            <p className="eyebrow mb-3">{TEST_CASES_LABEL}</p>
-            <FixtureRail active={fixture} />
-            <div className="mt-6">
-              <CompanySnapshot
-                profile={company}
-                cards={payload?.cards ?? cards.filter((card) => !card.ranking)}
-                onSave={(next) => {
-                  const ready = confirmInferredMustHaves(promoteFilledMustHaves(next));
-                  saveProfile(ready);
-                  setCompany(ready);
-                  setProfileOpen(false);
-                  setProfileRevision((value) => value + 1);
-                }}
-              />
-            </div>
+            <CompanySnapshot
+              profile={company}
+              cards={payload?.cards ?? cards.filter((card) => !card.ranking)}
+              onSave={(next) => {
+                const ready = confirmInferredMustHaves(promoteFilledMustHaves(next));
+                saveProfile(ready);
+                setCompany(ready);
+                setProfileOpen(false);
+                setProfileRevision((value) => value + 1);
+              }}
+            />
           </div>
         </div>
       ) : null}

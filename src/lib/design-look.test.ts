@@ -7,6 +7,7 @@ import {
   FLOOR_FOLLOW,
   INTAKE_CTA,
   INTAKE_HERO,
+  INTAKE_LANDING_LEAD,
   INTAKE_LANDING_TITLE,
   INTAKE_LEAD,
   INTAKE_ROLE_FOUNDER,
@@ -29,6 +30,7 @@ describe("Claude Design look", () => {
     expect(INTAKE_HERO).toBe("Tell us about your company.");
     expect(INTAKE_LEAD).toContain("website");
     expect(INTAKE_LANDING_TITLE).toBe("Start Something Here");
+    expect(INTAKE_LANDING_LEAD.toLowerCase()).not.toMatch(/not just|isn't just/);
     expect(INTAKE_CTA).toBe("Build my Opportunity Map");
     expect(INTAKE_ROLE_FOUNDER).toBe("I'm a founder");
     expect(JOURNEY_TITLE).toContain("every stage");

@@ -26,7 +26,7 @@ export const INTAKE_LANDING_EYEBROW =
 export const INTAKE_LANDING_TITLE = "Start Something Here";
 
 export const INTAKE_LANDING_LEAD =
-  "The Startup State Initiative highlights what already exists in Utah and elevates it to new heights. It isn't just about Utah; it's about setting a new global standard for innovation and entrepreneurship.";
+  "The Startup State Initiative highlights what already exists in Utah and raises it. The aim is a higher bar for innovation and entrepreneurship, here and elsewhere.";
 
 export const INTAKE_CTA = "Build my Opportunity Map";
 

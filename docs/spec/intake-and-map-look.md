@@ -13,7 +13,7 @@ Related: `docs/spec/company-profile-schema.md`, `docs/spec/retrieve-and-rank.md`
 | # | Decision |
 | --- | --- |
 | Q1 | Spine is the **editorial stack** (prototype variant A): midnight hero, one sentence, fixtures, then a column of Ranked cards. |
-| Q2 | Test cases stay on Intake and in the map company-profile panel so judges can flip companies without a new infer. Leave one-card focus (variant C) out of the weekend default. |
+| Q2 | Test cases stay on Intake and as a visible fixture rail on the map so judges can flip companies without a new infer. Leave one-card focus (variant C) out of the weekend default. |
 | Q3 | Default map uses **full Ranked cards** (why, concerns, history, next step). Not compact rows. |
 | Q4 | Case-5 **probably-not floor** is a green notice above the list (`Read this first` + locked sentence), federal `probably not` cards still listed under it. |
 | Q5 | This ticket locks **structure**. The HTML is a layout probe, not the end-state look. |
@@ -30,6 +30,7 @@ Confirm — inferred must-haves, editable (Q6 on the profile spec)
 Opportunity Map
   ├─ You bar (leftover persona; not a ranking input)
   ├─ Midnight company hero + facts strip
+  ├─ Fixture rail (visible; not only inside Company profile)
   ├─ Retrieve / Fit sidebar (retrieve is draft until Rank again)
   ├─ Probably-not notice when the floor trips
   └─ Full Ranked cards, 8–12, array order = rank
@@ -46,7 +47,7 @@ Opportunity Map
 ## Opportunity Map
 
 - Same page family as Intake (not a second site). Source badge Federal or Utah.
-- Test cases stay reachable from Intake and from the company-profile panel. You bar leftover persona is not a ranking input.
+- Test cases stay reachable from Intake and from the fixture rail on the map. You bar leftover persona is not a ranking input.
 - Retrieve sidebar: Lane (Federal / Utah), six GOEO keys, `directory`. Those changes stay draft until Rank again. Fit checkboxes only filter the ranked list and apply at once.
 - Each Ranked card shows, in this order: Source badge, instrument, status, Fit, program, agency, value, deadline, why, concerns, similar awardees, next step.
 - Value or deadline `null` displays as **Not published**. Do not invent a number or a date.

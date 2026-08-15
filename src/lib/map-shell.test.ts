@@ -49,4 +49,11 @@ describe("Opportunity Map shell", () => {
     expect(card).toContain("similarAwardees");
     expect(card).toContain("NONE_ATTACHED");
   });
+
+  it("keeps the fixture rail on the map, not only inside Company profile", () => {
+    const map = read("src/components/opportunity-map.tsx");
+    const profileAt = map.indexOf("{profileOpen &&");
+    expect(profileAt).toBeGreaterThan(-1);
+    expect(map.slice(0, profileAt)).toContain("<FixtureRail");
+  });
 });
