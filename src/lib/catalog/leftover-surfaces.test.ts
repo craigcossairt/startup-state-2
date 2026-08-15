@@ -48,6 +48,17 @@ describe("leftover surfaces", () => {
     expect(fab).toContain("rect.bottom > 0");
   });
 
+  it("applies leftover catalog schema during build and never inserts startup status", () => {
+    const pkg = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8")) as {
+      scripts: Record<string, string>;
+    };
+    expect(pkg.scripts.build).toContain("scripts/apply-catalog-schema.mjs");
+    const script = readFileSync(path.join(root, "scripts/apply-catalog-schema.mjs"), "utf8");
+    expect(script).toContain("supabase/schema.sql");
+    expect(script).toContain("insert into public.startups");
+    expect(script).not.toMatch(/insert into public\.startups[\s\S]*\bstatus\b/);
+  });
+
   it("commits the swag photos the swag page names", () => {
     for (const item of SWAG_ITEMS) {
       const full = path.join(root, "public", item.src.replace(/^\//, ""));
