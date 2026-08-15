@@ -1,0 +1,46 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { describe, expect, it } from "vitest";
+import { BONUS_CONTROLS } from "@/components/bonus-bar";
+import { FIT_LABELS, NOT_PUBLISHED, TEST_CASES_LABEL } from "@/lib/copy";
+
+const root = process.cwd();
+
+function read(rel: string): string {
+  return readFileSync(path.join(root, rel), "utf8");
+}
+
+describe("Opportunity Map shell", () => {
+  it("restores a cached map, paints retrieved cards while ranking, and keeps filters off the bonus row", () => {
+    const map = read("src/components/opportunity-map.tsx");
+    const filters = read("src/components/map-filter-bar.tsx");
+    expect(map).toContain("loadCachedMap");
+    expect(map).toContain("saveCachedMap");
+    expect(map).toContain("peekCachedMap");
+    expect(map).toContain("chipsReady");
+    expect(map).toContain("pendingCardsFromPreviews");
+    expect(map).toContain("CompanySnapshot");
+    expect(map).toContain("MapFilterBar");
+    expect(map).toContain("TEST_CASES_LABEL");
+    expect(map).not.toContain("Found so far");
+    expect(map).not.toMatch(/Official fixtures/i);
+    expect(`${map}\n${filters}`).not.toMatch(/\d+%/);
+    expect(`${map}\n${filters}`).not.toMatch(/confidence/i);
+    expect(map).not.toContain("BonusBar");
+  });
+
+  it("watches the company search and asks from a FAB, not extra chip rows", () => {
+    const map = read("src/components/opportunity-map.tsx");
+    const filters = read("src/components/map-filter-bar.tsx");
+    const layout = read("src/app/layout.tsx");
+    const alerts = read("src/app/map/alerts/page.tsx");
+    expect(filters).toContain("Watch this search");
+    expect(filters).toContain("/map/alerts");
+    expect(alerts).toContain("subscribeToSearch");
+    expect(layout).toContain("AskFab");
+    expect(BONUS_CONTROLS.map((item) => item.label)).toEqual(["Plan", "Graph"]);
+    expect(TEST_CASES_LABEL).toBe("Test cases");
+    expect(FIT_LABELS.likely).toBe("likely");
+    expect(NOT_PUBLISHED).toBe("Not published");
+  });
+});

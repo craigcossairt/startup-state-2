@@ -4,18 +4,14 @@ import { describe, expect, it } from "vitest";
 import { BONUS_CONTROLS } from "@/components/bonus-bar";
 
 describe("bonus controls", () => {
-  it("ships every stretch surface as a real control and never says coming soon", () => {
-    expect(BONUS_CONTROLS.map((item) => item.label)).toEqual([
-      "Checklist",
-      "12-month",
-      "Similar companies",
-      "Alerts",
-      "Chat",
-      "Agencies",
-      "Graph",
-    ]);
+  it("keeps Plan and Graph as real controls and never says coming soon", () => {
+    expect(BONUS_CONTROLS.map((item) => item.label)).toEqual(["Plan", "Graph"]);
     const map = readFileSync(
       path.join(process.cwd(), "src", "components", "opportunity-map.tsx"),
+      "utf8",
+    );
+    const filters = readFileSync(
+      path.join(process.cwd(), "src", "components", "map-filter-bar.tsx"),
       "utf8",
     );
     const intake = readFileSync(
@@ -26,7 +22,7 @@ describe("bonus controls", () => {
       path.join(process.cwd(), "src", "components", "nav.tsx"),
       "utf8",
     );
-    expect(map).toContain("BonusBar");
+    expect(filters).toContain("Watch this search");
     expect(intake).toContain("Open last Opportunity Map");
     expect(intake).toContain("restoreLastCompanyProfile");
     const blob = `${map}\n${intake}\n${nav}`;

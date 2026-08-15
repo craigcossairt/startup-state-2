@@ -3,7 +3,7 @@ import type { FixtureId } from "@/lib/types/company-profile";
 export const INTAKE_HERO = "Tell us about your company.";
 
 export const INTAKE_LEAD =
-  "Share your website, describe the company, or pick a fixture. We rank retrieved federal and Utah programs by fit. This is not a determination that you can apply.";
+  "Share your website, describe the company, or pick a test case. We rank retrieved federal and Utah programs by fit. This is not a determination that you can apply.";
 
 export const INTAKE_WHAT_THEY_DO_LABEL = "What does the company do?";
 
@@ -18,6 +18,8 @@ export const FLOOR_BANNER =
   "Traditional federal grants look like a poor fit for this company. Utah programs below are the stronger place to start.";
 
 export const NOT_PUBLISHED = "Not published";
+
+export const TEST_CASES_LABEL = "Test cases";
 
 export const FIXTURE_CHIPS: { id: FixtureId; label: string }[] = [
   { id: "fixture-1", label: "Healthcare AI" },

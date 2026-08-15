@@ -55,6 +55,7 @@ export type RankedCard = {
   concerns: string[];
   nextStep: { label: string; url?: string };
   similarAwardees: HistoryAttachment[];
+  ranking?: boolean;
 };
 
 export type RankModelCard = {

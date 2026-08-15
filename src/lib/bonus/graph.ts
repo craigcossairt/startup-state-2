@@ -1,5 +1,11 @@
 import type { RankedCard } from "@/lib/types/opportunity";
 
+export type GraphCluster = {
+  reason: "agency" | "aln";
+  label: string;
+  programs: { id: string; program: string }[];
+};
+
 export type GraphEdge = {
   from: string;
   to: string;
@@ -26,6 +32,37 @@ export function opportunityGraph(cards: RankedCard[]): {
     }
   }
   return { nodes, edges };
+}
+
+export function graphClusters(cards: RankedCard[]): GraphCluster[] {
+  const clusters: GraphCluster[] = [];
+  const agencies = new Map<string, { id: string; program: string }[]>();
+  const alns = new Map<string, { id: string; program: string }[]>();
+
+  for (const card of cards) {
+    const node = { id: card.opportunity.id, program: card.opportunity.program };
+    const agency = card.opportunity.agency.name;
+    if (agency) {
+      const list = agencies.get(agency) ?? [];
+      list.push(node);
+      agencies.set(agency, list);
+    }
+    for (const code of card.opportunity.aln) {
+      const list = alns.get(code) ?? [];
+      list.push(node);
+      alns.set(code, list);
+    }
+  }
+
+  for (const [label, programs] of agencies) {
+    if (programs.length < 2) continue;
+    clusters.push({ reason: "agency", label, programs });
+  }
+  for (const [code, programs] of alns) {
+    if (programs.length < 2) continue;
+    clusters.push({ reason: "aln", label: `ALN ${code}`, programs });
+  }
+  return clusters;
 }
 
 function sharedReason(

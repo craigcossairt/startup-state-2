@@ -1,54 +1,75 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BonusPage } from "@/components/bonus-page";
-import { toggleAlertWatch, type AlertWatch } from "@/lib/bonus/alerts";
-import { NOT_PUBLISHED } from "@/lib/copy";
-import { loadAlertWatches, saveAlertWatches } from "@/lib/session-map";
+import { newOpportunityIds, subscribeToSearch, type SavedSearch } from "@/lib/bonus/alerts";
+import { loadSavedSearch, peekCachedMap, persistSavedSearch } from "@/lib/session-map";
+import { loadStoredProfile } from "@/lib/session-profile";
 
 export default function AlertsPage() {
-  const [watches, setWatches] = useState<AlertWatch[]>([]);
+  const [saved, setSaved] = useState<SavedSearch | null>(null);
 
   useEffect(() => {
-    setWatches(loadAlertWatches());
+    setSaved(loadSavedSearch());
   }, []);
 
-  function toggle(watch: AlertWatch) {
-    const next = toggleAlertWatch(watches, watch);
-    setWatches(next);
-    saveAlertWatches(next);
-  }
-
   return (
-    <BonusPage title="Alerts" active="/map/alerts">
-      {(payload) => (
-        <ul className="space-y-3">
-          {payload.cards.map((card) => {
-            const watch = {
-              id: card.opportunity.id,
-              deadline: card.opportunity.deadline,
-            };
-            const watching = watches.some((item) => item.id === watch.id);
-            return (
-              <li key={card.opportunity.id} className="flex items-center justify-between gap-3 rounded-lg border border-border p-4">
-                <div>
-                  <p className="font-extrabold">{card.opportunity.program}</p>
-                  <p className="text-sm text-foreground-muted">
-                    Deadline {card.opportunity.deadline ?? NOT_PUBLISHED}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => toggle(watch)}
-                  className="rounded-md bg-midnight px-3 py-2 text-sm font-bold text-white"
-                >
-                  {watching ? "Stop watching" : "Watch"}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+    <BonusPage title="Watch this search" active="/map/alerts">
+      {(payload) => {
+        const newIds = saved ? newOpportunityIds(saved.seenIds, payload.retrievedIds) : [];
+        const newCards = payload.cards.filter((card) => newIds.includes(card.opportunity.id));
+
+        function watchNow() {
+          const profile = loadStoredProfile();
+          if (!profile) return;
+          const search = subscribeToSearch({
+            profile,
+            chips: peekCachedMap()?.chips ?? {},
+            seenIds: payload.retrievedIds,
+          });
+          persistSavedSearch(search);
+          setSaved(search);
+        }
+
+        return (
+          <div className="space-y-4">
+            <p className="text-foreground-muted">
+              Subscribe to this company search. The next time the map runs, new
+              retrieved programs are flagged here. Email delivery is not wired yet.
+            </p>
+            {saved ? (
+              <p className="text-sm font-semibold">Watching {saved.label}</p>
+            ) : (
+              <button
+                type="button"
+                onClick={watchNow}
+                className="rounded-md bg-midnight px-4 py-2 text-sm font-bold text-white"
+              >
+                Watch this search
+              </button>
+            )}
+            {newCards.length === 0 ? (
+              <p className="text-sm text-foreground-muted">No new programs since you subscribed.</p>
+            ) : (
+              <ul className="space-y-3">
+                {newCards.map((card) => (
+                  <li key={card.opportunity.id} className="rounded-lg border border-border p-4">
+                    <p className="text-xs font-bold uppercase text-vibrant-green">New</p>
+                    <p className="font-extrabold">{card.opportunity.program}</p>
+                    <p className="text-sm text-foreground-muted">{card.opportunity.agency.name}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p>
+              <Link href="/map" className="text-sm font-semibold text-vibrant-green">
+                Back to ranked cards
+              </Link>
+            </p>
+          </div>
+        );
+      }}
     </BonusPage>
   );
 }
