@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import { SITE_NAV, navItemIsActive } from "@/lib/site-nav";
 
 describe("SITE_NAV", () => {
-  it("lists leftover surfaces beside the Opportunity Map", () => {
+  it("lists leftover surfaces beside Opportunities", () => {
     expect(SITE_NAV.map((item) => [item.href, item.label])).toEqual([
-      ["/map", "Opportunity Map"],
+      ["/map", "Opportunities"],
       ["/playbook", "Playbook"],
       ["/resources", "Resources"],
       ["/startups", "Startups"],
