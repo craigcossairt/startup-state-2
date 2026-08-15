@@ -4,10 +4,12 @@ export function SurfaceHero({
   eyebrow,
   title,
   children,
+  after,
 }: {
   eyebrow: string;
   title: ReactNode;
   children: ReactNode;
+  after?: ReactNode;
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-midnight text-white">
@@ -26,6 +28,7 @@ export function SurfaceHero({
         <div className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
           {children}
         </div>
+        {after}
       </div>
     </section>
   );

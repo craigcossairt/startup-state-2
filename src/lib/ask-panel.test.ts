@@ -7,6 +7,7 @@ import {
   ASK_PLACEHOLDER,
 } from "@/lib/copy";
 import {
+  askFabHiddenOn,
   buildAskRequest,
   canSendAsk,
   readAskResponse,
@@ -55,5 +56,8 @@ describe("Ask panel", () => {
     expect(panel).toContain("ASK_FAB_LABEL");
     expect(panel).toContain("canSendAsk");
     expect(panel).not.toMatch(/matchResources|DEMO_PERSONAS|useChat|Tyler/i);
+    expect(askFabHiddenOn("/claim/alcomy")).toBe(true);
+    expect(askFabHiddenOn("/startups")).toBe(false);
+    expect(panel).toContain("askFabHiddenOn");
   });
 });

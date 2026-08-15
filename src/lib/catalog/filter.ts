@@ -2,12 +2,14 @@ import type { CatalogResource, CatalogStartup, PlaybookStep } from "./types";
 
 export function filterResources(
   rows: CatalogResource[],
-  query: { q?: string; topic?: string },
+  query: { q?: string; topic?: string; community?: string },
 ): CatalogResource[] {
   const needle = query.q?.trim().toLowerCase() ?? "";
   const topic = query.topic?.trim() ?? "";
+  const community = query.community?.trim() ?? "";
   return rows.filter((row) => {
     if (topic && !row.topics.includes(topic)) return false;
+    if (community && !row.communities.includes(community)) return false;
     if (!needle) return true;
     const hay = [row.title, row.description ?? "", ...row.topics, ...row.communities]
       .join(" ")
@@ -18,6 +20,12 @@ export function filterResources(
 
 export function resourceTopics(rows: CatalogResource[]): string[] {
   return [...new Set(rows.flatMap((row) => row.topics))].sort((a, b) => a.localeCompare(b));
+}
+
+export function resourceCommunities(rows: CatalogResource[]): string[] {
+  return [...new Set(rows.flatMap((row) => row.communities).filter((item) => item !== "Any"))].sort(
+    (a, b) => a.localeCompare(b),
+  );
 }
 
 export function resourcesForStep(

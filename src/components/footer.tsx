@@ -4,9 +4,9 @@ import Link from "next/link";
 import {
   FOOTER_CONNECT_EYEBROW,
   FOOTER_EMAIL,
-  FOOTER_GOEO_ADDRESS_1,
-  FOOTER_GOEO_ADDRESS_2,
-  FOOTER_GOEO_NAME,
+  FOOTER_GOED_ADDRESS_1,
+  FOOTER_GOED_ADDRESS_2,
+  FOOTER_GOED_NAME,
   FOOTER_NEWSLETTER_BODY,
   FOOTER_NEWSLETTER_CTA,
   FOOTER_NEWSLETTER_EYEBROW,
@@ -63,12 +63,12 @@ export function Footer() {
             href="https://business.utah.gov/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Governor's Office of Economic Opportunity"
+            aria-label="Governor's Office of Economic Development"
             className="inline-block hover:opacity-90"
           >
             <Image
-              src="/brand/goeo-only-white.png"
-              alt="Governor's Office of Economic Opportunity"
+              src="/brand/goed-only-white.png"
+              alt="Governor's Office of Economic Development"
               width={240}
               height={56}
               className="h-10 w-auto"
@@ -77,11 +77,11 @@ export function Footer() {
         </div>
 
         <div className="space-y-2 text-sm leading-relaxed text-white/80">
-          <p>{FOOTER_GOEO_NAME}</p>
+          <p>{FOOTER_GOED_NAME}</p>
           <p>
-            {FOOTER_GOEO_ADDRESS_1}
+            {FOOTER_GOED_ADDRESS_1}
             <br />
-            {FOOTER_GOEO_ADDRESS_2}
+            {FOOTER_GOED_ADDRESS_2}
           </p>
           <a
             href={`mailto:${FOOTER_EMAIL}`}

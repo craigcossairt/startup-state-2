@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 80" role="img" aria-label="Governor's Office of Economic Development">
+  <g fill="none" stroke="#0A192E" stroke-width="4" stroke-linejoin="round">
+    <path d="M40 6 L68 22 L68 54 L40 70 L12 54 L12 22 Z"/>
+  </g>
+  <g fill="#0A192E">
+    <ellipse cx="40" cy="24" rx="14" ry="5.5"/>
+    <ellipse cx="40" cy="32" rx="16" ry="6"/>
+    <ellipse cx="40" cy="40.5" rx="17" ry="6.2"/>
+    <ellipse cx="40" cy="49" rx="15.5" ry="6"/>
+    <path d="M33 54 C33 58 37 61 40 61 C43 61 47 58 47 54 Z" fill="#fff"/>
+  </g>
+  <g fill="#0A192E" font-family="Liberation Serif, Times New Roman, serif" font-weight="700">
+    <text x="86" y="34" font-size="22">Governor's Office of</text>
+    <text x="86" y="62" font-size="22">Economic Development</text>
+  </g>
+</svg>

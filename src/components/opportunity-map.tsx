@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { CompanySnapshot } from "@/components/company-snapshot";
 import { FixtureRail } from "@/components/fixture-rail";
 import { MapFilterBar } from "@/components/map-filter-bar";
@@ -8,7 +9,9 @@ import { MapMetrics } from "@/components/map-metrics";
 import { ProgressStatus } from "@/components/progress-status";
 import { RankedOpportunityCard } from "@/components/ranked-card";
 import { newOpportunityIds, subscribeToSearch } from "@/lib/bonus/alerts";
-import { TEST_CASES_LABEL } from "@/lib/copy";
+import { filterRankedCards } from "@/lib/catalog/match-resources";
+import { parseLeftoverFixtureId } from "@/lib/catalog/leftover-test-case";
+import { paramsToPersona, personaIsFilled } from "@/lib/catalog/you-persona";
 import {
   pendingCardsFromPreviews,
   summarizeMapMetrics,
@@ -27,6 +30,7 @@ import {
   saveCachedMap,
 } from "@/lib/session-map";
 import { loadStoredProfile, saveProfile } from "@/lib/session-profile";
+import { TEST_CASES_LABEL } from "@/lib/copy";
 import type { CompanyProfile, FixtureId } from "@/lib/types/company-profile";
 import type {
   FitLabel,
@@ -41,7 +45,11 @@ export function OpportunityMap({
 }: {
   initialFixture?: string;
 }) {
-  const fixture = isFixtureId(initialFixture) ? initialFixture : undefined;
+  const searchParams = useSearchParams();
+  const fixture =
+    parseLeftoverFixtureId(searchParams.get("fixture")) ??
+    (isFixtureId(initialFixture) ? initialFixture : undefined);
+  const persona = personaIsFilled(searchParams) ? paramsToPersona(searchParams) : null;
   const [company, setCompany] = useState<CompanyProfile | null>(null);
   const [payload, setPayload] = useState<OpportunityMapPayload | null>(null);
   const [cards, setCards] = useState<RankedCard[]>([]);
@@ -184,9 +192,11 @@ export function OpportunityMap({
   }, [payload, cards, retrievedIds]);
 
   const visible = useMemo(() => {
-    if (fitFilter === "all") return cards;
-    return cards.filter((card) => !card.ranking && card.fit === fitFilter);
-  }, [cards, fitFilter]);
+    const byFit =
+      fitFilter === "all" ? cards : cards.filter((card) => !card.ranking && card.fit === fitFilter);
+    if (fixture) return byFit;
+    return filterRankedCards(byFit, persona);
+  }, [cards, fitFilter, fixture, persona]);
 
   function watchSearch() {
     if (!company) return;

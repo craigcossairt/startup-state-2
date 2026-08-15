@@ -37,15 +37,101 @@ describe("leftover surfaces", () => {
   });
 
   it("always mounts the Utah plot, even when Mapbox is off", () => {
-    const directory = readFileSync(
-      path.join(root, "src/components/catalog/startup-directory.tsx"),
+    const client = readFileSync(
+      path.join(root, "src/components/catalog/startup-map-client.tsx"),
       "utf8",
     );
-    expect(directory).toContain("UtahStartupMap");
-    expect(directory).toContain("MAPBOX_MISSING_COPY");
-    expect(directory).not.toMatch(/mapboxEnabled && hasPublicMapboxToken/);
+    const map = readFileSync(path.join(root, "src/components/catalog/utah-startup-map.tsx"), "utf8");
+    expect(client).toContain("UtahStartupMap");
+    expect(client).toContain("MapFilterPanel");
+    expect(map).toContain("MAPBOX_MISSING_COPY");
+    expect(map).toContain("mapboxToken");
     const fab = readFileSync(path.join(root, "src/components/ask-fab.tsx"), "utf8");
     expect(fab).toContain("rect.bottom > 0");
+  });
+
+  it("ports the Part 1 startups map, careers filters, and playbook roadmap", () => {
+    const startups = readFileSync(path.join(root, "src/app/startups/page.tsx"), "utf8");
+    const careers = readFileSync(path.join(root, "src/app/careers/page.tsx"), "utf8");
+    const playbook = readFileSync(path.join(root, "src/app/playbook/page.tsx"), "utf8");
+    const clustered = readFileSync(path.join(root, "src/components/catalog/utah-map.tsx"), "utf8");
+    expect(startups).toContain("StartupMapClient");
+    expect(startups).toContain("readMapboxPublicToken");
+    expect(clustered).toContain("cluster");
+    expect(clustered).toContain("mapboxAccessToken");
+    expect(careers).toContain("TalentFilters");
+    expect(careers).toContain("/startups?startup=");
+    expect(careers).toContain("View open roles");
+    expect(playbook).toContain("PersonalizedRoadmap");
+    expect(playbook).toContain("ResumeBanner");
+    expect(playbook).toContain("written for you.");
+    expect(playbook).toContain("GOED");
+    expect(playbook).not.toMatch(/\bGOEO\b/);
+  });
+
+  it("ports Part 1 playbook progress, resource ranking chrome, and leftover polish", () => {
+    const playbook = readFileSync(path.join(root, "src/app/playbook/page.tsx"), "utf8");
+    const stage = readFileSync(path.join(root, "src/app/playbook/[stage]/page.tsx"), "utf8");
+    const step = readFileSync(path.join(root, "src/app/playbook/[stage]/[step]/page.tsx"), "utf8");
+    const grid = readFileSync(path.join(root, "src/components/catalog/playbook-stage-grid.tsx"), "utf8");
+    const stageCard = readFileSync(path.join(root, "src/components/catalog/stage-card-link.tsx"), "utf8");
+    const resourcesPage = readFileSync(path.join(root, "src/app/resources/page.tsx"), "utf8");
+    const directory = readFileSync(
+      path.join(root, "src/components/catalog/resource-directory.tsx"),
+      "utf8",
+    );
+    const news = readFileSync(path.join(root, "src/app/news/page.tsx"), "utf8");
+    const claim = readFileSync(path.join(root, "src/app/claim/[id]/page.tsx"), "utf8");
+    expect(playbook).toContain("ResumeBanner");
+    expect(grid).toContain("StageCardLink");
+    expect(stageCard).toContain("completedInStage");
+    expect(stage).toContain("StepCardLink");
+    expect(stage).toMatch(/<Suspense fallback=\{null\}>\s*<ol[\s\S]*?<StepCardLink/);
+    expect(step).toContain("StepCompleteToggle");
+    expect(step).toContain("StepNavFooter");
+    expect(resourcesPage).toContain("ranked for you");
+    expect(directory).toContain("communityFilter");
+    expect(directory).toContain("matchResources");
+    expect(directory).toContain("reasons");
+    expect(directory).toContain("setLimit");
+    expect(directory).toContain("more");
+    expect(directory).not.toMatch(/framer-motion/);
+    expect(news).toContain("Read on startup.utah.gov");
+    expect(news).toContain("SurfaceHero");
+    expect(claim).toContain("/startups?startup=");
+    expect(claim).toContain("CompanyLogo");
+  });
+
+  it("ports leftover dropdowns, saved-search, add listing, and empty You glow", () => {
+    const directory = readFileSync(
+      path.join(root, "src/components/catalog/resource-directory.tsx"),
+      "utf8",
+    );
+    const panel = readFileSync(
+      path.join(root, "src/components/catalog/map-filter-panel.tsx"),
+      "utf8",
+    );
+    const talent = readFileSync(path.join(root, "src/components/catalog/talent-filters.tsx"), "utf8");
+    const you = readFileSync(path.join(root, "src/components/catalog/you-bar.tsx"), "utf8");
+    const addPage = readFileSync(path.join(root, "src/app/startups/add/page.tsx"), "utf8");
+    const addApi = readFileSync(path.join(root, "src/app/api/startups/add/route.ts"), "utf8");
+    const news = readFileSync(path.join(root, "src/app/news/page.tsx"), "utf8");
+    expect(directory).toContain("FilterDropdown");
+    expect(directory).toContain("Topic");
+    expect(directory).toContain("Community");
+    expect(panel).toContain("/startups/add");
+    expect(panel).toContain("SaveSearchButton");
+    expect(talent).toContain("SaveSearchButton");
+    expect(readFileSync(path.join(root, "src/components/catalog/save-search-button.tsx"), "utf8")).toContain(
+      "persistLeftoverWatch",
+    );
+    expect(you).toContain("persona-bar-breathing");
+    expect(addPage).toContain("AddListingForm");
+    expect(addPage).not.toMatch(/coming soon|coming-soon/i);
+    expect(addApi).toContain("submitAddListing");
+    expect(addApi).not.toMatch(/insert into/);
+    expect(addApi).not.toMatch(/pending/);
+    expect(news).toContain("SurfaceHero");
   });
 
   it("applies leftover catalog schema during build and never inserts startup status", () => {

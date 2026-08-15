@@ -27,6 +27,10 @@ export function readAskResponse(input: { ok: boolean; body: unknown }): AskSendR
   return { kind: "error", message: "Ask failed" };
 }
 
+export function askFabHiddenOn(pathname: string): boolean {
+  return pathname === "/claim" || pathname.startsWith("/claim/");
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }

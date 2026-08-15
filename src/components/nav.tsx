@@ -12,7 +12,7 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between gap-3 px-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
         <div className="flex min-w-0 items-center gap-3">
           <Link href="/" aria-label="Startup State home" className="shrink-0 hover:opacity-80">
             <Image
@@ -36,26 +36,34 @@ export function Nav() {
             href="https://business.utah.gov/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Governor's Office of Economic Opportunity"
-            className="hidden items-center border-l border-border pl-3 hover:opacity-80 lg:inline-flex"
+            aria-label="Governor's Office of Economic Development"
+            className="hidden items-center border-l border-border pl-3 hover:opacity-80 md:inline-flex"
           >
             <Image
-              src="/brand/goeo-only-color.png"
-              alt="Governor's Office of Economic Opportunity"
+              src="/brand/goed-only-color.png"
+              alt="Governor's Office of Economic Development"
               width={170}
               height={36}
               className="h-7 w-auto"
             />
           </a>
         </div>
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
           {SITE_NAV.map((item) => (
             <NavLink key={item.href} href={item.href} label={item.label} active={navItemIsActive(pathname, item.href)} />
           ))}
+          <a
+            href="https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden h-9 items-center rounded-md px-2.5 text-[13px] font-semibold text-foreground-muted hover:bg-background-alt hover:text-foreground md:inline-flex"
+          >
+            Events ↗
+          </a>
         </nav>
         <button
           type="button"
-          className="inline-flex h-9 items-center rounded-md border border-border px-3 text-sm font-semibold xl:hidden"
+          className="inline-flex h-9 items-center rounded-md border border-border px-3 text-sm font-semibold md:hidden"
           aria-expanded={open}
           aria-controls="site-nav-menu"
           onClick={() => setOpen((value) => !value)}
@@ -64,7 +72,7 @@ export function Nav() {
         </button>
       </div>
       {open ? (
-        <nav id="site-nav-menu" className="border-t border-border bg-background px-4 py-3 xl:hidden" aria-label="Primary">
+        <nav id="site-nav-menu" className="border-t border-border bg-background px-4 py-3 md:hidden" aria-label="Primary">
           <ul className="grid grid-cols-2 gap-2">
             {SITE_NAV.map((item) => (
               <li key={item.href}>
@@ -81,6 +89,16 @@ export function Nav() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href="https://business.utah.gov/events/list/?tribe_eventcategory%5B0%5D=2732"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-10 items-center rounded-md bg-background-alt px-3 text-sm font-semibold text-foreground"
+              >
+                Events ↗
+              </a>
+            </li>
           </ul>
         </nav>
       ) : null}

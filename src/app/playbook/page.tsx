@@ -1,29 +1,40 @@
-import Link from "next/link";
+import { Suspense } from "react";
+import { PersonalizedRoadmap } from "@/components/catalog/personalized-roadmap";
+import { PlaybookStageGrid } from "@/components/catalog/playbook-stage-grid";
+import { ResumeBanner } from "@/components/catalog/resume-banner";
 import { SurfaceHero } from "@/components/catalog/surface-hero";
-import { PLAYBOOK_STAGES, PLAYBOOK_STEPS, stepCountByStage } from "@/lib/catalog/playbook";
+import { YouBar } from "@/components/catalog/you-bar";
+import { PLAYBOOK_STEPS } from "@/lib/catalog/playbook";
 
 export const metadata = {
   title: "Utah Startup Playbook",
-  description: "Nineteen official GOEO steps for thinking, starting, growing, or closing a Utah company.",
+  description: "Nineteen official GOED steps for thinking, starting, growing, or closing a Utah company.",
 };
 
 export default function PlaybookPage() {
-  const counts = stepCountByStage();
   return (
     <>
+      <Suspense fallback={null}>
+        <YouBar />
+      </Suspense>
       <SurfaceHero
         eyebrow="The Utah Startup Playbook"
         title={
           <>
-            <span className="serif-italic text-bright-green">{PLAYBOOK_STEPS.length}</span> steps,
-            written for the journey you are on.
+            <span className="serif-italic text-bright-green">{PLAYBOOK_STEPS.length}</span> steps,{" "}
+            <span className="serif-italic text-bright-green">written for you.</span>
           </>
+        }
+        after={
+          <Suspense fallback={null}>
+            <ResumeBanner />
+          </Suspense>
         }
       >
         <p>
-          GOEO published four lifecycle stages and {PLAYBOOK_STEPS.length} concrete steps. Pick
+          GOED published four lifecycle stages and {PLAYBOOK_STEPS.length} concrete steps. Pick
           where you are. Each step links to the official startup.utah.gov page and to matching
-          GOEO programs. Ask the Navigator if you want a next step in plain language.
+          GOED programs. Ask the Navigator if you want a next step in plain language.
         </p>
       </SurfaceHero>
       <section className="mx-auto max-w-[1200px] px-6 py-16">
@@ -31,28 +42,18 @@ export default function PlaybookPage() {
         <h2 className="h-display mb-10 max-w-2xl text-3xl sm:text-4xl">
           Where are you on your <span className="serif-italic text-primary">path?</span>
         </h2>
-        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PLAYBOOK_STAGES.map((stage) => (
-            <li key={stage.slug}>
-              <Link
-                href={`/playbook/${stage.slug}`}
-                className="block h-full rounded-2xl border border-border bg-white p-5 hover:border-primary/40 hover:shadow-md"
-              >
-                <span
-                  className="mb-4 block h-1.5 w-12 rounded-full"
-                  style={{ background: stage.accent }}
-                />
-                <h3 className="font-display text-xl font-extrabold tracking-tight">{stage.shortLabel}</h3>
-                <p className="mt-1 text-sm text-foreground-muted">{stage.label}</p>
-                <p className="mt-3 text-sm leading-relaxed">{stage.lead}</p>
-                <p className="mt-4 text-xs font-semibold text-primary">
-                  {counts[stage.slug]} steps
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Suspense fallback={null}>
+          <PlaybookStageGrid />
+        </Suspense>
+        <p className="mt-10 max-w-2xl text-sm leading-relaxed text-foreground-muted">
+          Every step page is written specifically for your business: your sector, your community,
+          your stage, your goal. Same official GOED guidance, in language that matches where you
+          are.
+        </p>
       </section>
+      <Suspense fallback={null}>
+        <PersonalizedRoadmap />
+      </Suspense>
     </>
   );
 }
