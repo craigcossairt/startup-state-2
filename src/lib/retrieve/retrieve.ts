@@ -12,6 +12,7 @@ import { joinSamListings } from "./sam-join";
 import { retrieveSamOpps } from "./sam-opps";
 
 export const RETRIEVE_CAP = 50;
+export const FEDERAL_RESERVE = 15;
 
 export type RetrieveResult = {
   opportunities: Opportunity[];
@@ -70,17 +71,31 @@ export function capRetrieved(input: {
   goeo: Opportunity[];
   federal: Opportunity[];
   cap?: number;
+  federalReserve?: number;
 }): Opportunity[] {
   const cap = input.cap ?? RETRIEVE_CAP;
   const seen = new Set<string>();
-  const out: Opportunity[] = [];
-  for (const row of [...input.curated, ...input.goeo, ...input.federal]) {
-    if (seen.has(row.id)) continue;
-    if (out.length >= cap) break;
-    seen.add(row.id);
-    out.push(row);
-  }
-  return out;
+  const take = (rows: Opportunity[], limit: number): Opportunity[] => {
+    const out: Opportunity[] = [];
+    for (const row of rows) {
+      if (out.length >= limit) break;
+      if (seen.has(row.id)) continue;
+      seen.add(row.id);
+      out.push(row);
+    }
+    return out;
+  };
+
+  const curated = take(input.curated, cap);
+  const remaining = cap - curated.length;
+  const reserve = Math.min(
+    input.federal.length,
+    input.federalReserve ?? FEDERAL_RESERVE,
+    remaining,
+  );
+  const goeo = take(input.goeo, Math.max(0, remaining - reserve));
+  const federal = take(input.federal, cap - curated.length - goeo.length);
+  return [...curated, ...goeo, ...federal];
 }
 
 function uniqueKeys(keys: GoeoKey[]): GoeoKey[] {

@@ -28,4 +28,14 @@ describe("fixture Grants.gov agency coverage", () => {
     const result = await retrieveOpportunities(loadCompanyFixture("fixture-4"));
     expect(federalAgencyText(result.opportunities)).toMatch(/DOD/i);
   });
+
+  it("keeps federal DoD or NASA on fixture-2 when the directory chip fills GOEO", async () => {
+    const result = await retrieveOpportunities(loadCompanyFixture("fixture-2"), {
+      includeDirectory: true,
+    });
+    expect(result.opportunities.some((row) => row.source === "grants_gov")).toBe(
+      true,
+    );
+    expect(federalAgencyText(result.opportunities)).toMatch(/DOD|NASA/i);
+  });
 });
