@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
+  // Next treats 127.0.0.1 as a different host than localhost and blocks
+  // /_next/webpack-hmr (and hydration) unless it is on this list.
+  allowedDevOrigins: ["127.0.0.1"],
   turbopack: {
     root: path.resolve(__dirname),
   },

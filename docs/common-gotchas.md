@@ -20,3 +20,4 @@ Include a commit SHA and issue reference when known.
 | Watch this listing did not match the brief | Alerts stored per-opportunity watches | Subscribe to the current company search, keep seen retrieved ids, flag new ids on the next map run. Email is not wired. | 2026-08-15 | saved search |
 | Import-fence `/News/` fails on the official footer | "Newsletter" matches `News` | Match leftover routes (`/news`), not the word News | 2026-08-15 | site-chrome test |
 | Leftover-nav fence stayed green after renaming `SITE_NAV` | `grep SITE_NAV` matches `SITE_NAV_BROKEN` | Use `grep -w SITE_NAV` | 2026-08-15 | import fences |
+| Navigator FAB visible but clicks do nothing on `127.0.0.1:3000` | Next 16 blocks `/_next` dev resources from `127.0.0.1` (treats it as cross-origin vs `localhost`); the button is SSR HTML with no hydrated `onClick` | Set `allowedDevOrigins: ['127.0.0.1']` or open `http://localhost:3000`. Do not change the FAB. | 2026-08-15 | site chrome |

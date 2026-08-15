@@ -67,6 +67,11 @@ describe("Part 1 site chrome import fences", () => {
     expect(locked).not.toMatch(/Tyler|confetti|easter egg/i);
   });
 
+  it("allows 127.0.0.1 to load Next.js dev resources", () => {
+    const config = read("next.config.ts");
+    expect(config).toMatch(/^\s*allowedDevOrigins:\s*\[[^\]]*['"]127\.0\.0\.1['"]/m);
+  });
+
   it("mounts Footer and AskFab from the root layout", () => {
     const layout = read("src/app/layout.tsx");
     expect(layout).toContain("Footer");
