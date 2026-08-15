@@ -31,4 +31,24 @@ describe("playbook roadmap", () => {
       }),
     ).toBeNull();
   });
+
+  it("turns em dashes in generated copy into hyphens", () => {
+    const parsed = parseRoadmap({
+      summary: "A month for Software — Wasatch Front.",
+      plan: [1, 2, 3, 4].map((week) => ({
+        week,
+        focus: "Fund the round — then hire",
+        actions: [
+          { text: "Call SBDC — then file", rationale: "Speed — not theater" },
+          { text: "Open the Opportunity Map" },
+        ],
+      })),
+    });
+    expect(parsed?.summary).toBe("A month for Software - Wasatch Front.");
+    expect(parsed?.plan[0]?.focus).toBe("Fund the round - then hire");
+    expect(parsed?.plan[0]?.actions[0]).toEqual({
+      text: "Call SBDC - then file",
+      rationale: "Speed - not theater",
+    });
+  });
 });

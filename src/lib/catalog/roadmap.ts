@@ -85,18 +85,22 @@ export function parseRoadmap(raw: unknown): Roadmap | null {
       if (!item || typeof item !== "object") return null;
       const action = item as { text?: unknown; href?: unknown; rationale?: unknown };
       if (typeof action.text !== "string" || !action.text.trim()) return null;
-      const parsed: RoadmapAction = { text: action.text.trim() };
+      const parsed: RoadmapAction = { text: cleanCopy(action.text) };
       if (typeof action.href === "string" && action.href.startsWith("/playbook/")) {
         parsed.href = action.href;
       }
       if (typeof action.rationale === "string" && action.rationale.trim()) {
-        parsed.rationale = action.rationale.trim();
+        parsed.rationale = cleanCopy(action.rationale);
       }
       actions.push(parsed);
     }
-    plan.push({ week: index + 1, focus: week.focus.trim(), actions });
+    plan.push({ week: index + 1, focus: cleanCopy(week.focus), actions });
   }
-  return { summary: body.summary.trim(), plan };
+  return { summary: cleanCopy(body.summary), plan };
+}
+
+function cleanCopy(value: string): string {
+  return value.replaceAll("—", "-").replaceAll("–", "-").trim();
 }
 
 export function fallbackRoadmap(persona: YouPersona): Roadmap {
