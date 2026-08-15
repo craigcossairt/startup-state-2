@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <!-- Brand-mark Small Icon pattern: tiled mark glyphs in alternating diagonal directions.
+       Mark = downward triangle composed of 3 rows of decreasing width. -->
+  <defs>
+    <symbol id="ssmark" viewBox="0 0 24 24">
+      <path d="M2 4 L22 4 L20 8 L13 8 L12 9 L5 9 Z" fill="currentColor" />
+      <path d="M5.5 11 L18.5 11 L16.5 15 L12.5 15 L11.5 16 L7.5 16 Z" fill="currentColor" />
+      <path d="M9 18 L15 18 L12 24 Z" fill="currentColor" />
+    </symbol>
+  </defs>
+  <g fill="currentColor" color="#ffffff">
+    <!-- Row 1 (rotated 30°) -->
+    <use href="#ssmark" x="10"  y="10"  width="20" height="20" transform="rotate(30 20 20)"/>
+    <use href="#ssmark" x="55"  y="10"  width="20" height="20" transform="rotate(30 65 20)"/>
+    <use href="#ssmark" x="100" y="10"  width="20" height="20" transform="rotate(30 110 20)"/>
+    <use href="#ssmark" x="145" y="10"  width="20" height="20" transform="rotate(30 155 20)"/>
+    <!-- Row 2 (rotated -30°, offset) -->
+    <use href="#ssmark" x="32"  y="55"  width="20" height="20" transform="rotate(-30 42 65)"/>
+    <use href="#ssmark" x="78"  y="55"  width="20" height="20" transform="rotate(-30 88 65)"/>
+    <use href="#ssmark" x="123" y="55"  width="20" height="20" transform="rotate(-30 133 65)"/>
+    <!-- Row 3 (rotated 30°) -->
+    <use href="#ssmark" x="10"  y="100" width="20" height="20" transform="rotate(30 20 110)"/>
+    <use href="#ssmark" x="55"  y="100" width="20" height="20" transform="rotate(30 65 110)"/>
+    <use href="#ssmark" x="100" y="100" width="20" height="20" transform="rotate(30 110 110)"/>
+    <use href="#ssmark" x="145" y="100" width="20" height="20" transform="rotate(30 155 110)"/>
+    <!-- Row 4 (rotated -30°) -->
+    <use href="#ssmark" x="32"  y="145" width="20" height="20" transform="rotate(-30 42 155)"/>
+    <use href="#ssmark" x="78"  y="145" width="20" height="20" transform="rotate(-30 88 155)"/>
+    <use href="#ssmark" x="123" y="145" width="20" height="20" transform="rotate(-30 133 155)"/>
+  </g>
+</svg>

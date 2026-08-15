@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import { ProgressStatus } from "@/components/progress-status";
 import { TypeaheadSelect } from "@/components/typeahead-select";
-import { restoreLastCompanyProfile } from "@/lib/bonus/welcome-back";
+import { WelcomeBack } from "@/components/welcome-back";
 import {
   FIXTURE_CHIPS,
   TEST_CASES_LABEL,
@@ -34,25 +34,6 @@ export function Intake() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [stage, setStage] = useState<"scrape" | "infer">("infer");
-  const hasWelcomeBack = useSyncExternalStore(
-    emptySubscribe,
-    () => Boolean(restoreLastCompanyProfile(sessionStorage)),
-    () => false,
-  );
-
-  function openLastMap() {
-    const profile = restoreLastCompanyProfile(sessionStorage);
-    if (!profile) return;
-    if (inferredMustHaves(profile).length > 0) {
-      router.push("/confirm");
-      return;
-    }
-    if (missingMustHaves(profile).length > 0) {
-      router.push("/ask");
-      return;
-    }
-    router.push("/map");
-  }
 
   async function onInfer(event: React.FormEvent) {
     event.preventDefault();
@@ -131,13 +112,27 @@ export function Intake() {
 
   return (
     <div>
-      <section className="bg-midnight text-white">
-        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24">
-          <p className="eyebrow text-bright-green">Opportunity Map</p>
+      <WelcomeBack />
+      <section className="relative isolate overflow-hidden bg-midnight text-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.55]"
+          style={{
+            backgroundImage: "url(/brand/topography-tile.webp)",
+            backgroundSize: "auto 100%",
+            backgroundRepeat: "repeat",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-[80%] bg-[radial-gradient(ellipse_at_top_left,rgba(0,162,76,0.30),transparent_55%)]"
+        />
+        <div className="relative mx-auto max-w-[1200px] px-6 py-16 sm:py-24">
+          <p className="eyebrow !text-white/60">Opportunity Map</p>
           <h1 className="h-display mt-4 max-w-3xl text-4xl sm:text-6xl">
             {INTAKE_HERO}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-platinum">{INTAKE_LEAD}</p>
+          <p className="mt-5 max-w-2xl text-lg text-white/75">{INTAKE_LEAD}</p>
         </div>
       </section>
 
@@ -214,15 +209,6 @@ export function Intake() {
             >
               {busy ? "Working..." : "See the Opportunity Map"}
             </button>
-            {hasWelcomeBack ? (
-              <button
-                type="button"
-                onClick={openLastMap}
-                className="rounded-md border border-midnight px-5 py-2.5 text-sm font-bold"
-              >
-                Open last Opportunity Map
-              </button>
-            ) : null}
           </div>
           {error ? <p className="text-sm text-red-700">{error}</p> : null}
         </form>
@@ -244,10 +230,6 @@ export function Intake() {
       </section>
     </div>
   );
-}
-
-function emptySubscribe() {
-  return () => undefined;
 }
 
 async function readError(response: Response, fallback: string): Promise<string> {

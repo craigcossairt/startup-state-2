@@ -68,6 +68,7 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 ├── data/
 │   ├── fixtures/            # five locked Company profiles
 │   ├── goeo/resources.json  # 213-row GOEO table
+│   ├── catalog/             # leftover-surface fallbacks (resources, startups)
 │   ├── curated/             # seven official Utah cards
 │   └── cache/               # Grants.gov slices; SAM/SBIR local-only
 ├── docs/
@@ -263,7 +264,10 @@ script installs dependencies only; service/run commands live here and in the sou
 - **The product app is scaffolded now: a Next.js 16 app (Node 22 + pnpm on the VM).** The
   standard commands live in `package.json` / `README.md`: `pnpm dev` (Turbopack dev server on
   port 3000), `pnpm build`, `pnpm test` (Vitest, 68 tests), `pnpm lint` (ESLint). The update
-  script runs `pnpm install`; start the dev server yourself.
+  script runs `pnpm install`; start the dev server yourself. Open the app at
+  `http://localhost:3000` or keep `allowedDevOrigins: ['127.0.0.1']` in `next.config.ts`.
+  Next 16 blocks `/_next` hydration on `http://127.0.0.1:3000` without that allowlist, so
+  the Navigator FAB renders from SSR but clicks do nothing.
 - **Live infer/rank needs `XAI_API_KEY` (Grok); `SAM_API_KEY` is optional and fails soft.** No
   `.env` is required in the cloud VM: both are injected as environment secrets and the dev
   server picks them up from the process environment. `src/lib/grok/client.ts` throws

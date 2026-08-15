@@ -1,3 +1,5 @@
+import { navigatorCatalogHint } from "@/lib/catalog/navigator";
+
 const ID_PATTERN = /\b((?:grants_gov|goeo|curated|sam_opps):[A-Za-z0-9._-]+)\b/g;
 
 export function extractCitedIds(text: string): string[] {
@@ -17,6 +19,12 @@ export function followUpChat(input: {
   rankedIds: string[];
   cardSummaries: Array<{ id: string; program: string; why: string }>;
 }): { reply: string; refused: string[] } {
+  if (input.cardSummaries.length === 0) {
+    return {
+      refused: [],
+      reply: navigatorCatalogHint(input.message),
+    };
+  }
   const cited = extractCitedIds(input.message);
   const refused = refuseUnknownProgramIds(cited, input.rankedIds);
   if (refused.length > 0) {

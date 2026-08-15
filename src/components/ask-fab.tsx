@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ASK_FAB_LABEL, ASK_NEEDS_MAP, ASK_PANEL_LEAD, ASK_PLACEHOLDER } from "@/lib/copy";
+import { buildAskRequest, canSendAsk, readAskResponse } from "@/lib/ask-panel";
 import { loadMapPayload } from "@/lib/session-map";
 
 export function AskFab() {
@@ -9,17 +11,39 @@ export function AskFab() {
   const [reply, setReply] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [dockBottom, setDockBottom] = useState<number | null>(null);
+
+  useEffect(() => {
+    const footer = document.getElementById("site-footer");
+    if (!footer) return;
+    const update = () => {
+      const rect = footer.getBoundingClientRect();
+      const visible = rect.top < window.innerHeight && rect.bottom > 0;
+      const overlap = window.innerHeight - rect.top;
+      setDockBottom(visible && overlap > 0 ? overlap + 16 : null);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const dockStyle = dockBottom == null ? undefined : { bottom: dockBottom };
 
   return (
     <>
       {open ? (
-        <div className="fixed right-4 bottom-20 z-40 w-[min(100%-2rem,24rem)] rounded-2xl border border-border bg-white p-4 shadow-2xl sm:right-6">
+        <div
+          className="fixed right-4 z-40 w-[min(100%-2rem,24rem)] rounded-2xl border border-border bg-white p-4 shadow-2xl sm:right-6"
+          style={dockStyle ?? { bottom: "5.5rem" }}
+        >
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="eyebrow">Ask the map</p>
-              <p className="mt-1 text-sm text-foreground-muted">
-                Questions stay on programs already retrieved for this company.
-              </p>
+              <p className="eyebrow">{ASK_FAB_LABEL}</p>
+              <p className="mt-1 text-sm text-foreground-muted">{ASK_PANEL_LEAD}</p>
             </div>
             <button
               type="button"
@@ -34,8 +58,8 @@ export function AskFab() {
             onSubmit={async (event) => {
               event.preventDefault();
               const payload = loadMapPayload();
-              if (!payload) {
-                setError("Open the Opportunity Map first.");
+              if (!canSendAsk({ draft: message })) {
+                setError(ASK_NEEDS_MAP);
                 return;
               }
               setBusy(true);
@@ -44,13 +68,19 @@ export function AskFab() {
                 const response = await fetch("/api/chat", {
                   method: "POST",
                   headers: { "content-type": "application/json" },
-                  body: JSON.stringify({ message, cards: payload.cards }),
+                  body: JSON.stringify(
+                    buildAskRequest({ message, cards: payload?.cards ?? [] }),
+                  ),
                 });
-                if (!response.ok) throw new Error(await response.text());
-                const body = (await response.json()) as { reply: string };
-                setReply(body.reply);
-              } catch (err) {
-                setError(err instanceof Error ? err.message : "Chat failed");
+                const body: unknown = await response.json().catch(() => ({}));
+                const result = readAskResponse({ ok: response.ok, body });
+                if (result.kind === "replied") {
+                  setReply(result.reply);
+                  return;
+                }
+                setError(result.message);
+              } catch {
+                setError("Ask failed");
               } finally {
                 setBusy(false);
               }
@@ -61,7 +91,7 @@ export function AskFab() {
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               className="h-24 w-full rounded-md border border-border px-3 py-2 text-sm"
-              placeholder="Which of these should we start with?"
+              placeholder={ASK_PLACEHOLDER}
             />
             <button
               type="submit"
@@ -77,11 +107,12 @@ export function AskFab() {
       ) : null}
       <button
         type="button"
-        aria-label="Ask the map"
+        aria-label={ASK_FAB_LABEL}
         onClick={() => setOpen((value) => !value)}
-        className="fixed right-4 bottom-4 z-40 rounded-full bg-midnight px-4 py-3 text-sm font-bold text-white shadow-lg hover:bg-onyx sm:right-6 sm:bottom-6"
+        className="fixed right-4 z-40 rounded-full bg-midnight px-4 py-3 text-sm font-bold text-white shadow-lg hover:bg-onyx sm:right-6"
+        style={dockStyle ?? { bottom: "1.5rem" }}
       >
-        Ask the map
+        {ASK_FAB_LABEL}
       </button>
     </>
   );
