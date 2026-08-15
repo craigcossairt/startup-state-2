@@ -10,7 +10,6 @@
 - **Name:** Startup State 2
 - **What it is:** GOED Government Opportunity Finder for AI Builder Day Part 2 (Aug 14-15 2026). One intake, one map, Federal + Utah lanes. New app wearing Startup State brand. Not a fork of craigcossairt/startup-state.
 - **Owner:** Craig Cossairt - craig@bloom.date
-- **Stage:** idea
 - For the owner's background and working style, see `docs/about-me.md`
 
 ## What I Need From Agents
@@ -44,7 +43,7 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 |---|---|
 | Frontend | Next.js 16 / React / TypeScript / Tailwind |
 | Backend | Route handlers + official federal APIs (2-4 sources) |
-| Database | TBD (start with cached JSON / local files; Supabase only if needed) |
+| Database | Cached JSON under `data/`. Supabase public read for leftover catalogs when the public URL and anon key exist. |
 | Hosting | Vercel |
 | Issue Tracking | GitHub Issues |
 | Error Tracking | none yet |
@@ -60,17 +59,16 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 
 ## Folder Structure
 
-<!-- FILL IN once the project takes shape. Keep this a map, not an inventory. -->
-
 ```
 .
-├── src/                     # Next.js App Router: Intake, map, confirm, ask, APIs
+├── src/                     # App Router: Intake, Opportunity Map, leftover pages, APIs
 ├── data/
 │   ├── fixtures/            # five locked Company profiles
 │   ├── goeo/resources.json  # 213-row GOEO table
 │   ├── catalog/             # leftover-surface fallbacks (resources, startups)
 │   ├── curated/             # seven official Utah cards
 │   └── cache/               # Grants.gov slices; SAM/SBIR local-only
+├── supabase/                # leftover catalog schema, public read only
 ├── docs/
 │   ├── primary-bounty.md    # why GOED, weekend slice
 │   ├── briefs/              # official GOED brief + reuse note
@@ -261,9 +259,9 @@ Refresh the model names when the model family turns over; the tier structure is 
 Durable, non-obvious notes for agents running in the Cursor Cloud VM. The startup update
 script installs dependencies only; service/run commands live here and in the sources below.
 
-- **The product app is scaffolded now: a Next.js 16 app (Node 22 + pnpm on the VM).** The
+- **The product app is a Next.js 16 app (Node 22 + pnpm on the VM).** The
   standard commands live in `package.json` / `README.md`: `pnpm dev` (Turbopack dev server on
-  port 3000), `pnpm build`, `pnpm test` (Vitest, 68 tests), `pnpm lint` (ESLint). The update
+  port 3000), `pnpm build`, `pnpm test` (Vitest), `pnpm lint` (ESLint). The update
   script runs `pnpm install`; start the dev server yourself. Open the app at
   `http://localhost:3000` or keep `allowedDevOrigins: ['127.0.0.1']` in `next.config.ts`.
   Next 16 blocks `/_next` hydration on `http://127.0.0.1:3000` without that allowlist, so

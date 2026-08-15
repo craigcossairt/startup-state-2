@@ -34,5 +34,7 @@ Required env vars (already set on the project):
 
 - `XAI_API_KEY` - infer and rank
 - `SAM_API_KEY` - optional `sam_opps` retrieve; fail soft if missing
+- `NEXT_PUBLIC_MAPBOX_TOKEN` - optional tiles on `/startups`; the schematic plot still shows without it
+- `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` - optional live leftover catalogs; empty tables fall back to `data/catalog/`
 
 `GH_TOKEN` is for GitHub CLI, not this app.
