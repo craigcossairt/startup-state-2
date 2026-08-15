@@ -61,7 +61,7 @@ Server drops any rank ID not in the retrieved set and copies program / agency / 
 
 | Adapter | Role | Retrieve IDs? |
 | --- | --- | --- |
-| Grants.gov search2 | Open list (`posted\|forecasted`). Keyword from Q3. Do not send `eligibilities`. Eligibility 23 hid DoD/NASA/NSF on the first page. Live with backoff. | Yes |
+| Grants.gov search2 | Open list (`posted\|forecasted`). Keyword from Q3. Do not send `eligibilities`. Eligibility 23 hid DoD/NASA/NSF on the first page. Drop `U.S. Mission to` diplomatic exchange rows before rank. Live with backoff. | Yes |
 | SAM Assistance Listings | Cached CFDA catalog. Join onto Grants.gov by ALN / CFDA. No live Friday hits. | No |
 | USAspending V2 | Similar awardees on ranked cards. Prefer Utah when `hqState` is `UT`. | No |
 | SBIR award CSV | Similar awardees on SBIR-shaped cards. APIs stay 403. | No |

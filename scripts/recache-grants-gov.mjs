@@ -8,7 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SLICES = [
   {
     file: "data/cache/grants-gov/fixture-1-sbir.json",
-    keyword: "SBIR healthcare AI nurses",
+    keyword: "SBIR STTR healthcare",
   },
   {
     file: "data/cache/grants-gov/fixture-1-open.json",

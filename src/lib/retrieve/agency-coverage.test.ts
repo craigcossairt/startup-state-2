@@ -19,6 +19,19 @@ describe("fixture Grants.gov agency coverage", () => {
     expect(federalAgencyText(result.opportunities)).toMatch(/NSF/i);
   });
 
+  it("drops diplomatic mission grants from fixture-1 so NIH and NSF can reach rank", async () => {
+    const result = await retrieveOpportunities(loadCompanyFixture("fixture-1"));
+    const federal = result.opportunities.filter((row) => row.source === "grants_gov");
+    const mission = federal.filter((row) =>
+      /u\.s\. mission to/i.test(`${row.agency.name} ${row.program}`),
+    );
+    expect(mission.map((row) => row.nativeId)).toEqual([]);
+    expect(federal.some((row) => /bridge2ai|primed-ai/i.test(row.program))).toBe(
+      true,
+    );
+    expect(federal.some((row) => /sbir|sttr/i.test(row.program))).toBe(true);
+  });
+
   it("includes DoD or NASA on fixture-2 aerospace", async () => {
     const result = await retrieveOpportunities(loadCompanyFixture("fixture-2"));
     expect(federalAgencyText(result.opportunities)).toMatch(/DOD|NASA/i);
