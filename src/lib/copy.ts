@@ -133,7 +133,7 @@ export const FOOTER_NEWSLETTER_URL =
 export const WELCOME_BACK_BANNER =
   "Welcome back. We saved your last Opportunity Map.";
 export const WELCOME_BACK_ACTION = "Open last Opportunity Map";
-export const ASK_FAB_LABEL = "Navigator";
+export const ASK_FAB_LABEL = "Ask the Navigator";
 export const ASK_PANEL_LEAD =
   "Ask about your Opportunity Map, the Utah playbook, or GOED programs.";
 export const ASK_NEEDS_MAP = "Type a question for the Navigator.";
