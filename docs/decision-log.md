@@ -69,3 +69,5 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Repo cleanup: drop create-next-app public SVGs, unused brand duplicates, stale import-fences script, template docs, and unused admin-snapshot. README, package homepage/repository, and root metadata match the live Opportunity Finder. GitHub repo About website still needs a human edit away from the lovable brief URL. See this PR.
 
 - **2026-08-15** - Drop dead `/api/bonus` aggregator (`surfaces` + `checklist`). Bonus pages compute locally. User-facing directory chip says GOED. See this PR.
+
+- **2026-08-15** - Repo is public for submission. GitHub About website is https://startup-state-2.vercel.app. Docs and tests no longer name the prior Startup State app or Part 1. See this PR.
