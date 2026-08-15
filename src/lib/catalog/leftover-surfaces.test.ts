@@ -121,6 +121,9 @@ describe("leftover surfaces", () => {
     expect(panel).toContain("/startups/add");
     expect(panel).toContain("SaveSearchButton");
     expect(talent).toContain("SaveSearchButton");
+    expect(readFileSync(path.join(root, "src/components/catalog/save-search-button.tsx"), "utf8")).toContain(
+      "persistLeftoverWatch",
+    );
     expect(you).toContain("persona-bar-breathing");
     expect(addPage).toContain("AddListingForm");
     expect(addPage).not.toMatch(/coming soon|coming-soon/i);

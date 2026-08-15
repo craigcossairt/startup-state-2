@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import {
   LEFTOVER_WATCH_MAIL_UNAVAILABLE,
-  submitLeftoverWatch,
+  persistLeftoverWatch,
   type LeftoverWatchScope,
 } from "@/lib/catalog/leftover-watch";
 
@@ -83,24 +83,28 @@ export function SaveSearchButton({
                   setStatus("saving");
                   setMessage(null);
                   try {
-                    const response = await fetch("/api/leftover-watch", {
-                      method: "POST",
-                      headers: { "content-type": "application/json" },
-                      body: JSON.stringify({ scope, email, label, filter, cadence }),
-                    });
-                    const body = (await response.json().catch(() => ({}))) as {
-                      error?: string;
-                      message?: string;
-                    };
-                    if (!response.ok) {
-                      setMessage(body.error ?? "Save failed");
+                    const local = persistLeftoverWatch(
+                      { scope, email, label, filter, cadence },
+                      window.localStorage,
+                    );
+                    if (!local.ok) {
+                      setMessage(local.error);
                       setStatus("error");
                       return;
                     }
-                    setMessage(body.message ?? LEFTOVER_WATCH_MAIL_UNAVAILABLE);
+                    try {
+                      await fetch("/api/leftover-watch", {
+                        method: "POST",
+                        headers: { "content-type": "application/json" },
+                        body: JSON.stringify({ scope, email, label, filter, cadence }),
+                      });
+                    } catch {
+                      /* Device storage is the record. The POST is optional. */
+                    }
+                    setMessage(local.message);
                     setStatus("saved");
                   } catch {
-                    setMessage("Network error");
+                    setMessage("Could not save on this device.");
                     setStatus("error");
                   }
                 }}
