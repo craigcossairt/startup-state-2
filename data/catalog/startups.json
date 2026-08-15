@@ -130,7 +130,7 @@
     "name": "DeepPower",
     "website": "www.deeppower.com",
     "linkedin_url": "http://www.linkedin.com/company/deeppowerinc",
-    "description": "Developing a breakthrough geothermal drilling technology to access the Earth’s unlimited source of clean heat energy.",
+    "description": "Developing a breakthrough geothermal drilling technology to access the Earth\u2019s unlimited source of clean heat energy.",
     "full_address": "1633 West Innovation Way, Lehi, UT",
     "city": "Lehi",
     "region": "Wasatch Front",
@@ -140,7 +140,7 @@
     "stage": "SeriesA",
     "employees_bucket": "Undisclosed",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -163,10 +163,10 @@
   },
   {
     "slug": "d-nde",
-    "name": "Dónde",
+    "name": "D\u00f3nde",
     "website": "www.godonde.com",
-    "linkedin_url": "http://www.linkedin.com/company/dónde",
-    "description": "Dónde enables companies to offer travel as a benefit. Our platform allows companies to contribute to their employees time off activities, so they can return to work refreshed and able to do the best work of their lives.",
+    "linkedin_url": "http://www.linkedin.com/company/d\u00f3nde",
+    "description": "D\u00f3nde enables companies to offer travel as a benefit. Our platform allows companies to contribute to their employees time off activities, so they can return to work refreshed and able to do the best work of their lives.",
     "full_address": "26 Rio Grand Street, Salt Lake City, UT",
     "city": "Salt Lake City",
     "region": "Wasatch Front",
@@ -346,7 +346,7 @@
     "name": "Jipe",
     "website": "www.jipejobs.com",
     "linkedin_url": "http://www.linkedin.com/company/jipejobs",
-    "description": "Jipe® enters the job search market to connect entry-level job seekers with local hiring businesses in a new and meaningful way. Jipe's mobile solution provides a cool and fun interface job seekers actually WANT to use. We give businesses the right candidates, remove the unnecessary processes, and make finding your next hire so much easier!",
+    "description": "Jipe\u00ae enters the job search market to connect entry-level job seekers with local hiring businesses in a new and meaningful way. Jipe's mobile solution provides a cool and fun interface job seekers actually WANT to use. We give businesses the right candidates, remove the unnecessary processes, and make finding your next hire so much easier!",
     "full_address": "1053 Blackstone Drive, Fruit Heights, UT",
     "city": "Fruit Heights",
     "region": "Wasatch Front",
@@ -364,7 +364,7 @@
     "name": "Veras",
     "website": "www.jobwise.com",
     "linkedin_url": "http://www.linkedin.com/company/jobwise-recruiting",
-    "description": "Veras is the first solution to help long-term care and senior housing operators save millions of dollars by optimizing your workforce with AI—cutting agency, overtime, overstaffing, churn, and time spent on scheduling and call-offs.",
+    "description": "Veras is the first solution to help long-term care and senior housing operators save millions of dollars by optimizing your workforce with AI\u2014cutting agency, overtime, overstaffing, churn, and time spent on scheduling and call-offs.",
     "full_address": "3400 North Ashton Boulevard, Lehi, UT",
     "city": "Lehi",
     "region": "Wasatch Front",
@@ -418,7 +418,7 @@
     "name": "Krado",
     "website": "www.krado.co",
     "linkedin_url": "http://www.linkedin.com/company/kradoinc",
-    "description": "Krado is an integrative plantcare system rooted real-time data that helps your plants prosper through leaflet, our app, growing plant database, and plant nourishment products - all delivered in a simple, frictionless subscription designed to precisely fit you and your plant’s needs.",
+    "description": "Krado is an integrative plantcare system rooted real-time data that helps your plants prosper through leaflet, our app, growing plant database, and plant nourishment products - all delivered in a simple, frictionless subscription designed to precisely fit you and your plant\u2019s needs.",
     "full_address": "2223 South Highland Drive, Salt Lake City, UT",
     "city": "Salt Lake City",
     "region": "Wasatch Front",
@@ -436,7 +436,7 @@
     "name": "Leash Bio",
     "website": "www.leash.bio",
     "linkedin_url": "http://www.linkedin.com/company/leash-laboratories",
-    "description": "Every single machine learning (ML)-driven breakthrough, from language translation to Go championships, was immediately preceded not by an algorithmic innovation but by a massive, well-controlled, purpose-built dataset. An ML-driven breakthrough in medicinal chemistry is going to require a similar dataset, but such high-quality, well-structured experimental data doesn’t exist yet. We're building that data set by making physical measurements of lots of targets (with automated in-house protein production) screened against lots of compounds (with DNA-encoded chemical libraries). We're also building the ML models, that will eventually be generalizable across any protein and novel medicines using insights from our models.",
+    "description": "Every single machine learning (ML)-driven breakthrough, from language translation to Go championships, was immediately preceded not by an algorithmic innovation but by a massive, well-controlled, purpose-built dataset. An ML-driven breakthrough in medicinal chemistry is going to require a similar dataset, but such high-quality, well-structured experimental data doesn\u2019t exist yet. We're building that data set by making physical measurements of lots of targets (with automated in-house protein production) screened against lots of compounds (with DNA-encoded chemical libraries). We're also building the ML models, that will eventually be generalizable across any protein and novel medicines using insights from our models.",
     "full_address": "48 South Rio Grande Street, Salt Lake City, UT",
     "city": "Salt Lake City",
     "region": "Wasatch Front",
@@ -464,7 +464,7 @@
     "stage": "Seed",
     "employees_bucket": "Undisclosed",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -670,7 +670,7 @@
     "name": "Roger",
     "website": "www.tryroger.com",
     "linkedin_url": "http://www.linkedin.com/company/iristechs",
-    "description": "Roger is construction's collaboration workspace – keeping project managers focused, prioritized, and on track.",
+    "description": "Roger is construction's collaboration workspace \u2013 keeping project managers focused, prioritized, and on track.",
     "full_address": "1441 Perry Avenue, Salt Lake City, UT",
     "city": "Salt Lake City",
     "region": "Wasatch Front",
@@ -734,7 +734,7 @@
     "stage": "Seed",
     "employees_bucket": "Undisclosed",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -850,7 +850,7 @@
     "name": "After.com",
     "website": "www.after.com",
     "linkedin_url": "http://www.linkedin.com/company/after-com",
-    "description": "After.com is the new home for funerals. We help families arrange and pre-plan simple cremations online in minutes with affordable, upfront pricing and absolutely no hidden costs or markups. Ever. We’re far from traditional, but we offer the same services and have the same licenses and credentials as traditional funeral homes. Our internet-first experience saves you time, money and energy for what matters—celebrating the life of your loved one.",
+    "description": "After.com is the new home for funerals. We help families arrange and pre-plan simple cremations online in minutes with affordable, upfront pricing and absolutely no hidden costs or markups. Ever. We\u2019re far from traditional, but we offer the same services and have the same licenses and credentials as traditional funeral homes. Our internet-first experience saves you time, money and energy for what matters\u2014celebrating the life of your loved one.",
     "full_address": "560 South 100 West, Provo, UT",
     "city": "Provo",
     "region": "Wasatch Front",
@@ -868,7 +868,7 @@
     "name": "Applause",
     "website": "www.applausehq.com",
     "linkedin_url": "http://www.linkedin.com/company/applausehq",
-    "description": "Applause is a SaaS start-up founded by experienced entrepreneurs and backed by some of the best VCs in Silicon Slopes. We’re focused on helping companies supercharge their team’s performance so they can win more lifelong customers.",
+    "description": "Applause is a SaaS start-up founded by experienced entrepreneurs and backed by some of the best VCs in Silicon Slopes. We\u2019re focused on helping companies supercharge their team\u2019s performance so they can win more lifelong customers.",
     "full_address": "5442 South 900 East, Salt Lake City, UT",
     "city": "Salt Lake City",
     "region": "Wasatch Front",
@@ -878,7 +878,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -932,7 +932,7 @@
     "stage": "Seed",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -968,7 +968,7 @@
     "stage": "Seed",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1012,7 +1012,7 @@
     "name": "Cinch",
     "website": "www.cinch.io",
     "linkedin_url": "http://www.linkedin.com/company/cinchplatform",
-    "description": "Cinch is a marketing automation platform—built on an enterprise-level customer data platform. Why does that matter? Because the success of your marketing communications rests on the power of your customer database.",
+    "description": "Cinch is a marketing automation platform\u2014built on an enterprise-level customer data platform. Why does that matter? Because the success of your marketing communications rests on the power of your customer database.",
     "full_address": "67 W 13490, Draper, UT 84020",
     "city": "Draper",
     "region": "Wasatch Front",
@@ -1220,7 +1220,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1336,7 +1336,7 @@
     "name": "Nomyx",
     "website": "www.nomyx.io",
     "linkedin_url": "http://www.linkedin.com/company/nomyx",
-    "description": "With Nomyx, financial institutions can confidently take the next step into tomorrow’s technology.",
+    "description": "With Nomyx, financial institutions can confidently take the next step into tomorrow\u2019s technology.",
     "full_address": "",
     "city": null,
     "region": "Wasatch Front",
@@ -1354,7 +1354,7 @@
     "name": "Oka",
     "website": "carboninsurance.co",
     "linkedin_url": "http://www.linkedin.com/company/oka-the-carbon-insurance-company",
-    "description": "Oka, The Carbon Insurance Company™ de-risks carbon credits to scale market growth and accelerate climate action.",
+    "description": "Oka, The Carbon Insurance Company\u2122 de-risks carbon credits to scale market growth and accelerate climate action.",
     "full_address": "1389 Center Drive, Park City, UT",
     "city": "Park City",
     "region": "Wasatch Front",
@@ -1418,7 +1418,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1562,7 +1562,7 @@
     "stage": "Seed",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1642,7 +1642,7 @@
     "name": "Roster",
     "website": "www.getroster.com",
     "linkedin_url": "http://www.linkedin.com/company/getroster",
-    "description": "Imagine turning your customers into your strongest sales force, reducing your dependency on paid ads. That’s not just a dream; it’s what brands achieve everyday with Roster. We're your co-pilot on a journey to powerful brand ambassadorship, with proven strategies at your fingertips.",
+    "description": "Imagine turning your customers into your strongest sales force, reducing your dependency on paid ads. That\u2019s not just a dream; it\u2019s what brands achieve everyday with Roster. We're your co-pilot on a journey to powerful brand ambassadorship, with proven strategies at your fingertips.",
     "full_address": "2701 North Thanksgiving Way, Lehi, UT",
     "city": "Lehi",
     "region": "Wasatch Front",
@@ -1670,7 +1670,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1714,7 +1714,7 @@
     "name": "Sameday",
     "website": "gosameday.com",
     "linkedin_url": "http://www.linkedin.com/company/samedayservices",
-    "description": "Sameday enables home service businesses to be available by phone 24/7 with our AI powered Virtual Sales Agents. Unlike anything you have heard before, Sameday’s AI sounds like a person and can answer questions, build value, and over come objections to get prospective customers on the schedule.",
+    "description": "Sameday enables home service businesses to be available by phone 24/7 with our AI powered Virtual Sales Agents. Unlike anything you have heard before, Sameday\u2019s AI sounds like a person and can answer questions, build value, and over come objections to get prospective customers on the schedule.",
     "full_address": "1557 West Innovation Way, Lehi, UT",
     "city": "Lehi",
     "region": "Wasatch Front",
@@ -1760,7 +1760,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1778,7 +1778,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1858,7 +1858,7 @@
     "name": "Velocity Access",
     "website": "www.velocityaccess.io",
     "linkedin_url": "http://www.linkedin.com/company/velocity-access",
-    "description": "At Velocity Access, we’re transforming how venues operate and engage with their customers. Our advanced ticketing software integrates all venue operations—ticketing, concessions, parking, and more—into one streamlined platform, ensuring everything runs smoothly and efficiently.",
+    "description": "At Velocity Access, we\u2019re transforming how venues operate and engage with their customers. Our advanced ticketing software integrates all venue operations\u2014ticketing, concessions, parking, and more\u2014into one streamlined platform, ensuring everything runs smoothly and efficiently.",
     "full_address": "412 West Rivers Edge Drive, Provo, UT",
     "city": "Provo",
     "region": "Wasatch Front",
@@ -1904,7 +1904,7 @@
     "stage": "Seed",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -1948,7 +1948,7 @@
     "name": "Xenter",
     "website": "www.xenter.io",
     "linkedin_url": "http://www.linkedin.com/company/xenter-corp",
-    "description": "Xenter™ is developing a wireless “Technology in Medicine” (TechMed) ecosystem aimed at improving outcomes for patients.",
+    "description": "Xenter\u2122 is developing a wireless \u201cTechnology in Medicine\u201d (TechMed) ecosystem aimed at improving outcomes for patients.",
     "full_address": "344 West 13800 South, Draper, UT",
     "city": "Draper",
     "region": "Wasatch Front",
@@ -2056,7 +2056,7 @@
     "name": "Cupbop",
     "website": "www.cupbop.com",
     "linkedin_url": "http://www.linkedin.com/company/cupbop",
-    "description": "Korean BBQ in a Cup. We're here to end your boredom with the same old food choices. The Cupbop menu is our own delicious take on Korean cuisine. Exotically flavorful, naturally healthy dishes you've never had a chance to try—and we make them all affordable, fresh, and lightning fast.",
+    "description": "Korean BBQ in a Cup. We're here to end your boredom with the same old food choices. The Cupbop menu is our own delicious take on Korean cuisine. Exotically flavorful, naturally healthy dishes you've never had a chance to try\u2014and we make them all affordable, fresh, and lightning fast.",
     "full_address": "593 E 12300 S Ste B Draper, UT, 84020",
     "city": "UT",
     "region": "Rural",
@@ -2084,7 +2084,7 @@
     "stage": "SeriesA",
     "employees_bucket": "201-500",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2092,7 +2092,7 @@
     "name": "Homie",
     "website": "www.homie.com",
     "linkedin_url": "http://www.linkedin.com/company/homie-com",
-    "description": "Homie is on a mission to make homeownership easier, more affordable, and accessible for all. By pairing experienced, local real estate professionals with modern technology, we’re changing the way homes are bought and sold. As the fastest growing tech-enabled real estate brokerage in North America, you can count on us to always have your back. Let’s help you get home.",
+    "description": "Homie is on a mission to make homeownership easier, more affordable, and accessible for all. By pairing experienced, local real estate professionals with modern technology, we\u2019re changing the way homes are bought and sold. As the fastest growing tech-enabled real estate brokerage in North America, you can count on us to always have your back. Let\u2019s help you get home.",
     "full_address": "489 South Jordan Parkway, South Jordan, UT",
     "city": "South Jordan",
     "region": "Wasatch Front",
@@ -2164,7 +2164,7 @@
     "name": "Vanderhall",
     "website": "www.vanderhallusa.com",
     "linkedin_url": "http://www.linkedin.com/company/vanderhall-motor-works-inc.",
-    "description": "Vanderhall Motor Works delivers the feel of yesteryear with modern performance in a unique package. Vanderhall aims to remain timeless while appealing to the Sunday cruiser and aggressive canyon carving driver alike. Our roadsters accomplish this with style and presence that leaves driver and passenger alike yearning for their next outing — manufactured in Provo, Utah with passion and a nod to the past.",
+    "description": "Vanderhall Motor Works delivers the feel of yesteryear with modern performance in a unique package. Vanderhall aims to remain timeless while appealing to the Sunday cruiser and aggressive canyon carving driver alike. Our roadsters accomplish this with style and presence that leaves driver and passenger alike yearning for their next outing \u2014 manufactured in Provo, Utah with passion and a nod to the past.",
     "full_address": "3500 Mountain Vista Parkway, Provo, UT",
     "city": "Provo",
     "region": "Wasatch Front",
@@ -2192,7 +2192,7 @@
     "stage": "SeriesB",
     "employees_bucket": "501-1K",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2228,7 +2228,7 @@
     "stage": "SeriesC",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2290,7 +2290,7 @@
     "name": "HeroDevs",
     "website": "www.herodevs.com",
     "linkedin_url": "http://www.linkedin.com/company/herodevs",
-    "description": "HeroDevs is the industry experts on “life after end-of-life” for open-source software.Our open-source packages and experts let you keep using your software safely and in compliance — allowing you to migrate if and when you’re ready.",
+    "description": "HeroDevs is the industry experts on \u201clife after end-of-life\u201d for open-source software.Our open-source packages and experts let you keep using your software safely and in compliance \u2014 allowing you to migrate if and when you\u2019re ready.",
     "full_address": "9561 S 700 E, Sandy, UT 84070",
     "city": "Sandy",
     "region": "Wasatch Front",
@@ -2300,7 +2300,7 @@
     "stage": "SeriesA",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2498,7 +2498,7 @@
     "stage": "SeriesA",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2560,7 +2560,7 @@
     "name": "Rivet Health",
     "website": "www.rivethealth.com",
     "linkedin_url": "http://www.linkedin.com/company/rivethealth",
-    "description": "When patients ask their provider \"what will this cost?\"​, they hear a variety of responses that communicate some form of \"we don't know\"​. Rivet is software for providers to answer that question quickly and accurately.",
+    "description": "When patients ask their provider \"what will this cost?\"\u200b, they hear a variety of responses that communicate some form of \"we don't know\"\u200b. Rivet is software for providers to answer that question quickly and accurately.",
     "full_address": "9815 S Monroe Street, Sandy, UT 84070",
     "city": "Sandy",
     "region": "Wasatch Front",
@@ -2624,7 +2624,7 @@
     "stage": "SeriesB",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2668,7 +2668,7 @@
     "name": "Vanilla",
     "website": "www.justvanilla.com",
     "linkedin_url": "http://www.linkedin.com/company/justvanilla",
-    "description": "Vanilla is the world’s first Estate Advisory Platform, purpose-built by advisors and estate professionals to help wealth management firms deliver a holistic, modern estate planning experience to their clients.",
+    "description": "Vanilla is the world\u2019s first Estate Advisory Platform, purpose-built by advisors and estate professionals to help wealth management firms deliver a holistic, modern estate planning experience to their clients.",
     "full_address": "310 South Main Street, Salt Lake City, UT",
     "city": "Salt Lake City",
     "region": "Wasatch Front",
@@ -2678,7 +2678,7 @@
     "stage": "SeriesB",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2732,7 +2732,7 @@
     "stage": "SeriesA",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2750,7 +2750,7 @@
     "stage": "Seed",
     "employees_bucket": "Undisclosed",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2786,7 +2786,7 @@
     "stage": "SeriesC",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2794,7 +2794,7 @@
     "name": "ObservePoint",
     "website": "https://www.observepoint.com/",
     "linkedin_url": "https://www.linkedin.com/company/observepoint/",
-    "description": "Ensure privacy compliance standards, validate landing pages, confirm data tracking, clearly see your entire marketing tech stack, validate your ecommerce engines, and much more. ObservePoint presents the reality of what’s happening on your website and gives you a clear map to make it even better.",
+    "description": "Ensure privacy compliance standards, validate landing pages, confirm data tracking, clearly see your entire marketing tech stack, validate your ecommerce engines, and much more. ObservePoint presents the reality of what\u2019s happening on your website and gives you a clear map to make it even better.",
     "full_address": "2100 Pleasant Grove Blvd #300, Pleasant Grove, UT 84062",
     "city": "Pleasant Grove",
     "region": "Wasatch Front",
@@ -2812,7 +2812,7 @@
     "name": "MX",
     "website": "https://www.mx.com/",
     "linkedin_url": "https://www.linkedin.com/company/mxenabled/",
-    "description": "MX Technologies, Inc. is a leader in actionable intelligence, enabling financial providers and consumers to do more with financial data. MX provides end-to-end solutions for financial institutions and fintechs to connect to, understand, and act on customers’ financial data.",
+    "description": "MX Technologies, Inc. is a leader in actionable intelligence, enabling financial providers and consumers to do more with financial data. MX provides end-to-end solutions for financial institutions and fintechs to connect to, understand, and act on customers\u2019 financial data.",
     "full_address": "N 3401 N Thanksgiving Way #500, Lehi, UT 84043",
     "city": "Lehi",
     "region": "Wasatch Front",
@@ -2822,7 +2822,7 @@
     "stage": "SeriesDPlus",
     "employees_bucket": "501-1K",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2858,7 +2858,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -2894,7 +2894,7 @@
     "stage": "SeriesDPlus",
     "employees_bucket": "1K-5K",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -3010,7 +3010,7 @@
     "name": "Awardco",
     "website": "https://www.award.co/",
     "linkedin_url": "https://www.linkedin.com/company/awardco/",
-    "description": "Awardco boosts productivity, reduces spend, and builds culture through value-driven recognition and rewards. Awardco is the only employee recognition and total rewards platform to be a featured partner with Amazon Business, and has the largest reward network on the planet—all with zero markups.",
+    "description": "Awardco boosts productivity, reduces spend, and builds culture through value-driven recognition and rewards. Awardco is the only employee recognition and total rewards platform to be a featured partner with Amazon Business, and has the largest reward network on the planet\u2014all with zero markups.",
     "full_address": "2080 W 400 N, Lindon, UT 84042",
     "city": "Lindon",
     "region": "Wasatch Front",
@@ -3082,7 +3082,7 @@
     "name": "DeepSee",
     "website": "https://deepsee.ai/",
     "linkedin_url": "https://www.linkedin.com/company/deepsee/",
-    "description": "DeepSee’s Knowledge Process Automation (KPA) platform represents a new category of people-first automation solutions that mines unstructured data, operationalizes AI-powered insights, and automates results into real-time action for the enterprise.",
+    "description": "DeepSee\u2019s Knowledge Process Automation (KPA) platform represents a new category of people-first automation solutions that mines unstructured data, operationalizes AI-powered insights, and automates results into real-time action for the enterprise.",
     "full_address": "13907 S Minuteman Drive, Draper, UT 84020",
     "city": "Draper",
     "region": "Wasatch Front",
@@ -3128,7 +3128,7 @@
     "stage": "SeriesB",
     "employees_bucket": "51-200",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -3190,7 +3190,7 @@
     "name": "Kuali",
     "website": "https://www.kuali.co/",
     "linkedin_url": "https://www.linkedin.com/company/kualico",
-    "description": "Kuali is a leading developer of administrative SaaS solutions for higher education. The company’s thoughtfully designed software, created in partnership with their community of college and university customers and partners, has proven to help institutions manage their business more efficiently.",
+    "description": "Kuali is a leading developer of administrative SaaS solutions for higher education. The company\u2019s thoughtfully designed software, created in partnership with their community of college and university customers and partners, has proven to help institutions manage their business more efficiently.",
     "full_address": "3300 North Ashton Boulevard, Lehi, UT 84043, US",
     "city": "UT 84043",
     "region": "Rural",
@@ -3334,7 +3334,7 @@
     "name": "Guard IQ",
     "website": "GuardIQ.com",
     "linkedin_url": "https://www.linkedin.com/company/guard-iq?trk=blended-typeahead",
-    "description": "Venue management technology for the world’s largest sports and entertainment facilities.",
+    "description": "Venue management technology for the world\u2019s largest sports and entertainment facilities.",
     "full_address": "2575 W 400 N Suite 100B, Lindon, UT 84042",
     "city": "Lindon",
     "region": "Wasatch Front",
@@ -3442,7 +3442,7 @@
     "name": "Renew Biotechnologies",
     "website": "https://www.renewbt.com/",
     "linkedin_url": "https://www.linkedin.com/company/renew-biotechnologies/",
-    "description": "Renew Biotechnologies is a leading innovator in the molecular diagnostics industry, specializing in the development and commercialization of cutting-edge technologies derived from Oxford Nanopore Technologies (ONT). The company operates under a unique business model, managing a portfolio of subsidiaries that hold or actively develop molecular diagnostic technologies. Each subsidiary is structured to function independently, allowing for tailored commercialization strategies and focused growth without impacting the overall asset management of the parent company. Renew’s core mission is to enhance precision diagnostics and personalized care through innovative technology solutions, fundamentally transforming patient outcomes in various medical fields.",
+    "description": "Renew Biotechnologies is a leading innovator in the molecular diagnostics industry, specializing in the development and commercialization of cutting-edge technologies derived from Oxford Nanopore Technologies (ONT). The company operates under a unique business model, managing a portfolio of subsidiaries that hold or actively develop molecular diagnostic technologies. Each subsidiary is structured to function independently, allowing for tailored commercialization strategies and focused growth without impacting the overall asset management of the parent company. Renew\u2019s core mission is to enhance precision diagnostics and personalized care through innovative technology solutions, fundamentally transforming patient outcomes in various medical fields.",
     "full_address": "412 W Rivers Edge Dr, Provo, UT 84604",
     "city": "Provo",
     "region": "Wasatch Front",
@@ -3452,7 +3452,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -3479,8 +3479,8 @@
     "website": "https://www.fluid.app",
     "linkedin_url": "https://www.linkedin.com/company/fluid-livefree/",
     "description": "Fluid is the e-commerce, sales, and marketing platform powering the next generation of direct sales companies.",
-    "full_address": "139 Hunter’s Grove Ln STE 207 Lehi, UT 84043",
-    "city": "139 Hunter’s Grove Ln STE 207 Lehi",
+    "full_address": "139 Hunter\u2019s Grove Ln STE 207 Lehi, UT 84043",
+    "city": "139 Hunter\u2019s Grove Ln STE 207 Lehi",
     "region": "Rural",
     "lat": 40.0061875,
     "lng": -111.49034375,
@@ -3622,7 +3622,7 @@
     "name": "Elektrik App Inc",
     "website": "Elektrikapp.com",
     "linkedin_url": "https://www.linkedin.com/company/elektrikapp?trk=profile-position",
-    "description": "Marketplaces for Medium and High Voltage electrical equipment. Transformers, cable, connectivity… we make it so easy.",
+    "description": "Marketplaces for Medium and High Voltage electrical equipment. Transformers, cable, connectivity\u2026 we make it so easy.",
     "full_address": "1396 W 200 S Bldg 2 Unit E Lindon UT 84042",
     "city": null,
     "region": "Wasatch Front",
@@ -3658,7 +3658,7 @@
     "name": "Alcomy",
     "website": "www.alcomy.com",
     "linkedin_url": "https://www.linkedin.com/company/alcomy/",
-    "description": "Alcomy is revolutionizing the residential assisted living industry by operating beyond the traditional binder with a cutting-edge mobile digital system that is both intuitive and easy to adopt. This innovative software streamlines the documentation process, making it effortless for caregivers to access, update, and manage resident care plans in real time. By simplifying complex tasks and enhancing communication, Alcomy ensures that every team member can deliver consistent, high-quality care while focusing on what truly matters—the well-being of residents.",
+    "description": "Alcomy is revolutionizing the residential assisted living industry by operating beyond the traditional binder with a cutting-edge mobile digital system that is both intuitive and easy to adopt. This innovative software streamlines the documentation process, making it effortless for caregivers to access, update, and manage resident care plans in real time. By simplifying complex tasks and enhancing communication, Alcomy ensures that every team member can deliver consistent, high-quality care while focusing on what truly matters\u2014the well-being of residents.",
     "full_address": "815 W 1250 S, Suite 119, Orem, Utah 84058",
     "city": "Orem",
     "region": "Wasatch Front",
@@ -3722,7 +3722,7 @@
     "stage": "SeriesA",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -3730,7 +3730,7 @@
     "name": "ADDAX Overland",
     "website": "https://www.addaxoverland.com/",
     "linkedin_url": "https://www.linkedin.com/company/addax-overland",
-    "description": "ADDAX Overland engineers high quality overlanding equipment. Bring your entire campsite with you using our trailers, truck caps, and campers. ADDAX Overland is proud to partner with Jeep®.",
+    "description": "ADDAX Overland engineers high quality overlanding equipment. Bring your entire campsite with you using our trailers, truck caps, and campers. ADDAX Overland is proud to partner with Jeep\u00ae.",
     "full_address": "32 1800 W H, Lindon, UT 84042",
     "city": "Lindon",
     "region": "Wasatch Front",
@@ -3748,7 +3748,7 @@
     "name": "ElizaChat",
     "website": "https://elizachat.com/",
     "linkedin_url": "https://www.linkedin.com/company/eliza-chat/?viewAsMember=true",
-    "description": "ElizaChat is a clinically trained mental health coach, powered by conversational AI. Available 24/7, Eliza is built to support mental well-being by providing a safe, accessible space to talk and reflect. We designed ElizaChat to complement—not replace—professional care, serving as a first step for students who might hesitate to seek help. Grounded in evidence-based positive psychology techniques and guided by ethical safeguards, ElizaChat empowers students to build resilience and thrive, while connecting them to licensed professionals when needed.",
+    "description": "ElizaChat is a clinically trained mental health coach, powered by conversational AI. Available 24/7, Eliza is built to support mental well-being by providing a safe, accessible space to talk and reflect. We designed ElizaChat to complement\u2014not replace\u2014professional care, serving as a first step for students who might hesitate to seek help. Grounded in evidence-based positive psychology techniques and guided by ethical safeguards, ElizaChat empowers students to build resilience and thrive, while connecting them to licensed professionals when needed.",
     "full_address": "2701 N Thanksgiving Way #100, Lehi, UT 84043",
     "city": "Lehi",
     "region": "Wasatch Front",
@@ -3766,7 +3766,7 @@
     "name": "Thymeless Enterprises",
     "website": "Rosie Rue Floral Co: https://www.rosierue.com/ | White Poppy Preservation: https://shop.whitepoppypreservation.com/",
     "linkedin_url": "https://www.linkedin.com/company/thymeless/?viewAsMember=true",
-    "description": "We streamline all operational aspects for wedding vendors and are building a \"one-stop shop\" for clients through our in-house vendor network, thus making wedding planning, easier, cheaper, and less stressful.\n\nCheck out our brands:\n⌛️ Rosie Rue Floral Co: https://www.rosierue.com/\n⌛️ White Poppy Preservation: https://shop.whitepoppypreservation.com/",
+    "description": "We streamline all operational aspects for wedding vendors and are building a \"one-stop shop\" for clients through our in-house vendor network, thus making wedding planning, easier, cheaper, and less stressful.\n\nCheck out our brands:\n\u231b\ufe0f Rosie Rue Floral Co: https://www.rosierue.com/\n\u231b\ufe0f White Poppy Preservation: https://shop.whitepoppypreservation.com/",
     "full_address": "231 N University Ave Provo, UT 84601",
     "city": "231 N University Ave Provo",
     "region": "Rural",
@@ -3812,7 +3812,7 @@
     "stage": "Seed",
     "employees_bucket": "11-50",
     "revenue_bucket": "Undisclosed",
-    "is_hiring": false,
+    "is_hiring": true,
     "status": "published"
   },
   {
@@ -3910,7 +3910,7 @@
     "name": "PowerBx",
     "website": "https://powerbx.com/",
     "linkedin_url": "https://www.linkedin.com/company/6426403/admin/dashboard/",
-    "description": "PowerBx specializes in innovative space management solutions, helping businesses optimize workplace efficiency through advanced room scheduling systems, internalized cloud infrastructure, and dashboardless data engineering. Our tailored tools streamline operations, enhance collaboration, and deliver actionable insights directly into workflows—empowering Fortune 1000 companies to unlock the full potential of their office, industrial, and retail spaces.",
+    "description": "PowerBx specializes in innovative space management solutions, helping businesses optimize workplace efficiency through advanced room scheduling systems, internalized cloud infrastructure, and dashboardless data engineering. Our tailored tools streamline operations, enhance collaboration, and deliver actionable insights directly into workflows\u2014empowering Fortune 1000 companies to unlock the full potential of their office, industrial, and retail spaces.",
     "full_address": "2174 S Main Street, Salt Lake City, UT 84115",
     "city": "Salt Lake City",
     "region": "Wasatch Front",

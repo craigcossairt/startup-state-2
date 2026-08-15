@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SVGProps } from "react";
 import {
   LEFTOVER_WATCH_MAIL_UNAVAILABLE,
   persistLeftoverWatch,
@@ -39,6 +39,7 @@ export function SaveSearchButton({
           "inline-flex h-9 items-center gap-1.5 rounded-full bg-midnight px-3.5 text-xs font-semibold text-white hover:bg-onyx"
         }
       >
+        <BellPlusIcon className="h-3.5 w-3.5" />
         Email me when this changes
       </button>
       {open ? (
@@ -175,5 +176,16 @@ export function SaveSearchButton({
         </div>
       ) : null}
     </>
+  );
+}
+
+function BellPlusIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" {...props}>
+      <path d="M10.268 21a2 2 0 0 0 3.464 0" />
+      <path d="M15 8h6" />
+      <path d="M18 5v6" />
+      <path d="M20.092 8.5A11 11 0 0 1 20.9 8a1 1 0 0 0-1.1-1 8 8 0 0 0-7.8-6 8 8 0 0 0-7.8 6 1 1 0 0 0-1.1 1 8 8 0 0 0 2.3 5.2L4 17h16l.4-1" />
+    </svg>
   );
 }
