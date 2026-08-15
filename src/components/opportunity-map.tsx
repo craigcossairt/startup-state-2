@@ -3,8 +3,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { BonusBar } from "@/components/bonus-bar";
 import { FixtureRail } from "@/components/fixture-rail";
+import { MapMetrics } from "@/components/map-metrics";
+import { ProgressStatus } from "@/components/progress-status";
 import { RankedOpportunityCard } from "@/components/ranked-card";
 import { GOEO_KEY_LABELS } from "@/lib/copy";
+import {
+  summarizeMapMetrics,
+  type MapMetrics as MapMetricsSummary,
+  type RankProgressStage,
+  type RetrievedPreview,
+} from "@/lib/map-metrics";
+import { readRankStream } from "@/lib/rank/stream-events";
 import { saveMapPayload } from "@/lib/session-map";
 import { loadStoredProfile, saveProfile } from "@/lib/session-profile";
 import type { CompanyProfile, FixtureId } from "@/lib/types/company-profile";
@@ -12,6 +21,7 @@ import type {
   FitLabel,
   GoeoKey,
   OpportunityMapPayload,
+  RankedCard,
   RetrieveChips,
 } from "@/lib/types/opportunity";
 
@@ -30,8 +40,14 @@ export function OpportunityMap({
 }) {
   const fixture = isFixtureId(initialFixture) ? initialFixture : undefined;
   const [payload, setPayload] = useState<OpportunityMapPayload | null>(null);
+  const [cards, setCards] = useState<RankedCard[]>([]);
+  const [previews, setPreviews] = useState<RetrievedPreview[]>([]);
+  const [retrievedIds, setRetrievedIds] = useState<string[]>([]);
+  const [firedKeys, setFiredKeys] = useState<GoeoKey[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [stage, setStage] = useState<RankProgressStage>("retrieve");
+  const [stageMessage, setStageMessage] = useState("Searching federal and Utah programs");
   const [lane, setLane] = useState<"all" | "federal" | "state">("all");
   const [extraKeys, setExtraKeys] = useState<GoeoKey[]>([]);
   const [directory, setDirectory] = useState(false);
@@ -48,6 +64,13 @@ export function OpportunityMap({
     async function load() {
       setBusy(true);
       setError(null);
+      setPayload(null);
+      setCards([]);
+      setPreviews([]);
+      setRetrievedIds([]);
+      setFiredKeys([]);
+      setStage("retrieve");
+      setStageMessage("Searching federal and Utah programs");
       try {
         const profile = await resolveProfile(fixture);
         if (!profile) {
@@ -56,15 +79,46 @@ export function OpportunityMap({
         saveProfile(profile);
         const response = await fetch("/api/rank", {
           method: "POST",
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json",
+            accept: "text/event-stream",
+          },
           body: JSON.stringify({ profile, chips }),
         });
         if (!response.ok) {
           throw new Error(await response.text());
         }
-        const next = (await response.json()) as OpportunityMapPayload;
-        saveMapPayload(next);
-        if (!cancelled) setPayload(next);
+        const streamed: RankedCard[] = [];
+        await readRankStream(response, (event) => {
+          if (cancelled) return;
+          if (event.type === "progress") {
+            setStage(event.stage);
+            setStageMessage(event.message);
+            return;
+          }
+          if (event.type === "retrieved") {
+            setRetrievedIds(event.retrievedIds);
+            setPreviews(event.previews ?? []);
+            setFiredKeys(event.firedKeys);
+            return;
+          }
+          if (event.type === "card" && "fit" in event.card) {
+            streamed.push(event.card);
+            setCards([...streamed]);
+            return;
+          }
+          if (event.type === "done" && event.payload) {
+            saveMapPayload(event.payload);
+            setPayload(event.payload);
+            setCards(event.payload.cards);
+            setRetrievedIds(event.payload.retrievedIds);
+            setFiredKeys(event.payload.firedKeys);
+            return;
+          }
+          if (event.type === "error") {
+            setError(event.message);
+          }
+        });
       } catch (err) {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : "Map failed");
@@ -81,11 +135,18 @@ export function OpportunityMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fixture, lane, extraKeys.join("|"), directory]);
 
+  const metrics: MapMetricsSummary | null = useMemo(() => {
+    if (payload) return summarizeMapMetrics(payload);
+    if (cards.length > 0 || retrievedIds.length > 0) {
+      return summarizeMapMetrics({ cards, retrievedIds });
+    }
+    return null;
+  }, [payload, cards, retrievedIds]);
+
   const visible = useMemo(() => {
-    if (!payload) return [];
-    if (fitFilter === "all") return payload.cards;
-    return payload.cards.filter((card) => card.fit === fitFilter);
-  }, [payload, fitFilter]);
+    if (fitFilter === "all") return cards;
+    return cards.filter((card) => card.fit === fitFilter);
+  }, [cards, fitFilter]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
@@ -120,7 +181,7 @@ export function OpportunityMap({
         {GOEO_KEYS.map((key) => (
           <Chip
             key={key}
-            active={extraKeys.includes(key) || Boolean(payload?.firedKeys.includes(key))}
+            active={extraKeys.includes(key) || firedKeys.includes(key)}
             onClick={() =>
               setExtraKeys((current) =>
                 current.includes(key)
@@ -151,8 +212,35 @@ export function OpportunityMap({
         <BonusBar />
       </div>
 
-      {busy ? <p className="mt-8 text-sm">Building the Opportunity Map...</p> : null}
+      {busy ? (
+        <div className="mt-8">
+          <ProgressStatus kind="map" active={stage} message={stageMessage} />
+        </div>
+      ) : null}
       {error ? <p className="mt-8 text-sm text-red-700">{error}</p> : null}
+
+      {metrics ? <MapMetrics metrics={metrics} /> : null}
+
+      {busy && cards.length === 0 && previews.length > 0 ? (
+        <div className="mt-8 rounded-xl border border-border bg-off-white p-5">
+          <p className="eyebrow">Found so far</p>
+          <ul className="mt-3 space-y-2 text-sm">
+            {previews.slice(0, 8).map((row) => (
+              <li key={row.id} className="flex flex-wrap gap-2">
+                <span className="font-semibold">{row.program}</span>
+                <span className="text-foreground-muted">
+                  {row.lane === "federal" ? "Federal" : "Utah"} · {row.agency}
+                </span>
+              </li>
+            ))}
+            {previews.length > 8 ? (
+              <li className="text-foreground-muted">
+                {previews.length - 8} more while we rank by fit
+              </li>
+            ) : null}
+          </ul>
+        </div>
+      ) : null}
 
       {payload?.floorTripped && payload.floorBanner ? (
         <div className="mt-8 rounded-xl bg-midnight px-5 py-4 text-white">
@@ -162,7 +250,9 @@ export function OpportunityMap({
 
       <div className="mt-8 space-y-4">
         {visible.map((card) => (
-          <RankedOpportunityCard key={card.opportunity.id} card={card} />
+          <div key={card.opportunity.id} className="ss2-card-enter">
+            <RankedOpportunityCard card={card} />
+          </div>
         ))}
       </div>
     </div>

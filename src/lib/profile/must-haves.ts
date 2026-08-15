@@ -1,3 +1,4 @@
+import { DEFAULT_HQ_COUNTRY, DEFAULT_HQ_STATE } from "@/lib/labels";
 import {
   MUST_HAVE_KEYS,
   type CompanyProfile,
@@ -66,6 +67,27 @@ export function confirmInferredMustHaves(profile: CompanyProfile): CompanyProfil
     };
   }
   return next;
+}
+
+export function seedLocationDefaults(profile: CompanyProfile): CompanyProfile {
+  let next = profile;
+  if (profile.hqCountry.status === "missing" && profile.hqCountry.value === undefined) {
+    next = applyMustHaveDraft(next, "hqCountry", DEFAULT_HQ_COUNTRY);
+  }
+  if (profile.hqState.status === "missing" && profile.hqState.value === undefined) {
+    next = applyMustHaveDraft(next, "hqState", DEFAULT_HQ_STATE);
+  }
+  return next;
+}
+
+export function locationKnownFields(country: string, state: string): Pick<
+  CompanyProfile,
+  "hqCountry" | "hqState"
+> {
+  return {
+    hqCountry: { status: "known", value: country },
+    hqState: { status: "known", value: state },
+  };
 }
 
 export function deriveOperatesInUtah(profile: CompanyProfile): CompanyProfile {

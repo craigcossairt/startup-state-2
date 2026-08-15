@@ -24,4 +24,13 @@ describe("Ask and Confirm forms", () => {
     expect(editor).toContain("<input");
     expect(editor).toContain("What they do");
   });
+
+  it("uses typeahead pickers for country and state, and human use-of-funds labels", () => {
+    const editor = read("src/components/must-have-field.tsx");
+    expect(editor).toContain("TypeaheadSelect");
+    expect(editor).toContain("USE_OF_FUNDS_LABELS");
+    expect(editor).toContain("DEFAULT_HQ_COUNTRY");
+    expect(editor).toContain("DEFAULT_HQ_STATE");
+    expect(editor).not.toMatch(/>\s*product_development\s*</);
+  });
 });

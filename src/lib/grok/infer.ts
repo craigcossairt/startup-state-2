@@ -1,6 +1,9 @@
 import { deriveOperatesInUtah } from "@/lib/profile/must-haves";
 import { emptyCompanyProfile } from "@/lib/profile/empty";
-import type { CompanyProfile } from "@/lib/types/company-profile";
+import {
+  MUST_HAVE_KEYS,
+  type CompanyProfile,
+} from "@/lib/types/company-profile";
 import { callGrokJson } from "./client";
 import { INFER_SYSTEM, inferUserPrompt } from "./prompts";
 
@@ -19,5 +22,26 @@ export async function inferCompanyProfile(
     ...parsed,
     fixtureId: undefined,
   };
-  return deriveOperatesInUtah(merged);
+  return deriveOperatesInUtah(keepKnownFields(merged, known));
+}
+
+function keepKnownFields(
+  profile: CompanyProfile,
+  known: Partial<CompanyProfile>,
+): CompanyProfile {
+  let next = profile;
+  for (const key of MUST_HAVE_KEYS) {
+    const provided = known[key];
+    if (
+      provided?.status === "known" &&
+      provided.value !== undefined &&
+      next[key].status === "missing"
+    ) {
+      next = {
+        ...next,
+        [key]: provided,
+      };
+    }
+  }
+  return next;
 }

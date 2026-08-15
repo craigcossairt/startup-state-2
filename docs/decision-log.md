@@ -37,3 +37,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-14** - Demo history uses committed `data/cache/sbir/utah-awards.json` and `data/cache/sam/listings-slice.json` so Cursor cloud / clones do not need the gitignored dumps.
 - **2026-08-14** - Vercel project is [cossairt/startup-state-2](https://vercel.com/cossairt/startup-state-2). Production needs `XAI_API_KEY` and `SAM_API_KEY`. `next.config.ts` traces `./data/**/*` into serverless functions.
 - **2026-08-14** - Production is live at https://startup-state-2.vercel.app (public). Preview URLs stay SSO-gated. Fixture-1 and fixture-5 rank on that URL. See [PR 22](https://github.com/craigcossairt/startup-state-2/pull/22).
+- **2026-08-14** - Intake can start from a public website URL. Scrape text feeds infer; country/state typeaheads default to US/UT; rank streams retrieve then cards; the map shows a KPI strip. See this PR.

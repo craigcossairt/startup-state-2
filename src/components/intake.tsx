@@ -1,23 +1,43 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+import { ProgressStatus } from "@/components/progress-status";
+import { TypeaheadSelect } from "@/components/typeahead-select";
 import { restoreLastCompanyProfile } from "@/lib/bonus/welcome-back";
-import { FIXTURE_CHIPS, INTAKE_HERO } from "@/lib/copy";
-import { inferredMustHaves, missingMustHaves } from "@/lib/profile/must-haves";
+import {
+  FIXTURE_CHIPS,
+  INTAKE_HERO,
+  INTAKE_LEAD,
+  INTAKE_WHAT_THEY_DO_HINT,
+  INTAKE_WHAT_THEY_DO_LABEL,
+  INTAKE_WEBSITE_HINT,
+  INTAKE_WEBSITE_LABEL,
+} from "@/lib/copy";
+import { DEFAULT_HQ_COUNTRY, DEFAULT_HQ_STATE } from "@/lib/labels";
+import { COUNTRIES, US_STATES } from "@/lib/locations";
+import {
+  inferredMustHaves,
+  locationKnownFields,
+  missingMustHaves,
+} from "@/lib/profile/must-haves";
 import { saveProfile } from "@/lib/session-profile";
 import type { CompanyProfile } from "@/lib/types/company-profile";
 
 export function Intake() {
   const router = useRouter();
+  const [websiteUrl, setWebsiteUrl] = useState("");
   const [sentence, setSentence] = useState("");
+  const [country, setCountry] = useState(DEFAULT_HQ_COUNTRY);
+  const [state, setState] = useState(DEFAULT_HQ_STATE);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [hasWelcomeBack, setHasWelcomeBack] = useState(false);
-
-  useEffect(() => {
-    setHasWelcomeBack(Boolean(restoreLastCompanyProfile(sessionStorage)));
-  }, []);
+  const [stage, setStage] = useState<"scrape" | "infer">("infer");
+  const hasWelcomeBack = useSyncExternalStore(
+    emptySubscribe,
+    () => Boolean(restoreLastCompanyProfile(sessionStorage)),
+    () => false,
+  );
 
   function openLastMap() {
     const profile = restoreLastCompanyProfile(sessionStorage);
@@ -35,16 +55,60 @@ export function Intake() {
 
   async function onInfer(event: React.FormEvent) {
     event.preventDefault();
+    const url = websiteUrl.trim();
+    const notes = sentence.trim();
+    if (!url && !notes) {
+      setError("Add a website or describe the company.");
+      return;
+    }
     setError(null);
     setBusy(true);
     try {
+      let founderText = notes;
+      if (url) {
+        setStage("scrape");
+        try {
+          const scraped = await fetch("/api/scrape", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ url }),
+          });
+          if (!scraped.ok) {
+            throw new Error(await readError(scraped, "Could not read that website."));
+          }
+          const site = (await scraped.json()) as { text?: string; url?: string };
+          const siteText = site.text?.trim() ?? "";
+          if (!siteText && !notes) {
+            throw new Error("That website did not return readable text.");
+          }
+          if (siteText) {
+            founderText = notes
+              ? `Founder notes:\n${notes}\n\nCompany website (${site.url ?? url}):\n${siteText}`
+              : `Company website (${site.url ?? url}):\n${siteText}`;
+            if (!notes) {
+              setSentence(siteText.slice(0, 800));
+            }
+          }
+        } catch (scrapeError) {
+          if (!notes) throw scrapeError;
+          setError(
+            scrapeError instanceof Error
+              ? `${scrapeError.message} Using the description you typed.`
+              : "Could not read that website. Using the description you typed.",
+          );
+        }
+      }
+      setStage("infer");
       const response = await fetch("/api/infer", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ sentence }),
+        body: JSON.stringify({
+          sentence: founderText,
+          known: locationKnownFields(country, state),
+        }),
       });
       if (!response.ok) {
-        throw new Error(await response.text());
+        throw new Error(await readError(response, "Infer failed"));
       }
       const profile = (await response.json()) as CompanyProfile;
       saveProfile(profile);
@@ -72,44 +136,94 @@ export function Intake() {
           <h1 className="h-display mt-4 max-w-3xl text-4xl sm:text-6xl">
             {INTAKE_HERO}
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-platinum">
-            One sentence, or pick a fixture. We rank retrieved federal and Utah
-            programs by fit. This is not a determination that you can apply.
-          </p>
+          <p className="mt-5 max-w-2xl text-lg text-platinum">{INTAKE_LEAD}</p>
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-        <form onSubmit={onInfer} className="space-y-4">
-          <label htmlFor="sentence" className="block text-sm font-semibold">
-            In one sentence, what does the company do?
-          </label>
-          <textarea
-            id="sentence"
-            required
-            rows={3}
-            value={sentence}
-            onChange={(event) => setSentence(event.target.value)}
-            placeholder="We build AI tools that cut paperwork for hospital nurses."
-            className="w-full rounded-lg border border-border px-4 py-3 text-base shadow-sm"
-          />
-          <button
-            type="submit"
-            disabled={busy}
-            className="rounded-md bg-vibrant-green px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-hover disabled:opacity-60"
-          >
-            {busy ? "Reading that sentence..." : "See the Opportunity Map"}
-          </button>
-          {error ? <p className="text-sm text-red-700">{error}</p> : null}
-          {hasWelcomeBack ? (
-            <button
-              type="button"
-              onClick={openLastMap}
-              className="ml-3 rounded-md border border-midnight px-5 py-2.5 text-sm font-bold"
-            >
-              Open last Opportunity Map
-            </button>
+        <form onSubmit={onInfer} className="space-y-6">
+          <div>
+            <label htmlFor="websiteUrl" className="block text-sm font-semibold">
+              {INTAKE_WEBSITE_LABEL}
+            </label>
+            <p className="mt-1 text-sm text-foreground-muted">
+              Optional. We read the public page and fill what we can.
+            </p>
+            <input
+              id="websiteUrl"
+              type="text"
+              inputMode="url"
+              placeholder={INTAKE_WEBSITE_HINT}
+              value={websiteUrl}
+              onChange={(event) => setWebsiteUrl(event.target.value)}
+              className="mt-2 w-full rounded-lg border border-border px-4 py-3 text-base shadow-sm"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="sentence" className="block text-sm font-semibold">
+              {INTAKE_WHAT_THEY_DO_LABEL}
+            </label>
+            <textarea
+              id="sentence"
+              rows={5}
+              value={sentence}
+              onChange={(event) => setSentence(event.target.value)}
+              placeholder={INTAKE_WHAT_THEY_DO_HINT}
+              className="mt-2 w-full rounded-lg border border-border px-4 py-3 text-base shadow-sm"
+            />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <TypeaheadSelect
+              id="intake-country"
+              label="Country"
+              required
+              options={COUNTRIES}
+              value={country}
+              onChange={setCountry}
+            />
+            <TypeaheadSelect
+              id="intake-state"
+              label="State"
+              required
+              options={US_STATES}
+              value={state}
+              onChange={setState}
+            />
+          </div>
+
+          {busy ? (
+            <ProgressStatus
+              kind="intake"
+              active={stage}
+              message={
+                stage === "scrape"
+                  ? "Reading your website"
+                  : "Filling the company profile"
+              }
+            />
           ) : null}
+
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="submit"
+              disabled={busy}
+              className="rounded-md bg-vibrant-green px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-hover disabled:opacity-60"
+            >
+              {busy ? "Working..." : "See the Opportunity Map"}
+            </button>
+            {hasWelcomeBack ? (
+              <button
+                type="button"
+                onClick={openLastMap}
+                className="rounded-md border border-midnight px-5 py-2.5 text-sm font-bold"
+              >
+                Open last Opportunity Map
+              </button>
+            ) : null}
+          </div>
+          {error ? <p className="text-sm text-red-700">{error}</p> : null}
         </form>
 
         <div className="mt-10">
@@ -129,4 +243,18 @@ export function Intake() {
       </section>
     </div>
   );
+}
+
+function emptySubscribe() {
+  return () => undefined;
+}
+
+async function readError(response: Response, fallback: string): Promise<string> {
+  const text = await response.text();
+  try {
+    const json = JSON.parse(text) as { error?: string };
+    return json.error ?? fallback;
+  } catch {
+    return text || fallback;
+  }
 }
