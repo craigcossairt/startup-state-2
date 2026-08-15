@@ -94,8 +94,12 @@ export function OpenTokenPicker({
             {suggestions.length === 0 ? (
               <li className="px-3 py-2 text-sm text-foreground-muted">No matches</li>
             ) : (
-              suggestions.map((row) => (
-                <li key={`${row.kind}:${row.token}`} role="option">
+              suggestions.map((row, index) => (
+                <li
+                  key={`${row.kind}:${row.token}`}
+                  role="option"
+                  aria-selected={index === 0}
+                >
                   <button
                     type="button"
                     className="block w-full px-3 py-2 text-left text-sm hover:bg-off-white"
