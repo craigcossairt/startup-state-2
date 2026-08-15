@@ -7,8 +7,9 @@
 # of these hooks read $TOOL_INPUT, always got an empty string, and silently no-op'd
 # on every call: the formatter never ran and, worse, the sensitive-file blocker never
 # blocked. A hook that no-ops is indistinguishable from a hook that passes, so nothing
-# complained. Verify hooks with a deliberate violation (see SETUP.md § Sanity check),
-# never by absence of complaints.
+# complained. Verify hooks with a deliberate violation, never by absence of
+# complaints. Example in AGENTS.md Cursor Cloud: printf '{"file_path":".env"}' |
+# bash bin/run-claude-hook.sh cursor block-sensitive-files must deny and exit 2.
 #
 # Parsing: jq when available; otherwise POSIX sed. Never grep -P - BSD grep (macOS)
 # has no -P, and GNU grep -P dies on non-UTF-8 locales (seen in Git Bash on Windows).

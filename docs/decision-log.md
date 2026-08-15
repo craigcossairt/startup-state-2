@@ -46,3 +46,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Leftover catalog schema applies during the Vercel Production build from marketplace `POSTGRES_URL*`. Agents cannot decrypt those sensitive vars via the Vercel API or `vercel env run`. See [PR 28](https://github.com/craigcossairt/startup-state-2/pull/28).
 - **2026-08-15** - Catalog apply strips DSN `sslmode=require` and uses `sslmode=no-verify`. `pg` 8 treats require as verify-full and rejects the Supabase chain. See this PR.
 - **2026-08-15** - `AGENTS.md` no longer stores a stage label or a frozen Vitest count. Database convention is cached JSON plus optional Supabase public read. See this PR.
+- **2026-08-15** - Removed unused `brain/`, SETUP.md, and `.audit/`. Agent prompt BM25 is not retrieve. See this PR.

@@ -80,8 +80,7 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 ├── .cursor/                 # Cursor adapter (rules + hooks + skill routers)
 ├── .grok/                   # Grok Build adapter (config + hooks)
 ├── .githooks/               # real git pre-push hook (opt-in push gate)
-├── bin/                     # verify-green, git-hook installer, harness hook adapter
-└── brain/                   # optional local knowledge base (see brain/README.md)
+└── bin/                     # verify-green, git-hook installer, harness hook adapter
 ```
 
 If this project outgrows a single repo (second repo, non-code assets piling up), see

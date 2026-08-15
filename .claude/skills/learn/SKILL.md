@@ -41,8 +41,7 @@ Things to SKIP:
 1. **Read the conversation above.** Identify 0-5 capture candidates. Don't force it - if nothing's
    worth saving, say so and exit.
 2. **Supersession pass (write-time invalidation).** Before writing each capture, search for what
-   it touches: grep `common-gotchas.md` and memory for the same symptom/topic (and query the
-   project brain, if initialized). Three outcomes:
+   it touches: grep `common-gotchas.md` and memory for the same symptom/topic. Three outcomes:
    - **Already documented and still true** - skip, or fold new detail into the existing entry.
    - **Documented but now contradicted or outdated** - update the OLD artifact in the same
      session. Correct it in place, or when the old fact has historical value, mark it superseded
