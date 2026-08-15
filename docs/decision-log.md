@@ -45,3 +45,4 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Next 16 `allowedDevOrigins` includes `127.0.0.1` so Cursor cloud / computerUse on that host can hydrate. The Navigator FAB itself is unchanged. See this PR.
 - **2026-08-15** - Leftover catalog schema applies during the Vercel Production build from marketplace `POSTGRES_URL*`. Agents cannot decrypt those sensitive vars via the Vercel API or `vercel env run`. See [PR 28](https://github.com/craigcossairt/startup-state-2/pull/28).
 - **2026-08-15** - Catalog apply strips DSN `sslmode=require` and uses `sslmode=no-verify`. `pg` 8 treats require as verify-full and rejects the Supabase chain. See this PR.
+- **2026-08-15** - Claude Design brief for the Opportunity Map states jobs, information, and situations only. Arrangement stays out so the visual pass is not biased by the locked structure note. See `docs/briefs/opportunity-map-design-handoff.md`.

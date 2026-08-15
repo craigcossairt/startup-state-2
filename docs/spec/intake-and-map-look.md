@@ -65,7 +65,7 @@ Startup State wordmark + GOEO. One product item: Opportunity Map. Do not bring o
 
 ## What this spec is not
 
-- Pixel-level visual end state (Figma / Claude Design handoff; see the follow-on ticket).
+- Pixel-level visual end state (Figma / Claude Design handoff). Product facts for that pass: `docs/briefs/opportunity-map-design-handoff.md`. See [Visual end state for Intake and Opportunity Map](https://github.com/craigcossairt/startup-state-2/issues/18).
 - Exact infer / rank / explain prompt text (locked: `docs/spec/infer-rank-explain-prompts.md`).
 - Which curated Utah cards exist (locked: `docs/spec/utah-state-lane-mix.md`).
 - The judged click path (locked: `docs/spec/judged-demo-walkthrough.md`). Not a required speech.
