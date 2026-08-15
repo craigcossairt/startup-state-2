@@ -24,12 +24,12 @@ import {
 import { SECTOR_LABELS as SECTOR_WORDS } from "@/lib/labels";
 import { formatUsdCompact } from "@/lib/map-metrics";
 import {
-  pendingCardsFromPreviews,
   summarizeMapMetrics,
   type MapMetrics as MapMetricsSummary,
   type RankProgressStage,
 } from "@/lib/map-metrics";
 import { sortRankedCards } from "@/lib/rank/sort";
+import { cardsReadyToPaint } from "@/lib/rank/stream-paint";
 import { readRankStream } from "@/lib/rank/stream-events";
 import { confirmInferredMustHaves, promoteFilledMustHaves } from "@/lib/profile/must-haves";
 import {
@@ -179,7 +179,6 @@ export function OpportunityMap({
           if (event.type === "retrieved") {
             setRetrievedIds(event.retrievedIds);
             setFiredKeys(event.firedKeys);
-            setCards(pendingCardsFromPreviews(event.previews ?? []));
             applyWatch(profile, event.retrievedIds);
             return;
           }
@@ -226,18 +225,18 @@ export function OpportunityMap({
   const metrics: MapMetricsSummary | null = useMemo(() => {
     if (payload) return summarizeMapMetrics(payload);
     if (cards.length > 0 || retrievedIds.length > 0) {
-      return summarizeMapMetrics({ cards: cards.filter((card) => !card.ranking), retrievedIds });
+      return summarizeMapMetrics({ cards, retrievedIds });
     }
     return null;
   }, [payload, cards, retrievedIds]);
 
   const visible = useMemo(() => {
-    const byFit = cards.filter((card) => card.ranking || fits[card.fit]);
+    const byFit = cardsReadyToPaint(cards, fits);
     if (fixture) return byFit;
     return filterRankedCards(byFit, persona);
   }, [cards, fits, fixture, persona]);
 
-  const rankedCount = payload?.cards.length ?? cards.filter((card) => !card.ranking).length;
+  const rankedCount = payload?.cards.length ?? cards.length;
   const filterEmpty = !busy && !error && !missingCompany && rankedCount > 0 && visible.length === 0;
 
   function watchSearch() {
@@ -354,7 +353,7 @@ export function OpportunityMap({
           <div className="mx-auto max-w-[1320px] px-6 py-6 sm:px-8">
             <CompanySnapshot
               profile={company}
-              cards={payload?.cards ?? cards.filter((card) => !card.ranking)}
+              cards={payload?.cards ?? cards}
               onSave={(next) => {
                 const ready = confirmInferredMustHaves(promoteFilledMustHaves(next));
                 saveProfile(ready);
@@ -476,7 +475,7 @@ export function OpportunityMap({
               <div className="mb-3.5 flex items-baseline justify-between gap-4">
                 <h2 className="font-display text-xl font-extrabold text-midnight">
                   {busy
-                    ? `Ranking ${cards.length} retrieved listings`
+                    ? `Ranking ${retrievedIds.length} retrieved listings`
                     : visible.length === rankedCount
                       ? "Ranked listings"
                       : `${visible.length} of ${rankedCount} ranked listings in view`}
@@ -525,9 +524,7 @@ function companyLine(profile: CompanyProfile): string {
 function mergeRankedCard(current: RankedCard[], rankedCard: RankedCard): RankedCard[] {
   const byId = new Map(current.map((card) => [card.opportunity.id, card]));
   byId.set(rankedCard.opportunity.id, rankedCard);
-  const ranked = sortRankedCards([...byId.values()].filter((card) => !card.ranking));
-  const pending = [...byId.values()].filter((card) => card.ranking);
-  return [...ranked, ...pending];
+  return sortRankedCards([...byId.values()]);
 }
 
 function isFixtureId(value?: string): value is FixtureId {

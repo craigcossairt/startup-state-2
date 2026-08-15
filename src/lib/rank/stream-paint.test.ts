@@ -1,7 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { pendingCardsFromPreviews } from "@/lib/map-metrics";
 import { cardsReadyToPaint } from "@/lib/rank/stream-paint";
 import type { FitLabel, RankedCard } from "@/lib/types/opportunity";
 
@@ -18,29 +17,44 @@ const ALL_FITS: Record<FitLabel, boolean> = {
   probably_not: true,
 };
 
+function shellCard(overrides: Partial<RankedCard> & Pick<RankedCard, "why" | "ranking">): RankedCard {
+  return {
+    opportunity: {
+      id: "grants_gov:359671",
+      source: "grants_gov",
+      nativeId: "359671",
+      lane: "federal",
+      jurisdiction: null,
+      instrument: "other",
+      status: "posted",
+      program: "Parent SBIR",
+      agency: { name: "HHS" },
+      value: null,
+      deadline: null,
+      url: null,
+      aln: [],
+      description: null,
+    },
+    fit: "adjacent",
+    concerns: [],
+    nextStep: { label: "Open on Grants.gov", url: "https://example.com" },
+    similarAwardees: [],
+    ...overrides,
+  };
+}
+
 describe("stream paint: completed cards only", () => {
   it("hides ranking placeholders so empty shells never appear before fit content", () => {
-    const pending = pendingCardsFromPreviews([
-      {
-        id: "grants_gov:359671",
-        program: "Parent SBIR",
-        lane: "federal",
-        agency: "HHS",
-      },
-    ]);
-    const ranked: RankedCard = {
-      ...pending[0]!,
+    const pending = shellCard({ ranking: true, why: "" });
+    const ranked = shellCard({
       ranking: undefined,
       fit: "likely",
       why: "Matches healthcare AI nurses in Utah.",
-      concerns: [],
-      nextStep: { label: "Open on Grants.gov", url: "https://example.com" },
-      similarAwardees: [],
-    };
+    });
 
-    expect(pending[0]?.why).toBe("");
-    expect(cardsReadyToPaint(pending, ALL_FITS)).toEqual([]);
-    expect(cardsReadyToPaint([ranked, ...pending], ALL_FITS)).toEqual([ranked]);
+    expect(pending.why).toBe("");
+    expect(cardsReadyToPaint([pending], ALL_FITS)).toEqual([]);
+    expect(cardsReadyToPaint([ranked, pending], ALL_FITS)).toEqual([ranked]);
   });
 
   it("map seeds only completed streamed cards, not retrieved placeholders", () => {
