@@ -26,7 +26,7 @@ export default function SwagPage() {
             Swag worth <span className="serif-italic text-primary">earning.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground-muted">
-            The Startup State brand at human scale. Stickers, packs, polos, mugs, and tees
+            The Startup State brand at human scale. Stickers, hoodies, hats, mugs, and packs
             founders can wear into a meeting or a demo day. Produced on demand for GOED partners.
           </p>
         </div>
