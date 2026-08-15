@@ -34,8 +34,8 @@ describe("Opportunity Map shell", () => {
     const filters = read("src/components/map-filter-bar.tsx");
     const layout = read("src/app/layout.tsx");
     const alerts = read("src/app/map/alerts/page.tsx");
-    expect(filters).toContain("Watch this search");
-    expect(filters).toContain("/map/alerts");
+    expect(map).toContain("Watch this search");
+    expect(map).toContain("/map/alerts");
     expect(alerts).toContain("subscribeToSearch");
     expect(layout).toContain("AskFab");
     expect(BONUS_CONTROLS.map((item) => item.label)).toEqual(["Plan", "Graph"]);

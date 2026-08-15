@@ -4,7 +4,7 @@ export type SiteNavItem = {
 };
 
 export const SITE_NAV: SiteNavItem[] = [
-  { href: "/map", label: "Opportunity Map" },
+  { href: "/map", label: "Opportunities" },
   { href: "/playbook", label: "Playbook" },
   { href: "/resources", label: "Resources" },
   { href: "/startups", label: "Startups" },
