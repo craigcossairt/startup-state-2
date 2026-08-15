@@ -45,8 +45,10 @@ describe("Part 1 admin operations", () => {
     const deepTech = filterStartupsForList(startups, ops.outreach[2]!.filter);
     expect(software.length).toBeGreaterThan(10);
     expect(software.every((row) => row.sector === "Software")).toBe(true);
-    expect(hiring.length).toBeGreaterThan(10);
-    expect(hiring.every((row) => row.region === "Wasatch Front")).toBe(true);
+    expect(hiring.length).toBeGreaterThan(0);
+    expect(hiring.every((row) => row.isHiring && row.region === "Wasatch Front")).toBe(
+      true,
+    );
     expect(deepTech.every((row) => ["BioMedical", "Security", "Energy"].includes(row.sector))).toBe(
       true,
     );

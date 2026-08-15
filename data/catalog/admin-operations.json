@@ -43,7 +43,7 @@
       "slug": "wasatch-front-hiring",
       "title": "Wasatch Front companies hiring now.",
       "audience": "Operators recruiting in Utah",
-      "filter": { "regions": ["Wasatch Front"] }
+      "filter": { "regions": ["Wasatch Front"], "hiringOnly": true }
     },
     {
       "id": "list-deeptech",
