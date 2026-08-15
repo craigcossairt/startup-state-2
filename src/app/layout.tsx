@@ -30,7 +30,7 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   title: {
-    default: "Startup State",
+    default: "Startup State · Opportunity Finder",
     template: "%s · Startup State",
   },
   description:

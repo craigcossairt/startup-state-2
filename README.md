@@ -42,14 +42,6 @@ Project: [vercel.com/cossairt/startup-state-2](https://vercel.com/cossairt/start
 Public production URL: https://startup-state-2.vercel.app  
 Preview and `*.vercel.app` deployment URLs stay behind Vercel SSO.
 
-## GitHub About
-
-Set the repo About fields to match production (the API key on this agent cannot write them):
-
-- Description: `GOED Government Opportunity Finder for AI Builder Day Part 2`
-- Website: `https://startup-state-2.vercel.app`
-- Topics: `goed`, `utah`, `nextjs`, `opportunity-finder`
-
 ## Docs
 
 - Brief: [`docs/briefs/goed-opportunity-finder.md`](docs/briefs/goed-opportunity-finder.md)
