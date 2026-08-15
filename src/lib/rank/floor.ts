@@ -23,6 +23,9 @@ export function applyProbablyNotFloor(cards: RankedCard[]): {
     return { cards, floorTripped: false, floorBanner: null };
   }
   const utah = cards.filter((card) => card.opportunity.lane === "state");
+  const federalAdjacent = cards.filter(
+    (card) => card.opportunity.lane === "federal" && card.fit === "adjacent",
+  );
   const federalProbablyNot = cards
     .filter(
       (card) =>
@@ -30,7 +33,7 @@ export function applyProbablyNotFloor(cards: RankedCard[]): {
     )
     .slice(0, 3);
   return {
-    cards: [...utah, ...federalProbablyNot],
+    cards: [...utah, ...federalAdjacent, ...federalProbablyNot],
     floorTripped: true,
     floorBanner: FLOOR_BANNER,
   };
