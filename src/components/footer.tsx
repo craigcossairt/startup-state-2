@@ -68,10 +68,10 @@ export function Footer() {
               className="block w-full hover:opacity-90"
             >
               <Image
-                src="/brand/goed-only-white.png"
+                src="/brand/goed-only-white.svg"
                 alt="Governor's Office of Economic Development"
-                width={1120}
-                height={160}
+                width={560}
+                height={80}
                 className="h-auto w-full"
               />
             </a>

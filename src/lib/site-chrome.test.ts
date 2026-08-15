@@ -82,7 +82,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(footer).toContain("FOOTER_OFFICIAL_LINE");
     expect(footer).toContain("FOOTER_GOED_NAME");
     expect(footer).toContain("ss-stacked-white.png");
-    expect(footer).toContain("goed-only-white.png");
+    expect(footer).toContain("goed-only-white.svg");
     expect(footer).not.toContain("goeo-only");
     expect(footer).not.toMatch(/Tyler|tyler-card|confetti/i);
     expect(footer).toContain("FOOTER_LEGAL_LINKS");
