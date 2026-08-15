@@ -87,7 +87,7 @@ describe("startup claim", () => {
     const root = process.cwd();
     expect(existsSync(path.join(root, "src/app/claim/[id]/page.tsx"))).toBe(true);
     const directory = readFileSync(
-      path.join(root, "src/components/catalog/startup-directory.tsx"),
+      path.join(root, "src/components/catalog/startup-detail-panel.tsx"),
       "utf8",
     );
     expect(directory).toContain("/claim/");

@@ -36,12 +36,12 @@ export function Nav() {
             href="https://business.utah.gov/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Governor's Office of Economic Opportunity"
+            aria-label="Governor's Office of Economic Development"
             className="hidden items-center border-l border-border pl-3 hover:opacity-80 md:inline-flex"
           >
             <Image
-              src="/brand/goeo-only-color.png"
-              alt="Governor's Office of Economic Opportunity"
+              src="/brand/goed-only-color.png"
+              alt="Governor's Office of Economic Development"
               width={170}
               height={36}
               className="h-7 w-auto"

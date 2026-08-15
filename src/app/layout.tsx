@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mulish, Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { AskFab } from "@/components/ask-fab";
 import { Footer } from "@/components/footer";
+import { FooterGate } from "@/components/footer-gate";
 import { Nav } from "@/components/nav";
 import "./globals.css";
 
@@ -46,7 +47,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Nav />
         <main className="flex-1">{children}</main>
-        <Footer />
+        <FooterGate>
+          <Footer />
+        </FooterGate>
         <AskFab />
       </body>
     </html>

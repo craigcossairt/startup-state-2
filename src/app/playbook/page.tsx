@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { PersonalizedRoadmap } from "@/components/catalog/personalized-roadmap";
 import { PlaybookStageGrid } from "@/components/catalog/playbook-stage-grid";
 import { SurfaceHero } from "@/components/catalog/surface-hero";
 import { YouBar } from "@/components/catalog/you-bar";
@@ -6,7 +7,7 @@ import { PLAYBOOK_STEPS } from "@/lib/catalog/playbook";
 
 export const metadata = {
   title: "Utah Startup Playbook",
-  description: "Nineteen official GOEO steps for thinking, starting, growing, or closing a Utah company.",
+  description: "Nineteen official GOED steps for thinking, starting, growing, or closing a Utah company.",
 };
 
 export default function PlaybookPage() {
@@ -25,9 +26,9 @@ export default function PlaybookPage() {
         }
       >
         <p>
-          GOEO published four lifecycle stages and {PLAYBOOK_STEPS.length} concrete steps. Pick
+          GOED published four lifecycle stages and {PLAYBOOK_STEPS.length} concrete steps. Pick
           where you are. Each step links to the official startup.utah.gov page and to matching
-          GOEO programs. Ask the Navigator if you want a next step in plain language.
+          GOED programs. Ask the Navigator if you want a next step in plain language.
         </p>
       </SurfaceHero>
       <section className="mx-auto max-w-[1200px] px-6 py-16">
@@ -39,6 +40,9 @@ export default function PlaybookPage() {
           <PlaybookStageGrid />
         </Suspense>
       </section>
+      <Suspense fallback={null}>
+        <PersonalizedRoadmap />
+      </Suspense>
     </>
   );
 }

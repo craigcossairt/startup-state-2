@@ -65,7 +65,7 @@ export default async function PlaybookStepPage({
         </div>
         {related.length > 0 ? (
           <div>
-            <h2 className="h-display text-2xl">Matching GOEO programs</h2>
+            <h2 className="h-display text-2xl">Matching GOED programs</h2>
             <ul className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
               {related.map((row) => (
                 <li key={row.id} className="rounded-xl border border-border p-4">

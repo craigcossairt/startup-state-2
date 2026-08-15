@@ -37,15 +37,35 @@ describe("leftover surfaces", () => {
   });
 
   it("always mounts the Utah plot, even when Mapbox is off", () => {
-    const directory = readFileSync(
-      path.join(root, "src/components/catalog/startup-directory.tsx"),
+    const client = readFileSync(
+      path.join(root, "src/components/catalog/startup-map-client.tsx"),
       "utf8",
     );
-    expect(directory).toContain("UtahStartupMap");
-    expect(directory).toContain("MAPBOX_MISSING_COPY");
-    expect(directory).not.toMatch(/mapboxEnabled && hasPublicMapboxToken/);
+    const map = readFileSync(path.join(root, "src/components/catalog/utah-startup-map.tsx"), "utf8");
+    expect(client).toContain("UtahStartupMap");
+    expect(client).toContain("MapFilterPanel");
+    expect(client).not.toContain("/startups/add");
+    expect(map).toContain("MAPBOX_MISSING_COPY");
+    expect(map).toContain("mapboxToken");
     const fab = readFileSync(path.join(root, "src/components/ask-fab.tsx"), "utf8");
     expect(fab).toContain("rect.bottom > 0");
+  });
+
+  it("ports the Part 1 startups map, careers filters, and playbook roadmap", () => {
+    const startups = readFileSync(path.join(root, "src/app/startups/page.tsx"), "utf8");
+    const careers = readFileSync(path.join(root, "src/app/careers/page.tsx"), "utf8");
+    const playbook = readFileSync(path.join(root, "src/app/playbook/page.tsx"), "utf8");
+    const clustered = readFileSync(path.join(root, "src/components/catalog/utah-map.tsx"), "utf8");
+    expect(startups).toContain("StartupMapClient");
+    expect(startups).toContain("readMapboxPublicToken");
+    expect(clustered).toContain("cluster");
+    expect(clustered).toContain("mapboxAccessToken");
+    expect(careers).toContain("TalentFilters");
+    expect(careers).toContain("/startups?startup=");
+    expect(careers).toContain("View open roles");
+    expect(playbook).toContain("PersonalizedRoadmap");
+    expect(playbook).toContain("GOED");
+    expect(playbook).not.toMatch(/\bGOEO\b/);
   });
 
   it("applies leftover catalog schema during build and never inserts startup status", () => {

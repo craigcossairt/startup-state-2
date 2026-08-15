@@ -362,13 +362,13 @@ export const PLAYBOOK_STEPS: PlaybookStep[] = [
     summary:
       "Utah can be a second site or a new HQ. Bring the jobs number and the timeline.",
     whatYouDo: [
-      "Call GOEO with headcount, sector, and the quarter you would move.",
+      "Call GOED with headcount, sector, and the quarter you would move.",
       "Compare EDTIF and local incentives against the real lease math.",
       "Register the Utah entity before you hire here.",
     ],
     officialLinks: [
       { label: "Official step on startup.utah.gov", url: "https://startup.utah.gov/relocate-business/" },
-      { label: "GOEO", url: "https://business.utah.gov/" },
+      { label: "GOED", url: "https://business.utah.gov/" },
     ],
     resourceTopics: ["Late Stage Growth", "Funding"],
   },

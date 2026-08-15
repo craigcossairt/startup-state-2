@@ -51,9 +51,13 @@ describe("You persona", () => {
     expect(EMPTY_YOU_PERSONA.fixtureId).toBeNull();
   });
 
-  it("puts the matching playbook stage first", () => {
+  it("keeps Thinking, Starting, Growing, Closing even when the persona is Growing", () => {
     const ordered = orderPlaybookStages(PLAYBOOK_STAGES, applyTestCase("fixture-1"));
-    expect(ordered[0]?.slug).toBe("growing");
-    expect(ordered.map((stage) => stage.slug)).toHaveLength(4);
+    expect(ordered.map((stage) => stage.slug)).toEqual([
+      "thinking-of-starting",
+      "starting",
+      "growing",
+      "closing",
+    ]);
   });
 });

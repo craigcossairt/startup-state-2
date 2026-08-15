@@ -190,15 +190,9 @@ export function withYouParams(href: string, params: URLSearchParams): string {
 
 export function orderPlaybookStages(
   stages: PlaybookStageCard[],
-  persona: YouPersona | null,
+  _persona: YouPersona | null,
 ): PlaybookStageCard[] {
-  if (!persona) return stages;
-  const wanted = YOU_STAGE_SLUG[persona.stage];
-  return [...stages].sort((left, right) => {
-    if (left.slug === wanted && right.slug !== wanted) return -1;
-    if (right.slug === wanted && left.slug !== wanted) return 1;
-    return 0;
-  });
+  return stages;
 }
 
 export function youSummaryChips(persona: YouPersona): string[] {

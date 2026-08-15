@@ -3,7 +3,7 @@ import { SWAG_ITEMS } from "@/lib/catalog/swag";
 
 export const metadata = {
   title: "Startup State swag",
-  description: "Official Startup State merch produced for GOEO partners.",
+  description: "Official Startup State merch produced for GOED partners.",
 };
 
 export default function SwagPage() {
@@ -27,7 +27,7 @@ export default function SwagPage() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-foreground-muted">
             The Startup State brand at human scale. Stickers, packs, polos, mugs, and tees
-            founders can wear into a meeting or a demo day. Produced on demand for GOEO partners.
+            founders can wear into a meeting or a demo day. Produced on demand for GOED partners.
           </p>
         </div>
       </section>

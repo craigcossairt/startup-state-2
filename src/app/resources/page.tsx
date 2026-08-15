@@ -6,7 +6,7 @@ import { loadCatalogResources } from "@/lib/catalog/load";
 
 export const metadata = {
   title: "Utah resources",
-  description: "The full GOEO program directory for Utah founders.",
+  description: "The full GOED program directory for Utah founders.",
 };
 
 export default async function ResourcesPage() {
@@ -21,7 +21,7 @@ export default async function ResourcesPage() {
         title={
           <>
             <span className="serif-italic text-bright-green">{resources.length}</span> programs
-            in the GOEO directory.
+            in the GOED directory.
           </>
         }
       >
