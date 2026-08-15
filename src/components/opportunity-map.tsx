@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { CompanySnapshot } from "@/components/company-snapshot";
 import { FixtureRail } from "@/components/fixture-rail";
 import { MapFilterBar } from "@/components/map-filter-bar";
 import { MapMetrics } from "@/components/map-metrics";
@@ -12,6 +11,10 @@ import { RankedOpportunityCard } from "@/components/ranked-card";
 import { newOpportunityIds, subscribeToSearch } from "@/lib/bonus/alerts";
 import { filterRankedCards } from "@/lib/catalog/match-resources";
 import { parseLeftoverFixtureId } from "@/lib/catalog/leftover-test-case";
+import {
+  requestYouBarToggle,
+  YOU_BAR_OPEN_EVENT,
+} from "@/lib/catalog/you-bar-apply";
 import { paramsToPersona, personaIsFilled } from "@/lib/catalog/you-persona";
 import {
   FLOOR_BANNER,
@@ -31,16 +34,20 @@ import {
 } from "@/lib/map-metrics";
 import { sortRankedCards } from "@/lib/rank/sort";
 import { readRankStream } from "@/lib/rank/stream-events";
-import { confirmInferredMustHaves, promoteFilledMustHaves } from "@/lib/profile/must-haves";
 import {
   isCurrentWatchedSearch,
   loadCachedMap,
   loadSavedSearch,
   peekCachedMap,
   persistSavedSearch,
+  profileCacheKey,
   saveCachedMap,
 } from "@/lib/session-map";
-import { loadStoredProfile, saveProfile } from "@/lib/session-profile";
+import {
+  loadStoredProfile,
+  PROFILE_COMMITTED_EVENT,
+  saveProfile,
+} from "@/lib/session-profile";
 import type { CompanyProfile, FixtureId } from "@/lib/types/company-profile";
 import type {
   FitLabel,
@@ -84,8 +91,8 @@ export function OpportunityMap({
   const [appliedKeys, setAppliedKeys] = useState<GoeoKey[]>([]);
   const [appliedDirectory, setAppliedDirectory] = useState(false);
   const [fits, setFits] = useState<Record<FitLabel, boolean>>(ALL_FITS);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const [profileRevision, setProfileRevision] = useState(0);
+  const [barOpen, setBarOpen] = useState(false);
+  const [rankNonce, setRankNonce] = useState(0);
   const [watching, setWatching] = useState(false);
   const [newCount, setNewCount] = useState(0);
   const [chipsReady, setChipsReady] = useState(false);
@@ -117,25 +124,37 @@ export function OpportunityMap({
     setChipsReady(true);
   }, []);
 
+  const searchKey = company ? profileCacheKey(company) : null;
+
   useEffect(() => {
     if (!chipsReady) return;
     let cancelled = false;
-    async function load() {
+    async function loadCompany() {
       setError(null);
       setMissingCompany(false);
-      try {
-        const profile = await resolveProfile(fixture);
-        if (!profile) {
-          if (!cancelled) {
-            setCompany(null);
-            setMissingCompany(true);
-            setBusy(false);
-          }
-          return;
-        }
-        saveProfile(profile);
-        if (!cancelled) setCompany(profile);
+      const profile = await resolveProfile(fixture);
+      if (cancelled) return;
+      if (!profile) {
+        setCompany(null);
+        setMissingCompany(true);
+        setBusy(false);
+        return;
+      }
+      saveProfile(profile);
+      setCompany(profile);
+    }
+    void loadCompany();
+    return () => {
+      cancelled = true;
+    };
+  }, [chipsReady, fixture]);
 
+  useEffect(() => {
+    if (!chipsReady || !company || !searchKey) return;
+    const profile = company;
+    let cancelled = false;
+    async function rank() {
+      try {
         const cached = loadCachedMap(profile, chips);
         if (cached) {
           if (cancelled) return;
@@ -208,13 +227,33 @@ export function OpportunityMap({
         if (!cancelled) setBusy(false);
       }
     }
-    void load();
+    void rank();
     return () => {
       cancelled = true;
     };
-    // chips are rebuilt each render; depend on the primitive fields.
+    // chips are rebuilt each render; searchKey is the ranking identity.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chipsReady, fixture, appliedLane, appliedKeys.join("|"), appliedDirectory, profileRevision]);
+  }, [chipsReady, searchKey, appliedLane, appliedKeys.join("|"), appliedDirectory, rankNonce]);
+
+  useEffect(() => {
+    const onCommit = () => {
+      const next = loadStoredProfile();
+      if (!next) return;
+      setCompany(next);
+      setRankNonce((n) => n + 1);
+    };
+    window.addEventListener(PROFILE_COMMITTED_EVENT, onCommit);
+    return () => window.removeEventListener(PROFILE_COMMITTED_EVENT, onCommit);
+  }, []);
+
+  useEffect(() => {
+    const onOpen = (event: Event) => {
+      const open = (event as CustomEvent<{ open?: boolean }>).detail?.open;
+      setBarOpen(Boolean(open));
+    };
+    window.addEventListener(YOU_BAR_OPEN_EVENT, onOpen);
+    return () => window.removeEventListener(YOU_BAR_OPEN_EVENT, onOpen);
+  }, []);
 
   function applyWatch(profile: CompanyProfile, ids: string[]) {
     const saved = loadSavedSearch();
@@ -256,7 +295,7 @@ export function OpportunityMap({
     setAppliedLane(lane);
     setAppliedKeys(extraKeys);
     setAppliedDirectory(directory);
-    if (!dirty) setProfileRevision((value) => value + 1);
+    if (!dirty) setRankNonce((value) => value + 1);
   }
 
   if (missingCompany) {
@@ -312,10 +351,10 @@ export function OpportunityMap({
             <div className="flex min-w-[240px] flex-col gap-2.5">
               <button
                 type="button"
-                onClick={() => setProfileOpen((value) => !value)}
+                onClick={() => requestYouBarToggle("map-hero")}
                 className="rounded-full border border-white/35 bg-transparent px-5 py-2.5 text-sm font-semibold text-white"
               >
-                {profileOpen ? "Hide company profile" : "Company profile"}
+                {barOpen ? "Hide company profile" : "Company profile"}
               </button>
               {watching ? (
                 <Link
@@ -348,24 +387,6 @@ export function OpportunityMap({
           <FixtureRail active={fixture} />
         </div>
       </div>
-
-      {profileOpen && company ? (
-        <div className="border-b border-border bg-white">
-          <div className="mx-auto max-w-[1320px] px-6 py-6 sm:px-8">
-            <CompanySnapshot
-              profile={company}
-              cards={payload?.cards ?? cards.filter((card) => !card.ranking)}
-              onSave={(next) => {
-                const ready = confirmInferredMustHaves(promoteFilledMustHaves(next));
-                saveProfile(ready);
-                setCompany(ready);
-                setProfileOpen(false);
-                setProfileRevision((value) => value + 1);
-              }}
-            />
-          </div>
-        </div>
-      ) : null}
 
       {metrics ? <MapMetrics metrics={metrics} /> : null}
 
@@ -431,7 +452,7 @@ export function OpportunityMap({
                 type="button"
                 onClick={() => {
                   setRestored(false);
-                  setProfileRevision((value) => value + 1);
+                  setRankNonce((value) => value + 1);
                 }}
                 className="ml-auto bg-transparent p-0 text-[13px] font-bold text-vibrant-green"
               >

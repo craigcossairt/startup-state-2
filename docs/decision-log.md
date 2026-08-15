@@ -71,3 +71,5 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 - **2026-08-15** - Drop dead `/api/bonus` aggregator (`surfaces` + `checklist`). Bonus pages compute locally. User-facing directory chip says GOED. See this PR.
 
 - **2026-08-15** - Repo is public for submission. GitHub About website is https://startup-state-2.vercel.app. Docs and tests no longer name the prior Startup State app. See PR #43.
+
+- **2026-08-15** - Company profile editing lives in the YouBar expand slot. Apply writes leftover persona and, on /map, `commitProfile`. Map fixture load is separate from re-rank so a commit cannot be overwritten by `resolveProfile(fixture)`. See this PR.

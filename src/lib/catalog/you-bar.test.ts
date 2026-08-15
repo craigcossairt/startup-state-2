@@ -13,11 +13,19 @@ describe("You bar", () => {
   it("is the leftover You bar with Part 2 test-case chips in the edit panel", () => {
     const bar = read("src/components/catalog/you-bar.tsx");
     expect(bar).toMatch(/>\s*You\s*</);
-    expect(bar).toContain("Refine your persona");
+    expect(bar).toContain("Company profile");
+    expect(bar).not.toContain("Refine your persona");
     expect(bar).toContain("TEST_CASES_LABEL");
     expect(bar).toContain("FIXTURE_CHIPS");
     expect(bar).toContain("applyTestCase");
     expect(bar).toContain("YOU_STORAGE_KEY");
+    expect(bar).toContain("prepareBarApply");
+    expect(bar).toContain("persistBarApply");
+    expect(bar).toContain("MustHaveField");
+    expect(bar).toContain("Fields the ranking uses");
+    expect(bar).toContain("intake-cta");
+    expect(bar).toContain("MAP_EMPTY_CTA");
+    expect(bar).toContain("YOU_BAR_TOGGLE_EVENT");
     expect(bar).not.toMatch(/pick a test persona|DEMO_PERSONAS|jordan|maria/i);
     expect(bar).toContain("persona-bar-breathing");
     expect(bar).toContain("Tell us about your business to get a personalized action plan");
@@ -28,6 +36,12 @@ describe("You bar", () => {
       "Cyber",
       "Youth marketplace (honest-no)",
     ]);
+  });
+
+  it("hides leftover test-case chips in dual mode and keeps them on leftover pages", () => {
+    const bar = read("src/components/catalog/you-bar.tsx");
+    expect(bar).toMatch(/draft\.mode === "persona"[\s\S]*TEST_CASES_LABEL|TEST_CASES_LABEL[\s\S]*draft\.mode === "persona"/);
+    expect(bar).toContain('mode === "dual"');
   });
 
   it("keeps YouParamLink search params behind Suspense so playbook steps can prerender", () => {

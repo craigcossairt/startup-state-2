@@ -19,7 +19,14 @@ describe("Opportunity Map shell", () => {
     expect(map).toContain("peekCachedMap");
     expect(map).toContain("chipsReady");
     expect(map).toContain("pendingCardsFromPreviews");
-    expect(map).toContain("CompanySnapshot");
+    expect(map).not.toContain("CompanySnapshot");
+    expect(map).not.toContain("profileOpen");
+    expect(map).not.toContain("profileRevision");
+    expect(map).toContain("requestYouBarToggle");
+    expect(map).toContain("map-hero");
+    expect(map).toContain("PROFILE_COMMITTED_EVENT");
+    expect(map).toContain("rankNonce");
+    expect(map).toContain("profileCacheKey");
     expect(map).toContain("MapFilterBar");
     expect(map).toContain("TEST_CASES_LABEL");
     expect(map).not.toContain("Found so far");
@@ -52,8 +59,22 @@ describe("Opportunity Map shell", () => {
 
   it("keeps the fixture rail on the map, not only inside Company profile", () => {
     const map = read("src/components/opportunity-map.tsx");
-    const profileAt = map.indexOf("{profileOpen &&");
-    expect(profileAt).toBeGreaterThan(-1);
-    expect(map.slice(0, profileAt)).toContain("<FixtureRail");
+    expect(map).toContain("<FixtureRail");
+    expect(map).not.toContain("CompanySnapshot");
+    expect(map.indexOf("<FixtureRail")).toBeGreaterThan(map.indexOf("requestYouBarToggle"));
+  });
+
+  it("splits fixture resolve from re-rank so a commit cannot clobber via resolveProfile", () => {
+    const map = read("src/components/opportunity-map.tsx");
+    expect(map).toContain("resolveProfile(fixture)");
+    expect(map).toMatch(/\[chipsReady, fixture\]/);
+    expect(map).toContain("rankNonce");
+    expect(map).not.toMatch(/\[chipsReady, fixture,[\s\S]*rankNonce/);
+    const commitAt = map.indexOf("addEventListener(PROFILE_COMMITTED_EVENT");
+    expect(commitAt).toBeGreaterThan(-1);
+    const commitBlock = map.slice(Math.max(0, commitAt - 420), commitAt + 180);
+    expect(commitBlock).toContain("loadStoredProfile");
+    expect(commitBlock).toContain("setRankNonce");
+    expect(commitBlock).not.toContain("resolveProfile");
   });
 });
