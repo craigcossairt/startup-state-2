@@ -260,13 +260,21 @@ Refresh the model names when the model family turns over; the tier structure is 
 Durable, non-obvious notes for agents running in the Cursor Cloud VM. The startup update
 script installs dependencies only; service/run commands live here and in the sources below.
 
-- **The product app is not scaffolded yet (idea stage).** There is no `package.json`, no
-  source, and nothing to `pnpm dev`. The only runnable checks today are the guardrail scripts
-  and the `hooks-ci` workflow. Once `create-next-app` lands, put the real dev/test/lint
-  commands under `## Getting Started` (the intended stack is Next.js 16 + pnpm; Node 22 and
-  pnpm are on the VM).
-- **The real "lint/test" suite right now is `.github/workflows/hooks-ci.yml`.** It validates the
-  guardrail infrastructure: no CRLF, `bash -n`, `shellcheck -S warning -x`, exec bits on
+- **The product app is scaffolded now: a Next.js 16 app (Node 22 + pnpm on the VM).** The
+  standard commands live in `package.json` / `README.md`: `pnpm dev` (Turbopack dev server on
+  port 3000), `pnpm build`, `pnpm test` (Vitest, 68 tests), `pnpm lint` (ESLint). The update
+  script runs `pnpm install`; start the dev server yourself.
+- **Live infer/rank needs `XAI_API_KEY` (Grok); `SAM_API_KEY` is optional and fails soft.** No
+  `.env` is required in the cloud VM: both are injected as environment secrets and the dev
+  server picks them up from the process environment. `src/lib/grok/client.ts` throws
+  `XAI_API_KEY is missing` if the key is absent. Fixture chips (`/map?fixture=<id>`) skip the
+  infer step but the rank step still calls Grok, so it needs the key too.
+- **`pnpm lint` currently reports 4 pre-existing `react-hooks/set-state-in-effect` errors** in
+  `src/components/confirm-form.tsx` and `src/components/bonus-page.tsx`. These predate any env
+  setup and do not block `pnpm build` (which passes TypeScript) or `pnpm test`. Do not treat
+  them as something you broke.
+- **The guardrail-infrastructure suite is `.github/workflows/hooks-ci.yml`** (separate from the
+  app checks above). It validates: no CRLF, `bash -n`, `shellcheck -S warning -x`, exec bits on
   `.githooks/*` and `bin/*`, skill/command/agent/router frontmatter, and JSON config parseability.
   Run the same checks locally by stepping through that workflow's commands against
   `git ls-files '*.sh' '.githooks/*'`.
