@@ -13,7 +13,7 @@ import {
   FOOTER_NEWSLETTER_URL,
   FOOTER_OFFICIAL_LINE,
 } from "@/lib/copy";
-import { SITE_NAV } from "@/lib/site-nav";
+import { FOOTER_LEGAL_LINKS } from "@/lib/site-nav";
 
 export function Footer() {
   return (
@@ -49,31 +49,33 @@ export function Footer() {
 
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-start gap-10 px-6 py-12 md:grid-cols-3">
         <div className="flex flex-col items-center gap-5 text-center">
-          <Link href="/" aria-label="Startup State home" className="inline-block hover:opacity-90">
-            <Image
-              src="/brand/ss-stacked-white.png"
-              alt="Startup State"
-              width={170}
-              height={120}
-              className="h-24 w-auto"
-            />
-          </Link>
-          <div className="h-px w-32 bg-white/30" aria-hidden />
-          <a
-            href="https://business.utah.gov/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Governor's Office of Economic Development"
-            className="inline-block hover:opacity-90"
-          >
-            <Image
-              src="/brand/goed-only-white.png"
-              alt="Governor's Office of Economic Development"
-              width={240}
-              height={56}
-              className="h-10 w-auto"
-            />
-          </a>
+          <div className="mx-auto flex w-[10.5rem] flex-col items-center gap-5">
+            <Link href="/" aria-label="Startup State home" className="block w-full hover:opacity-90">
+              <Image
+                src="/brand/ss-stacked-white.png"
+                alt="Startup State"
+                width={1058}
+                height={735}
+                className="h-auto w-full"
+              />
+            </Link>
+            <div className="h-px w-1/2 bg-white/30" aria-hidden />
+            <a
+              href="https://business.utah.gov/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Governor's Office of Economic Development"
+              className="block w-full hover:opacity-90"
+            >
+              <Image
+                src="/brand/goed-only-white.svg"
+                alt="Governor's Office of Economic Development"
+                width={560}
+                height={80}
+                className="h-auto w-full"
+              />
+            </a>
+          </div>
         </div>
 
         <div className="space-y-2 text-sm leading-relaxed text-white/80">
@@ -115,25 +117,24 @@ export function Footer() {
             <span>{FOOTER_OFFICIAL_LINE}</span>
           </div>
           <div className="ml-auto flex flex-wrap items-center gap-4">
-            <a href="https://utah.gov" target="_blank" rel="noopener noreferrer" className="hover:text-white">
-              Utah.gov
-            </a>
-            <Link href="/" className="hover:text-white">
-              Home
-            </Link>
-            {SITE_NAV.map((item) => (
-              <Link key={item.href} href={item.href} className="hover:text-white">
-                {item.label}
-              </Link>
-            ))}
-            <a
-              href="https://startup.utah.gov"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white"
-            >
-              startup.utah.gov
-            </a>
+            {FOOTER_LEGAL_LINKS.map((item) =>
+              item.kind === "internal" ? (
+                <Link key={item.href} href={item.href} className="hover:text-white">
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  {item.label}
+                </a>
+              ),
+            )}
+            <span className="opacity-60">Built for AI Builder Day</span>
           </div>
         </div>
       </div>

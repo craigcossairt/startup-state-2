@@ -24,6 +24,17 @@ describe("follow-up chat grounding", () => {
     expect(turn.reply).not.toMatch(/eligible/i);
   });
 
+  it("does not answer with undefined when cards lack program names", () => {
+    const turn = followUpChat({
+      message: "What first?",
+      rankedIds: ["curated:nucleus-grow"],
+      cardSummaries: [{ id: "curated:nucleus-grow", program: "", why: "" }],
+      surface: "map",
+    });
+    expect(turn.reply).not.toMatch(/undefined/i);
+    expect(turn.reply).toMatch(/Intake|Opportunity Map/i);
+  });
+
   it("points at the playbook when no ranked cards are present", () => {
     const turn = followUpChat({
       message: "How do I get funding?",
