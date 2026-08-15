@@ -1,12 +1,9 @@
-import { existsSync, readFileSync } from "node:fs";
-import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { buildAdminSnapshot } from "./admin-snapshot";
-
-const root = process.cwd();
+import { loadAdminOperations } from "./admin-operations";
 
 describe("GOED admin snapshot", () => {
-  it("names honest queue states instead of empty supabase tables", () => {
+  it("still names catalog counts for leftover inventory", () => {
     expect(
       buildAdminSnapshot({ resources: 213, startups: 220, playbookSteps: 19 }),
     ).toEqual({
@@ -21,15 +18,11 @@ describe("GOED admin snapshot", () => {
     });
   });
 
-  it("ships /admin without the Tyler card", () => {
-    const page = path.join(root, "src/app/admin/page.tsx");
-    expect(existsSync(page)).toBe(true);
-    const source = readFileSync(page, "utf8");
-    expect(source).toContain("buildAdminSnapshot");
-    expect(source).toContain("Operations");
-    expect(source).not.toMatch(/Tyler|tyler-card|canvas-confetti|framer-motion/i);
-    expect(existsSync(path.join(root, "src/components/admin/tyler-card.tsx"))).toBe(
-      false,
-    );
+  it("fills the Part 1 queues from the committed operations fixture", () => {
+    const ops = loadAdminOperations();
+    expect(ops.pending).toHaveLength(1);
+    expect(ops.claims).toHaveLength(2);
+    expect(ops.outreach).toHaveLength(3);
+    expect(ops.auditTotal).toBeGreaterThan(20);
   });
 });

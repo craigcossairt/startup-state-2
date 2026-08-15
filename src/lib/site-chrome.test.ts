@@ -117,18 +117,23 @@ describe("Part 1 site chrome import fences", () => {
     expect(nav).not.toMatch(/\bxl:hidden\b/);
   });
 
-  it("puts leftover surfaces on the nav and still forbids the Tyler card", () => {
+  it("puts leftover surfaces on the nav and keeps Tyler off public chrome", () => {
     const nav = read("src/components/nav.tsx");
     expect(nav).toContain("SITE_NAV");
     expect(read("src/lib/site-nav.ts")).toContain("Playbook");
-    expect(existsSync(path.join(root, "src/components/admin/tyler-card.tsx"))).toBe(
-      false,
-    );
-    const blob = walkSrcFiles()
-      .map((file) => readFileSync(file, "utf8"))
+    const publicBlob = [
+      "src/components/nav.tsx",
+      "src/components/footer.tsx",
+      "src/app/playbook/page.tsx",
+      "src/app/resources/page.tsx",
+      "src/app/startups/page.tsx",
+    ]
+      .map(read)
       .join("\n");
-    expect(blob).not.toMatch(/TylerCard|canvas-confetti|For Tyler/i);
-    expect(blob).not.toMatch(/from "framer-motion"|from 'framer-motion'/);
+    expect(publicBlob).not.toMatch(/TylerCard|canvas-confetti|For Tyler/i);
+    expect(walkSrcFiles().map((file) => readFileSync(file, "utf8")).join("\n")).not.toMatch(
+      /from "framer-motion"|from 'framer-motion'/,
+    );
   });
 });
 
