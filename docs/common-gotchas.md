@@ -19,3 +19,4 @@ Include a commit SHA and issue reference when known.
 | Returning to /map always waits on rank | OpportunityMap remounts on client navigation and POSTed `/api/rank` with no cache | Cache the ranked payload in sessionStorage keyed by company must-haves plus retrieve chips. Restore last chips from the cache before fetch. Fit chips stay out of the key. | 2026-08-15 | map cache |
 | Watch this listing did not match the brief | Alerts stored per-opportunity watches | Subscribe to the current company search, keep seen retrieved ids, flag new ids on the next map run. Email is not wired. | 2026-08-15 | saved search |
 | Import-fence `/News/` fails on the official footer | "Newsletter" matches `News` | Match leftover routes (`/news`), not the word News | 2026-08-15 | site-chrome test |
+| Leftover-nav fence stayed green after renaming `SITE_NAV` | `grep SITE_NAV` matches `SITE_NAV_BROKEN` | Use `grep -w SITE_NAV` | 2026-08-15 | import fences |

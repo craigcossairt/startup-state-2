@@ -6,8 +6,8 @@ export type AskSendResult =
   | { kind: "replied"; reply: string }
   | { kind: "error"; message: string };
 
-export function canSendAsk(input: { draft: string; hasCards: boolean }): boolean {
-  return input.draft.trim().length > 0 && input.hasCards;
+export function canSendAsk(input: { draft: string }): boolean {
+  return input.draft.trim().length > 0;
 }
 
 export function buildAskRequest(input: { message: string; cards: AskCard[] }): {

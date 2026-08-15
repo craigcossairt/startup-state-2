@@ -64,9 +64,8 @@ export const FOOTER_NEWSLETTER_URL =
 export const WELCOME_BACK_BANNER =
   "Welcome back. We saved your last Opportunity Map.";
 export const WELCOME_BACK_ACTION = "Open last Opportunity Map";
-export const ASK_FAB_LABEL = "Ask the map";
+export const ASK_FAB_LABEL = "Navigator";
 export const ASK_PANEL_LEAD =
-  "Questions stay on programs already retrieved for this company.";
-export const ASK_NEEDS_MAP =
-  "Rank a company first. Then I can talk about programs on that Opportunity Map.";
-export const ASK_PLACEHOLDER = "What should I do first on this map?";
+  "Ask about your Opportunity Map, the Utah playbook, or GOEO programs.";
+export const ASK_NEEDS_MAP = "Type a question for the Navigator.";
+export const ASK_PLACEHOLDER = "What should I do first?";

@@ -68,6 +68,7 @@ Prefer the stack that already shipped the Part 1 Startup State demo, unless some
 ├── data/
 │   ├── fixtures/            # five locked Company profiles
 │   ├── goeo/resources.json  # 213-row GOEO table
+│   ├── catalog/             # leftover-surface fallbacks (resources, startups)
 │   ├── curated/             # seven official Utah cards
 │   └── cache/               # Grants.gov slices; SAM/SBIR local-only
 ├── docs/

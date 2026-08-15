@@ -17,9 +17,15 @@ if grep -RInE --exclude='*.test.ts' --exclude='*.test.tsx' 'TylerCard|canvas-con
   die "Tyler easter egg strings are present under src/"
 fi
 
-if grep -RInE 'href="/playbook"|href="/careers"|href="/swag"|href="/news"' "$root/src/components/nav.tsx" >/dev/null; then
-  die "Part 1 leftover nav items are on the Opportunity Finder nav"
+if ! grep -qw 'SITE_NAV' "$root/src/components/nav.tsx"; then
+  die "nav does not render SITE_NAV"
 fi
+
+for href in /playbook /resources /startups /careers /news /swag; do
+  if ! grep -q "$href" "$root/src/lib/site-nav.ts"; then
+    die "SITE_NAV is missing $href"
+  fi
+done
 
 if ! grep -q 'Footer' "$root/src/app/layout.tsx"; then
   die "root layout does not mount Footer"

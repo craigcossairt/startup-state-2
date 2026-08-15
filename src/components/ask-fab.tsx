@@ -57,7 +57,7 @@ export function AskFab() {
             onSubmit={async (event) => {
               event.preventDefault();
               const payload = loadMapPayload();
-              if (!canSendAsk({ draft: message, hasCards: Boolean(payload?.cards.length) })) {
+              if (!canSendAsk({ draft: message })) {
                 setError(ASK_NEEDS_MAP);
                 return;
               }

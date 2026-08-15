@@ -50,9 +50,9 @@ describe("Part 1 site chrome import fences", () => {
     expect(FOOTER_NEWSLETTER_CTA).toBe("Subscribe to Newsletter");
     expect(WELCOME_BACK_BANNER).toContain("Opportunity Map");
     expect(WELCOME_BACK_ACTION).toBe("Open last Opportunity Map");
-    expect(ASK_FAB_LABEL).toBe("Ask the map");
-    expect(ASK_NEEDS_MAP).toContain("Rank a company first");
-    expect(ASK_PANEL_LEAD).toContain("retrieved");
+    expect(ASK_FAB_LABEL).toBe("Navigator");
+    expect(ASK_NEEDS_MAP).toContain("Navigator");
+    expect(ASK_PANEL_LEAD).toContain("playbook");
     const locked = [
       FOOTER_CONNECT_EYEBROW,
       FOOTER_OFFICIAL_LINE,
@@ -83,7 +83,7 @@ describe("Part 1 site chrome import fences", () => {
     expect(footer).toContain("ss-stacked-white.png");
     expect(footer).toContain("goeo-only-white.png");
     expect(footer).not.toMatch(/admin|Tyler|tyler-card|confetti/i);
-    expect(footer).not.toMatch(/\/playbook|\/careers|\/swag|\/news/i);
+    expect(footer).toContain("SITE_NAV");
   });
 
   it("gives Intake the Part 1 topographic hero and welcome-back banner", () => {
@@ -94,9 +94,10 @@ describe("Part 1 site chrome import fences", () => {
     expect(INTAKE_HERO).toBe("Tell us about your company.");
   });
 
-  it("does not import the Tyler card, Playbook nav, or Part 1 leftover surfaces", () => {
+  it("puts leftover surfaces on the nav and still forbids the Tyler card", () => {
     const nav = read("src/components/nav.tsx");
-    expect(nav).not.toMatch(/Playbook|Careers|Swag|News|Startups/i);
+    expect(nav).toContain("SITE_NAV");
+    expect(read("src/lib/site-nav.ts")).toContain("Playbook");
     expect(existsSync(path.join(root, "src/components/admin/tyler-card.tsx"))).toBe(
       false,
     );
@@ -117,6 +118,13 @@ describe("Part 1 brand assets in git", () => {
       "public/brand/goeo-only-white.png",
       "public/brand/topography-tile.webp",
     ];
+    const patterns = [
+      "public/brand/large-gradient-pattern.svg",
+      "public/brand/small-icon-pattern.svg",
+    ];
+    for (const rel of patterns) {
+      expect(existsSync(path.join(root, rel)), rel).toBe(true);
+    }
     for (const rel of required) {
       const full = path.join(root, rel);
       expect(existsSync(full), rel).toBe(true);

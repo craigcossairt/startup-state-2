@@ -23,4 +23,15 @@ describe("follow-up chat grounding", () => {
     expect(turn.reply).toContain("curated:not-a-program");
     expect(turn.reply).not.toMatch(/eligible/i);
   });
+
+  it("points at the playbook when no ranked cards are present", () => {
+    const turn = followUpChat({
+      message: "How do I get funding?",
+      rankedIds: [],
+      cardSummaries: [],
+    });
+    expect(turn.refused).toEqual([]);
+    expect(turn.reply).toMatch(/funding|playbook|Opportunity Map/i);
+    expect(turn.reply).not.toMatch(/eligible/i);
+  });
 });

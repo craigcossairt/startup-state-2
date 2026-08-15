@@ -52,8 +52,7 @@ describe("Intake copy", () => {
     expect(intake).toContain("{INTAKE_HERO}");
     expect(intake).toContain("{chip.label}");
     expect(intake).not.toMatch(/in one sentence/i);
-    expect(`${intake}\n${nav}`).not.toMatch(
-      /Playbook|Careers|Swag|News|eligible|eligibility|coming soon|coming-soon/i,
-    );
+    expect(intake).not.toMatch(/eligible|eligibility|coming soon|coming-soon/i);
+    expect(nav).toContain("SITE_NAV");
   });
 });

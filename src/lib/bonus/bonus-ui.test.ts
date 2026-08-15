@@ -32,7 +32,7 @@ describe("bonus controls", () => {
     expect(welcome).toContain("restoreLastCompanyProfile");
     const blob = `${map}\n${intake}\n${nav}`;
     expect(blob).not.toMatch(/coming soon|coming-soon/i);
-    expect(nav).not.toMatch(/Playbook|Careers|Swag|News/i);
+    expect(nav).toContain("SITE_NAV");
     for (const item of BONUS_CONTROLS) {
       const page = item.href.replace("/map/", "");
       const source = readFileSync(

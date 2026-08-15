@@ -13,6 +13,7 @@ import {
   FOOTER_NEWSLETTER_URL,
   FOOTER_OFFICIAL_LINE,
 } from "@/lib/copy";
+import { SITE_NAV } from "@/lib/site-nav";
 
 export function Footer() {
   return (
@@ -120,6 +121,11 @@ export function Footer() {
             <Link href="/" className="hover:text-white">
               Home
             </Link>
+            {SITE_NAV.map((item) => (
+              <Link key={item.href} href={item.href} className="hover:text-white">
+                {item.label}
+              </Link>
+            ))}
             <a
               href="https://startup.utah.gov"
               target="_blank"

@@ -14,9 +14,8 @@ import {
 
 describe("Ask panel", () => {
   it("sends only a trimmed message plus ranked cards", () => {
-    expect(canSendAsk({ draft: "  ", hasCards: true })).toBe(false);
-    expect(canSendAsk({ draft: "What first?", hasCards: false })).toBe(false);
-    expect(canSendAsk({ draft: "What first?", hasCards: true })).toBe(true);
+    expect(canSendAsk({ draft: "  " })).toBe(false);
+    expect(canSendAsk({ draft: "What first?" })).toBe(true);
     expect(
       buildAskRequest({
         message: "  What first?  ",
@@ -44,9 +43,9 @@ describe("Ask panel", () => {
   });
 
   it("keeps the floating panel on the Part 2 chat route", () => {
-    expect(ASK_FAB_LABEL).toBe("Ask the map");
-    expect(ASK_NEEDS_MAP).toContain("Opportunity Map");
-    expect(ASK_PLACEHOLDER).toContain("this map");
+    expect(ASK_FAB_LABEL).toBe("Navigator");
+    expect(ASK_NEEDS_MAP).toContain("Navigator");
+    expect(ASK_PLACEHOLDER).toContain("first");
     const panel = readFileSync(
       path.join(process.cwd(), "src/components/ask-fab.tsx"),
       "utf8",

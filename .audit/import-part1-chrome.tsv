@@ -10,3 +10,6 @@ ts	phase	decision	why	evidence	result
 2026-08-15T03:35:19Z	verify	suite is 92 passing after the chrome import	reviewer asked for command output, not a file path	commit 3d659c0 /opt/cursor/artifacts/vitest_92_passing.log	92 tests green
 2026-08-15T03:35:19Z	verify	TylerCard mutation fails the fence, revert is clean	reviewer asked for exit codes	/opt/cursor/artifacts/import_fence_mutation.log	mutate_exit=1 then clean
 2026-08-15T03:35:19Z	verify	production build compiled and typechecked	trail had no build proof	pnpm build on this branch, Next.js 16.2.6 compiled	build green
+2026-08-15T04:13:00Z	frame	leftover surfaces are now in because the user created Supabase and asked for the rest	user message this turn; /map stays Opportunity Map; Tyler stays out	user_query	in scope
+2026-08-15T04:13:00Z	unit	SITE_NAV registry plus Navigator FAB; JSON fallbacks under data/catalog	Supabase keys are not in this VM; pages must still be full	src/lib/site-nav.ts data/catalog/	implemented
+2026-08-15T04:13:00Z	verify	leftover fence mutate: SITE_NAV -> SITE_NAV_BROKEN fails with grep -w	substring grep was vacuous	scripts/check-import-fences.sh	mutate_exit=1 then clean

@@ -7,13 +7,14 @@ export async function POST(request: Request) {
     message?: string;
     cards?: RankedCard[];
   };
-  if (!body.message || !body.cards) {
-    return NextResponse.json({ error: "message and cards are required" }, { status: 400 });
+  if (!body.message) {
+    return NextResponse.json({ error: "message is required" }, { status: 400 });
   }
+  const cards = body.cards ?? [];
   const result = followUpChat({
     message: body.message,
-    rankedIds: body.cards.map((card) => card.opportunity.id),
-    cardSummaries: body.cards.map((card) => ({
+    rankedIds: cards.map((card) => card.opportunity.id),
+    cardSummaries: cards.map((card) => ({
       id: card.opportunity.id,
       program: card.opportunity.program,
       why: card.why,
