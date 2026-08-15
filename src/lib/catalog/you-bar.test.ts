@@ -60,4 +60,17 @@ describe("You bar", () => {
     expect(openBlock).toContain("overflow-y-auto");
     expect(openBlock).toContain("min-h-0");
   });
+
+  it("mounts on Opportunity Map, Playbook, and Resources", () => {
+    expect(read("src/app/map/page.tsx")).toContain("YouBar");
+    expect(read("src/app/playbook/page.tsx")).toContain("YouBar");
+    expect(read("src/app/playbook/[stage]/page.tsx")).toContain("YouBar");
+    expect(read("src/app/playbook/[stage]/[step]/page.tsx")).toContain("YouBar");
+    expect(read("src/app/resources/page.tsx")).toContain("YouBar");
+    expect(read("src/components/catalog/resource-directory.tsx")).toContain("matchResources");
+    expect(read("src/components/opportunity-map.tsx")).toContain("filterRankedCards");
+    expect(existsSync(path.join(root, "src/components/catalog/leftover-test-case-bar.tsx"))).toBe(
+      false,
+    );
+  });
 });
