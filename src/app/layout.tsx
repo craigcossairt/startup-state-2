@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mulish, Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { Nav } from "@/components/nav";
+import { AskFab } from "@/components/ask-fab";
 import "./globals.css";
 
 const mulish = Mulish({
@@ -26,7 +27,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Opportunity Map — Startup State",
+  title: "Startup State Opportunity Map",
   description:
     "Tell us about your company. See federal and Utah programs that fit, with a why.",
 };
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Nav />
         <main className="flex-1">{children}</main>
+        <AskFab />
       </body>
     </html>
   );

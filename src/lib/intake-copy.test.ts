@@ -11,7 +11,7 @@ import {
 } from "@/lib/copy";
 
 describe("Intake copy", () => {
-  it("locks the hero and the five official fixture labels", () => {
+  it("locks the hero and the five test case labels", () => {
     expect(INTAKE_HERO).toBe("Tell us about your company.");
     expect(FIXTURE_CHIPS.map((chip) => chip.label)).toEqual([
       "Healthcare AI",
@@ -48,6 +48,7 @@ describe("Intake copy", () => {
     expect(intake).toContain("INTAKE_WHAT_THEY_DO_LABEL");
     expect(intake).toContain("INTAKE_WHAT_THEY_DO_HINT");
     expect(intake).toContain("FIXTURE_CHIPS");
+    expect(intake).toContain("TEST_CASES_LABEL");
     expect(intake).toContain("{INTAKE_HERO}");
     expect(intake).toContain("{chip.label}");
     expect(intake).not.toMatch(/in one sentence/i);

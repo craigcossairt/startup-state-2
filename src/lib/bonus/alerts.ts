@@ -1,22 +1,44 @@
-export type AlertWatch = {
-  id: string;
-  deadline: string | null;
+import { FIXTURE_CHIPS } from "@/lib/copy";
+import type { CompanyProfile } from "@/lib/types/company-profile";
+import type { RetrieveChips } from "@/lib/types/opportunity";
+
+export type SavedSearch = {
+  label: string;
+  profile: CompanyProfile;
+  chips: RetrieveChips;
+  seenIds: string[];
+  savedAt: string;
 };
 
-export function alertWatchesFromCards(
-  cards: Array<{ opportunity: { id: string; deadline: string | null } }>,
-): AlertWatch[] {
-  return cards.map((card) => ({
-    id: card.opportunity.id,
-    deadline: card.opportunity.deadline,
-  }));
+export function describeSearch(
+  profile: CompanyProfile,
+  _chips: RetrieveChips = {},
+): string {
+  const fixture = FIXTURE_CHIPS.find((chip) => chip.id === profile.fixtureId);
+  if (fixture) return fixture.label;
+  const what = profile.whatTheyDo.value?.trim();
+  return what || "This company search";
 }
 
-export function toggleAlertWatch(
-  watches: AlertWatch[],
-  watch: AlertWatch,
-): AlertWatch[] {
-  const exists = watches.some((item) => item.id === watch.id);
-  if (exists) return watches.filter((item) => item.id !== watch.id);
-  return [...watches, watch];
+export function subscribeToSearch(input: {
+  profile: CompanyProfile;
+  chips: RetrieveChips;
+  seenIds: string[];
+  now?: Date;
+}): SavedSearch {
+  return {
+    label: describeSearch(input.profile, input.chips),
+    profile: input.profile,
+    chips: input.chips,
+    seenIds: [...input.seenIds],
+    savedAt: (input.now ?? new Date()).toISOString(),
+  };
+}
+
+export function newOpportunityIds(
+  seenIds: string[],
+  retrievedIds: string[],
+): string[] {
+  const seen = new Set(seenIds);
+  return retrievedIds.filter((id) => !seen.has(id));
 }

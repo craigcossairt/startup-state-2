@@ -7,6 +7,7 @@ import { TypeaheadSelect } from "@/components/typeahead-select";
 import { restoreLastCompanyProfile } from "@/lib/bonus/welcome-back";
 import {
   FIXTURE_CHIPS,
+  TEST_CASES_LABEL,
   INTAKE_HERO,
   INTAKE_LEAD,
   INTAKE_WHAT_THEY_DO_HINT,
@@ -227,7 +228,7 @@ export function Intake() {
         </form>
 
         <div className="mt-10">
-          <p className="eyebrow">Official fixtures</p>
+          <p className="eyebrow">{TEST_CASES_LABEL}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {FIXTURE_CHIPS.map((chip) => (
               <a

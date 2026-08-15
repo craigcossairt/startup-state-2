@@ -1,12 +1,7 @@
 import Link from "next/link";
 
 export const BONUS_CONTROLS = [
-  { href: "/map/checklist", label: "Checklist" },
-  { href: "/map/strategy", label: "12-month" },
-  { href: "/map/similar", label: "Similar companies" },
-  { href: "/map/alerts", label: "Alerts" },
-  { href: "/map/chat", label: "Chat" },
-  { href: "/map/agencies", label: "Agencies" },
+  { href: "/map/plan", label: "Plan" },
   { href: "/map/graph", label: "Graph" },
 ] as const;
 

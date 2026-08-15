@@ -29,6 +29,8 @@ describe("streamRetrieveThenRank", () => {
         retrievedIds = event.retrievedIds;
         expect(events.includes("rank-called")).toBe(false);
         expect(event.retrievedIds.length).toBeGreaterThan(0);
+        expect(event.previews?.length).toBe(event.retrievedIds.length);
+        expect(event.previews?.find((row) => row.id === "curated:nucleus-grow")?.program).toBeTruthy();
       }
     }
 

@@ -28,9 +28,11 @@ export function RankedOpportunityCard({ card }: { card: RankedCard }) {
           {sourceLabel}
         </span>
         <span className="rounded-full bg-off-white px-2 py-1 text-foreground">
-          {FIT_LABELS[card.fit]}
+          {card.ranking ? "Ranking" : FIT_LABELS[card.fit]}
         </span>
-        <span className="text-foreground-muted">{card.opportunity.instrument}</span>
+        {card.ranking ? null : (
+          <span className="text-foreground-muted">{card.opportunity.instrument}</span>
+        )}
       </div>
       <h2 className="mt-3 font-display text-xl font-extrabold">
         {card.opportunity.program}
@@ -48,52 +50,42 @@ export function RankedOpportunityCard({ card }: { card: RankedCard }) {
           <dd className="mt-1">{card.opportunity.deadline ?? NOT_PUBLISHED}</dd>
         </div>
       </dl>
-      <div className="mt-4">
-        <p className="eyebrow">Why</p>
-        <p className="mt-1">{card.why}</p>
-      </div>
-      <div className="mt-4">
-        <p className="eyebrow">Concerns</p>
-        {card.concerns.length === 0 ? (
-          <p className="mt-1 text-foreground-muted">None listed</p>
-        ) : (
-          <ul className="mt-1 list-disc space-y-1 pl-5">
-            {card.concerns.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div className="mt-4">
-        <p className="eyebrow">Similar awardees</p>
-        {card.similarAwardees.length === 0 ? (
-          <p className="mt-1 text-foreground-muted">None attached</p>
-        ) : (
-          <ul className="mt-1 space-y-1">
-            {card.similarAwardees.map((row, index) => (
-              <li key={`${row.source}:${row.name}:${row.year ?? "na"}:${index}`}>
-                {row.name}
-                {row.state ? ` (${row.state})` : ""}
-                {row.year ? ` · ${row.year}` : ""}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div className="mt-5">
-        {card.nextStep.url ? (
-          <a
-            href={card.nextStep.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex rounded-md bg-midnight px-4 py-2 text-sm font-bold text-white"
-          >
-            {card.nextStep.label}
-          </a>
-        ) : (
-          <p className="text-sm font-semibold">{card.nextStep.label}</p>
-        )}
-      </div>
+      {card.ranking ? (
+        <p className="mt-4 text-sm text-foreground-muted">Ranking by fit</p>
+      ) : (
+        <>
+          <div className="mt-4">
+            <p className="eyebrow">Why</p>
+            <p className="mt-1">{card.why}</p>
+          </div>
+          <div className="mt-4">
+            <p className="eyebrow">Concerns</p>
+            {card.concerns.length === 0 ? (
+              <p className="mt-1 text-foreground-muted">None listed</p>
+            ) : (
+              <ul className="mt-1 list-disc space-y-1 pl-5">
+                {card.concerns.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="mt-5">
+            {card.nextStep.url ? (
+              <a
+                href={card.nextStep.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex rounded-md bg-midnight px-4 py-2 text-sm font-bold text-white"
+              >
+                {card.nextStep.label}
+              </a>
+            ) : (
+              <p className="text-sm font-semibold">{card.nextStep.label}</p>
+            )}
+          </div>
+        </>
+      )}
     </article>
   );
 }
