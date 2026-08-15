@@ -70,5 +70,8 @@ Format: `- **YYYY-MM-DD** - Decision description. See <issue-ref>.`
 
 - **2026-08-15** - Drop dead `/api/bonus` aggregator (`surfaces` + `checklist`). Bonus pages compute locally. User-facing directory chip says GOED. See this PR.
 
+- **2026-08-15** - Repo is public for submission. GitHub About website is https://startup-state-2.vercel.app. Docs and tests no longer name the prior Startup State app. See PR #43.
+
 - **2026-08-15** - Opportunity Map paints ranked cards only as each stream `card` event completes. Retrieved placeholders (`pendingCardsFromPreviews` / `Ranking by fit`) are removed. See this PR.
 - **2026-08-15** - Must-have editors share a copy registry, open tech-token picker, and USD draft with a $ affix and no thousands grouping. Capital need stays one box. Editing a revenue amount keeps the existing basis. See intake field UX synthesis.
+- **2026-08-15** - Company profile editing lives in the YouBar expand slot. Apply writes leftover persona and, on /map, `commitProfile` with the profile in the event detail. Map fixture load is separate from re-rank. User Apply and Rank again set `bypassCacheRef` so a matching `loadCachedMap` cannot no-op the fresh run. Persona URL writes keep an active rail `?fixture=`. See this PR.
